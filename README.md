@@ -7,7 +7,6 @@ Inspirado no Sistema de Reputação do SERASA e nos sistemas de empréstimos atu
 - Daniel Silva de Lima
 - George Justino de Queiroz
 - Haga Fedra de Brito Cavalcanti
-- Pablo Morato de Albuquerque Lima
 - Steffano Xavier Pereira
 
 ## Descrição Geral
