@@ -36,7 +36,7 @@ Os serviços necessários serão os sistemas de login e autenticação dos usuá
 
 Os relatórios serão gerados a partir dos usuários do sistema, que são o Cliente, Employee e Admin; em especial, o relatório do Admin que será considerado como o relatório do setor em que o Admin é responsável e não necessariamente do desempenho do Admin. No relatório do Cliente, estarão presentes informações pessoais, propostas, status dos empréstimos, extrato das operações, Score (pontuação do cliente), catálogo de BENS do Cliente. Do Relatório do Employee, estarão presentes informações pessoais, informações acerca de devedores, da reputação do negócio, de suas comissões, e de listas de clientes protegidos e também de clientes da lista de alto risco.
 
-Já o relatório do Admin, é direcionado ao desempenho do negócio, no qual, estarão presentes informações do Serviço de Gerenciamento de Empréstimo Pessoal Alternativo. Mais detalhes acerca dos relatórios é possível visualizar na [documentação de entrega 03](docs\entregas-ip2\entrega03), no qual foram anexados documentos que especificam as informações agregadas de cada item do relatório.
+Já o relatório do Admin, é direcionado ao desempenho do negócio, no qual, estarão presentes informações do Serviço de Gerenciamento de Empréstimo Pessoal Alternativo. Mais detalhes acerca dos relatórios é possível visualizar na [documentação de entrega 03](docs/entregas-ip2/entrega03), no qual foram anexados documentos que especificam as informações agregadas de cada item do relatório.
 
 ## Requisitos
 
