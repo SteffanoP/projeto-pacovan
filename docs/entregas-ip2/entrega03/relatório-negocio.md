@@ -1,4 +1,4 @@
-# Relatório do Administrador
+# Relatório do Negócio
 
 No relatório do administrador, estarão relacionadas as informações de negócio referentes ao Serviço de Gerenciamento de Empréstimo Pessoal Alternativo.
 
@@ -23,5 +23,3 @@ O Catálogo de B.E.N.S irá apresentar a descrição dos mesmos e o valor relaci
 A Confiança do negócio está relacionada a reputação dos clientes com seus devidos empréstimos. Por exemplo, caso os clientes sejam em sua maioria mais devedores do que o normal, a confiança do negócio estará baixa; caso os clientes sejam adimplentes em sua maioria, a confiança do negócio é alta.
 
 Logo, no relatório, deverá conter as informações acerca do conglomerado de clientes e empréstimos.
-
-### **Perigos (TODO)**
