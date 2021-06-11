@@ -60,6 +60,8 @@ public abstract class Pessoa {
     }
 
     public  boolean cpfValido(String CPF) {
+        if (CPF == null) return false;
+
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||
                 CPF.equals("11111111111") ||
@@ -116,6 +118,7 @@ public abstract class Pessoa {
     }
     //formata o cpf no modelo padronizado
     public static String imprimeCPF(String CPF) {
+        if (CPF == null) return "";
         return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
                 CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
     }
