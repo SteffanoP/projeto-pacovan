@@ -1,6 +1,7 @@
 package negocio.beans;
 import java.util.InputMismatchException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 //TODO: Implementação da classe Pessoa
 
@@ -18,6 +19,14 @@ public abstract class Pessoa {
     //Construtores
     public Pessoa() {
 
+    }
+
+    //Método de checagem de pessoa maior de idade
+    public boolean pessoaDeMaior(){
+        long anos = ChronoUnit.YEARS.between(this.dataNascimento, LocalDate.now());
+        boolean deMaior = false;
+        if(anos > 18) deMaior = true;
+        return deMaior;
     }
 
     //Métodos
