@@ -20,6 +20,16 @@ public class Bens {
     }
 
     //Métodos
+
+     //Calcular depreciação do bem, a partir da desvalorização à taxa de 10% por ano de uso. 
+    
+     public double calcularDepreciacao(int tempoDeUso){
+        if(tempoDeUso == 0) 
+            return valor;
+        else valor -= valor * tempoDeUso * 0.1;
+            return valor;
+    }
+
     @Override
     public String toString() {
         return "Bens{" +
