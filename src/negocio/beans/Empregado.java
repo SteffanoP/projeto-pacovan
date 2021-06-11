@@ -1,5 +1,7 @@
 package negocio.beans;
 
+import java.util.Objects;
+
 //TODO: Implementação da classe Empregado
 public class Empregado extends Pessoa {
     //Variáveis
@@ -12,6 +14,20 @@ public class Empregado extends Pessoa {
     }
 
     //Métodos
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Empregado)) return false;
+        Empregado empregado = (Empregado) o;
+        return Float.compare(empregado.getSalarioBase(), getSalarioBase()) == 0 && Float.compare(empregado.getReputacao(), getReputacao()) == 0 && getPrivilegio() == empregado.getPrivilegio();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSalarioBase(), getReputacao(), getPrivilegio());
+    }
+
     @Override
     public String toString() {
         return "Empregado{" +

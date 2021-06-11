@@ -1,6 +1,7 @@
 package negocio.beans;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Movimentacao {
     //Variáveis
@@ -15,6 +16,20 @@ public class Movimentacao {
     }
 
     //Métodos
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movimentacao)) return false;
+        Movimentacao that = (Movimentacao) o;
+        return Double.compare(that.getValor(), getValor()) == 0 && Objects.equals(getDescricao(), that.getDescricao()) && Objects.equals(getInstante(), that.getInstante()) && Objects.equals(getCliente(), that.getCliente()) && getTipoMovimentacao() == that.getTipoMovimentacao();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDescricao(), getInstante(), getCliente(), getTipoMovimentacao(), getValor());
+    }
+
     @Override
     public String toString() {
         return "Movimentacao{" +

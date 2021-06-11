@@ -2,6 +2,7 @@ package negocio.beans;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 //TODO: Implementação da função Empréstimo
 public class Emprestimo {
@@ -25,6 +26,19 @@ public class Emprestimo {
         double valor = 0;
         //TODO: Método de valorBens()
         return valor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Emprestimo)) return false;
+        Emprestimo that = (Emprestimo) o;
+        return Double.compare(that.getValor(), getValor()) == 0 && Double.compare(that.getParcelas(), getParcelas()) == 0 && getPrazo() == that.getPrazo() && Float.compare(that.getConfiancaPagamento(), getConfiancaPagamento()) == 0 && Objects.equals(getCliente(), that.getCliente()) && Objects.equals(getData(), that.getData()) && Objects.equals(getDataPagamento(), that.getDataPagamento()) && Objects.equals(getEmpregado(), that.getEmpregado());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCliente(), getData(), getDataPagamento(), getValor(), getParcelas(), getPrazo(), getEmpregado(), getConfiancaPagamento());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package negocio.beans;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 //TODO: Implementação da classe Bens
 public class Bens {
@@ -16,18 +17,34 @@ public class Bens {
 
     //Construtores
     public Bens() {
-
+        //TODO: Implementação com controladores
     }
 
     //Métodos
 
-     //Calcular depreciação do bem, a partir da desvalorização à taxa de 10% por ano de uso. 
-    
-     public double calcularDepreciacao(int tempoDeUso){
+    /**
+     * Calcular depreciação do bem, a partir da desvalorização à taxa de 10% por ano de uso.
+     * @param tempoDeUso quantidade de anos desde a compra do bem.
+     * @return valor atualizado em double.
+     */
+    public double calcularDepreciacao(int tempoDeUso){
         if(tempoDeUso == 0) 
-            return valor;
-        else valor -= valor * tempoDeUso * 0.1;
-            return valor;
+            return this.valor;
+        else this.valor -= this.valor * tempoDeUso * 0.1;
+            return this.valor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bens)) return false;
+        Bens bens = (Bens) o;
+        return Double.compare(bens.getValor(), getValor()) == 0 && getTempoDeUso() == bens.getTempoDeUso() && isGarantia() == bens.isGarantia() && isPendente() == bens.isPendente() && Objects.equals(getNome(), bens.getNome()) && Objects.equals(getDescricao(), bens.getDescricao()) && Objects.equals(getDataCadastro(), bens.getDataCadastro()) && getCategoria() == bens.getCategoria();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNome(), getDescricao(), getDataCadastro(), getCategoria(), getValor(), getTempoDeUso(), isGarantia(), isPendente());
     }
 
     @Override

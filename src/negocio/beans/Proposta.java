@@ -2,8 +2,10 @@ package negocio.beans;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class Proposta {
+    //Atributos
     private Cliente cliente;
     private LocalDate data;
     private String motivo;
@@ -13,7 +15,23 @@ public class Proposta {
     private List<Bens> garantia;
     private boolean contraproposta;
 
+    //Construtores
     public Proposta() {
+    }
+
+    //Métodos
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Proposta)) return false;
+        Proposta proposta = (Proposta) o;
+        return Double.compare(proposta.getValorDesejado(), getValorDesejado()) == 0 && Double.compare(proposta.getParcelasDesejadas(), getParcelasDesejadas()) == 0 && getPrazo() == proposta.getPrazo() && isContraproposta() == proposta.isContraproposta() && Objects.equals(getCliente(), proposta.getCliente()) && Objects.equals(getData(), proposta.getData()) && Objects.equals(getMotivo(), proposta.getMotivo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCliente(), getData(), getMotivo(), getValorDesejado(), getParcelasDesejadas(), getPrazo(), isContraproposta());
     }
 
     @Override
