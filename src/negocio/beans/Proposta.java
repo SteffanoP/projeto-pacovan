@@ -14,6 +14,7 @@ public class Proposta {
     private int prazo;
     private List<Bens> garantia;
     private boolean contraproposta;
+    private long numProtocolo;
 
     //Construtores
     public Proposta() {
@@ -26,12 +27,12 @@ public class Proposta {
         if (this == o) return true;
         if (!(o instanceof Proposta)) return false;
         Proposta proposta = (Proposta) o;
-        return Double.compare(proposta.getValorDesejado(), getValorDesejado()) == 0 && Double.compare(proposta.getParcelasDesejadas(), getParcelasDesejadas()) == 0 && getPrazo() == proposta.getPrazo() && isContraproposta() == proposta.isContraproposta() && Objects.equals(getCliente(), proposta.getCliente()) && Objects.equals(getData(), proposta.getData()) && Objects.equals(getMotivo(), proposta.getMotivo());
+        return getNumProtocolo() == proposta.getNumProtocolo() && Objects.equals(getCliente(), proposta.getCliente()) && Objects.equals(getData(), proposta.getData()) && Objects.equals(getMotivo(), proposta.getMotivo());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCliente(), getData(), getMotivo(), getValorDesejado(), getParcelasDesejadas(), getPrazo(), isContraproposta());
+        return Objects.hash(getCliente(), getData(), getMotivo(), getNumProtocolo());
     }
 
     @Override
@@ -110,5 +111,13 @@ public class Proposta {
 
     public void setContraproposta(boolean contraproposta) {
         this.contraproposta = contraproposta;
+    }
+
+    public long getNumProtocolo() {
+        return numProtocolo;
+    }
+
+    public void setNumProtocolo(long numProtocolo) {
+        this.numProtocolo = numProtocolo;
     }
 }
