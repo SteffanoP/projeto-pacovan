@@ -4,6 +4,9 @@ import dados.Repositorio;
 import dados.RepositorioCRUD;
 import negocio.beans.Emprestimo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ControladorEmprestimo {
     private Repositorio<Emprestimo> repoEmprestimo;
 
@@ -11,19 +14,14 @@ public class ControladorEmprestimo {
         this.repoEmprestimo = new RepositorioCRUD<>();
     }
 
-    public void inserirEmprestimo() {
+    public String emprestimoEmDetalhe() {
+        Emprestimo emprestimo = null;
 
+        return emprestimo.toString();
     }
+    public List<Emprestimo> listarEmprestimosCliente(long uidCliente) {
+        List<Emprestimo> emprestimosCliente = new ArrayList<>();
 
-    public void listarEmprestimo() {
-
-    }
-
-    public void atualizarEmprestimo() {
-
-    }
-
-    public void removerEmprestimo() {
-
+        return emprestimosCliente;
     }
 }
