@@ -19,7 +19,13 @@ public class ControladorBENS {
 
     }
 
-    public List<Bens> listarBens(long uidCliente) {
+    public List<Bens> listarBensEmpresa() {
+        List<Bens> bensList = new ArrayList<>();
+
+        return bensList;
+    }
+
+    public List<Bens> listarBensCliente(long uidCliente) {
         List<Bens> bensList = new ArrayList<>();
 
         return bensList;

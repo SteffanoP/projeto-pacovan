@@ -19,6 +19,10 @@ public class ControladorProposta {
 
     }
 
+    public void criarContraProposta(Proposta proposta) {
+
+    }
+
     public String propostaEmDetalhe() {
         Proposta proposta = null;
 
