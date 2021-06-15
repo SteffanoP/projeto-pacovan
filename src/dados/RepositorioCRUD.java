@@ -3,11 +3,16 @@ package dados;
 import exceptions.ObjetoDuplicadoException;
 import exceptions.ObjetoInexistenteException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RepositorioCRUD<T> implements Repositorio<T> {
     protected List<T> objetos;
+
+    public RepositorioCRUD() {
+        this.objetos = new ArrayList<>();
+    }
 
     /**
      * Método de inserção de objetos genéricos na lista do repositório CRUD.
@@ -16,8 +21,9 @@ public class RepositorioCRUD<T> implements Repositorio<T> {
      * @throws ObjetoDuplicadoException poderá acontecer caso haja algum objeto
      * duplicado.
      */
+    @Override
     public void inserir(T obj) throws ObjetoDuplicadoException {
-        if (obj != null) {
+        if (obj != null || objetos != null) {
             if (!this.objetos.contains(obj))
                 this.objetos.add(obj);
             else
