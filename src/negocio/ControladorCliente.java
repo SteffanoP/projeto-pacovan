@@ -18,6 +18,17 @@ public class ControladorCliente {
         this.repoCliente = new RepositorioCRUD<>();
     }
 
+    /**
+     * A função de {@code cadastrarCliente} cria e adiciona um objeto do tipo {@code cliente} com senha no formato hash,
+     * em especial com o algoritmo SHA-256, dessa forma, armazena apenas o digest da senha com a função hash. Há também
+     * a verificação se o cpf é válido, com a validação básica de um número cpf. O objeto criado por essa função é
+     * armazenado no objeto {@code repoCliente}, que se trata do repositório/banco de dados de clientes.
+     *
+     * @param cliente objeto que cliente a ser inserido no repoCliente.
+     * @param senhaCliente senha do cliente a ser tratada para um digest SHA-256.
+     * @throws ClienteCPFInvalidoException exceção que determinada quando o CPF do cliente é considerado inválido.
+     * @throws ClienteDuplicadoException exceção que é determinada quando há um cliente duplicado no repositório
+     */
     public void cadastrarCliente(Cliente cliente, String senhaCliente) throws ClienteCPFInvalidoException,
             NoSuchAlgorithmException, ClienteDuplicadoException {
 
