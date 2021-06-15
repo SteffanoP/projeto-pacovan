@@ -30,7 +30,7 @@ public class ControladorCliente {
      * @throws ClienteDuplicadoException exceção que é determinada quando há um cliente duplicado no repositório
      */
     public void cadastrarCliente(Cliente cliente, String senhaCliente) throws ClienteCPFInvalidoException,
-            NoSuchAlgorithmException, ClienteDuplicadoException {
+            ClienteDuplicadoException {
 
         if (cliente == null || senhaCliente == null) return; //TODO: Tratar erros para GUI
 
@@ -40,13 +40,17 @@ public class ControladorCliente {
         }
 
         //Digest da senha
-        MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
-        byte[] senhaDisgest = algoritmoEncrypt.digest(senhaCliente.getBytes(StandardCharsets.UTF_8));
-
         StringBuilder senhaHex = new StringBuilder();
 
-        for (byte b : senhaDisgest) {
-            senhaHex.append(String.format("%02X",0xFF &b));
+        try {
+            MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
+            byte[] senhaDisgest = algoritmoEncrypt.digest(senhaCliente.getBytes(StandardCharsets.UTF_8));
+            for (byte b : senhaDisgest) {
+                senhaHex.append(String.format("%02X",0xFF &b));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return;
         }
 
         cliente.setSenha(senhaHex.toString());

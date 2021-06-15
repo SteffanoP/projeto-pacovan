@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
 public class TesteMain {
-    public static void main(String[] args) throws ClienteDuplicadoException, ClienteCPFInvalidoException, NoSuchAlgorithmException {
+    public static void main(String[] args) {
         ControladorCliente controladorCliente = new ControladorCliente();
         Cliente clienteTeste = new Cliente();
         clienteTeste.setUid(1);
