@@ -2,9 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.ClienteDuplicadoException;
-import exceptions.ClienteCPFInvalidoException;
-import exceptions.ObjetoDuplicadoException;
+import exceptions.*;
 import negocio.beans.Cliente;
 
 import java.nio.charset.StandardCharsets;
@@ -87,6 +85,50 @@ public class ControladorCliente {
 
     public void alterarCadastro(Cliente cliente) {
 
+    }
+
+    public void alterarSenhaCliente(long uidCliente, String novaSenha) throws ClienteInexistenteException {
+        //Verifica se o cliente existe
+        boolean clienteExiste = false;
+
+        for (Cliente c : this.repoCliente.listar()) {
+            if (c.getUid() == uidCliente) {
+                clienteExiste = true;
+                break;
+            }
+        }
+
+        if (!clienteExiste) {
+            throw new ClienteInexistenteException("Cliente não existe!");
+        }
+
+        //Digest da nova senha
+        StringBuilder senhaHex = new StringBuilder();
+
+        try {
+            MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
+            byte[] senhaDigest = algoritmoEncrypt.digest(novaSenha.getBytes(StandardCharsets.UTF_8));
+            for (byte b : senhaDigest) {
+                senhaHex.append(String.format("%02X",0xFF &b));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        //Alteração de novo cliente
+        for (Cliente cSenhaAntiga : this.repoCliente.listar()) {
+            if (cSenhaAntiga.getUid() == uidCliente) {
+                Cliente cSenhaNova = cSenhaAntiga.retornaClone();
+                cSenhaNova.setSenha(senhaHex.toString());
+                try {
+                    this.repoCliente.atualizar(cSenhaAntiga,cSenhaNova);
+                } catch (ObjetoInexistenteException e) {
+                    //Garante que realmente não existe o cliente
+                    throw new ClienteInexistenteException("Cliente não existe!");
+                }
+            }
+        }
     }
 
     public Repositorio<Cliente> getRepoCliente() {
