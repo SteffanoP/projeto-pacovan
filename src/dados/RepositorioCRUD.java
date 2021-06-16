@@ -41,17 +41,19 @@ public class RepositorioCRUD<T> implements Repositorio<T> {
     }
 
     /**
-     * TODO: Operacionalizar a operação atualizar
-     * @param obj
-     * @throws ObjetoInexistenteException
+     * Método que atualiza um objeto genérico da lista de objetos do repositório CRUD.
+     * @param objAntigo objeto a ser atualizado.
+     * @param objNovo novo objeto que irá substituir o objeto antigo.
+     * @throws ObjetoInexistenteException poderá acontecer se objeto requisitado não
+     * existir dentro da lista do repositório.
      */
-    public void atualizar(T obj) throws ObjetoInexistenteException {
-        if (obj == null) return;
+    public void atualizar(T objAntigo, T objNovo) throws ObjetoInexistenteException {
+        if (objAntigo == null || objNovo == null) return;
 
-        if (this.objetos.contains(obj)) {
-            this.objetos.set(this.objetos.indexOf(obj),obj);
+        if (this.objetos.contains(objAntigo)) {
+            this.objetos.set(this.objetos.indexOf(objAntigo),objNovo);
         } else {
-            throw new ObjetoInexistenteException(obj);
+            throw new ObjetoInexistenteException(objAntigo);
         }
     }
 
