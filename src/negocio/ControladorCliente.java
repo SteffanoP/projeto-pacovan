@@ -55,6 +55,9 @@ public class ControladorCliente {
 
         cliente.setSenha(senhaHex.toString());
 
+        //Set de UID do Cliente
+        cliente.setUid(repoCliente.listar().size());
+
         //Adicionar cliente ao repoCliente
         try {
             this.repoCliente.inserir(cliente);
