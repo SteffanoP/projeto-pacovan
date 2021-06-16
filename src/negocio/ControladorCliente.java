@@ -87,6 +87,15 @@ public class ControladorCliente {
 
     }
 
+    /**
+     * Método que altera os dados cadastrados de um cliente por meio da substituição do objeto {@code Cliente} antigo
+     * por um novo objeto do tipo {@code Cliente}.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param clienteDadosNovo o novo objeto que irá substituir o {@code Cliente} antigo.
+     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
     public void alterarDadosPessoais(long uidCliente, Cliente clienteDadosNovo) throws ClienteInexistenteException {
         //TODO: Revisar regras de negócio e se aplicam neste espaço
         for (Cliente cliente : this.repoCliente.listar()) {
@@ -102,6 +111,15 @@ public class ControladorCliente {
         throw new ClienteInexistenteException("Cliente não Existe!");
     }
 
+    /**
+     * Método que altera o atributo {@code senha} de um objeto do tipo {@code Cliente} por meio da substituição do
+     * atributo anterior por um novo atributo de senha.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param novaSenha se refere a nova senha que será cadastrada no repositório que armazena o digest da senha.
+     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
     public void alterarSenhaCliente(long uidCliente, String novaSenha) throws ClienteInexistenteException {
         //Verifica se o cliente existe
         boolean clienteExiste = false;
