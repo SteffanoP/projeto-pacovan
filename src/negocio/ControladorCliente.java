@@ -87,6 +87,21 @@ public class ControladorCliente {
 
     }
 
+    public void alterarDadosPessoais(long uidCliente, Cliente clienteDadosNovo) throws ClienteInexistenteException {
+        //TODO: Revisar regras de negócio e se aplicam neste espaço
+        for (Cliente cliente : this.repoCliente.listar()) {
+            if (cliente.getUid() == uidCliente) {
+                try {
+                    this.repoCliente.atualizar(cliente,clienteDadosNovo);
+                    return;
+                } catch (ObjetoInexistenteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        throw new ClienteInexistenteException("Cliente não Existe!");
+    }
+
     public void alterarSenhaCliente(long uidCliente, String novaSenha) throws ClienteInexistenteException {
         //Verifica se o cliente existe
         boolean clienteExiste = false;
