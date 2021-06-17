@@ -39,7 +39,7 @@ public class ControladorProposta {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
         
         for (Proposta proposta : this.repoProposta.listar()) {
-            if(proposta.getCliente().getUid() == uidCliente){
+            if(proposta.getCliente().getUid() == uidCliente && !proposta.isContraproposta()){
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
             }
@@ -47,10 +47,16 @@ public class ControladorProposta {
         return mapaPropostas;
     }
 
-    public List<Proposta> listarContraPropostas(long uidCliente) {
-        List<Proposta> clienteContraPropostas = new ArrayList<>();
-
-        return clienteContraPropostas;
+    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) {
+        NavigableMap<LocalDate, Proposta> mapaContraPropostas = new TreeMap<>();
+        
+        for (Proposta proposta : this.repoProposta.listar()) {
+            if(proposta.getCliente().getUid() == uidCliente && proposta.isContraproposta()){
+                //Preencher mapa
+                mapaContraPropostas.put(proposta.getData(), proposta);
+            }
+        }
+        return mapaContraPropostas;
     }
 
     public List<Proposta> listarPropostasPendentes() {

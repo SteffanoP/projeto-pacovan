@@ -30,6 +30,8 @@ public class TesteListaMain {
         p3.setData(LocalDate.of(2021, 6, 14));
         p4.setData(LocalDate.of(2021, 4, 24));
 
+        p4.setContraproposta(true);
+
         ControladorProposta cp = new ControladorProposta();
 
         cp.criarProposta(p);
@@ -38,6 +40,7 @@ public class TesteListaMain {
         cp.criarProposta(p3);
         cp.criarProposta(p4);
 
-        System.out.println(cp.listarPropostasCliente(1));
+        //System.out.println(cp.listarPropostasCliente(1));
+        System.out.println(cp.listarContraPropostas(1));
     }
 }
