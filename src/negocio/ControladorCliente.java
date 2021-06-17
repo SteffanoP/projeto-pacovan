@@ -2,9 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.ClienteDuplicadoException;
-import exceptions.ClienteCPFInvalidoException;
-import exceptions.ObjetoDuplicadoException;
+import exceptions.*;
 import negocio.beans.Cliente;
 
 import java.nio.charset.StandardCharsets;
@@ -87,6 +85,84 @@ public class ControladorCliente {
 
     public void alterarCadastro(Cliente cliente) {
 
+    }
+
+    /**
+     * Método que altera os dados cadastrados de um cliente por meio da substituição do objeto {@code Cliente} antigo
+     * por um novo objeto do tipo {@code Cliente}.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param clienteDadosNovo o novo objeto que irá substituir o {@code Cliente} antigo.
+     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
+    public void alterarDadosPessoais(long uidCliente, Cliente clienteDadosNovo) throws ClienteInexistenteException {
+        //TODO: Revisar regras de negócio e se aplicam neste espaço
+        for (Cliente cliente : this.repoCliente.listar()) {
+            if (cliente.getUid() == uidCliente) {
+                try {
+                    this.repoCliente.atualizar(cliente,clienteDadosNovo);
+                    return;
+                } catch (ObjetoInexistenteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        throw new ClienteInexistenteException("Cliente não Existe!");
+    }
+
+    /**
+     * Método que altera o atributo {@code senha} de um objeto do tipo {@code Cliente} por meio da substituição do
+     * atributo anterior por um novo atributo de senha.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param novaSenha se refere a nova senha que será cadastrada no repositório que armazena o digest da senha.
+     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
+    public void alterarSenhaCliente(long uidCliente, String novaSenha) throws ClienteInexistenteException {
+        //Verifica se o cliente existe
+        boolean clienteExiste = false;
+
+        for (Cliente c : this.repoCliente.listar()) {
+            if (c.getUid() == uidCliente) {
+                clienteExiste = true;
+                break;
+            }
+        }
+
+        if (!clienteExiste) {
+            throw new ClienteInexistenteException("Cliente não existe!");
+        }
+
+        //Digest da nova senha
+        StringBuilder senhaHex = new StringBuilder();
+
+        try {
+            MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
+            byte[] senhaDigest = algoritmoEncrypt.digest(novaSenha.getBytes(StandardCharsets.UTF_8));
+            for (byte b : senhaDigest) {
+                senhaHex.append(String.format("%02X",0xFF &b));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        //Alteração de novo cliente
+        for (Cliente cSenhaAntiga : this.repoCliente.listar()) {
+            if (cSenhaAntiga.getUid() == uidCliente) {
+                Cliente cSenhaNova = cSenhaAntiga.retornaClone();
+                cSenhaNova.setSenha(senhaHex.toString());
+                try {
+                    this.repoCliente.atualizar(cSenhaAntiga,cSenhaNova);
+                    return;
+                } catch (ObjetoInexistenteException e) {
+                    //Garante que realmente não existe o cliente
+                    throw new ClienteInexistenteException("Cliente não existe!");
+                }
+            }
+        }
     }
 
     public Repositorio<Cliente> getRepoCliente() {
