@@ -156,6 +156,7 @@ public class ControladorCliente {
                 cSenhaNova.setSenha(senhaHex.toString());
                 try {
                     this.repoCliente.atualizar(cSenhaAntiga,cSenhaNova);
+                    return;
                 } catch (ObjetoInexistenteException e) {
                     //Garante que realmente não existe o cliente
                     throw new ClienteInexistenteException("Cliente não existe!");
