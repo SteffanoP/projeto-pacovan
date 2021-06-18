@@ -4,13 +4,10 @@ import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.ClienteInexistenteException;
 import exceptions.ObjetoDuplicadoException;
-import jdk.vm.ci.meta.Local;
 import negocio.beans.Cliente;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;
@@ -23,11 +20,7 @@ public class ControladorProposta {
     }
 
     public void criarProposta(Proposta p) throws ObjetoDuplicadoException {
-        try {
-            this.repoProposta.inserir(p);
-        } catch (ObjetoDuplicadoException e) {
-            throw new ObjetoDuplicadoException(e);
-        }
+
     }
 
     public String propostaEmDetalhe() {
@@ -39,7 +32,7 @@ public class ControladorProposta {
     /**
      * Método que lista as propostas do cliente ordenadas por sua data de criação por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo 
-     * do tipo {@code data}.
+     * {@code data}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
      * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
@@ -63,10 +56,11 @@ public class ControladorProposta {
 
         return mapaPropostas;
     }
+    
     /**
      * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir 
-     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo do tipo {@code data}.
+     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
      * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
@@ -94,7 +88,7 @@ public class ControladorProposta {
     /**
      * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
-     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo do tipo {@code data}.
+     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
      * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
