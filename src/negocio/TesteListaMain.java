@@ -2,15 +2,18 @@ package negocio;
 
 import java.time.LocalDate;
 
+import exceptions.ClienteInexistenteException;
 import exceptions.ObjetoDuplicadoException;
 import negocio.beans.Cliente;
 import negocio.beans.Proposta;
 
 public class TesteListaMain {
-    public static void main(String[] args) throws ObjetoDuplicadoException {
+    public static void main(String[] args) throws ObjetoDuplicadoException, ClienteInexistenteException {
         Cliente c = new Cliente();
+        Cliente c2 = new Cliente();
 
         c.setUid(1);
+        c2.setUid(2);
 
         Proposta p = new Proposta();
         Proposta p1 = new Proposta();
@@ -18,9 +21,9 @@ public class TesteListaMain {
         Proposta p3 = new Proposta();
         Proposta p4 = new Proposta();
 
-        p.setCliente(c);
+        p.setCliente(c2);
         p1.setCliente(c);
-        p2.setCliente(c);
+        p2.setCliente(c2);
         p3.setCliente(c);
         p4.setCliente(c);
 
@@ -30,6 +33,7 @@ public class TesteListaMain {
         p3.setData(LocalDate.of(2021, 6, 14));
         p4.setData(LocalDate.of(2021, 4, 24));
 
+        p2.setContraproposta(true);
         p4.setContraproposta(true);
 
         ControladorProposta cp = new ControladorProposta();
@@ -40,7 +44,10 @@ public class TesteListaMain {
         cp.criarProposta(p3);
         cp.criarProposta(p4);
 
-        //System.out.println(cp.listarPropostasCliente(1));
-        System.out.println(cp.listarContraPropostas(1));
+        System.out.println(cp.listarPropostasCliente(1) + "\n");
+        System.out.println(cp.listarContraPropostas(1) + "\n");
+        System.out.println(cp.listarPropostasCliente(2) + "\n");
+        System.out.println(cp.listarContraPropostas(2) + "\n");
+        System.out.println(cp.listarPropostasCliente(12));
     }
 }

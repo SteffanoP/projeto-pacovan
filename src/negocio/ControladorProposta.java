@@ -2,6 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
+import exceptions.ClienteInexistenteException;
 import exceptions.ObjetoDuplicadoException;
 import jdk.vm.ci.meta.Local;
 import negocio.beans.Cliente;
@@ -35,33 +36,86 @@ public class ControladorProposta {
         return proposta.toString();
     }
 
-    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) {
+    /**
+     * Método que lista as propostas do cliente ordenadas por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo 
+     * do tipo {@code data}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
+    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws ClienteInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        boolean clienteExiste = false;
         
         for (Proposta proposta : this.repoProposta.listar()) {
             if(proposta.getCliente().getUid() == uidCliente && !proposta.isContraproposta()){
+                clienteExiste = true;
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
             }
         }
+        
+        if (!clienteExiste) {
+            throw new ClienteInexistenteException("Cliente não existe!");
+        }
+
         return mapaPropostas;
     }
-
-    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) {
-        NavigableMap<LocalDate, Proposta> mapaContraPropostas = new TreeMap<>();
+    /**
+     * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
+     * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir 
+     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo do tipo {@code data}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
+    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws ClienteInexistenteException {
+        NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        boolean clienteExiste = false;
         
         for (Proposta proposta : this.repoProposta.listar()) {
             if(proposta.getCliente().getUid() == uidCliente && proposta.isContraproposta()){
+                clienteExiste = true;
                 //Preencher mapa
-                mapaContraPropostas.put(proposta.getData(), proposta);
+                mapaPropostas.put(proposta.getData(), proposta);
             }
         }
-        return mapaContraPropostas;
+        
+        if (!clienteExiste) {
+            throw new ClienteInexistenteException("Cliente não existe!");
+        }
+
+        return mapaPropostas;
     }
 
-    public List<Proposta> listarPropostasPendentes() {
-        List<Proposta> propostasPendentes = new ArrayList<>();
+    /**
+     * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
+     * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
+     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo do tipo {@code data}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
+    public Map<LocalDate, Proposta> listarPropostasPendentes() throws ClienteInexistenteException {
+        NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        boolean clienteExiste = false;
+        
+        for (Proposta proposta : this.repoProposta.listar()) {
+            if(!proposta.isContraproposta()){
+                clienteExiste = true;
+                //Preencher mapa
+                mapaPropostas.put(proposta.getData(), proposta);
+            }
+        }
+        
+        if (!clienteExiste) {
+            throw new ClienteInexistenteException("Cliente não existe!");
+        }
 
-        return propostasPendentes;
+        return mapaPropostas;
     }
 }
