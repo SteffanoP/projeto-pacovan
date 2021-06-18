@@ -51,14 +51,14 @@ public class ControladorEmpregado {
             }
 
            stringSenha = senhaHex.toString();
-          
+
                 if (stringSenha.equals(stringSenhaCadastro)){
                     validado = true;
                 }
                 else {
                     validado = false;
                 }
-            
+
         }
 
         return validado;
