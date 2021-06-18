@@ -2,9 +2,13 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
+import exceptions.*;
 import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +99,8 @@ public class ControladorEmpregado {
      * @throws EmpregadoInexistenteException poderá acontecer caso o {@code uidEmpregado} não esteja atribuído a nenhum
      * empregado.
      */
-    public void alterarDadosPessoais(long uidEmpregado, Empregado empregadoDadosNovo) throws EmpregadoInexistenteException {
+    public void alterarDadosPessoais(long uidEmpregado, Empregado empregadoDadosNovo) throws
+            EmpregadoInexistenteException {
         //TODO: Revisar regras de negócio e se aplicam neste espaço
         for (Empregado empregado : this.repoEmpregado.listar()) {
             if (empregado.getUid() == uidEmpregado) {

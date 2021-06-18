@@ -1,6 +1,6 @@
-package src.exceptions;
+package exceptions;
 
-public class EmpregadoDuplicadoException {
+public class EmpregadoDuplicadoException extends Exception {
 	public EmpregadoDuplicadoException(Object obj) {
         //TODO: Tratar Exceção
     }
