@@ -25,12 +25,12 @@ public class ControladorEmpregado {
     public boolean autenticarEmpregado(String _email, String _senha) {
         boolean emailValidado = false;
         boolean validado = false;
-        Empregado eSenha = null;
         String stringSenha = " ";
-
+        String stringSenhaCadastro;
+        
         for(Empregado e : this.repoEmpregado.listar()){
             if(e.getEmail().equals(_email)){
-                eSenha = e;
+                stringSenhaCadastro = e.getSenha();
                 emailValidado = true;
             }
         }
@@ -50,11 +50,10 @@ public class ControladorEmpregado {
                 return false;
             }
 
-            eSenha.setSenha(senhaHex.toString());
-            stringSenha = eSenha.getSenha();
+           stringSenha = senhaHex.toString();
 
             for ( Empregado e : repoEmpregado.listar()){
-                if (e.getSenha().equals(stringSenha)){
+                if (e.getSenha().equals(stringSenha) && emailValidado){
                     validado = true;
                 }
                 else {
