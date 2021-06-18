@@ -26,8 +26,8 @@ public class ControladorEmpregado {
         boolean emailValidado = false;
         boolean validado = false;
         String stringSenha = " ";
-        String stringSenhaCadastro;
-        
+        String stringSenhaCadastro = " ";
+
         for(Empregado e : this.repoEmpregado.listar()){
             if(e.getEmail().equals(_email)){
                 stringSenhaCadastro = e.getSenha();
@@ -35,7 +35,7 @@ public class ControladorEmpregado {
             }
         }
 
-        if(emailValidado == true){
+        if(emailValidado){
             //Digest e senha
             StringBuilder senhaHex = new StringBuilder();
 
@@ -51,15 +51,14 @@ public class ControladorEmpregado {
             }
 
            stringSenha = senhaHex.toString();
-
-            for ( Empregado e : repoEmpregado.listar()){
-                if (e.getSenha().equals(stringSenha) && emailValidado){
+          
+                if (stringSenha.equals(stringSenhaCadastro)){
                     validado = true;
                 }
                 else {
                     validado = false;
                 }
-            }
+            
         }
 
         return validado;
