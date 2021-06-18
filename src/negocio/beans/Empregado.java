@@ -3,7 +3,7 @@ package negocio.beans;
 import java.util.Objects;
 
 //TODO: Implementação da classe Empregado
-public class Empregado extends Pessoa {
+public class Empregado extends Pessoa implements Cloneable{
     //Variáveis
     private float salarioBase;
     private float reputacao;
@@ -12,6 +12,16 @@ public class Empregado extends Pessoa {
     //Construtores
     public Empregado() {
     }
+
+    public Empregado retornaClone() {
+        try {
+            return (Empregado) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     //Métodos
 
