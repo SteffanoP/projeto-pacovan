@@ -97,7 +97,7 @@ public class ControladorEmpregado {
      */
     public void alterarDadosPessoais(long uidEmpregado, Empregado empregadoDadosNovo) throws EmpregadoInexistenteException {
         //TODO: Revisar regras de negócio e se aplicam neste espaço
-        for (Emopregado empregado : this.repoEmpregado.listar()) {
+        for (Empregado empregado : this.repoEmpregado.listar()) {
             if (empregado.getUid() == uidEmpregado) {
                 try {
                     this.repoEmpregado.atualizar(empregado, empregadoDadosNovo);
