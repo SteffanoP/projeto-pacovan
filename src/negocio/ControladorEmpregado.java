@@ -15,6 +15,55 @@ public class ControladorEmpregado {
         this.repoEmpregado = new RepositorioCRUD<>();
     }
 
+     /**
+     * A função de {@code cadastrarEmpregado} cria e adiciona um objeto do tipo {@code empregado} com senha no formato hash,
+     * em especial com o algoritmo SHA-256, dessa forma, armazena apenas o digest da senha com a função hash. Há também
+     * a verificação se o cpf é válido, com a validação básica de um número cpf. O objeto criado por essa função é
+     * armazenado no objeto {@code repoEmpregado}, que se trata do repositório/banco de dados de empregados.
+     *
+     * @param empregado objeto que empregado a ser inserido no repoEmpregado.
+     * @param senhaEmpregado senha do empregado a ser tratada para um digest SHA-256.
+     * @throws EmpregadoCPFInvalidoException exceção que determinada quando o CPF do empregado é considerado inválido.
+     * @throws EmpregadoDuplicadoException exceção que é determinada quando há um empregado duplicado no repositório
+     */
+    public void cadastrarEmpregado(Empregado empregado, String senhaEmpregado) throws EmpregadoCPFInvalidoException,
+            EmpregadoDuplicadoException {
+
+        if (empregado == null || senhaEmpregado == null) return; //TODO: Tratar erros para GUI
+
+        //Verifica se cpf é válido
+        if (!empregado.cpfValido()) {
+            throw new EmpregadoCPFInvalidoException(empregado.getCpf());
+        }
+
+        //Digest da senha
+        StringBuilder senhaHex = new StringBuilder();
+
+        try {
+            MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
+            byte[] senhaDisgest = algoritmoEncrypt.digest(senhaCliente.getBytes(StandardCharsets.UTF_8));
+            for (byte b : senhaDisgest) {
+                senhaHex.append(String.format("%02X",0xFF &b));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        empregado.setSenha(senhaHex.toString());
+
+        //Set de UID do Empregado
+        empregado.setUid(repoEmpregado.listar().size());
+
+        //Adicionar empregado ao repoCliente
+        try {
+            this.repoEmpregado.inserir(empregado);
+        } catch (ObjetoDuplicadoException e) {
+            throw new EmpregadoDuplicadoException(e);
+        }
+
+    }
+
     public void cadastrarEmpregado() {
 
     }
