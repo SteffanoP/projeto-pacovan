@@ -80,8 +80,34 @@ public class ControladorEmpregado {
         return infoCliente;
     }
 
-    public void alterarCadastro(Cliente cliente) {
+    
+    
+    public void alterarCadastro(Empregado empregado) {
 
+    }
+
+    /**
+     * Método que altera os dados cadastrados de um empregado por meio da substituição do objeto {@code Empregado} antigo
+     * por um novo objeto do tipo {@code Empregado}.
+     *
+     * @param uidEmpregado se refere ao identificador único e exclusivo do empregado que se vai alterar o cadastro.
+     * @param empregadoDadosNovo o novo objeto que irá substituir o {@code Empregado} antigo.
+     * @throws EmpregadoInexistenteException poderá acontecer caso o {@code uidEmpregado} não esteja atribuído a nenhum
+     * empregado.
+     */
+    public void alterarDadosPessoais(long uidEmpregado, Empregado empregadoDadosNovo) throws EmpregadoInexistenteException {
+        //TODO: Revisar regras de negócio e se aplicam neste espaço
+        for (Emopregado empregado : this.repoEmpregado.listar()) {
+            if (empregado.getUid() == uidEmpregado) {
+                try {
+                    this.repoEmpregado.atualizar(empregado, empregadoDadosNovo);
+                    return;
+                } catch (ObjetoInexistenteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        throw new EmpregadoInexistenteException("Empregado não Existe!");
     }
 
     public List<Empregado> listarEmpregados() {
