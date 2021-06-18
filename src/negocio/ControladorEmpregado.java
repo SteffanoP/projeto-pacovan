@@ -41,7 +41,7 @@ public class ControladorEmpregado {
 
         try {
             MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
-            byte[] senhaDisgest = algoritmoEncrypt.digest(senhaCliente.getBytes(StandardCharsets.UTF_8));
+            byte[] senhaDisgest = algoritmoEncrypt.digest(senhaEmpregado.getBytes(StandardCharsets.UTF_8));
             for (byte b : senhaDisgest) {
                 senhaHex.append(String.format("%02X",0xFF &b));
             }
