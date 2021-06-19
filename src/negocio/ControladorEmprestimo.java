@@ -61,10 +61,38 @@ public class ControladorEmprestimo {
 
     }
 
-    public String emprestimoEmDetalhe() {
-        Emprestimo emprestimo = null;
+    /**
+     * Método que procura por detalhes de um empréstimo efetuado em uma determinada {@code dataEmprestimo} por um
+     * {@code cliente}, visto que, há apenas 1 empréstimo do mesmo cliente por dia. O método lista os empréstimos de
+     * um cliente e procura por empréstimos por data.
+     *
+     * @param cliente se refere ao {@code Cliente} que realizou o {@code Emprestimo}.
+     * @param dataEmprestimo se refere a data em que o {@code Cliente} realizou o {@code Emprestimo}.
+     * @return uma {@code String} de dados, com base no método {@code toString()} do objeto {@code Emprestimo}.
+     * @throws EmprestimoInexistenteException poderá acontecer caso não exista um empréstimo para esse {@code cliente}
+     * ou não existe um empréstimo para esse {@code cliente} na determinada {@code dataEmprestimo}.
+     */
+    public String emprestimoEmDetalhe(Cliente cliente, LocalDate dataEmprestimo) throws EmprestimoInexistenteException {
+        if (cliente == null || dataEmprestimo == null) throw new EmprestimoInexistenteException("Essa requisição " +
+                "parece inválida!");
 
-        return emprestimo.toString();
+        List<Emprestimo> listaEmprestimosCliente = this.listarEmprestimosCliente(cliente.getUid());
+        String emprestimoEmDetalhe = "";
+
+        boolean emprestimoEncontrado = false;
+        for (int i = 0; i < listaEmprestimosCliente.size() && !emprestimoEncontrado; i++) {
+            Emprestimo emprestimo = listaEmprestimosCliente.get(i);
+            if (dataEmprestimo.equals(emprestimo.getData())) {
+                emprestimoEncontrado = true;
+                emprestimoEmDetalhe = emprestimo.toString();
+            }
+        }
+
+        if (!emprestimoEncontrado) {
+            throw new EmprestimoInexistenteException("Empréstimo não encontrado!");
+        }
+
+        return emprestimoEmDetalhe;
     }
 
     public List<Emprestimo> listarEmprestimosCliente(long uidCliente) {
