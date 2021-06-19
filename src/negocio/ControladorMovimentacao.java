@@ -15,10 +15,22 @@ public class ControladorMovimentacao {
         this.repoMovimentacao = new RepositorioCRUD<>();
     }
 
-    public List<Movimentacao> listarTodasMovimentacaoCliente(long uidCliente) {
-        List<Movimentacao> movimentacaoList = new ArrayList<>();
+    
+    public Map<LocalDate, Movimentacao> listarMoveCliente(long uidCliente) throws ClienteInexistenteException {
+        NavigableMap<LocalDate, Movimentacao> mapaMovimentacaoCliente = new TreeMap<>();
+        boolean moveClienteExiste = false;
+        List<Movimentacao> moveList = repoMovimentacao.listar();
 
-        return movimentacaoList;
+        for( Movimentacao move : moveList){
+
+            if(move.getCliente().getUid() == uidCliente ){
+                moveClienteExiste = true;
+                    mapaMovimentacaoCliente.put(move.getInstante().toLocalDate(), move);  //duvida
+            }
+        }if(!moveClienteExiste)  throw new ClienteInexistenteException("Cliente Não existe!");
+
+
+        return mapaMovimentacaoCliente;
     }
 
     public List<Movimentacao> listarPeriodoMovimentacaoCliente(long uidCliente, LocalDate dataInicial, LocalDate dataFinal) {
