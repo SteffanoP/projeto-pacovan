@@ -21,6 +21,15 @@ public class Emprestimo {
     public Emprestimo() {
     }
 
+    public Emprestimo(Proposta proposta) {
+        this.setCliente(proposta.getCliente());
+        this.setData(proposta.getData());
+        this.setValor(proposta.getValorDesejado());
+        this.setParcelas(proposta.getParcelasDesejadas());
+        this.setPrazo(proposta.getPrazo());
+        this.setGarantia(proposta.getGarantia());
+    }
+
     //Métodos
     public double valorBens() {
         double valor = 0;
