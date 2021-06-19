@@ -2,14 +2,18 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
+import exceptions.ObjetoDuplicadoException;
 import negocio.beans.Cliente;
 import negocio.beans.Emprestimo;
 import negocio.beans.Proposta;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 public class ControladorEmprestimo {
     private Repositorio<Emprestimo> repoEmprestimo;
@@ -19,7 +23,7 @@ public class ControladorEmprestimo {
     }
 
     public void criarEmprestimo(Proposta proposta) {
-
+        
     }
 
     public String emprestimoEmDetalhe() {
@@ -28,10 +32,17 @@ public class ControladorEmprestimo {
         return emprestimo.toString();
     }
 
-    public List<Emprestimo> listarEmprestimosCliente(long uidCliente) {
-        List<Emprestimo> emprestimosCliente = new ArrayList<>();
+    public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimos = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return emprestimosCliente;
+        for (Emprestimo emprestimo : repositorio) {
+            if(emprestimo.getCliente().getUid() == uidCliente){
+                //Preencher mapa
+                mapaEmprestimos.put(emprestimo.getData(), emprestimo);
+            }
+        }
+        return mapaEmprestimos;
     }
 
     public List<Emprestimo> listarComissõesEmprestimo() {
@@ -40,21 +51,48 @@ public class ControladorEmprestimo {
         return comissoesEmprestimo;
     }
 
-    public Map<Cliente, Emprestimo> listarDevedores() {
-        Map<Cliente, Emprestimo> listaDevedores = new HashMap<>();
+    public Map<LocalDate, Cliente> listarDevedores() {
+        NavigableMap<LocalDate, Cliente> mapaClientes = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return listaDevedores;
+        for (Emprestimo emprestimo : repositorio) {
+            LocalDate prazo = emprestimo.getData().plusDays(emprestimo.getPrazo());
+            long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
+            if(dataPagamento < 0){
+                //Preencher mapa
+                mapaClientes.put(prazo, emprestimo.getCliente());
+            }
+        }
+        return mapaClientes;
     }
 
-    public Map<Cliente, Emprestimo> listarDevedoresProtegidos() {
-        Map<Cliente, Emprestimo> listaDevedores = new HashMap<>();
+    public Map<Emprestimo, Cliente> listarDevedoresProtegidos() {
+        NavigableMap<Emprestimo, Cliente> mapaClientes = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return listaDevedores;
+        for (Emprestimo emprestimo : repositorio) {
+            LocalDate prazo = emprestimo.getData().plusDays(emprestimo.getPrazo());
+            long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
+            if(dataPagamento < 0 /* score > ? */){
+                //Preencher mapa
+                mapaClientes.put(emprestimo, emprestimo.getCliente());
+            }
+        }
+        return mapaClientes;
     }
 
-    public Map<Cliente, Emprestimo> listarDevedoresAltoRisco() {
-        Map<Cliente, Emprestimo> listaDevedores = new HashMap<>();
+    public Map<Emprestimo, Cliente> listarDevedoresAltoRisco() {
+        NavigableMap<Emprestimo, Cliente> mapaClientes = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return listaDevedores;
+        for (Emprestimo emprestimo : repositorio) {
+            LocalDate prazo = emprestimo.getData().plusDays(emprestimo.getPrazo());
+            long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
+            if(dataPagamento < 0 /* score < ? */){
+                //Preencher mapa
+                mapaClientes.put(emprestimo, emprestimo.getCliente());
+            }
+        }
+        return mapaClientes;
     }
 }
