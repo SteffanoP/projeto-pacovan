@@ -35,9 +35,11 @@ public class ControladorEmpregado {
 
     }
 
+    
     public List<Empregado> listarEmpregados() {
-        List<Empregado> listaEmpregado = new ArrayList<>();
+        List<Empregado> listaEmpregados = new ArrayList<>();
+        repoEmpregado.listar().addAll(listaEmpregados);
 
-        return listaEmpregado;
+        return listaEmpregados;
     }
 }
