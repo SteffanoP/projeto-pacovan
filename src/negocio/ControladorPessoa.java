@@ -10,11 +10,13 @@ import negocio.beans.Pessoa;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
 import java.util.List;
 
 public class ControladorPessoa {
     private Repositorio<Cliente> repoCliente;
     private Repositorio<Empregado> repoEmpregado;
+    private static long contadorUID;
 
     public ControladorPessoa() {
         this.repoCliente = new RepositorioCRUD<>();
@@ -42,18 +44,23 @@ public class ControladorPessoa {
             throw new PessoaCPFInvalidoException("CPF Inválido!");
         }
 
-        //Set de UID da Pessoa
+        //Set de UID da pessoa
+        pessoa.setUid(contadorUID);
+
+        //Set de Senha da Pessoa
         pessoa.setSenha(digestSHA256(senhaPessoa));
 
         if (pessoa instanceof Cliente) {
             try {
                 this.repoCliente.inserir((Cliente) pessoa);
+                contadorUID++;
             } catch (ObjetoDuplicadoException e) {
                 throw new PessoaDuplicadoException("Pessoa já registrada no sistema!");
             }
         } else if (pessoa instanceof Empregado) {
             try {
                 this.repoEmpregado.inserir((Empregado) pessoa);
+                contadorUID++;
             } catch (ObjetoDuplicadoException e) {
                 throw new PessoaDuplicadoException("Pessoa já registrada no sistema!");
             }
