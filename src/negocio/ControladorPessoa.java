@@ -2,9 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.ObjetoDuplicadoException;
-import exceptions.PessoaCPFInvalidoException;
-import exceptions.PessoaDuplicadoException;
+import exceptions.*;
 import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 import negocio.beans.Pessoa;
@@ -58,7 +56,7 @@ public class ControladorPessoa {
         }
 
         //Set de UID da Pessoa
-        pessoa.setSenha(senhaHex.toString());
+        pessoa.setSenha(digestSHA256(senhaPessoa));
 
         if (pessoa instanceof Cliente) {
             try {
@@ -133,5 +131,94 @@ public class ControladorPessoa {
 
         return validado;
     }
+
+    /**
+     * Método que altera os dados cadastrados de uma pessoa por meio da substituição do objeto {@code Pessoa} antigo
+     * por um novo objeto do tipo {@code Pessoa}.
+     *
+     * @param pessoaDadosNovo o novo objeto que irá substituir a {@code Pessoa} antiga.
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * cliente.
+     */
+    public void alterarDadosPessoais(Pessoa pessoaDadosNovo) throws PessoaInexistenteException {
+        if (pessoaDadosNovo instanceof Cliente) {
+            List<Cliente> clienteList = this.repoCliente.listar();
+            boolean clienteAtualizado = false;
+            for (int i = 0; (i < clienteList.size()) && !clienteAtualizado; i++) {
+                Cliente cliente = clienteList.get(i);
+                if (cliente.getUid() == pessoaDadosNovo.getUid()) {
+                    try {
+                        this.repoCliente.atualizar(cliente, (Cliente) pessoaDadosNovo);
+                        clienteAtualizado = true;
+                    } catch (ObjetoInexistenteException e) {
+                        throw new PessoaInexistenteException("Cliente não Existe!");
+                    }
+                }
+            }
+        } else if (pessoaDadosNovo instanceof Empregado) {
+            List<Empregado> empregadoList = this.repoEmpregado.listar();
+            boolean empregadoAtualizado = false;
+            for (int i = 0; (i < empregadoList.size()) && !empregadoAtualizado; i++) {
+                Empregado empregado = empregadoList.get(i);
+                if (empregado.getUid() == pessoaDadosNovo.getUid()) {
+                    try {
+                        this.repoEmpregado.atualizar(empregado, (Empregado) pessoaDadosNovo);
+                        empregadoAtualizado = true;
+                    } catch (ObjetoInexistenteException e) {
+                        throw new PessoaInexistenteException("Empregado não Existe!");
+                    }
+                }
+            }
+        } else {
+            throw new PessoaInexistenteException("Esta pessoa não existe!");
+        }
+    }
+
+    /**
+     * Método que altera o atributo {@code senha} de um objeto do tipo {@code Cliente} por meio da substituição do
+     * atributo anterior por um novo atributo de senha.
+     * @param pessoa se refere a pessoa que se vai alterar a senha
+     * @param novaSenha se refere a nova senha que será cadastrada no repositório que armazena o digest da senha.
+     * @throws PessoaInexistenteException poderá acontecer caso a {@code Pessoa} não esteja atribuída a nenhuma
+     * instância Pessoa dos repositórios.
+     */
+    public void alterarSenha(Pessoa pessoa, String novaSenha) throws PessoaInexistenteException {
+        boolean pessoaExiste = false;
+
+        if (pessoa instanceof Cliente) {
+            List<Cliente> clienteList = this.repoCliente.listar();
+            for (int i = 0; (i < clienteList.size()) && !pessoaExiste; i++) {
+                Cliente cSenhaAntigo = clienteList.get(i);
+                if (cSenhaAntigo.getUid() == pessoa.getUid()) {
+                    Cliente cSenhaNova = cSenhaAntigo.retornaClone();
+                    cSenhaNova.setSenha(digestSHA256(novaSenha));
+                    try {
+                        this.repoCliente.atualizar(cSenhaAntigo,cSenhaNova);
+                    } catch (ObjetoInexistenteException e) {
+                        throw new PessoaInexistenteException("Cliente não existe!");
+                    }
+                    pessoaExiste = true;
+                }
+            }
+        } else if (pessoa instanceof Empregado) {
+            List<Empregado> empregadoList = this.repoEmpregado.listar();
+            for (int i = 0; (i < empregadoList.size()) && !pessoaExiste; i++) {
+                Empregado eSenhaAntigo = empregadoList.get(i);
+                if (eSenhaAntigo.getUid() == pessoa.getUid()) {
+                    Empregado eSenhaNova = eSenhaAntigo.retornaClone();
+                    eSenhaNova.setSenha(digestSHA256(novaSenha));
+                    try {
+                        this.repoEmpregado.atualizar(eSenhaAntigo,eSenhaNova);
+                    } catch (ObjetoInexistenteException e) {
+                        throw new PessoaInexistenteException("Cliente não existe!");
+                    }
+                    pessoaExiste = true;
+                }
+            }
+        } else {
+            throw new PessoaInexistenteException("Esta pessoa não existe!");
+        }
+    }
+
 
 }
