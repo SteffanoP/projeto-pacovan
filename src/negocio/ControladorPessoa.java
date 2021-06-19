@@ -218,11 +218,19 @@ public class ControladorPessoa {
         return senhaHex.toString();
     }
 
-    public Repositorio<Cliente> getRepoCliente() {
-        return repoCliente;
+    /**
+     * Método que lista todos os clientes do repositório de clientes {@code repoCliente}.
+     * @return uma lista não modificável do repositório de clientes.
+     */
+    public List<Cliente> listarClientes() {
+        return Collections.unmodifiableList(repoCliente.listar());
     }
 
-    public Repositorio<Empregado> getRepoEmpregado() {
-        return repoEmpregado;
+    /**
+     * Método que lista todos os empregados do repositório de empregados {@code repoEmpregado}.
+     * @return uma lista não modificável do repositório de empregados.
+     */
+    public List<Empregado> listarEmpregados() {
+        return Collections.unmodifiableList(repoEmpregado.listar());
     }
 }
