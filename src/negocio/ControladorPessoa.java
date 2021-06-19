@@ -12,6 +12,7 @@ import negocio.beans.Pessoa;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class ControladorPessoa {
     private Repositorio<Cliente> repoCliente;
@@ -73,4 +74,64 @@ public class ControladorPessoa {
             }
         }
     }
+
+    /**
+     * A função de {@code autenticarPessoa} faz o processo de autenticação de um usuário do sistema, com base nas
+     * informações cadastradas nos repositórios de pessoas, seja do Cliente ou do Empregado.
+     *
+     * @param email email do usuário cadastrado, se trata do atributo {@code email} do objeto {@code Pessoa}.
+     * @param senha senha da pessoa a ser autenticada.
+     * @param isEmpregado atributo que especifica se está autenticando um {@code Cliente} ou um {@code Empregado}.
+     * @return {@code true} se a pessoa foi autenticada com sucesso e {@code false} caso a pessoa não tenha sido
+     * autenticada com sucesso
+     */
+    public boolean autenticarPessoa(String email, String senha, boolean isEmpregado) {
+        boolean emailValidado = false;
+        boolean validado = false;
+        String senhaDigest;
+        String senhaCadastro = "";
+
+        if (email == null || senha == null) return false;
+
+        if (!isEmpregado) {
+            List<Cliente> clienteList = this.repoCliente.listar();
+            for (int i = 0; (i < clienteList.size()) && (!emailValidado); i++) {
+                if (email.equals(clienteList.get(i).getEmail())) {
+                    senhaCadastro = clienteList.get(i).getSenha();
+                    emailValidado = true;
+                }
+            }
+        } else {
+            List<Empregado> empregadoList = this.repoEmpregado.listar();
+            for (int i = 0; (i < empregadoList.size()) && (!emailValidado); i++) {
+                if (email.equals(empregadoList.get(i).getEmail())) {
+                    senhaCadastro = empregadoList.get(i).getSenha();
+                    emailValidado = true;
+                }
+            }
+        }
+
+        if (emailValidado) {
+            //Digest da senha
+
+            StringBuilder senhaHex = new StringBuilder();
+
+            try{
+                MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
+                byte[] digest = algoritmoEncrypt.digest(senha.getBytes(StandardCharsets.UTF_8));
+                for(byte b :  digest){
+                    senhaHex.append(String.format("%02X",0xFF &b));
+                }
+            } catch (NoSuchAlgorithmException e){
+                e.printStackTrace();
+            }
+
+            senhaDigest = senhaHex.toString();
+
+            validado = senhaDigest.equals(senhaCadastro);
+        }
+
+        return validado;
+    }
+
 }
