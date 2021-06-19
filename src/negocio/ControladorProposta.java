@@ -2,9 +2,8 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.ClienteInexistenteException;
 import exceptions.ObjetoDuplicadoException;
-import negocio.beans.Cliente;
+import exceptions.PessoaInexistenteException;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
@@ -35,10 +34,10 @@ public class ControladorProposta {
      * {@code data}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
      * cliente.
      */
-    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws ClienteInexistenteException {
+    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
         boolean clienteExiste = false;
         
@@ -51,7 +50,7 @@ public class ControladorProposta {
         }
         
         if (!clienteExiste) {
-            throw new ClienteInexistenteException("Cliente não existe!");
+            throw new PessoaInexistenteException("Cliente não existe!");
         }
 
         return mapaPropostas;
@@ -63,10 +62,10 @@ public class ControladorProposta {
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
      * cliente.
      */
-    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws ClienteInexistenteException {
+    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
         boolean clienteExiste = false;
         
@@ -79,7 +78,7 @@ public class ControladorProposta {
         }
         
         if (!clienteExiste) {
-            throw new ClienteInexistenteException("Cliente não existe!");
+            throw new PessoaInexistenteException("Cliente não existe!");
         }
 
         return mapaPropostas;
@@ -91,10 +90,10 @@ public class ControladorProposta {
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws ClienteInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
      * cliente.
      */
-    public Map<LocalDate, Proposta> listarPropostasPendentes() throws ClienteInexistenteException {
+    public Map<LocalDate, Proposta> listarPropostasPendentes() throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
         boolean clienteExiste = false;
         
@@ -107,7 +106,7 @@ public class ControladorProposta {
         }
         
         if (!clienteExiste) {
-            throw new ClienteInexistenteException("Cliente não existe!");
+            throw new PessoaInexistenteException("Cliente não existe!");
         }
 
         return mapaPropostas;
