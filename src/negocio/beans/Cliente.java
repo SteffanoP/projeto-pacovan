@@ -24,7 +24,8 @@ public class Cliente extends Pessoa implements Cloneable {
     //Métodos
     @Override
     public String toString() {
-        return "Cliente{" +
+        return super.toString() +
+                "Cliente{" +
                 "score=" + score +
                 '}';
     }
