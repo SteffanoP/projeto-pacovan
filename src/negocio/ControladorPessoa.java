@@ -42,19 +42,6 @@ public class ControladorPessoa {
             throw new PessoaCPFInvalidoException("CPF Inválido!");
         }
 
-        //Digest da senha
-        StringBuilder senhaHex = new StringBuilder();
-
-        try {
-            MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
-            byte[] senhaDisgest = algoritmoEncrypt.digest(senhaPessoa.getBytes(StandardCharsets.UTF_8));
-            for (byte b : senhaDisgest) {
-                senhaHex.append(String.format("%02X", 0xFF &b));
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-
         //Set de UID da Pessoa
         pessoa.setSenha(digestSHA256(senhaPessoa));
 
@@ -111,20 +98,7 @@ public class ControladorPessoa {
 
         if (emailValidado) {
             //Digest da senha
-
-            StringBuilder senhaHex = new StringBuilder();
-
-            try{
-                MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
-                byte[] digest = algoritmoEncrypt.digest(senha.getBytes(StandardCharsets.UTF_8));
-                for(byte b :  digest){
-                    senhaHex.append(String.format("%02X",0xFF &b));
-                }
-            } catch (NoSuchAlgorithmException e){
-                e.printStackTrace();
-            }
-
-            senhaDigest = senhaHex.toString();
+            senhaDigest = digestSHA256(senha);
 
             validado = senhaDigest.equals(senhaCadastro);
         }
@@ -221,4 +195,27 @@ public class ControladorPessoa {
     }
 
 
+    private static String digestSHA256(String senha) {
+        StringBuilder senhaHex = new StringBuilder();
+
+        try {
+            MessageDigest algoritmoEncrypt = MessageDigest.getInstance("SHA-256");
+            byte[] digest = algoritmoEncrypt.digest(senha.getBytes(StandardCharsets.UTF_8));
+            for(byte b :  digest){
+                senhaHex.append(String.format("%02X",0xFF &b));
+            }
+        } catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+
+        return senhaHex.toString();
+    }
+
+    public Repositorio<Cliente> getRepoCliente() {
+        return repoCliente;
+    }
+
+    public Repositorio<Empregado> getRepoEmpregado() {
+        return repoEmpregado;
+    }
 }
