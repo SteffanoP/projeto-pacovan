@@ -6,6 +6,7 @@ import java.util.Objects;
 //TODO: Implementação da classe Bens
 public class Bens {
     //Variáveis
+    private Cliente cliente;
     private String nome;
     private String descricao;
     private LocalDate dataCadastro;
@@ -61,6 +62,10 @@ public class Bens {
                 '}';
     }
 
+
+    public Cliente getCliente() {
+        return cliente;
+    }
     public String getNome() {
         return nome;
     }
