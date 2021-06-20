@@ -156,7 +156,7 @@ public class ControladorEmprestimo {
             long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
             if(dataPagamento < 0 /* && score <= ? */){
                 //Preencher mapa
-                mapaClientes.put(emprestimo, emprestimo.getCliente());
+                mapaClientes.put(emprestimo.getData(), emprestimo.getCliente());
             }
         }
         return mapaClientes;
