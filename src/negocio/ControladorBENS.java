@@ -79,7 +79,6 @@ public class ControladorBENS {
      * @param bensNovo novo bem a ser inserido para substituir
      * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
      */
-
     public void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException{
         boolean bensExiste = false;
 
