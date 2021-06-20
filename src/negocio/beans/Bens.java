@@ -1,121 +1,132 @@
-package negocio;
-
-import dados.Repositorio;
-import dados.RepositorioCRUD;
-import exceptions.ClienteInexistenteException;
-import negocio.beans.Bens;
-import negocio.beans.Cliente;
-import negocio.beans.Movimentacao;
+package negocio.beans;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Objects;
 
-public class ControladorBENS {
-    private Repositorio<Bens> repoBENS;
+//TODO: Implementação da classe Bens
+public class Bens {
+    //Variáveis
+    private Cliente cliente;
+    private String nome;
+    private String descricao;
+    private LocalDate dataCadastro;
+    private CategoriaBens categoria;
+    private double valor;
+    private int tempoDeUso;
+    private boolean garantia;
+    private boolean pendente;
 
-    public ControladorBENS() {
-        this.repoBENS = new RepositorioCRUD<>();
+    //Construtores
+    public Bens() {
+        //TODO: Implementação com controladores
     }
 
-    public void inserirBens(Bens bens) {
+    //Métodos
 
+    /**
+     * Calcular depreciação do bem, a partir da desvalorização à taxa de 10% por ano de uso.
+     * @param tempoDeUso quantidade de anos desde a compra do bem.
+     * @return valor atualizado em double.
+     */
+    public double calcularDepreciacao(int tempoDeUso){
+        if(tempoDeUso == 0) 
+            return this.valor;
+        else this.valor -= this.valor * tempoDeUso * 0.1;
+            return this.valor;
     }
 
-    public Map<LocalDate,Bens> listarBensEmpresa() {
-        NavigableMap<LocalDate, Bens> mapaBens = new TreeMap<>();
-        List<Bens> benEmpresaList = repoBENS.listar();
-            for( Bens ben : benEmpresaList){
-               mapaBens.put(ben.getDataCadastro(), ben);
-            }
-        return mapaBens;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bens)) return false;
+        Bens bens = (Bens) o;
+        return Double.compare(bens.getValor(), getValor()) == 0 && getTempoDeUso() == bens.getTempoDeUso() && isGarantia() == bens.isGarantia() && isPendente() == bens.isPendente() && Objects.equals(getNome(), bens.getNome()) && Objects.equals(getDescricao(), bens.getDescricao()) && Objects.equals(getDataCadastro(), bens.getDataCadastro()) && getCategoria() == bens.getCategoria();
     }
 
-    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) throws ClienteInexistenteException {
-        NavigableMap<LocalDate, Bens> mapaBensCliente = new TreeMap<>();
-        boolean benClienteExiste = false;
-        List<Bens> benClienteList = repoBENS.listar();
-
-        for(Bens ben : benClienteList){
-            if(ben.getCliente().getUid() == uidCliente) {
-
-                benClienteExiste = true;
-                mapaBensCliente.put(ben.getDataCadastro(), ben);
-            }
-
-        }if(!benClienteExiste)  throw new ClienteInexistenteException("Cliente Não existe!");
-            return mapaBensCliente;
-}
-
-
-    public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws ClienteInexistenteException{
-
-        NavigableMap<LocalDate, Bens> mapaBensPendentes = new TreeMap<>();
-        boolean pendente = false;
-        List<Bens> pendenteList = repoBENS.listar();
-
-        for(Bens ben : pendenteList){
-            if(ben.getCliente().getUid() == uidCliente && ben.isPendente()) {
-
-                pendente = true;
-
-                mapaBensPendentes.put(ben.getDataCadastro(), ben);
-            }
-        }
-        if(!pendente)  throw new ClienteInexistenteException("Cliente Não existe!");
-
-        return mapaBensPendentes;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNome(), getDescricao(), getDataCadastro(), getCategoria(), getValor(), getTempoDeUso(), isGarantia(), isPendente());
     }
 
-    public  Map<LocalDate,Bens> listarBensAprovados(long uidCliente) throws ClienteInexistenteException{
-        NavigableMap<LocalDate, Bens> mapaBensaprovados = new TreeMap<>();
-        boolean aprovado = false;
-        List<Bens> aproveList = repoBENS.listar();
-
-        for(Bens ben : aproveList){
-            if(ben.getCliente().getUid() == uidCliente && (!ben.isPendente())) {
-              aprovado = true;
-
-              mapaBensaprovados.put(ben.getDataCadastro(), ben);
-            }
-        }if(!aprovado)  throw new ClienteInexistenteException("Cliente Não existe!");
-
-        return mapaBensaprovados;
+    @Override
+    public String toString() {
+        return "Bens{" +
+                "nome='" + nome + '\'' +
+                ", dataCadastro=" + dataCadastro +
+                ", tempoDeUso=" + tempoDeUso +
+                ", descricao='" + descricao + '\'' +
+                ", valor=" + valor +
+                ", categoria=" + categoria +
+                ", garantia=" + garantia +
+                ", pendente=" + pendente +
+                '}';
     }
 
-    public Map<LocalDate,Bens> listarBensGarantia (long uidCliente) throws ClienteInexistenteException{
-        NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
-        boolean garantia = false;
-        List<Bens> garantiaList = repoBENS.listar();
 
-            for(Bens ben: garantiaList){
-                if(ben.getCliente().getUid() == uidCliente && ben.isGarantia()){
-                    garantia = true;
-                    mapaBensGarantia.put(ben.getDataCadastro(), ben);
-                }
-            }if(!garantia)  throw new ClienteInexistenteException("Cliente Não existe!");
-
-        return mapaBensGarantia;
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public String getNome() {
+        return nome;
     }
 
-    public double calcularValorBensCliente(long uidCliente) throws ClienteInexistenteException{
-        double valor = 0;
-        boolean existevalor  = false;
-        List<Bens> valorBenList = repoBENS.listar();
-        for(Bens ben: valorBenList) {
-            if (ben.getCliente().getUid() == uidCliente){
-                existevalor = true;
-                valor = ben.getValor() ;
-            }
-        }if(!existevalor)  throw new ClienteInexistenteException("Cliente Não existe!");
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public int getTempoDeUso() {
+        return tempoDeUso;
+    }
+
+    public void setTempoDeUso(int tempoDeUso) {
+        this.tempoDeUso = tempoDeUso;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public double getValor() {
         return valor;
     }
 
-    public void alterarBens(Bens bens) {
-
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public void removerBens(Bens bens) {
+    public CategoriaBens getCategoria() {
+        return categoria;
+    }
 
+    public void setCategoria(CategoriaBens categoria) {
+        this.categoria = categoria;
+    }
+
+    public boolean isGarantia() {
+        return garantia;
+    }
+
+    public void setGarantia(boolean garantia) {
+        this.garantia = garantia;
+    }
+
+    public boolean isPendente() {
+        return pendente;
+    }
+
+    public void setPendente(boolean pendente) {
+        this.pendente = pendente;
     }
 }
