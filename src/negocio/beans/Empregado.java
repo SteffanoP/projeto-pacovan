@@ -40,7 +40,8 @@ public class Empregado extends Pessoa implements Cloneable{
 
     @Override
     public String toString() {
-        return "Empregado{" +
+        return super.toString() +
+                "Empregado{" +
                 "salarioBase=" + salarioBase +
                 ", reputacao=" + reputacao +
                 ", privilegio=" + privilegio +

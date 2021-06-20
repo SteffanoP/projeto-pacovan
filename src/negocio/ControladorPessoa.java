@@ -10,6 +10,7 @@ import negocio.beans.Pessoa;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -218,11 +219,47 @@ public class ControladorPessoa {
         return senhaHex.toString();
     }
 
-    public Repositorio<Cliente> getRepoCliente() {
-        return repoCliente;
+    /**
+     * Método que lista todos os clientes do repositório de clientes {@code repoCliente}.
+     * @return uma lista não modificável do repositório de clientes.
+     */
+    public List<Cliente> listarClientes() {
+        return Collections.unmodifiableList(repoCliente.listar());
     }
 
-    public Repositorio<Empregado> getRepoEmpregado() {
-        return repoEmpregado;
+    /**
+     * Método que lista todos os empregados do repositório de empregados {@code repoEmpregado}.
+     * @return uma lista não modificável do repositório de empregados.
+     */
+    public List<Empregado> listarEmpregados() {
+        return Collections.unmodifiableList(repoEmpregado.listar());
+    }
+
+    /**
+     * Método que retorna uma String de dados de uma pessoa.
+     *
+     * @param pessoa se refere ao usuário que irá ser verificado os dados no repositório de pessoas.
+     * @return uma {@code String} de dados dos atributos do usuário.
+     * @throws PessoaInexistenteException poderá acontecer caso a {@code Pessoa} não esteja atribuída a nenhuma
+     * instância Pessoa dos repositórios.
+     */
+    public String informacoesPessoais(Pessoa pessoa) throws PessoaInexistenteException {
+        boolean pessoaEncontrada = false;
+        String infoPessoa = "";
+        List<Pessoa> pessoaList = new ArrayList<>();
+        pessoaList.addAll(this.listarClientes());
+        pessoaList.addAll(this.listarEmpregados());
+
+        for (int i = 0; i < pessoaList.size() && !pessoaEncontrada; i++) {
+            Pessoa p = pessoaList.get(i);
+            if (p.getUid() == pessoa.getUid()) {
+                pessoaEncontrada = true;
+                infoPessoa = p.toString();
+            }
+        }
+
+        if (!pessoaEncontrada) throw new PessoaInexistenteException("Pessoa não encontrada!");
+
+        return infoPessoa;
     }
 }
