@@ -11,10 +11,12 @@ import negocio.beans.Emprestimo;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 public class ControladorEmprestimo {
     private static final long QTD_DIAS_PARA_1_PAGAMENTO = 30;
@@ -58,7 +60,6 @@ public class ControladorEmprestimo {
         } catch (ObjetoDuplicadoException e) {
             throw new EmprestimoDuplicadoException("Parece que esse empréstimo já existe!");
         }
-
     }
 
     /**
@@ -95,10 +96,17 @@ public class ControladorEmprestimo {
         return emprestimoEmDetalhe;
     }
 
-    public List<Emprestimo> listarEmprestimosCliente(long uidCliente) {
-        List<Emprestimo> emprestimosCliente = new ArrayList<>();
+    public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimos = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return emprestimosCliente;
+        for (Emprestimo emprestimo : repositorio) {
+            if(emprestimo.getCliente().getUid() == uidCliente){
+                //Preencher mapa
+                mapaEmprestimos.put(emprestimo.getData(), emprestimo);
+            }
+        }
+        return mapaEmprestimos;
     }
 
     public List<Emprestimo> listarComissõesEmprestimo() {
@@ -107,21 +115,48 @@ public class ControladorEmprestimo {
         return comissoesEmprestimo;
     }
 
-    public Map<Cliente, Emprestimo> listarDevedores() {
-        Map<Cliente, Emprestimo> listaDevedores = new HashMap<>();
+    public Map<LocalDate, Cliente> listarDevedores() {
+        NavigableMap<LocalDate, Cliente> mapaClientes = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return listaDevedores;
+        for (Emprestimo emprestimo : repositorio) {
+            LocalDate prazo = emprestimo.getData().plusDays(emprestimo.getPrazo());
+            long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
+            if(dataPagamento < 0){
+                //Preencher mapa
+                mapaClientes.put(prazo, emprestimo.getCliente());
+            }
+        }
+        return mapaClientes;
     }
 
-    public Map<Cliente, Emprestimo> listarDevedoresProtegidos() {
-        Map<Cliente, Emprestimo> listaDevedores = new HashMap<>();
+    public Map<LocalDate, Cliente> listarDevedoresProtegidos() {
+        NavigableMap<LocalDate, Cliente> mapaClientes = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return listaDevedores;
+        for (Emprestimo emprestimo : repositorio) {
+            LocalDate prazo = emprestimo.getData().plusDays(emprestimo.getPrazo());
+            long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
+            if(dataPagamento < 0 /* && score >= ? */){
+                //Preencher mapa
+                mapaClientes.put(emprestimo.getData(), emprestimo.getCliente());
+            }
+        }
+        return mapaClientes;
     }
 
-    public Map<Cliente, Emprestimo> listarDevedoresAltoRisco() {
-        Map<Cliente, Emprestimo> listaDevedores = new HashMap<>();
+    public Map<LocalDate, Cliente> listarDevedoresAltoRisco() {
+        NavigableMap<LocalDate, Cliente> mapaClientes = new TreeMap<>();
+        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
-        return listaDevedores;
+        for (Emprestimo emprestimo : repositorio) {
+            LocalDate prazo = emprestimo.getData().plusDays(emprestimo.getPrazo());
+            long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
+            if(dataPagamento < 0 /* && score <= ? */){
+                //Preencher mapa
+                mapaClientes.put(emprestimo.getData(), emprestimo.getCliente());
+            }
+        }
+        return mapaClientes;
     }
 }
