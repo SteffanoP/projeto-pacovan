@@ -99,6 +99,17 @@ public class ControladorBENS {
     }
 
     public void removerBens(Bens bens) {
+    /**
+     * Método que remove bens do repositório.
+     * @param bens bem a ser removido do repositório.
+     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
+     */
 
+    public void removerBens(Bens bens) throws BensInexistenteException{
+        try {
+            this.repoBENS.remover(bens);
+        } catch (ObjetoInexistenteException e) {
+            throw new BensInexistenteException("O bem não existe!");
+        }
     }
 }
