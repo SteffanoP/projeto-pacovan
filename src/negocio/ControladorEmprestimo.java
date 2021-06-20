@@ -27,8 +27,6 @@ public class ControladorEmprestimo {
         this.repoEmprestimo = new RepositorioCRUD<>();
     }
 
-
-    public void criarEmprestimo(Proposta proposta) {
     /**
      * Método que cria um empréstimo a partir de uma proposta aprovada por um empregado, neste método são aplicadas
      * regras de negócio, como a primeira data de pagamento do empréstimo que se baseia na
