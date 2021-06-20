@@ -4,7 +4,7 @@ import java.util.Objects;
 
 //TODO: Implementar a classe Cliente
 //TODO: Trabalhar com equals observando classe abstrata
-public class Cliente extends Pessoa {
+public class Cliente extends Pessoa implements Cloneable {
     //Atributos
     private int score;
 
@@ -12,23 +12,20 @@ public class Cliente extends Pessoa {
     public Cliente() {
     }
 
+    public Cliente retornaClone() {
+        try {
+            return (Cliente) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     //Métodos
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Cliente)) return false;
-        Cliente cliente = (Cliente) o;
-        return getScore() == cliente.getScore();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getScore());
-    }
-
-    @Override
     public String toString() {
-        return "Cliente{" +
+        return super.toString() +
+                "Cliente{" +
                 "score=" + score +
                 '}';
     }

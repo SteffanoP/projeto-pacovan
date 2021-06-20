@@ -22,7 +22,7 @@ public interface Repositorio<T> {
      */
     public List<T> listar();
 
-    public void atualizar(T obj) throws ObjetoInexistenteException;
+    public void atualizar(T objAntigo,T objNovo) throws ObjetoInexistenteException;
 
     /**
      * Método que remove um objeto genérico da lista dos objetos do repositório CRUD.
