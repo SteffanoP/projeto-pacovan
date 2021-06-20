@@ -62,10 +62,10 @@ public class Bens {
                 '}';
     }
 
-
     public Cliente getCliente() {
         return cliente;
     }
+
     public String getNome() {
         return nome;
     }
