@@ -30,7 +30,7 @@ public class ControladorBENS {
         return mapaBens;
     }
 
-    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) throws ClienteInexistenteException {
+    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Bens> mapaBensCliente = new TreeMap<>();
         boolean benClienteExiste = false;
         List<Bens> benClienteList = repoBENS.listar();
@@ -42,12 +42,12 @@ public class ControladorBENS {
                 mapaBensCliente.put(ben.getDataCadastro(), ben);
             }
 
-        }if(!benClienteExiste)  throw new ClienteInexistenteException("Cliente Não existe!");
+        }if(!benClienteExiste)  throw new PessoaInexistenteException("Cliente Não existe!");
             return mapaBensCliente;
 }
 
 
-    public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws ClienteInexistenteException{
+    public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException{
 
         NavigableMap<LocalDate, Bens> mapaBensPendentes = new TreeMap<>();
         boolean pendente = false;
@@ -61,12 +61,12 @@ public class ControladorBENS {
                 mapaBensPendentes.put(ben.getDataCadastro(), ben);
             }
         }
-        if(!pendente)  throw new ClienteInexistenteException("Cliente Não existe!");
+        if(!pendente)  throw new PessoaInexistenteException("Cliente Não existe!");
 
         return mapaBensPendentes;
     }
 
-    public  Map<LocalDate,Bens> listarBensAprovados(long uidCliente) throws ClienteInexistenteException{
+    public  Map<LocalDate,Bens> listarBensAprovados(long uidCliente) throws PessoaInexistenteException{
         NavigableMap<LocalDate, Bens> mapaBensaprovados = new TreeMap<>();
         boolean aprovado = false;
         List<Bens> aproveList = repoBENS.listar();
@@ -77,12 +77,12 @@ public class ControladorBENS {
 
               mapaBensaprovados.put(ben.getDataCadastro(), ben);
             }
-        }if(!aprovado)  throw new ClienteInexistenteException("Cliente Não existe!");
+        }if(!aprovado)  throw new PessoaInexistenteException("Cliente Não existe!");
 
         return mapaBensaprovados;
     }
 
-    public Map<LocalDate,Bens> listarBensGarantia (long uidCliente) throws ClienteInexistenteException{
+    public Map<LocalDate,Bens> listarBensGarantia (long uidCliente) throws PessoaInexistenteException{
         NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
         boolean garantia = false;
         List<Bens> garantiaList = repoBENS.listar();
@@ -92,12 +92,12 @@ public class ControladorBENS {
                     garantia = true;
                     mapaBensGarantia.put(ben.getDataCadastro(), ben);
                 }
-            }if(!garantia)  throw new ClienteInexistenteException("Cliente Não existe!");
+            }if(!garantia)  throw new PessoaInexistenteException ("Cliente Não existe!");
 
         return mapaBensGarantia;
     }
 
-    public double calcularValorBensCliente(long uidCliente) throws ClienteInexistenteException{
+    public double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException{
         double valor = 0;
         boolean existevalor  = false;
         List<Bens> valorBenList = repoBENS.listar();
@@ -106,7 +106,7 @@ public class ControladorBENS {
                 existevalor = true;
                 valor = ben.getValor() ;
             }
-        }if(!existevalor)  throw new ClienteInexistenteException("Cliente Não existe!");
+        }if(!existevalor)  throw new PessoaInexistenteException("Cliente Não existe!");
 
         return valor;
     }
