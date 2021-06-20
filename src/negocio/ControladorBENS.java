@@ -19,6 +19,23 @@ public class ControladorBENS {
 
     public void inserirBens(Bens bens) {
 
+    /**
+     * Método que insere bem no repositório.
+     * @param bens bem a ser inserido no repositório. O objeto receberá a data do cadastro e receberá os parametros
+     *             falso para o atributo {@code garantia} e verdadeiro para o atributo {@code pendente}.
+     * @throws BensDuplicadoException caso o bem cadastrado já tenha sido inserido.
+     */
+    public void inserirBens(Bens bens) throws BensDuplicadoException{
+       //Atribui a data de cadastro do bem
+        bens.setDataCadastro(LocalDate.now());
+        //Seta os valores para os atributos pendente e garantia
+        bens.setPendente(true);
+        bens.setGarantia(false);
+
+        try {
+            this.repoBENS.inserir(bens);
+        } catch (ObjetoDuplicadoException e) {
+            throw new BensDuplicadoException("Bens já registrado no sistema!");
     }
 
     public Map<LocalDate,Bens> listarBensEmpresa() {
@@ -112,10 +129,41 @@ public class ControladorBENS {
     }
 
     public void alterarBens(Bens bens) {
+    /**
+     * Método que altera um bem por outro no repositório
+     * @param bensAntigo bem inicialmente cadastrado.
+     * @param bensNovo novo bem a ser inserido para substituir
+     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
+     */
+    public void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException{
+        boolean bensExiste = false;
 
+        List<Bens> bensList = this.repoBENS.listar();
+        for (int i = 0; (i < bensList.size()) && !bensExiste; i++) {
+            Bens bens = bensList.get(i);
+
+            if (bens.equals(bensAntigo)) {
+                try {
+                    this.repoBENS.atualizar(bensAntigo, bensNovo);
+                } catch (ObjetoInexistenteException e) {
+                    throw new BensInexistenteException("O bem não existe!");
+                }
+                bensExiste = true;
+            }
+        }
     }
 
     public void removerBens(Bens bens) {
-
+    /**
+     * Método que remove bens do repositório.
+     * @param bens bem a ser removido do repositório.
+     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
+     */
+    public void removerBens(Bens bens) throws BensInexistenteException{
+        try {
+            this.repoBENS.remover(bens);
+        } catch (ObjetoInexistenteException e) {
+            throw new BensInexistenteException("O bem não existe!");
+        }
     }
 }
