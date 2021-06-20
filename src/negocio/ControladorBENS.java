@@ -73,7 +73,29 @@ public class ControladorBENS {
     }
 
     public void alterarBens(Bens bens) {
+    /**
+     * Método que altera um bem por outro no repositório
+     * @param bensAntigo bem inicialmente cadastrado.
+     * @param bensNovo novo bem a ser inserido para substituir
+     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
+     */
 
+    public void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException{
+        boolean bensExiste = false;
+
+        List<Bens> bensList = this.repoBENS.listar();
+        for (int i = 0; (i < bensList.size()) && !bensExiste; i++) {
+            Bens bens = bensList.get(i);
+
+            if (bens.equals(bensAntigo)) {
+                try {
+                    this.repoBENS.atualizar(bensAntigo, bensNovo);
+                } catch (ObjetoInexistenteException e) {
+                    throw new BensInexistenteException("O bem não existe!");
+                }
+                bensExiste = true;
+            }
+        }
     }
 
     public void removerBens(Bens bens) {
