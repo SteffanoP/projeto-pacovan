@@ -77,7 +77,7 @@ public class ControladorEmprestimo {
         if (cliente == null || dataEmprestimo == null) throw new EmprestimoInexistenteException("Essa requisição " +
                 "parece inválida!");
 
-        List<Emprestimo> listaEmprestimosCliente = this.listarEmprestimosCliente(cliente.getUid());
+        List<Emprestimo> listaEmprestimosCliente = new ArrayList<>(this.listarEmprestimosCliente(cliente.getUid()).values());
         String emprestimoEmDetalhe = "";
 
         boolean emprestimoEncontrado = false;
