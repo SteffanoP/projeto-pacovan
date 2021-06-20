@@ -9,6 +9,7 @@ public class Bens {
     private String nome;
     private String descricao;
     private LocalDate dataCadastro;
+    private Cliente cliente;
     private CategoriaBens categoria;
     private double valor;
     private int tempoDeUso;
@@ -92,6 +93,10 @@ public class Bens {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public Cliente getCliente() { return cliente; }
+
+    public void setCliente(Cliente cliente) { this.cliente = cliente; }
 
     public double getValor() {
         return valor;
