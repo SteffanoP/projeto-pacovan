@@ -2,7 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.ClienteInexistenteException;
+import exceptions.PessoaInexistenteException;
 import negocio.beans.Bens;
 import negocio.beans.Cliente;
 import negocio.beans.Movimentacao;
