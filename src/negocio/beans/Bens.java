@@ -10,7 +10,6 @@ public class Bens {
     private String nome;
     private String descricao;
     private LocalDate dataCadastro;
-    private Cliente cliente;
     private CategoriaBens categoria;
     private double valor;
     private int tempoDeUso;
@@ -64,9 +63,6 @@ public class Bens {
     }
 
 
-    public Cliente getCliente() {
-        return cliente;
-    }
     public String getNome() {
         return nome;
     }

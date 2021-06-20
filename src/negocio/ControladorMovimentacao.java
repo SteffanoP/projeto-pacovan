@@ -7,6 +7,7 @@ import negocio.beans.Bens;
 import negocio.beans.Movimentacao;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ControladorMovimentacao {
@@ -17,7 +18,7 @@ public class ControladorMovimentacao {
     }
 
     public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException  {
-        NavigableMap<LocalDate, Movimentacao> mapaMovimentacaoCliente = new TreeMap<>();
+        NavigableMap<LocalDateTime, Movimentacao> mapaMovimentacaoCliente = new TreeMap<>();
         boolean moveClienteExiste = false;
         List<Movimentacao> moveList = repoMovimentacao.listar();
 

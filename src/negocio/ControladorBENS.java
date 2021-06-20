@@ -2,7 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.PessoaInexistenteException;
+import exceptions.*;
 import negocio.beans.Bens;
 import negocio.beans.Cliente;
 import negocio.beans.Movimentacao;
@@ -17,16 +17,14 @@ public class ControladorBENS {
         this.repoBENS = new RepositorioCRUD<>();
     }
 
-    public void inserirBens(Bens bens) {
-
     /**
      * Método que insere bem no repositório.
      * @param bens bem a ser inserido no repositório. O objeto receberá a data do cadastro e receberá os parametros
      *             falso para o atributo {@code garantia} e verdadeiro para o atributo {@code pendente}.
      * @throws BensDuplicadoException caso o bem cadastrado já tenha sido inserido.
      */
-    public void inserirBens(Bens bens) throws BensDuplicadoException{
-       //Atribui a data de cadastro do bem
+    public void inserirBens(Bens bens) throws BensDuplicadoException {
+        //Atribui a data de cadastro do bem
         bens.setDataCadastro(LocalDate.now());
         //Seta os valores para os atributos pendente e garantia
         bens.setPendente(true);
@@ -36,6 +34,7 @@ public class ControladorBENS {
             this.repoBENS.inserir(bens);
         } catch (ObjetoDuplicadoException e) {
             throw new BensDuplicadoException("Bens já registrado no sistema!");
+        }
     }
 
     public Map<LocalDate,Bens> listarBensEmpresa() {
@@ -61,7 +60,7 @@ public class ControladorBENS {
 
         }if(!benClienteExiste)  throw new PessoaInexistenteException("Cliente Não existe!");
             return mapaBensCliente;
-}
+    }
 
 
     public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException{
@@ -128,14 +127,13 @@ public class ControladorBENS {
         return valor;
     }
 
-    public void alterarBens(Bens bens) {
     /**
      * Método que altera um bem por outro no repositório
      * @param bensAntigo bem inicialmente cadastrado.
      * @param bensNovo novo bem a ser inserido para substituir
      * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
      */
-    public void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException{
+    public void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException {
         boolean bensExiste = false;
 
         List<Bens> bensList = this.repoBENS.listar();
@@ -153,7 +151,6 @@ public class ControladorBENS {
         }
     }
 
-    public void removerBens(Bens bens) {
     /**
      * Método que remove bens do repositório.
      * @param bens bem a ser removido do repositório.
