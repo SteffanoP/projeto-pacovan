@@ -17,6 +17,9 @@ public class Fachada implements SistemaEmprestimosBens {
     
     private static SistemaEmprestimosBens instance;
 
+    /**
+     * Implementação do Construtor privado do padrão Singleton.
+     */
     private Fachada() {
         this.bens = new ControladorBENS();
         this.emprestimos = new ControladorEmprestimo();
@@ -25,6 +28,11 @@ public class Fachada implements SistemaEmprestimosBens {
         this.propostas = new ControladorProposta();
     }
 
+    /**
+     * Método que implementa a instância de uma fachada.
+     *
+     * @return a instância fachada sendo utilizada ou uma nova instância de fachada.
+     */
     public static SistemaEmprestimosBens getInstance() {
         if (instance == null) {
             instance = new Fachada();
