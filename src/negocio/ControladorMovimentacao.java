@@ -16,7 +16,7 @@ public class ControladorMovimentacao {
         this.repoMovimentacao = new RepositorioCRUD<>();
     }
 
-    public Map<LocalDate, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException  {
+    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException  {
         NavigableMap<LocalDate, Movimentacao> mapaMovimentacaoCliente = new TreeMap<>();
         boolean moveClienteExiste = false;
         List<Movimentacao> moveList = repoMovimentacao.listar();
@@ -25,7 +25,7 @@ public class ControladorMovimentacao {
 
             if(move.getCliente().getUid() == uidCliente ){
                 moveClienteExiste = true;
-                    mapaMovimentacaoCliente.put(move.getInstante().toLocalDate(), move);  //duvida
+                    mapaMovimentacaoCliente.put(move.getInstante(), move);  //duvida
             }
         }if(!moveClienteExiste)  throw new PessoaInexistenteException ("Cliente Não existe!");
 
