@@ -12,7 +12,7 @@ public class Main extends Application {
         primaryStage.setTitle("Sistema de Gerenciamento de Empréstimo Pessoal Alternativo");
 
         primaryStage.setWidth(1024);
-        primaryStage.setHeight(720);
+        primaryStage.setHeight(768);
 
         primaryStage.show();
     }
