@@ -1,12 +1,12 @@
 package gui;
 
+import exceptions.PessoaInexistenteException;
+import gerenciamento.SessaoUsuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import negocio.Fachada;
+import negocio.beans.Pessoa;
 
 public class TelaLoginController {
 
@@ -19,8 +19,17 @@ public class TelaLoginController {
 
     @FXML
     public void btnLoginPressed(ActionEvent event) {
-        System.out.println(Fachada.getInstance().autenticarPessoa(txtEmail.getText(),txtSenha.getText(),
-                splMenuPessoa.getText().equals("Empregado")));
+        if (Fachada.getInstance().autenticarPessoa(txtEmail.getText(),txtSenha.getText(),
+                splMenuPessoa.getText().equals("Empregado"))) {
+            try {
+                Pessoa pessoa = Fachada.getInstance().buscarPesssoa(txtEmail.getText());
+                SessaoUsuario.getInstance().setPessoaSessao(pessoa);
+            } catch (PessoaInexistenteException e) {
+                e.printStackTrace();
+            }
+        } else {
+            this.gerarAlertaErroAutenticacao("O usuário e senha não conferem ou você não está cadastrado.");
+        }
     }
 
     @FXML
@@ -31,6 +40,14 @@ public class TelaLoginController {
     @FXML
     public void btnSplMenuEmpregadoPressed(ActionEvent event) {
         this.setSplMenuPessoa(splMenuItemEmpregado.getText());
+    }
+
+    private void gerarAlertaErroAutenticacao(String justificativa) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro de Autenticação");
+        alerta.setHeaderText("Parece que tivemos um erro com sua tentativa de login");
+        alerta.setContentText(justificativa);
+        alerta.showAndWait();
     }
 
     private void setSplMenuPessoa(String menuItemEscolhido) {
