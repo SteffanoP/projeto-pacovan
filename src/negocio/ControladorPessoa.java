@@ -122,7 +122,7 @@ public class ControladorPessoa {
      * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
      * {@code Pessoa}.
      */
-    public Pessoa buscarPesssoa(String email) throws PessoaInexistenteException {
+    public Pessoa buscarPessoa(String email) throws PessoaInexistenteException {
         Pessoa pessoa = null;
         List<Pessoa> listPessoas = new ArrayList<>(repoCliente.listar());
         listPessoas.addAll(repoEmpregado.listar());

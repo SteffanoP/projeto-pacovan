@@ -146,8 +146,8 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Pessoa buscarPesssoa(String email) throws PessoaInexistenteException {
-        return pessoas.buscarPesssoa(email);
+    public Pessoa buscarPessoa(String email) throws PessoaInexistenteException {
+        return pessoas.buscarPessoa(email);
     }
 
     @Override

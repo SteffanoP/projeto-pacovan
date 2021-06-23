@@ -125,7 +125,7 @@ public interface SistemaEmprestimosBens {
      * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
      * {@code Pessoa}.
      */
-    Pessoa buscarPesssoa(String email) throws PessoaInexistenteException;
+    Pessoa buscarPessoa(String email) throws PessoaInexistenteException;
 
     /**
      * Método que altera os dados cadastrados de uma pessoa por meio da substituição do objeto {@code Pessoa} antigo

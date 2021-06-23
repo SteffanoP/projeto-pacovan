@@ -22,7 +22,7 @@ public class TelaLoginController {
         if (Fachada.getInstance().autenticarPessoa(txtEmail.getText(),txtSenha.getText(),
                 splMenuPessoa.getText().equals("Empregado"))) {
             try {
-                Pessoa pessoa = Fachada.getInstance().buscarPesssoa(txtEmail.getText());
+                Pessoa pessoa = Fachada.getInstance().buscarPessoa(txtEmail.getText());
                 SessaoUsuario.getInstance().setPessoaSessao(pessoa);
             } catch (PessoaInexistenteException e) {
                 e.printStackTrace();
