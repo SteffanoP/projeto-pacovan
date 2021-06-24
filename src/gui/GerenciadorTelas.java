@@ -14,6 +14,8 @@ public class GerenciadorTelas {
     private Stage primaryStage;
     private Scene mainScene;
 
+    private TelaLoginController telaLoginController;
+
     private GerenciadorTelas() {
         this.initialize();
     }

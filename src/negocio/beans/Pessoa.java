@@ -37,7 +37,8 @@ public abstract class Pessoa {
         if (this == o) return true;
         if (!(o instanceof Pessoa)) return false;
         Pessoa pessoa = (Pessoa) o;
-        return getUid() == pessoa.getUid() && Objects.equals(getNome(), pessoa.getNome()) && Objects.equals(getTelefone(), pessoa.getTelefone()) && Objects.equals(getCpf(), pessoa.getCpf()) && Objects.equals(getEndereco(), pessoa.getEndereco()) && Objects.equals(getEmail(), pessoa.getEmail()) && Objects.equals(getDataNascimento(), pessoa.getDataNascimento()) && Objects.equals(getSenha(), pessoa.getSenha());
+        return Objects.equals(getCpf(), pessoa.getCpf()) && Objects.equals(getEmail(), pessoa.getEmail()) &&
+                Objects.equals(getDataNascimento(), pessoa.getDataNascimento());
     }
 
     @Override

@@ -118,6 +118,16 @@ public interface SistemaEmprestimosBens {
     boolean autenticarPessoa(String email, String senha, boolean isEmpregado);
 
     /**
+     * Método que faz a busca de uma {@code Pessoa} dentro do repositório de todos os usuários.
+     *
+     * @param email se trata do parâmetro de busca do usuário
+     * @return retorna um objeto abstrato do tipo {@code Pessoa}
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
+     * {@code Pessoa}.
+     */
+    Pessoa buscarPessoa(String email) throws PessoaInexistenteException;
+
+    /**
      * Método que altera os dados cadastrados de uma pessoa por meio da substituição do objeto {@code Pessoa} antigo
      * por um novo objeto do tipo {@code Pessoa}.
      *
