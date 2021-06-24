@@ -48,7 +48,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Label layoutY="1.0" text="Empéstimos do Cliente" />
+                  <Label layoutY="1.0" text="Empréstimos do Cliente" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
