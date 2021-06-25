@@ -23,7 +23,6 @@ public class Main extends Application {
         primaryStage.setHeight(400);
 
         GerenciadorTelas.getInstance().setPrimaryStage(primaryStage);
-        
 
         primaryStage.show();
     }
