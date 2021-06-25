@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -28,7 +29,14 @@ public class GerenciadorTelas {
     }
 
     private void initialize() {
-        //Inicie aqui as telas do programa
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        AnchorPane panePrincipal = null;
+        try {
+            panePrincipal = fxmlLoader.load(getClass().getResource("/gui/TelaCadastroEmpregados.fxml").openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.mainScene = new Scene(panePrincipal);
     }
 
     public Scene getMainScene() {
