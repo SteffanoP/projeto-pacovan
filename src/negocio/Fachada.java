@@ -51,6 +51,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
+        return bens.listarBensEmpresaCategoria(categoria);
+    }
+
+    @Override
     public Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
         return bens.listarBensCliente(uidCliente);
     }
