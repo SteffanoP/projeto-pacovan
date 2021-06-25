@@ -19,6 +19,7 @@ public class TelaLoginController {
     @FXML MenuItem splMenuItemCliente;
     @FXML MenuItem splMenuItemEmpregado;
     @FXML Button btnLoginPressed;
+    @FXML Button btnCadastrarPressed;
 
     @FXML
     public void btnLoginPressed(ActionEvent event) {
@@ -60,5 +61,9 @@ public class TelaLoginController {
 
     private void setSplMenuPessoa(String menuItemEscolhido) {
         this.splMenuPessoa.setText(menuItemEscolhido);
+    }
+
+    public void btnCadastrarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaCadastrar");
     }
 }

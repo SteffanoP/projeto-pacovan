@@ -66,6 +66,26 @@ public class GerenciadorTelas {
 	        }
 	        break;
 		}
+		case "telaCadastrar":{
+		    Parent telaCadastrar = null;
+		    try {
+		        telaCadastrar = fxmlLoader.load(getClass().getResource("/gui/TelaCadastrarCliente.fxml").openStream());
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		    this.mainScene = new Scene(telaCadastrar);
+		    break;
+		}
+		case "telaLogin": {
+            Parent telaLogin = null;
+            try {
+                telaLogin = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.mainScene = new Scene(telaLogin);
+            break;
+        }
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + tela);
 		}
