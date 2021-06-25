@@ -72,7 +72,6 @@ public class GerenciadorTelas {
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
-		    this.mainScene = new Scene(telaCadastrar);
 		    break;
 		}
 		case "telaLogin": {
@@ -81,7 +80,6 @@ public class GerenciadorTelas {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            this.mainScene = new Scene(telaLogin);
             break;
         }
 		default:
