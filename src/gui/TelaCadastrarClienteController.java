@@ -39,6 +39,7 @@ public class TelaCadastrarClienteController {
             clienteCadastro.setEmail(txtEmail.getText());
             try {
                 Fachada.getInstance().cadastrarPessoa(clienteCadastro,txtSenha.getText());
+                GerenciadorTelas.getInstance().changeScreen("telaLogin");
             } catch (PessoaDuplicadoException | PessoaCPFInvalidoException e) {
                 this.gerarAlertaErroCadastro(e.getMessage());
             }
