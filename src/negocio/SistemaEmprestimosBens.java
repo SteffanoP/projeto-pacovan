@@ -172,7 +172,13 @@ public interface SistemaEmprestimosBens {
      */
     String informacoesPessoais(Pessoa pessoa) throws PessoaInexistenteException;
 
-    void criarProposta(Proposta p) throws ObjetoDuplicadoException;
+    /**
+     * Método que cria e adiciona um objeto do tipo {@code Proposta}, no qual atribuí um número de procolo a proposta e
+     * seta parâmetros de controle, como {@code data} e {@code contraproposta}.
+     * @param p se refere a proposta inicial ao qual se deseja adicionar ao sistema.
+     * @throws PropostaInvalidaException poderá acontecer caso a proposta seja inválida por alguma razão.
+     */
+    void criarProposta(Proposta p) throws PropostaInvalidaException;
 
     String propostaEmDetalhe();
 
