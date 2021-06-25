@@ -6,7 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
+import negocio.beans.Cliente;
+import negocio.beans.Empregado;
 import negocio.beans.Pessoa;
+import gui.GerenciadorTelas;
 
 public class TelaLoginController {
 
@@ -24,6 +27,7 @@ public class TelaLoginController {
             try {
                 Pessoa pessoa = Fachada.getInstance().buscarPessoa(txtEmail.getText());
                 SessaoUsuario.getInstance().setPessoaSessao(pessoa);
+                if (pessoa instanceof Cliente) btnLoginPressed(GerenciadorTelas.getInstance().changeScreen("telaCliente"));
             } catch (PessoaInexistenteException e) {
                 e.printStackTrace();
             }

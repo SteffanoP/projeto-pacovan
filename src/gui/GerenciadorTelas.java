@@ -1,10 +1,10 @@
 package gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,8 +13,6 @@ public class GerenciadorTelas {
     private static GerenciadorTelas instance;
     private Stage primaryStage;
     private Scene mainScene;
-
-    private TelaLoginController telaLoginController;
 
     private GerenciadorTelas() {
         this.initialize();
@@ -28,7 +26,34 @@ public class GerenciadorTelas {
     }
 
     private void initialize() {
-        //Inicie aqui as telas do programa
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent telaLogin = null;
+        
+        try {
+        	telaLogin = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.mainScene = new Scene(telaLogin);
+    }
+    
+    public ActionEvent changeScreen(String tela) {
+    	FXMLLoader fxmlLoader = new FXMLLoader();
+    	
+    	switch (tela) {
+		case "telaCliente": {
+	        Parent telaCliente = null;
+	        
+	        try {
+	        	telaCliente = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalCliente.fxml").openStream());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        this.mainScene = new Scene(telaCliente);
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + tela);
+		}
     }
 
     public Scene getMainScene() {
