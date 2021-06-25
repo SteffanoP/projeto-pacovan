@@ -89,24 +89,17 @@ public class ControladorProposta {
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
      * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
      * cliente.
      */
     public Map<LocalDate, Proposta> listarPropostasPendentes() throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
-        boolean clienteExiste = false;
         
         for (Proposta proposta : this.repoProposta.listar()) {
             if(!proposta.isContraproposta()){
-                clienteExiste = true;
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
             }
-        }
-        
-        if (!clienteExiste) {
-            throw new PessoaInexistenteException("Cliente não existe!");
         }
 
         return mapaPropostas;
