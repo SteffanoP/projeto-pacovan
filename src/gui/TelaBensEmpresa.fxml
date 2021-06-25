@@ -1,31 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaBensEmpresaController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane onMouseEntered="#onMouseEntered" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="419.0" layoutY="88.0" text="Catálogo de Bens">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <ListView layoutX="155.0" layoutY="202.0" prefHeight="136.0" prefWidth="659.0" />
-            <ScrollBar layoutX="799.0" layoutY="202.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
-            <ListView layoutX="155.0" layoutY="384.0" prefHeight="136.0" prefWidth="659.0" />
-            <ListView layoutX="155.0" layoutY="559.0" prefHeight="136.0" prefWidth="659.0" />
-            <ScrollBar layoutX="799.0" layoutY="559.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
-            <ScrollBar layoutX="799.0" layoutY="384.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
             <Label layoutX="155.0" layoutY="176.0" text="Móveis fungíveis" />
             <Label layoutX="155.0" layoutY="360.0" text="Móveis infungíveis" />
             <Label layoutX="155.0" layoutY="533.0" text="Imóveis" />
+            <TableView fx:id="tblvMoveisInfungiveis" layoutX="155.0" layoutY="377.0" prefHeight="135.0" prefWidth="660.0">
+               <columns>
+                  <TableColumn fx:id="colDtCadastroInfungiveis" prefWidth="110.0" text="Data de Cadastro" />
+                  <TableColumn fx:id="colValorInfungiveis" text="Valor" />
+                  <TableColumn fx:id="colNomeInfungiveis" prefWidth="120.0" text="Nome" />
+                  <TableColumn fx:id="colDescricaoInfungiveis" prefWidth="255.0" text="Descrição" />
+                  <TableColumn fx:id="colTempoUsoInfungiveis" prefWidth="94.0" text="Tempo de Uso" />
+               </columns>
+            </TableView>
+            <TableView fx:id="tblvMoveisFungiveis" layoutX="155.0" layoutY="193.0" prefHeight="135.0" prefWidth="660.0">
+              <columns>
+                <TableColumn fx:id="colDtCadastroFungiveis" prefWidth="110.0" text="Data de Cadastro" />
+                <TableColumn fx:id="colValorFungiveis" text="Valor" />
+                  <TableColumn fx:id="colNomeFungiveis" prefWidth="120.0" text="Nome" />
+                  <TableColumn fx:id="colDescricaoFungiveis" prefWidth="255.0" text="Descrição" />
+                  <TableColumn fx:id="colTempoUsoFungiveis" prefWidth="94.0" text="Tempo de Uso" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tblvImoveis" layoutX="155.0" layoutY="550.0" prefHeight="135.0" prefWidth="660.0">
+               <columns>
+                  <TableColumn fx:id="colDtCadastroImoveis" prefWidth="110.0" text="Data de Cadastro" />
+                  <TableColumn fx:id="colValorImoveis" text="Valor" />
+                  <TableColumn fx:id="colNomeImoveis" prefWidth="120.0" text="Nome" />
+                  <TableColumn fx:id="colDescricaoImoveis" prefWidth="255.0" text="Descrição" />
+                  <TableColumn fx:id="colTempoUsoImoveis" prefWidth="94.0" text="Tempo de Uso" />
+               </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </center>
