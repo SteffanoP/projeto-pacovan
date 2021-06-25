@@ -10,7 +10,7 @@ import negocio.beans.Pessoa;
 
 
 
-public class infoPessoaisController {
+public class TelaInformacoesPessoaisController {
     @FXML TextField txtNome;
     @FXML TextField txtCpf;
     @FXML TextField txtTelefone;
