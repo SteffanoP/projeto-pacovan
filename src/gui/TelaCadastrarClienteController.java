@@ -2,6 +2,7 @@ package gui;
 
 import exceptions.PessoaCPFInvalidoException;
 import exceptions.PessoaDuplicadoException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
@@ -38,6 +39,7 @@ public class TelaCadastrarClienteController {
             clienteCadastro.setEmail(txtEmail.getText());
             try {
                 Fachada.getInstance().cadastrarPessoa(clienteCadastro,txtSenha.getText());
+                GerenciadorTelas.getInstance().changeScreen("telaLogin");
             } catch (PessoaDuplicadoException | PessoaCPFInvalidoException e) {
                 this.gerarAlertaErroCadastro(e.getMessage());
             }
@@ -67,5 +69,9 @@ public class TelaCadastrarClienteController {
 
     public void btnAtalhoCadastroPressed() {
         tabPane.getSelectionModel().selectPrevious();
+    }
+
+    public void btnRetornarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaLogin");
     }
 }
