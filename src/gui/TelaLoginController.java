@@ -27,7 +27,9 @@ public class TelaLoginController {
             try {
                 Pessoa pessoa = Fachada.getInstance().buscarPessoa(txtEmail.getText());
                 SessaoUsuario.getInstance().setPessoaSessao(pessoa);
-                if (pessoa instanceof Cliente) btnLoginPressed(GerenciadorTelas.getInstance().changeScreen("telaCliente"));
+                if (pessoa instanceof Cliente) {
+                	GerenciadorTelas.getInstance().changeScreen("telaCliente");
+                }
             } catch (PessoaInexistenteException e) {
                 e.printStackTrace();
             }

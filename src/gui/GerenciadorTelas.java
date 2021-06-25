@@ -37,7 +37,7 @@ public class GerenciadorTelas {
         this.mainScene = new Scene(telaLogin);
     }
     
-    public ActionEvent changeScreen(String tela) {
+    public void changeScreen(String tela) {
     	FXMLLoader fxmlLoader = new FXMLLoader();
     	
     	switch (tela) {
@@ -50,10 +50,13 @@ public class GerenciadorTelas {
 	            e.printStackTrace();
 	        }
 	        this.mainScene = new Scene(telaCliente);
+	        break;
 		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + tela);
 		}
+
+        primaryStage.setScene(mainScene);
     }
 
     public Scene getMainScene() {
