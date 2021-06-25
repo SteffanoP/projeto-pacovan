@@ -39,12 +39,12 @@ public class GerenciadorTelas {
     
     public void changeScreen(String tela) {
     	FXMLLoader fxmlLoader = new FXMLLoader();
-    	Parent telaUsuario = null;
+    	Parent telaAtual = null;
     	
     	switch (tela) {
 		case "telaCliente": {
 	        try {
-	        	telaUsuario = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalCliente.fxml").openStream());
+	        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalCliente.fxml").openStream());
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
@@ -52,7 +52,7 @@ public class GerenciadorTelas {
 		}
 		case "telaEmpregado": {
 	        try {
-	        	telaUsuario = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalEmpregado.fxml").openStream());
+	        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalEmpregado.fxml").openStream());
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
@@ -60,16 +60,15 @@ public class GerenciadorTelas {
 		}
 		case "telaAdmin": {	        
 	        try {
-	        	telaUsuario = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalAdmin.fxml").openStream());
+	        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalAdmin.fxml").openStream());
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	        break;
 		}
 		case "telaCadastrar":{
-		    Parent telaCadastrar = null;
 		    try {
-		        telaCadastrar = fxmlLoader.load(getClass().getResource("/gui/TelaCadastrarCliente.fxml").openStream());
+		        telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCadastrarCliente.fxml").openStream());
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }
@@ -77,9 +76,8 @@ public class GerenciadorTelas {
 		    break;
 		}
 		case "telaLogin": {
-            Parent telaLogin = null;
             try {
-                telaLogin = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -90,7 +88,7 @@ public class GerenciadorTelas {
 			throw new IllegalArgumentException("Unexpected value: " + tela);
 		}
 
-    	this.mainScene = new Scene(telaUsuario);
+    	this.mainScene = new Scene(telaAtual);
         primaryStage.setScene(mainScene);
     }
 
