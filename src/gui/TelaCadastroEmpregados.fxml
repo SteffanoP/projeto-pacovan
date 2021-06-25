@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewTelaPrincipalAdmin">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaCadastroEmpregadosController">
    <children>
       <Label layoutX="232.0" layoutY="244.0" text="Nome*:">
          <font>
@@ -22,7 +22,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="151.0" layoutY="325.0" text="Data de Nascimento:">
+      <Label layoutX="144.0" layoutY="325.0" text="Data de Nascimento*:">
          <font>
             <Font size="14.0" />
          </font>
@@ -37,22 +37,22 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="291.0" layoutY="242.0" />
-      <TextField layoutX="291.0" layoutY="282.0" />
-      <TextField layoutX="661.0" layoutY="319.0" />
+      <TextField fx:id="txtNome" layoutX="291.0" layoutY="242.0" />
+      <TextField fx:id="txtCpf" layoutX="291.0" layoutY="282.0" />
+      <TextField fx:id="txtTelefone" layoutX="661.0" layoutY="319.0" />
       <Label layoutX="390.0" layoutY="91.0" text="Cadastro de empregados">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="292.0" layoutY="360.0" />
+      <TextField fx:id="txtEndereco" layoutX="292.0" layoutY="360.0" />
       <Separator layoutX="509.0" layoutY="232.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="5.0" />
       <Label layoutX="601.0" layoutY="242.0" text="E-mail*:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="610.0" layoutY="283.0" text="Senha:">
+      <Label layoutX="602.0" layoutY="283.0" text="Senha*:">
          <font>
             <Font size="14.0" />
          </font>
@@ -62,25 +62,25 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="663.0" layoutY="242.0" />
-      <TextField layoutX="663.0" layoutY="280.0" />
-      <TextField layoutX="664.0" layoutY="358.0" />
-      <TableView layoutX="152.0" layoutY="510.0" prefHeight="200.0" prefWidth="662.0">
+      <TextField fx:id="txtEmail" layoutX="663.0" layoutY="242.0" />
+      <TextField fx:id="txtSenha" layoutX="663.0" layoutY="280.0" />
+      <TextField fx:id="txtSalarioBase" layoutX="664.0" layoutY="358.0" />
+      <TableView fx:id="tblvEmpregadosCadastro" layoutX="152.0" layoutY="510.0" prefHeight="200.0" prefWidth="662.0">
         <columns>
-          <TableColumn prefWidth="119.99996566772461" text="UID Empregado" />
-            <TableColumn prefWidth="128.7999725341797" text="Nome" />
-            <TableColumn prefWidth="158.4000244140625" text="E-mail" />
-            <TableColumn prefWidth="123.20001220703125" text="Reputação" />
-            <TableColumn prefWidth="129.5999755859375" text="Salário base" />
+          <TableColumn fx:id="colEmpregadoUID" prefWidth="119.99996566772461" text="UID Empregado" />
+            <TableColumn fx:id="colEmpregadoNome" prefWidth="128.7999725341797" text="Nome" />
+            <TableColumn fx:id="colEmpregadoEmail" prefWidth="158.4000244140625" text="E-mail" />
+            <TableColumn fx:id="colEmpregadoReputacao" prefWidth="123.20001220703125" text="Reputação" />
+            <TableColumn fx:id="colEmpregadoSalBase" prefWidth="129.5999755859375" text="Salário base" />
         </columns>
       </TableView>
       <Label layoutX="325.0" layoutY="398.0" text="*Campos obrigatórios" />
-      <Button layoutX="666.0" layoutY="394.0" mnemonicParsing="false" text="Cadastrar">
+      <Button fx:id="btnCadastrar" layoutX="666.0" layoutY="394.0" mnemonicParsing="false" onAction="#btnCadastrarPressed" text="Cadastrar">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="749.0" layoutY="394.0" mnemonicParsing="false" text="Cancelar" />
-      <DatePicker layoutX="291.0" layoutY="323.0" prefHeight="26.0" prefWidth="150.0" />
+      <Button fx:id="btnCancelar" layoutX="749.0" layoutY="394.0" mnemonicParsing="false" onAction="#btnCancelarPressed" text="Cancelar" />
+      <DatePicker fx:id="dtNascimento" layoutX="291.0" layoutY="323.0" prefHeight="26.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
