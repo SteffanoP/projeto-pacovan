@@ -28,9 +28,11 @@ public class TelaLoginController {
             try {
                 Pessoa pessoa = Fachada.getInstance().buscarPessoa(txtEmail.getText());
                 SessaoUsuario.getInstance().setPessoaSessao(pessoa);
-                if (pessoa instanceof Cliente) {
-                	GerenciadorTelas.getInstance().changeScreen("telaCliente");
-                }
+                if (pessoa instanceof Cliente) GerenciadorTelas.getInstance().changeScreen("telaCliente");
+                if (pessoa instanceof Empregado) {
+                	if (((Empregado)pessoa).getPrivilegio() < 5) GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
+                    else if (pessoa instanceof Empregado && ((Empregado)pessoa).getPrivilegio() == 5)GerenciadorTelas.getInstance().changeScreen("telaAdmin");
+				}
             } catch (PessoaInexistenteException e) {
                 e.printStackTrace();
             }

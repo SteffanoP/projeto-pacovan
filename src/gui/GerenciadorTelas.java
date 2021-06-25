@@ -39,16 +39,31 @@ public class GerenciadorTelas {
     
     public void changeScreen(String tela) {
     	FXMLLoader fxmlLoader = new FXMLLoader();
+    	Parent telaUsuario = null;
     	
     	switch (tela) {
 		case "telaCliente": {
-	        Parent telaCliente = null;
 	        try {
-	        	telaCliente = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalCliente.fxml").openStream());
+	        	telaUsuario = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalCliente.fxml").openStream());
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        this.mainScene = new Scene(telaCliente);
+	        break;
+		}
+		case "telaEmpregado": {
+	        try {
+	        	telaUsuario = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalEmpregado.fxml").openStream());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        break;
+		}
+		case "telaAdmin": {	        
+	        try {
+	        	telaUsuario = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalAdmin.fxml").openStream());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
 	        break;
 		}
 		case "telaCadastrar":{
@@ -75,6 +90,7 @@ public class GerenciadorTelas {
 			throw new IllegalArgumentException("Unexpected value: " + tela);
 		}
 
+    	this.mainScene = new Scene(telaUsuario);
         primaryStage.setScene(mainScene);
     }
 
