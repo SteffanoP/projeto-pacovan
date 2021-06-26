@@ -6,10 +6,12 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalClienteController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="51.0" layoutY="79.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="629.0">
          <items>
@@ -21,6 +23,14 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
                   <ListView layoutX="1.0" layoutY="1.0" prefHeight="146.0" prefWidth="627.0" />
+                  <TableView fx:id="tblvPropostas" layoutX="-1.0" layoutY="-1.0" prefHeight="146.0" prefWidth="629.0">
+                    <columns>
+                        <TableColumn fx:id="colProtocoloPropostas" prefWidth="113.0" text="Protocolo" />
+                      <TableColumn fx:id="colDataPropostas" prefWidth="135.0" text="Data" />
+                      <TableColumn fx:id="colValorDesejadoPropostas" prefWidth="189.0" text="Valor Desejado" />
+                        <TableColumn fx:id="colParcelasPropostas" prefWidth="191.0" text="Parcelas" />
+                    </columns>
+                  </TableView>
                   <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
                </children>
             </AnchorPane>
@@ -35,8 +45,14 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <ListView layoutX="1.0" layoutY="1.0" prefHeight="146.0" prefWidth="627.0" />
-                  <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
+                  <TableView fx:id="tblvExtrato" layoutX="-1.0" prefHeight="146.0" prefWidth="629.0">
+                     <columns>
+                        <TableColumn fx:id="coldataPagamentoEmprestimo" prefWidth="146.0" text="Data de Pagamento" />
+                        <TableColumn fx:id="colparcelasEmprestimo" prefWidth="122.0" text="Valor Parcela" />
+                        <TableColumn fx:id="colvalorEmprestimo" prefWidth="150.0" text="Valor Total" />
+                        <TableColumn fx:id="colempregadoEmprestimo" prefWidth="210.0" text="Empregado Responsável" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </items>
@@ -45,13 +61,18 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="158.0">
                <children>
-                  <Label layoutX="13.0" layoutY="2.0" text="Extratos" />
+                  <Label layoutX="13.0" layoutY="2.0" text="Extrato" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <ListView layoutX="1.0" layoutY="1.0" prefHeight="146.0" prefWidth="627.0" />
-                  <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
+                  <TableView fx:id="tblvEmprestimos" prefHeight="146.0" prefWidth="629.0">
+                     <columns>
+                        <TableColumn fx:id="colInstanteExtrato" prefWidth="189.0" text="Data/Hora de Movimentação" />
+                        <TableColumn fx:id="coltipoMovimentacaoExtrato" minWidth="9.0" prefWidth="164.0" text="Tipo de Movimentação" />
+                        <TableColumn fx:id="colvalorExtrato" prefWidth="275.0" text="Valor" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </items>
