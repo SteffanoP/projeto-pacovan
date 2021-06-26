@@ -176,7 +176,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public void criarProposta(Proposta p) throws ObjetoDuplicadoException {
+    public void criarProposta(Proposta p) throws PropostaInvalidaException {
         propostas.criarProposta(p);
     }
 
