@@ -30,7 +30,7 @@ public class GerenciadorTelas {
         Parent telaLogin = null;
         
         try {
-        	telaLogin = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalAdmin.fxml").openStream());
+        	telaLogin = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,6 +97,22 @@ public class GerenciadorTelas {
 				e.printStackTrace();
 			}
 			break;
+        }
+        case "telaAnaliseProposta": {
+        	try {
+        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaAnaliseProposta.fxml").openStream());
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+        	break;
+        }
+        case "telaDevedorDetalhe": {
+        	try {
+        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaDevedorDetalhe.fxml").openStream());
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+        	break;
         }
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + tela);
