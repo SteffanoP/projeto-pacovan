@@ -5,6 +5,7 @@ import gerenciamento.SessaoUsuario;
 import gui.models.EmprestimoModelo;
 import gui.models.MovimentacaoModelo;
 import gui.models.PropostaModelo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,7 +14,6 @@ import negocio.Fachada;
 import negocio.beans.Emprestimo;
 import negocio.beans.Movimentacao;
 import negocio.beans.Proposta;
-
 import java.util.List;
 
 public class TelaPrincipalClienteController {
@@ -107,5 +107,29 @@ public class TelaPrincipalClienteController {
             initialized = true;
             this.initialize();
         }
+    }
+    
+    @FXML
+    public void btnMinhasInformacoesPressed(ActionEvent event) throws PessoaInexistenteException {
+    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
+    	
+    	if (Fachada.getInstance().buscarPessoa(emailCliente) != null) 
+    		GerenciadorTelas.getInstance().changeScreen("telaInformacoesPessoais");
+    }
+    
+    @FXML
+    public void btnMeusBENSPressed(ActionEvent event) throws PessoaInexistenteException {
+    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
+    	
+    	if (Fachada.getInstance().buscarPessoa(emailCliente) != null) 
+    		GerenciadorTelas.getInstance().changeScreen("telaBENS");
+    }
+    
+    @FXML
+    public void btnNovaPropostaPressed(ActionEvent event) throws PessoaInexistenteException {
+    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
+    	
+    	if (Fachada.getInstance().buscarPessoa(emailCliente) != null) 
+    		GerenciadorTelas.getInstance().changeScreen("telaCriarProposta");
     }
 }
