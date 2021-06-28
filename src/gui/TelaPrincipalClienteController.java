@@ -7,6 +7,7 @@ import gui.models.MovimentacaoModelo;
 import gui.models.PropostaModelo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TelaPrincipalClienteController {
+    @FXML Label lblNomeUsuario;
+    @FXML Label lblScoreUsuario;
+
     @FXML TableView<PropostaModelo> tblvPropostas;
     @FXML TableColumn<PropostaModelo, Long> colProtocoloPropostas;
     @FXML TableColumn<PropostaModelo, String> colDataPropostas;
@@ -41,6 +45,9 @@ public class TelaPrincipalClienteController {
     boolean initialized = false;
 
     private void initialize() {
+        Cliente usuario = (Cliente) SessionManager.getInstance().getPessoaSessao();
+        this.lblNomeUsuario.setText(usuario.getNome());
+        this.lblScoreUsuario.setText(usuario.getScore() + "%");
         this.initializeTableViews();
 
         long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
