@@ -97,6 +97,9 @@ public class TelaCadastroEmpregadosController {
         alerta.showAndWait();
     }
 
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaAdmin");
+    }
     //TODO: Possivelmente, tratar como um modelo estático em outra classe separada para GUI
     public static class EmpregadoModelo {
         private final SimpleLongProperty uid;
