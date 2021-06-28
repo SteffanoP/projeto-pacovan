@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollBar?>
@@ -7,8 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaBensEmpresaController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,15 +17,16 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <ListView layoutX="155.0" layoutY="202.0" prefHeight="136.0" prefWidth="659.0" />
-            <ScrollBar layoutX="799.0" layoutY="202.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
-            <ListView layoutX="155.0" layoutY="384.0" prefHeight="136.0" prefWidth="659.0" />
-            <ListView layoutX="155.0" layoutY="559.0" prefHeight="136.0" prefWidth="659.0" />
-            <ScrollBar layoutX="799.0" layoutY="559.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
-            <ScrollBar layoutX="799.0" layoutY="384.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
-            <Label layoutX="155.0" layoutY="176.0" text="Móveis fungíveis" />
-            <Label layoutX="155.0" layoutY="360.0" text="Móveis infungíveis" />
-            <Label layoutX="155.0" layoutY="533.0" text="Imóveis" />
+            <ListView layoutX="155.0" layoutY="165.0" prefHeight="136.0" prefWidth="659.0" />
+            <ScrollBar layoutX="799.0" layoutY="165.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
+            <ListView layoutX="155.0" layoutY="347.0" prefHeight="136.0" prefWidth="659.0" />
+            <ListView layoutX="155.0" layoutY="522.0" prefHeight="136.0" prefWidth="659.0" />
+            <ScrollBar layoutX="799.0" layoutY="522.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
+            <ScrollBar layoutX="799.0" layoutY="347.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="14.0" />
+            <Label layoutX="155.0" layoutY="139.0" text="Móveis fungíveis" />
+            <Label layoutX="155.0" layoutY="323.0" text="Móveis infungíveis" />
+            <Label layoutX="155.0" layoutY="496.0" text="Imóveis" />
+            <Button layoutX="685.0" layoutY="694.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar à tela principal" />
          </children>
       </AnchorPane>
    </center>
