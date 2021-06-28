@@ -5,10 +5,13 @@ import gerenciamento.SessaoUsuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
+import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 import negocio.beans.Pessoa;
 
 public class TelaInformacoesPessoaisController {
+    @FXML Button btnVoltarTela;
+
     //Elementos Parte de Dados
     @FXML TextField txtNome;
     @FXML TextField txtCpf;
@@ -59,6 +62,7 @@ public class TelaInformacoesPessoaisController {
             try {
                 Fachada.getInstance().alterarDadosPessoais(pessoa);
                 SessaoUsuario.getInstance().setPessoaSessao(pessoa);
+                this.txtSenha.setText("");
                 //TODO: Mensagem de alteração com sucesso
             } catch (PessoaInexistenteException e) {
                 e.printStackTrace();
@@ -88,6 +92,14 @@ public class TelaInformacoesPessoaisController {
             this.gerarAlertaErroAutenticacao("A sua senha atual não confere!");
         }
         this.txtSenhaAtual.setText("");
+    }
+
+    @FXML
+    public void btnVoltarTelaPressed() {
+        if (SessaoUsuario.getInstance().getPessoaSessao() instanceof Cliente)
+            GerenciadorTelas.getInstance().changeScreen("telaCliente");
+        else if (SessaoUsuario.getInstance().getPessoaSessao() instanceof Empregado)
+            GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
     }
 
     @FXML

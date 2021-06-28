@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaInformacoesPessoaisController">
    <children>
-      <SplitPane dividerPositions="0.24232081911262798" layoutX="87.0" layoutY="50.0" prefHeight="281.0" prefWidth="588.0">
+      <SplitPane dividerPositions="0.24232081911262798" layoutX="85.0" layoutY="110.0" prefHeight="281.0" prefWidth="588.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -38,11 +38,11 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Label layoutX="87.0" layoutY="14.0" prefHeight="36.0" prefWidth="100.0" text="Seus Dados" />
-      <Button fx:id="btnEditarDados" layoutX="570.0" layoutY="359.0" mnemonicParsing="false" onAction="#btnEditarDadosPressed" text="Editar" />
-      <Button fx:id="btnSalvarDados" layoutX="627.0" layoutY="359.0" mnemonicParsing="false" onAction="#btnSalvarDadosPressed" text="Salvar" />
-      <Label layoutX="87.0" layoutY="413.0" prefHeight="36.0" prefWidth="100.0" text="Alterar Senha" />
-      <SplitPane dividerPositions="0.4222873900293255" layoutX="87.0" layoutY="449.0" prefHeight="148.0" prefWidth="343.0">
+      <Label layoutX="85.0" layoutY="74.0" prefHeight="36.0" prefWidth="100.0" text="Seus Dados" />
+      <Button fx:id="btnEditarDados" layoutX="568.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnEditarDadosPressed" text="Editar" />
+      <Button fx:id="btnSalvarDados" layoutX="625.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnSalvarDadosPressed" text="Salvar" />
+      <Label layoutX="85.0" layoutY="437.0" prefHeight="36.0" prefWidth="100.0" text="Alterar Senha" />
+      <SplitPane dividerPositions="0.4222873900293255" layoutX="85.0" layoutY="473.0" prefHeight="148.0" prefWidth="343.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -60,6 +60,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button fx:id="btnSalvarSenha" layoutX="381.0" layoutY="621.0" mnemonicParsing="false" onAction="#btnSalvarSenhaPressed" text="Salvar" />
+      <Button fx:id="btnSalvarSenha" layoutX="379.0" layoutY="645.0" mnemonicParsing="false" onAction="#btnSalvarSenhaPressed" text="Salvar" />
+      <Button fx:id="btnVoltarTela" layoutX="85.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnVoltarTelaPressed" text="&lt; Voltar" />
    </children>
 </Pane>
