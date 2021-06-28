@@ -109,8 +109,19 @@ public class ControladorEmprestimo {
         return mapaEmprestimos;
     }
 
-    public List<Emprestimo> listarComissõesEmprestimo() {
+    /**
+     * Método que lista todas as comissões de empréstimos de que um empregado é responsável.
+     *
+     * @param empregado se refere ao empregado que se quer listar os empréstimos no qual ele é responsável.
+     * @return uma lista de empréstimos do qual o empregado é responsável.
+     */
+    public List<Emprestimo> listarComissoesEmprestimo(Empregado empregado) {
         List<Emprestimo> comissoesEmprestimo = new ArrayList<>();
+
+        for (Emprestimo emprestimo : this.repoEmprestimo.listar()) {
+            if (emprestimo.getEmpregado().getUid() == empregado.getUid())
+                comissoesEmprestimo.add(emprestimo);
+        }
 
         return comissoesEmprestimo;
     }

@@ -106,8 +106,8 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public List<Emprestimo> listarComissõesEmprestimo() {
-        return emprestimos.listarComissõesEmprestimo();
+    public List<Emprestimo> listarComissoesEmprestimo(Empregado empregado) {
+        return emprestimos.listarComissoesEmprestimo(empregado);
     }
 
     @Override
