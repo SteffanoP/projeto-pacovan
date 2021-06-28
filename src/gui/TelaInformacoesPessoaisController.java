@@ -1,7 +1,7 @@
 package gui;
 
 import exceptions.PessoaInexistenteException;
-import gerenciamento.SessaoUsuario;
+import gerenciamento.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
@@ -34,14 +34,14 @@ public class TelaInformacoesPessoaisController {
     boolean initialized = false;
 
     private void initialize() {
-        Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+        Pessoa pessoa = SessionManager.getInstance().getPessoaSessao();
 
         txtNome.setText(pessoa.getNome());
         txtCpf.setText(pessoa.getCpf());
         txtEndereco.setText(pessoa.getEndereco());
         txtTelefone.setText(pessoa.getTelefone());
         txtEmail.setText(pessoa.getEmail());
-        dtNascimento.getEditor().setText(SessaoUsuario.getInstance().getPessoaSessao().getDataNascimentoToString());
+        dtNascimento.getEditor().setText(SessionManager.getInstance().getPessoaSessao().getDataNascimentoToString());
     }
 
     @FXML
@@ -52,13 +52,13 @@ public class TelaInformacoesPessoaisController {
     @FXML
     public void btnSalvarDadosPressed() {
         if (this.autenticarSenha(txtSenha.getText())) {
-            Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+            Pessoa pessoa = SessionManager.getInstance().getPessoaSessao();
             pessoa.setNome(txtNome.getText());
             pessoa.setEndereco(txtEndereco.getText());
             pessoa.setTelefone(txtTelefone.getText());
             try {
                 Fachada.getInstance().alterarDadosPessoais(pessoa);
-                SessaoUsuario.getInstance().setPessoaSessao(pessoa);
+                SessionManager.getInstance().setPessoaSessao(pessoa);
                 this.ativarEdicaoDados(false);
                 this.txtSenha.setText("");
                 //TODO: Mensagem de alteração com sucesso
@@ -74,7 +74,7 @@ public class TelaInformacoesPessoaisController {
     public void btnSalvarSenhaPressed() {
         if (this.autenticarSenha(txtSenhaAtual.getText())) {
             if (txtNovaSenha.getText().equals(txtConfNovaSenha.getText())) {
-                Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+                Pessoa pessoa = SessionManager.getInstance().getPessoaSessao();
                 try {
                     Fachada.getInstance().alterarSenha(pessoa,txtNovaSenha.getText());
                     this.txtNovaSenha.setText("");
@@ -94,9 +94,9 @@ public class TelaInformacoesPessoaisController {
 
     @FXML
     public void btnVoltarTelaPressed() {
-        if (SessaoUsuario.getInstance().getPessoaSessao() instanceof Cliente)
+        if (SessionManager.getInstance().getPessoaSessao() instanceof Cliente)
             GerenciadorTelas.getInstance().changeScreen("telaCliente");
-        else if (SessaoUsuario.getInstance().getPessoaSessao() instanceof Empregado)
+        else if (SessionManager.getInstance().getPessoaSessao() instanceof Empregado)
             GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
     }
 
@@ -121,7 +121,7 @@ public class TelaInformacoesPessoaisController {
 
     private boolean autenticarSenha(String senha) {
         return Fachada.getInstance().autenticarPessoa(txtEmail.getText(), senha,
-                SessaoUsuario.getInstance().getPessoaSessao() instanceof Empregado);
+                SessionManager.getInstance().getPessoaSessao() instanceof Empregado);
     }
 
     private void gerarAlertaErroAutenticacao(String justificativa) {
