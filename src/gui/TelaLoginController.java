@@ -6,7 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
+import negocio.beans.Cliente;
+import negocio.beans.Empregado;
 import negocio.beans.Pessoa;
+import gui.GerenciadorTelas;
 
 public class TelaLoginController {
 
@@ -16,6 +19,7 @@ public class TelaLoginController {
     @FXML MenuItem splMenuItemCliente;
     @FXML MenuItem splMenuItemEmpregado;
     @FXML Button btnLoginPressed;
+    @FXML Button btnCadastrarPressed;
 
     @FXML
     public void btnLoginPressed(ActionEvent event) {
@@ -24,6 +28,11 @@ public class TelaLoginController {
             try {
                 Pessoa pessoa = Fachada.getInstance().buscarPessoa(txtEmail.getText());
                 SessaoUsuario.getInstance().setPessoaSessao(pessoa);
+                if (pessoa instanceof Cliente) GerenciadorTelas.getInstance().changeScreen("telaCliente");
+                if (pessoa instanceof Empregado) {
+                	if (((Empregado)pessoa).getPrivilegio() < 5) GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
+                    else if (pessoa instanceof Empregado && ((Empregado)pessoa).getPrivilegio() == 5)GerenciadorTelas.getInstance().changeScreen("telaAdmin");
+				}
             } catch (PessoaInexistenteException e) {
                 e.printStackTrace();
             }
@@ -52,5 +61,9 @@ public class TelaLoginController {
 
     private void setSplMenuPessoa(String menuItemEscolhido) {
         this.splMenuPessoa.setText(menuItemEscolhido);
+    }
+
+    public void btnCadastrarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaCadastrar");
     }
 }

@@ -102,6 +102,7 @@
                               <Pane prefHeight="159.0" prefWidth="297.0">
                                  <children>
                                     <Button fx:id="btnAtlhPessoais" layoutX="162.0" layoutY="120.0" mnemonicParsing="false" onAction="#btnAtalhoPessoaisPressed" text="Ir para o cadastro &gt;" />
+                                    <Button layoutX="29.0" layoutY="120.0" mnemonicParsing="false" onAction="#btnRetornarPressed" text="&lt; Retornar" />
                                  </children>
                               </Pane>
                            </children>
