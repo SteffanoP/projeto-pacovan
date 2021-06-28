@@ -16,6 +16,8 @@ import negocio.beans.Emprestimo;
 import negocio.beans.Movimentacao;
 import negocio.beans.Pessoa;
 import negocio.beans.Proposta;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class TelaPrincipalClienteController {
@@ -43,12 +45,13 @@ public class TelaPrincipalClienteController {
 
         long uidCliente = SessaoUsuario.getInstance().getPessoaSessao().getUid();
         try {
-            this.atualizarTableViewPropostas((List<Proposta>)
-                    Fachada.getInstance().listarPropostasCliente(uidCliente).values());
-            this.atualizarTableViewEmprestimos((List<Emprestimo>)
-                    Fachada.getInstance().listarEmprestimosCliente(uidCliente).values());
-            this.atualizarTableViewExtrato((List<Movimentacao>)
-                    Fachada.getInstance().listarMoveCliente(uidCliente).values());
+            List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente).values());
+            List<Emprestimo> eList = new
+                    ArrayList<>(Fachada.getInstance().listarEmprestimosCliente(uidCliente).values());
+            List<Movimentacao> mList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(uidCliente).values());
+            this.atualizarTableViewPropostas(pList);
+            this.atualizarTableViewEmprestimos(eList);
+            this.atualizarTableViewExtrato(mList);
         } catch (PessoaInexistenteException e) {
             e.printStackTrace();
         }
