@@ -20,14 +20,14 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <Label layoutX="712.0" layoutY="546.0" text="Período:">
+      <Label layoutX="712.0" layoutY="498.0" text="Período:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="712.0" layoutY="581.0" text="Lucros:" />
-      <Label layoutX="712.0" layoutY="618.0" text="Despesas:" />
-      <Label layoutX="712.0" layoutY="656.0" text="Confiança" />
+      <Label layoutX="712.0" layoutY="533.0" text="Lucros:" />
+      <Label layoutX="712.0" layoutY="570.0" text="Despesas:" />
+      <Label layoutX="712.0" layoutY="608.0" text="Confiança" />
       <DatePicker layoutX="197.0" layoutY="244.0" />
       <DatePicker layoutX="410.0" layoutY="244.0" />
       <Label layoutX="197.0" layoutY="216.0" text="Data inicial:" />
@@ -37,5 +37,6 @@
       <TextField layoutX="197.0" layoutY="171.0" />
       <Button layoutX="698.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnCadastrarEmpregadoPressed" text="Cadastrar empregado" />
       <Button layoutX="698.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnCatalogoPressed" prefHeight="26.0" prefWidth="131.0" text="Catálogo de bens" />
+      <Button layoutX="699.0" layoutY="646.0" mnemonicParsing="false" onAction="#btnVoltarPressed" prefHeight="26.0" prefWidth="131.0" text="Voltar ao login" />
    </children>
 </AnchorPane>

@@ -83,5 +83,6 @@
           </TitledPane>
         </panes>
       </Accordion>
+      <Button layoutX="890.0" layoutY="703.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar ao login" />
    </children>
 </Pane>
