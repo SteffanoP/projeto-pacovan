@@ -88,11 +88,11 @@ public interface SistemaEmprestimosBens {
 
     List<Emprestimo> listarComissõesEmprestimo();
 
-    Map<LocalDate, Cliente> listarDevedores();
+    Map<LocalDate, Emprestimo> listarDevedores();
 
-    Map<LocalDate, Cliente> listarDevedoresProtegidos();
+    Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
-    Map<LocalDate, Cliente> listarDevedoresAltoRisco();
+    Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
     Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
 
