@@ -1,7 +1,7 @@
 package gui;
 
 import exceptions.PessoaInexistenteException;
-import gerenciamento.SessaoUsuario;
+import gerenciamento.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,7 +9,6 @@ import negocio.Fachada;
 import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 import negocio.beans.Pessoa;
-import gui.GerenciadorTelas;
 
 public class TelaLoginController {
 
@@ -27,7 +26,7 @@ public class TelaLoginController {
                 splMenuPessoa.getText().equals("Empregado"))) {
             try {
                 Pessoa pessoa = Fachada.getInstance().buscarPessoa(txtEmail.getText());
-                SessaoUsuario.getInstance().setPessoaSessao(pessoa);
+                SessionManager.getInstance().setPessoaSessao(pessoa);
                 if (pessoa instanceof Cliente) GerenciadorTelas.getInstance().changeScreen("telaCliente");
                 if (pessoa instanceof Empregado) {
                 	if (((Empregado)pessoa).getPrivilegio() < 5) GerenciadorTelas.getInstance().changeScreen("telaEmpregado");

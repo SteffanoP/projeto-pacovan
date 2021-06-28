@@ -1,7 +1,7 @@
 package gui;
 
 import exceptions.PessoaInexistenteException;
-import gerenciamento.SessaoUsuario;
+import gerenciamento.SessionManager;
 import gui.models.EmprestimoModelo;
 import gui.models.MovimentacaoModelo;
 import gui.models.PropostaModelo;
@@ -43,7 +43,7 @@ public class TelaPrincipalClienteController {
     private void initialize() {
         this.initializeTableViews();
 
-        long uidCliente = SessaoUsuario.getInstance().getPessoaSessao().getUid();
+        long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
         try {
             List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente).values());
             this.atualizarTableViewPropostas(pList);
@@ -116,8 +116,8 @@ public class TelaPrincipalClienteController {
     
     @FXML
     public void btnMinhasInformacoesPressed(ActionEvent event) throws PessoaInexistenteException {
-    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
-        Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+    	String emailCliente = SessionManager.getInstance().getPessoaSessao().getEmail();
+        Pessoa pessoa = SessionManager.getInstance().getPessoaSessao();
 
         try {
             if (Fachada.getInstance().buscarPessoa(emailCliente) != null && pessoa instanceof Cliente) 
@@ -130,8 +130,8 @@ public class TelaPrincipalClienteController {
     
     @FXML
     public void btnMeusBENSPressed(ActionEvent event) throws PessoaInexistenteException {
-    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
-        Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+    	String emailCliente = SessionManager.getInstance().getPessoaSessao().getEmail();
+        Pessoa pessoa = SessionManager.getInstance().getPessoaSessao();
 
         try {
             if (Fachada.getInstance().buscarPessoa(emailCliente) != null && pessoa instanceof Cliente) 
@@ -144,8 +144,8 @@ public class TelaPrincipalClienteController {
     
     @FXML
     public void btnNovaPropostaPressed(ActionEvent event) throws PessoaInexistenteException {
-    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
-        Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+    	String emailCliente = SessionManager.getInstance().getPessoaSessao().getEmail();
+        Pessoa pessoa = SessionManager.getInstance().getPessoaSessao();
 
         try {
             if (Fachada.getInstance().buscarPessoa(emailCliente) != null && pessoa instanceof Cliente) 
