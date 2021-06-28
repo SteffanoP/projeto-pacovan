@@ -10,8 +10,9 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="48.0" layoutY="90.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="629.0">
         <items>
@@ -84,5 +85,16 @@
         </panes>
       </Accordion>
       <Button layoutX="890.0" layoutY="703.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar ao login" />
+      <Label layoutX="48.0" layoutY="37.0" text="Olá, ">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNomeUsuario" layoutX="78.0" layoutY="37.0" prefHeight="21.0" prefWidth="147.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnMeusDados" layoutX="595.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnMeusDadosPressed" text="Meus Dados" />
    </children>
 </Pane>
