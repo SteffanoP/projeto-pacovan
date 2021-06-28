@@ -4,6 +4,7 @@ import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.*;
 import negocio.beans.Bens;
+import negocio.beans.CategoriaBens;
 import negocio.beans.Cliente;
 import negocio.beans.Movimentacao;
 
@@ -44,6 +45,26 @@ public class ControladorBENS {
                mapaBens.put(ben.getDataCadastro(), ben);
             }
         return mapaBens;
+    }
+
+    /**
+     * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma
+     * {@code CategoriaBens} parametrizada.
+     *
+     * @param categoria se refere a categoria de bens que se pretende listar.
+     * @return um {@code Map<LocalDate, Bens>} com os bens filtrados por meio de uma {@code CategoriaBens} como
+     * parâmetro.
+     */
+    public Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
+        NavigableMap<LocalDate, Bens> mapaBens = new TreeMap<>();
+        List<Bens> bensList = this.repoBENS.listar();
+
+        for (Bens bens : bensList) {
+            if (bens.getCategoria().equals(categoria)) {
+                mapaBens.put(bens.getDataCadastro(), bens);
+            }
+        }
+        return  mapaBens;
     }
 
     public Map<LocalDate,Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {

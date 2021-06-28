@@ -21,6 +21,16 @@ public interface SistemaEmprestimosBens {
 
     Map<LocalDate, Bens> listarBensEmpresa();
 
+    /**
+     * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma
+     * {@code CategoriaBens} parametrizada.
+     *
+     * @param categoria se refere a categoria de bens que se pretende listar.
+     * @return um {@code Map<LocalDate, Bens>} com os bens filtrados por meio de uma {@code CategoriaBens} como
+     * parâmetro.
+     */
+    Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
+
     Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException;
 
     Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException;

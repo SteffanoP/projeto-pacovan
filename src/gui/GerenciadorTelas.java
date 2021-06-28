@@ -89,45 +89,62 @@ public class GerenciadorTelas {
                 e.printStackTrace();
             }
             break;
-        }
-        case "telaBens": {
-			try {
-				telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBENS.fxml").openStream());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			break;
-        }
-        case "telaBensEmpresa": {
+     }
+    case "telaBensEmpresa": {
         	try {
         		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBensEmpresa.fxml").openStream());
         	} catch (IOException e) {
         		e.printStackTrace();
         	}
         	break;
-			}
-        case "telaAnaliseProposta": {
+		 }
+    case "telaAnaliseProposta": {
         	try {
         		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaAnaliseProposta.fxml").openStream());
         	} catch (IOException e) {
         		e.printStackTrace();
         	}
         	break;
-        }
-        case "telaDevedorDetalhe": {
+     }
+    case "telaDevedorDetalhe": {
         	try {
         		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaDevedorDetalhe.fxml").openStream());
         	} catch (IOException e) {
         		e.printStackTrace();
         	}
         	break;
-        }
+     }
+		case "telaInformacoesPessoais": {
+            try {
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaInformacoesPessoais.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+		 }
+		case "telaBENS": {
+            try {
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBENS.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+		 }
+		case "telaCriarProposta": {
+            try {
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCriarProposta.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + tela);
 		}
 
     	this.mainScene = new Scene(telaAtual);
-        primaryStage.setScene(mainScene);
+      primaryStage.setScene(mainScene);
+
     }
 
     public Scene getMainScene() {

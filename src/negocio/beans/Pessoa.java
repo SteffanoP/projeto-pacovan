@@ -1,4 +1,5 @@
 package negocio.beans;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -175,6 +176,11 @@ public abstract class Pessoa {
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
+    }
+
+    public String getDataNascimentoToString() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.dataNascimento.format(formatador);
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {

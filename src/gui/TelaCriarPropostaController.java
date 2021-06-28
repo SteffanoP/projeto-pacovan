@@ -2,7 +2,7 @@ package gui;
 
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
-import gerenciamento.SessaoUsuario;
+import gerenciamento.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
@@ -30,7 +30,7 @@ public class TelaCriarPropostaController {
         if (!this.isTextFieldsBlank()) {
             Proposta proposta = new Proposta();
             try {
-                proposta.setCliente((Cliente) SessaoUsuario.getInstance().getPessoaSessao());
+                proposta.setCliente((Cliente) SessionManager.getInstance().getPessoaSessao());
                 proposta.setMotivo(txtMotivo.getText());
                 proposta.setValorDesejado(Double.parseDouble(txtValor.getText()));
                 proposta.setParcelasDesejadas(Double.parseDouble(txtParcelas.getText()));
@@ -64,14 +64,14 @@ public class TelaCriarPropostaController {
     private void atualizarListaBens() throws PessoaInexistenteException {
         splMenuGarantia.getItems().removeAll();
         for (Bens bens :
-                Fachada.getInstance().listarBensAprovados(SessaoUsuario.getInstance().getPessoaSessao().getUid()).values()) {
+                Fachada.getInstance().listarBensAprovados(SessionManager.getInstance().getPessoaSessao().getUid()).values()) {
             MenuItem item = new MenuItem(bens.getNome());
             splMenuGarantia.getItems().add(item);
         }
     }
 
     private void initialize() {
-        txtCliente.setText(SessaoUsuario.getInstance().getPessoaSessao().getNome());
+        txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
         try {
             this.atualizarListaBens();
         } catch (PessoaInexistenteException e) {
