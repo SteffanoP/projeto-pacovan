@@ -27,13 +27,13 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="210.0">
                <children>
-                  <TextField fx:id="txtNome" editable="false" layoutX="14.0" layoutY="14.0" />
-                  <TextField fx:id="txtCpf" editable="false" layoutX="14.0" layoutY="48.0" />
-                  <TextArea fx:id="txtEndereco" editable="false" layoutX="14.0" layoutY="83.0" prefHeight="44.0" prefWidth="375.0" />
-                  <TextField fx:id="txtTelefone" editable="false" layoutX="14.0" layoutY="136.0" />
-                  <TextField fx:id="txtEmail" editable="false" layoutX="14.0" layoutY="170.0" />
-                  <DatePicker fx:id="dtNascimento" editable="false" layoutX="14.0" layoutY="204.0" />
-                  <PasswordField fx:id="txtSenha" layoutX="14.0" layoutY="240.0" />
+                  <TextField fx:id="txtNome" disable="true" editable="false" layoutX="14.0" layoutY="14.0" />
+                  <TextField fx:id="txtCpf" disable="true" editable="false" layoutX="14.0" layoutY="48.0" />
+                  <TextArea fx:id="txtEndereco" disable="true" editable="false" layoutX="14.0" layoutY="83.0" prefHeight="44.0" prefWidth="375.0" />
+                  <TextField fx:id="txtTelefone" disable="true" editable="false" layoutX="14.0" layoutY="136.0" />
+                  <TextField fx:id="txtEmail" disable="true" editable="false" layoutX="14.0" layoutY="170.0" />
+                  <DatePicker fx:id="dtNascimento" disable="true" editable="false" layoutX="14.0" layoutY="204.0" />
+                  <PasswordField fx:id="txtSenha" disable="true" editable="false" layoutX="14.0" layoutY="240.0" />
                </children>
             </AnchorPane>
         </items>

@@ -46,10 +46,7 @@ public class TelaInformacoesPessoaisController {
 
     @FXML
     public void btnEditarDadosPressed() {
-        txtNome.setEditable(true);
-        txtSenha.setEditable(true);
-        txtEndereco.setEditable(true);
-        txtTelefone.setEditable(true);
+        this.ativarEdicaoDados(true);
     }
 
     @FXML
@@ -62,6 +59,7 @@ public class TelaInformacoesPessoaisController {
             try {
                 Fachada.getInstance().alterarDadosPessoais(pessoa);
                 SessaoUsuario.getInstance().setPessoaSessao(pessoa);
+                this.ativarEdicaoDados(false);
                 this.txtSenha.setText("");
                 //TODO: Mensagem de alteração com sucesso
             } catch (PessoaInexistenteException e) {
@@ -108,6 +106,17 @@ public class TelaInformacoesPessoaisController {
             this.initialize();
             initialized = true;
         }
+    }
+
+    private void ativarEdicaoDados(boolean edicao) {
+        txtNome.setEditable(edicao);
+        txtNome.setDisable(!edicao);
+        txtSenha.setEditable(edicao);
+        txtSenha.setDisable(!edicao);
+        txtEndereco.setEditable(edicao);
+        txtEndereco.setDisable(!edicao);
+        txtTelefone.setEditable(edicao);
+        txtTelefone.setDisable(!edicao);
     }
 
     private boolean autenticarSenha(String senha) {
