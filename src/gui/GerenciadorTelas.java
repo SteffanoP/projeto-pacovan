@@ -111,7 +111,8 @@ public class GerenciadorTelas {
 		}
 
     	this.mainScene = new Scene(telaAtual);
-        primaryStage.setScene(mainScene);
+      primaryStage.setScene(mainScene);
+
     }
 
     public Scene getMainScene() {
