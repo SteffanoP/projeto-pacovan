@@ -82,6 +82,30 @@ public class GerenciadorTelas {
             }
             break;
         }
+		case "telaInformacoesPessoais": {
+            try {
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaInformacoesPessoais.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+		}
+		case "telaBENS": {
+            try {
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBENS.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+		}
+		case "telaCriarProposta": {
+            try {
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCriarProposta.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + tela);
 		}

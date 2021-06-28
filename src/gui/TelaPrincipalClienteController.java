@@ -5,15 +5,17 @@ import gerenciamento.SessaoUsuario;
 import gui.models.EmprestimoModelo;
 import gui.models.MovimentacaoModelo;
 import gui.models.PropostaModelo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.Fachada;
+import negocio.beans.Cliente;
 import negocio.beans.Emprestimo;
 import negocio.beans.Movimentacao;
+import negocio.beans.Pessoa;
 import negocio.beans.Proposta;
-
 import java.util.List;
 
 public class TelaPrincipalClienteController {
@@ -106,6 +108,48 @@ public class TelaPrincipalClienteController {
         if (!initialized) {
             initialized = true;
             this.initialize();
+        }
+    }
+    
+    @FXML
+    public void btnMinhasInformacoesPressed(ActionEvent event) throws PessoaInexistenteException {
+    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
+        Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+
+        try {
+            if (Fachada.getInstance().buscarPessoa(emailCliente) != null && pessoa instanceof Cliente) 
+    		GerenciadorTelas.getInstance().changeScreen("telaInformacoesPessoais");
+        } catch (PessoaInexistenteException e) {
+            e.printStackTrace();
+            System.out.println("Essa pessoa não existe!");
+        }
+    }
+    
+    @FXML
+    public void btnMeusBENSPressed(ActionEvent event) throws PessoaInexistenteException {
+    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
+        Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+
+        try {
+            if (Fachada.getInstance().buscarPessoa(emailCliente) != null && pessoa instanceof Cliente) 
+    		GerenciadorTelas.getInstance().changeScreen("telaBENS");
+        } catch (PessoaInexistenteException e) {
+            e.printStackTrace();
+            System.out.println("Essa pessoa não existe!");
+        }
+    }
+    
+    @FXML
+    public void btnNovaPropostaPressed(ActionEvent event) throws PessoaInexistenteException {
+    	String emailCliente = SessaoUsuario.getInstance().getPessoaSessao().getEmail();
+        Pessoa pessoa = SessaoUsuario.getInstance().getPessoaSessao();
+
+        try {
+            if (Fachada.getInstance().buscarPessoa(emailCliente) != null && pessoa instanceof Cliente) 
+    		GerenciadorTelas.getInstance().changeScreen("telaCriarProposta");
+        } catch (PessoaInexistenteException e) {
+            e.printStackTrace();
+            System.out.println("Essa pessoa não existe!");
         }
     }
 }
