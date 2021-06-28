@@ -1,7 +1,6 @@
 package gui;
 
 import exceptions.PessoaInexistenteException;
-import gerenciamento.SessaoUsuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
