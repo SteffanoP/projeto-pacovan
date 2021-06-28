@@ -5,6 +5,7 @@ import exceptions.PessoaDuplicadoException;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -97,6 +98,9 @@ public class TelaCadastroEmpregadosController {
         alerta.showAndWait();
     }
 
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaAdmin");
+    }
     //TODO: Possivelmente, tratar como um modelo estático em outra classe separada para GUI
     public static class EmpregadoModelo {
         private final SimpleLongProperty uid;

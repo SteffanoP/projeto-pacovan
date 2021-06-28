@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalAdminController">
+   <children>
+      <LineChart layoutX="160.0" layoutY="296.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Label layoutX="712.0" layoutY="498.0" text="Período:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="712.0" layoutY="533.0" text="Lucros:" />
+      <Label layoutX="712.0" layoutY="570.0" text="Despesas:" />
+      <Label layoutX="712.0" layoutY="608.0" text="Confiança" />
+      <DatePicker layoutX="197.0" layoutY="244.0" />
+      <DatePicker layoutX="410.0" layoutY="244.0" />
+      <Label layoutX="197.0" layoutY="216.0" text="Data inicial:" />
+      <Label layoutX="410.0" layoutY="216.0" text="Data final:" />
+      <Button layoutX="698.0" layoutY="245.0" mnemonicParsing="false" onAction="#btnGerarRelatorioPressed" prefHeight="26.0" prefWidth="131.0" text="Gerar relatório" />
+      <Label layoutX="197.0" layoutY="142.0" text="Admin:" />
+      <TextField layoutX="197.0" layoutY="171.0" />
+      <Button layoutX="698.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnCadastrarEmpregadoPressed" text="Cadastrar empregado" />
+      <Button layoutX="698.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnCatalogoPressed" prefHeight="26.0" prefWidth="131.0" text="Catálogo de bens" />
+      <Button layoutX="699.0" layoutY="646.0" mnemonicParsing="false" onAction="#btnVoltarPressed" prefHeight="26.0" prefWidth="131.0" text="Voltar ao login" />
+   </children>
+</AnchorPane>

@@ -74,6 +74,14 @@ public class GerenciadorTelas {
 		    }
 		    break;
 		}
+		case "telaCadastrarEmpregado": {
+			try {
+				telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCadastroEmpregados.fxml").openStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		}
 		case "telaLogin": {
             try {
                 telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
@@ -81,7 +89,31 @@ public class GerenciadorTelas {
                 e.printStackTrace();
             }
             break;
-        }
+     }
+    case "telaBensEmpresa": {
+        	try {
+        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBensEmpresa.fxml").openStream());
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+        	break;
+		 }
+    case "telaAnaliseProposta": {
+        	try {
+        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaAnaliseProposta.fxml").openStream());
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+        	break;
+     }
+    case "telaDevedorDetalhe": {
+        	try {
+        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaDevedorDetalhe.fxml").openStream());
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+        	break;
+     }
 		case "telaInformacoesPessoais": {
             try {
                 telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaInformacoesPessoais.fxml").openStream());
@@ -89,7 +121,7 @@ public class GerenciadorTelas {
                 e.printStackTrace();
             }
             break;
-		}
+		 }
 		case "telaBENS": {
             try {
                 telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBENS.fxml").openStream());
@@ -97,7 +129,7 @@ public class GerenciadorTelas {
                 e.printStackTrace();
             }
             break;
-		}
+		 }
 		case "telaCriarProposta": {
             try {
                 telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCriarProposta.fxml").openStream());
