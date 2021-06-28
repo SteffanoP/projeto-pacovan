@@ -47,7 +47,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <ListView prefHeight="173.0" prefWidth="627.0" />
+                  <ListView fx:id="lstvComissoes" prefHeight="173.0" prefWidth="627.0" />
                   <ScrollBar layoutX="619.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="10.0" />
                </children>
             </AnchorPane>

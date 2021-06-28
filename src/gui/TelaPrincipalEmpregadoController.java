@@ -5,12 +5,10 @@ import gui.models.DevedorModelo;
 import gui.models.PropostaModelo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.Fachada;
+import negocio.beans.Empregado;
 import negocio.beans.Emprestimo;
 
 import java.util.ArrayList;
@@ -47,6 +45,8 @@ public class TelaPrincipalEmpregadoController {
     @FXML TableColumn<DevedorModelo, Double> colParcelasDAltoRisco;
     @FXML TableColumn<DevedorModelo, Float> colConfiancaPagamentoAltoRisco;
 
+    @FXML ListView<String> lstvComissoes;
+
     @FXML Button btnAnaliseProposta;
     @FXML Button btnConfirmarDevedor;
 
@@ -63,6 +63,9 @@ public class TelaPrincipalEmpregadoController {
         this.atualizaTableViews(tblvDProtegidos, eDProtegidos);
         List<Emprestimo> eDAltoRisco = new ArrayList<>(Fachada.getInstance().listarDevedoresAltoRisco().values());
         this.atualizaTableViews(tblvDAltoRisco, eDAltoRisco);
+
+        Empregado empregado = (Empregado) SessionManager.getInstance().getPessoaSessao();
+        this.atualizaListView(lstvComissoes, Fachada.getInstance().listarComissoesEmprestimo(empregado));
     }
 
     private void atualizaTableViews(TableView<DevedorModelo> tableView, List<Emprestimo> emprestimoList) {
@@ -70,6 +73,18 @@ public class TelaPrincipalEmpregadoController {
             DevedorModelo devedorModelo = new DevedorModelo(emprestimo.getValor(), emprestimo.getDataPagamento(),
                     emprestimo.getCliente(),emprestimo.getParcelas(),emprestimo.getConfiancaPagamento());
             tableView.getItems().add(devedorModelo);
+        }
+    }
+
+    private void atualizaListView(ListView<String> listView, List<Emprestimo> emprestimoList) {
+        listView.getItems().removeAll();
+        for (Emprestimo emprestimo : emprestimoList) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(emprestimo.getEmpregado()).append("; ");
+            stringBuilder.append("R$ ").append(emprestimo.getValor()).append("; ");
+            stringBuilder.append("Confiança: ").append(emprestimo.getConfiancaPagamento()).append("%;");
+
+            listView.getItems().add(stringBuilder.toString());
         }
     }
 
