@@ -16,4 +16,8 @@ public class TelaPrincipalEmpregadoController {
     public void btnConfirmarDevedorPressed(ActionEvent event) {
         GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
     }
+
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaLogin");
+    }
 }
