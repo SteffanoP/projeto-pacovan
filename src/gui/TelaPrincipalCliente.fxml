@@ -7,11 +7,11 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalClienteController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalClienteController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="51.0" layoutY="79.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="629.0">
          <items>
@@ -77,10 +77,20 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button fx:id="btnNovaPropostaPressed" layoutX="366.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnNovaPropostaPressed" prefHeight="25.0" prefWidth="101.0" text="Nova Proposta" />
-      <Button fx:id="btnMinhasInformacoesPressed" layoutX="51.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnMinhasInformacoesPressed" text="Minhas Informações" />
-      <Button fx:id="btnMeusBENSPressed" layoutX="187.0" layoutY="26.0" mnemonicParsing="false" onAction="#btnMeusBENSPressed" text="Meus BENS" />
-      <TextField layoutX="317.0" layoutY="26.0" prefHeight="25.0" prefWidth="32.0" />
-      <Label layoutX="278.0" layoutY="29.0" text="Score:" />
+      <Button fx:id="btnNovaPropostaPressed" layoutX="579.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnNovaPropostaPressed" prefHeight="25.0" prefWidth="101.0" text="Nova Proposta" />
+      <Button fx:id="btnMinhasInformacoesPressed" layoutX="268.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnMinhasInformacoesPressed" text="Minhas Informações" />
+      <Button fx:id="btnMeusBENSPressed" layoutX="402.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnMeusBENSPressed" text="Meus BENS" />
+      <Label layoutX="491.0" layoutY="29.0" text="Score:" />
+      <Label layoutX="51.0" layoutY="28.0" text="Olá,">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNomeUsuario" layoutX="83.0" layoutY="27.0" prefHeight="21.0" prefWidth="171.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblScoreUsuario" layoutX="532.0" layoutY="30.0" prefHeight="17.0" prefWidth="32.0" />
    </children>
 </Pane>

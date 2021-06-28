@@ -52,8 +52,12 @@ public class ControladorPessoa {
         pessoa.setSenha(digestSHA256(senhaPessoa));
 
         if (pessoa instanceof Cliente) {
+            Cliente cliente = (Cliente) pessoa;
+            //Set de Score inicial
+            cliente.setScore(50);
+
             try {
-                this.repoCliente.inserir((Cliente) pessoa);
+                this.repoCliente.inserir(cliente);
                 contadorUID++;
             } catch (ObjetoDuplicadoException e) {
                 throw new PessoaDuplicadoException("Pessoa já registrada no sistema!");
