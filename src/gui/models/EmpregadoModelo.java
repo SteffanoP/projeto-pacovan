@@ -5,11 +5,16 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class EmpregadoModelo {
-    private final SimpleLongProperty uid;
+    private SimpleLongProperty uid;
     private final SimpleStringProperty nome;
-    private final SimpleStringProperty email;
+    private SimpleStringProperty email;
     private final SimpleFloatProperty reputacao;
-    private final SimpleFloatProperty salarioBase;
+    private SimpleFloatProperty salarioBase;
+
+    public EmpregadoModelo(String nome, Float reputacao) {
+        this.nome = new SimpleStringProperty(nome);
+        this.reputacao = new SimpleFloatProperty(reputacao);
+    }
 
     public EmpregadoModelo(Long uid, String nome, String email, Float reputacao, Float salarioBase) {
         this.uid = new SimpleLongProperty(uid);

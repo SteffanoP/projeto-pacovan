@@ -6,11 +6,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalAdminController">
+<AnchorPane onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalAdminController">
    <children>
       <LineChart layoutX="160.0" layoutY="296.0">
         <xAxis>
@@ -38,5 +42,25 @@
       <Button layoutX="698.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnCadastrarEmpregadoPressed" text="Cadastrar empregado" />
       <Button layoutX="698.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnCatalogoPressed" prefHeight="26.0" prefWidth="131.0" text="Catálogo de bens" />
       <Button layoutX="699.0" layoutY="646.0" mnemonicParsing="false" onAction="#btnVoltarPressed" prefHeight="26.0" prefWidth="131.0" text="Voltar ao login" />
+      <SplitPane dividerPositions="0.12871287128712872" layoutX="697.0" layoutY="298.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="264.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="158.0">
+               <children>
+                  <Label layoutX="13.0" layoutY="2.0" text="Empregados" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
+               <children>
+                  <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
+                  <TableView fx:id="tblvEmpregados" prefHeight="146.0" prefWidth="262.0">
+                    <columns>
+                      <TableColumn fx:id="colNomeEmpregados" prefWidth="159.0" text="Empregado" />
+                      <TableColumn fx:id="colReputacaoEmpregados" prefWidth="102.0" text="Reputação (%)" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
    </children>
 </AnchorPane>
