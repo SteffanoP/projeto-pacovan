@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaInformacoesPessoaisController">
+   <children>
+      <SplitPane dividerPositions="0.24232081911262798" layoutX="85.0" layoutY="110.0" prefHeight="281.0" prefWidth="588.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="12.0" layoutY="14.0" text="Nome Completo:" />
+                  <Label layoutX="12.0" layoutY="52.0" text="CPF:" />
+                  <Label layoutX="13.0" layoutY="96.0" text="Endereço:" />
+                  <Label layoutX="14.0" layoutY="139.0" text="Telefone:" />
+                  <Label layoutX="14.0" layoutY="176.0" text="Email:" />
+                  <Label layoutX="14.0" layoutY="209.0" text="Data de Nascimento:" />
+                  <Label layoutX="14.0" layoutY="242.0" text="Senha Atual:" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="210.0">
+               <children>
+                  <TextField fx:id="txtNome" disable="true" editable="false" layoutX="14.0" layoutY="14.0" />
+                  <TextField fx:id="txtCpf" disable="true" editable="false" layoutX="14.0" layoutY="48.0" />
+                  <TextArea fx:id="txtEndereco" disable="true" editable="false" layoutX="14.0" layoutY="83.0" prefHeight="44.0" prefWidth="375.0" />
+                  <TextField fx:id="txtTelefone" disable="true" editable="false" layoutX="14.0" layoutY="136.0" />
+                  <TextField fx:id="txtEmail" disable="true" editable="false" layoutX="14.0" layoutY="170.0" />
+                  <DatePicker fx:id="dtNascimento" disable="true" editable="false" layoutX="14.0" layoutY="204.0" />
+                  <PasswordField fx:id="txtSenha" disable="true" editable="false" layoutX="14.0" layoutY="240.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <Label layoutX="85.0" layoutY="74.0" prefHeight="36.0" prefWidth="100.0" text="Seus Dados" />
+      <Button fx:id="btnEditarDados" layoutX="568.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnEditarDadosPressed" text="Editar" />
+      <Button fx:id="btnSalvarDados" layoutX="625.0" layoutY="408.0" mnemonicParsing="false" onAction="#btnSalvarDadosPressed" text="Salvar" />
+      <Label layoutX="85.0" layoutY="437.0" prefHeight="36.0" prefWidth="100.0" text="Alterar Senha" />
+      <SplitPane dividerPositions="0.4222873900293255" layoutX="85.0" layoutY="473.0" prefHeight="148.0" prefWidth="343.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Senha Atual:" />
+                  <Label layoutX="13.0" layoutY="65.0" text="Nova Senha:" />
+                  <Label layoutX="13.0" layoutY="89.0" text="Confirme Nova Senha:" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="210.0">
+               <children>
+                  <PasswordField fx:id="txtSenhaAtual" layoutX="14.0" layoutY="14.0" />
+                  <PasswordField fx:id="txtNovaSenha" layoutX="14.0" layoutY="61.0" />
+                  <PasswordField fx:id="txtConfNovaSenha" layoutX="14.0" layoutY="88.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <Button fx:id="btnSalvarSenha" layoutX="379.0" layoutY="645.0" mnemonicParsing="false" onAction="#btnSalvarSenhaPressed" text="Salvar" />
+      <Button fx:id="btnVoltarTela" layoutX="85.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnVoltarTelaPressed" text="&lt; Voltar" />
+   </children>
+</Pane>

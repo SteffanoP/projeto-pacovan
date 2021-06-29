@@ -52,8 +52,12 @@ public class ControladorPessoa {
         pessoa.setSenha(digestSHA256(senhaPessoa));
 
         if (pessoa instanceof Cliente) {
+            Cliente cliente = (Cliente) pessoa;
+            //Set de Score inicial
+            cliente.setScore(50);
+
             try {
-                this.repoCliente.inserir((Cliente) pessoa);
+                this.repoCliente.inserir(cliente);
                 contadorUID++;
             } catch (ObjetoDuplicadoException e) {
                 throw new PessoaDuplicadoException("Pessoa já registrada no sistema!");
@@ -112,6 +116,34 @@ public class ControladorPessoa {
         }
 
         return validado;
+    }
+
+    /**
+     * Método que faz a busca de uma {@code Pessoa} dentro do repositório de todos os usuários.
+     *
+     * @param email se trata do parâmetro de busca do usuário
+     * @return retorna um objeto abstrato do tipo {@code Pessoa}
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
+     * {@code Pessoa}.
+     */
+    public Pessoa buscarPessoa(String email) throws PessoaInexistenteException {
+        Pessoa pessoa = null;
+        List<Pessoa> listPessoas = new ArrayList<>(repoCliente.listar());
+        listPessoas.addAll(repoEmpregado.listar());
+
+        boolean pessoaEncontrada = false;
+        for (int i = 0; (i < listPessoas.size()) && !pessoaEncontrada; i++) {
+            Pessoa p = listPessoas.get(i);
+            if (email.equals(p.getEmail())) {
+                pessoa = p;
+                pessoaEncontrada = true;
+            }
+        }
+
+        if (!pessoaEncontrada)
+            throw new PessoaInexistenteException("Essa pessoa não foi encontrada!");
+
+        return pessoa;
     }
 
     /**

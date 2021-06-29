@@ -1,4 +1,5 @@
 package negocio.beans;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -37,7 +38,8 @@ public abstract class Pessoa {
         if (this == o) return true;
         if (!(o instanceof Pessoa)) return false;
         Pessoa pessoa = (Pessoa) o;
-        return getUid() == pessoa.getUid() && Objects.equals(getNome(), pessoa.getNome()) && Objects.equals(getTelefone(), pessoa.getTelefone()) && Objects.equals(getCpf(), pessoa.getCpf()) && Objects.equals(getEndereco(), pessoa.getEndereco()) && Objects.equals(getEmail(), pessoa.getEmail()) && Objects.equals(getDataNascimento(), pessoa.getDataNascimento()) && Objects.equals(getSenha(), pessoa.getSenha());
+        return Objects.equals(getCpf(), pessoa.getCpf()) && Objects.equals(getEmail(), pessoa.getEmail()) &&
+                Objects.equals(getDataNascimento(), pessoa.getDataNascimento());
     }
 
     @Override
@@ -174,6 +176,11 @@ public abstract class Pessoa {
 
     public LocalDate getDataNascimento() {
         return dataNascimento;
+    }
+
+    public String getDataNascimentoToString() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.dataNascimento.format(formatador);
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {

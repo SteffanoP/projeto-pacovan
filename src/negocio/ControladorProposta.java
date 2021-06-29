@@ -4,6 +4,7 @@ import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.ObjetoDuplicadoException;
 import exceptions.PessoaInexistenteException;
+import exceptions.PropostaInvalidaException;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
@@ -13,13 +14,32 @@ import java.util.TreeMap;
 
 public class ControladorProposta {
     private Repositorio<Proposta> repoProposta;
+    private static long contadorProtocolo = 0;
 
     public ControladorProposta() {
         this.repoProposta = new RepositorioCRUD<>();
     }
 
-    public void criarProposta(Proposta p) throws ObjetoDuplicadoException {
+    /**
+     * Método que cria e adiciona um objeto do tipo {@code Proposta}, no qual atribuí um número de procolo a proposta e
+     * seta parâmetros de controle, como {@code data} e {@code contraproposta}.
+     * @param p se refere a proposta inicial ao qual se deseja adicionar ao sistema.
+     * @throws PropostaInvalidaException poderá acontecer caso a proposta seja inválida por alguma razão.
+     */
+    public void criarProposta(Proposta p) throws PropostaInvalidaException {
+        if (p == null) return;
 
+        //Set de valores iniciais
+        p.setData(LocalDate.now());
+        p.setContraproposta(false);
+        p.setNumProtocolo(contadorProtocolo);
+
+        try {
+            this.repoProposta.inserir(p);
+            contadorProtocolo++;
+        } catch (ObjetoDuplicadoException e) {
+            throw new PropostaInvalidaException("Parece que já existe uma proposta parecida com essa.");
+        }
     }
 
     public String propostaEmDetalhe() {

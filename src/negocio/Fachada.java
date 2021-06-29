@@ -51,6 +51,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
+        return bens.listarBensEmpresaCategoria(categoria);
+    }
+
+    @Override
     public Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
         return bens.listarBensCliente(uidCliente);
     }
@@ -101,22 +106,22 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public List<Emprestimo> listarComissõesEmprestimo() {
-        return emprestimos.listarComissõesEmprestimo();
+    public List<Emprestimo> listarComissoesEmprestimo(Empregado empregado) {
+        return emprestimos.listarComissoesEmprestimo(empregado);
     }
 
     @Override
-    public Map<LocalDate, Cliente> listarDevedores() {
+    public Map<LocalDate, Emprestimo> listarDevedores() {
         return emprestimos.listarDevedores();
     }
 
     @Override
-    public Map<LocalDate, Cliente> listarDevedoresProtegidos() {
+    public Map<LocalDate, Emprestimo> listarDevedoresProtegidos() {
         return emprestimos.listarDevedoresProtegidos();
     }
 
     @Override
-    public Map<LocalDate, Cliente> listarDevedoresAltoRisco() {
+    public Map<LocalDate, Emprestimo> listarDevedoresAltoRisco() {
         return emprestimos.listarDevedoresAltoRisco();
     }
 
@@ -146,6 +151,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public Pessoa buscarPessoa(String email) throws PessoaInexistenteException {
+        return pessoas.buscarPessoa(email);
+    }
+
+    @Override
     public void alterarDadosPessoais(Pessoa pessoaDadosNovo) throws PessoaInexistenteException {
         pessoas.alterarDadosPessoais(pessoaDadosNovo);
     }
@@ -171,7 +181,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public void criarProposta(Proposta p) throws ObjetoDuplicadoException {
+    public void criarProposta(Proposta p) throws PropostaInvalidaException {
         propostas.criarProposta(p);
     }
 

@@ -21,6 +21,16 @@ public interface SistemaEmprestimosBens {
 
     Map<LocalDate, Bens> listarBensEmpresa();
 
+    /**
+     * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma
+     * {@code CategoriaBens} parametrizada.
+     *
+     * @param categoria se refere a categoria de bens que se pretende listar.
+     * @return um {@code Map<LocalDate, Bens>} com os bens filtrados por meio de uma {@code CategoriaBens} como
+     * parâmetro.
+     */
+    Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
+
     Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException;
 
     Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException;
@@ -76,13 +86,19 @@ public interface SistemaEmprestimosBens {
 
     Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
 
-    List<Emprestimo> listarComissõesEmprestimo();
+    /**
+     * Método que lista todas as comissões de empréstimos de que um empregado é responsável.
+     *
+     * @param empregado se refere ao empregado que se quer listar os empréstimos no qual ele é responsável.
+     * @return uma lista de empréstimos do qual o empregado é responsável.
+     */
+    List<Emprestimo> listarComissoesEmprestimo(Empregado empregado);
 
-    Map<LocalDate, Cliente> listarDevedores();
+    Map<LocalDate, Emprestimo> listarDevedores();
 
-    Map<LocalDate, Cliente> listarDevedoresProtegidos();
+    Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
-    Map<LocalDate, Cliente> listarDevedoresAltoRisco();
+    Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
     Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
 
@@ -116,6 +132,16 @@ public interface SistemaEmprestimosBens {
      * autenticada com sucesso
      */
     boolean autenticarPessoa(String email, String senha, boolean isEmpregado);
+
+    /**
+     * Método que faz a busca de uma {@code Pessoa} dentro do repositório de todos os usuários.
+     *
+     * @param email se trata do parâmetro de busca do usuário
+     * @return retorna um objeto abstrato do tipo {@code Pessoa}
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
+     * {@code Pessoa}.
+     */
+    Pessoa buscarPessoa(String email) throws PessoaInexistenteException;
 
     /**
      * Método que altera os dados cadastrados de uma pessoa por meio da substituição do objeto {@code Pessoa} antigo
@@ -162,7 +188,13 @@ public interface SistemaEmprestimosBens {
      */
     String informacoesPessoais(Pessoa pessoa) throws PessoaInexistenteException;
 
-    void criarProposta(Proposta p) throws ObjetoDuplicadoException;
+    /**
+     * Método que cria e adiciona um objeto do tipo {@code Proposta}, no qual atribuí um número de procolo a proposta e
+     * seta parâmetros de controle, como {@code data} e {@code contraproposta}.
+     * @param p se refere a proposta inicial ao qual se deseja adicionar ao sistema.
+     * @throws PropostaInvalidaException poderá acontecer caso a proposta seja inválida por alguma razão.
+     */
+    void criarProposta(Proposta p) throws PropostaInvalidaException;
 
     String propostaEmDetalhe();
 
