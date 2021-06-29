@@ -9,6 +9,7 @@ import negocio.Fachada;
 import negocio.beans.Bens;
 import negocio.beans.CategoriaBens;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TelaBensEmpresaController {
@@ -38,12 +39,15 @@ public class TelaBensEmpresaController {
 
     private void initialize() {
         this.initializeTableViews();
-        this.atualizaTableViewBens(tblvMoveisFungiveis,
-                (List<Bens>) Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_FUNGIVEL).values());
-        this.atualizaTableViewBens(tblvMoveisInfungiveis,
-                (List<Bens>) Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_INFUNGIVEL).values());
-        this.atualizaTableViewBens(tblvImoveis,
-                (List<Bens>) Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.IMOVEL).values());
+        List<Bens> bensFungiveisList = new
+                ArrayList<>(Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_FUNGIVEL).values());
+        this.atualizaTableViewBens(tblvMoveisFungiveis, bensFungiveisList);
+        List<Bens> bensInfungiveisList = new
+                ArrayList<>(Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_INFUNGIVEL).values());
+        this.atualizaTableViewBens(tblvMoveisInfungiveis, bensInfungiveisList);
+        List<Bens> bensImoveisList = new
+                ArrayList<>(Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.IMOVEL).values());
+        this.atualizaTableViewBens(tblvImoveis, bensImoveisList);
     }
 
     private void atualizaTableViewBens(TableView<BensModelo> tableView, List<Bens> bensList) {
