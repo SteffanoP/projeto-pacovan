@@ -11,10 +11,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setScene(GerenciadorTelas.getInstance().getMainScene());
-        primaryStage.setTitle("Sistema de Gerenciamento de Empréstimo Pessoal Alternativo");
+        primaryStage.setTitle("Sistema de Gerenciamento de EmprÃ©stimo Pessoal Alternativo");
 
-        primaryStage.setWidth(600);
-        primaryStage.setHeight(400);
+        primaryStage.setWidth(1024);
+        primaryStage.setHeight(768);
 
         GerenciadorTelas.getInstance().setPrimaryStage(primaryStage);
 
