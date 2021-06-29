@@ -86,13 +86,19 @@ public interface SistemaEmprestimosBens {
 
     Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
 
-    List<Emprestimo> listarComissõesEmprestimo();
+    /**
+     * Método que lista todas as comissões de empréstimos de que um empregado é responsável.
+     *
+     * @param empregado se refere ao empregado que se quer listar os empréstimos no qual ele é responsável.
+     * @return uma lista de empréstimos do qual o empregado é responsável.
+     */
+    List<Emprestimo> listarComissoesEmprestimo(Empregado empregado);
 
-    Map<LocalDate, Cliente> listarDevedores();
+    Map<LocalDate, Emprestimo> listarDevedores();
 
-    Map<LocalDate, Cliente> listarDevedoresProtegidos();
+    Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
-    Map<LocalDate, Cliente> listarDevedoresAltoRisco();
+    Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
     Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
 

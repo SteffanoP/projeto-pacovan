@@ -109,14 +109,25 @@ public class ControladorEmprestimo {
         return mapaEmprestimos;
     }
 
-    public List<Emprestimo> listarComissõesEmprestimo() {
+    /**
+     * Método que lista todas as comissões de empréstimos de que um empregado é responsável.
+     *
+     * @param empregado se refere ao empregado que se quer listar os empréstimos no qual ele é responsável.
+     * @return uma lista de empréstimos do qual o empregado é responsável.
+     */
+    public List<Emprestimo> listarComissoesEmprestimo(Empregado empregado) {
         List<Emprestimo> comissoesEmprestimo = new ArrayList<>();
+
+        for (Emprestimo emprestimo : this.repoEmprestimo.listar()) {
+            if (emprestimo.getEmpregado().getUid() == empregado.getUid())
+                comissoesEmprestimo.add(emprestimo);
+        }
 
         return comissoesEmprestimo;
     }
 
-    public Map<LocalDate, Cliente> listarDevedores() {
-        NavigableMap<LocalDate, Cliente> mapaClientes = new TreeMap<>();
+    public Map<LocalDate, Emprestimo> listarDevedores() {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimoClientes = new TreeMap<>();
         List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
         for (Emprestimo emprestimo : repositorio) {
@@ -124,14 +135,14 @@ public class ControladorEmprestimo {
             long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
             if(dataPagamento < 0){
                 //Preencher mapa
-                mapaClientes.put(prazo, emprestimo.getCliente());
+                mapaEmprestimoClientes.put(prazo, emprestimo);
             }
         }
-        return mapaClientes;
+        return mapaEmprestimoClientes;
     }
 
-    public Map<LocalDate, Cliente> listarDevedoresProtegidos() {
-        NavigableMap<LocalDate, Cliente> mapaClientes = new TreeMap<>();
+    public Map<LocalDate, Emprestimo> listarDevedoresProtegidos() {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimoClientes = new TreeMap<>();
         List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
         for (Emprestimo emprestimo : repositorio) {
@@ -139,14 +150,14 @@ public class ControladorEmprestimo {
             long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
             if(dataPagamento < 0 /* && score >= ? */){
                 //Preencher mapa
-                mapaClientes.put(emprestimo.getData(), emprestimo.getCliente());
+                mapaEmprestimoClientes.put(emprestimo.getData(), emprestimo);
             }
         }
-        return mapaClientes;
+        return mapaEmprestimoClientes;
     }
 
-    public Map<LocalDate, Cliente> listarDevedoresAltoRisco() {
-        NavigableMap<LocalDate, Cliente> mapaClientes = new TreeMap<>();
+    public Map<LocalDate, Emprestimo> listarDevedoresAltoRisco() {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimoClientes = new TreeMap<>();
         List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
         for (Emprestimo emprestimo : repositorio) {
@@ -154,9 +165,9 @@ public class ControladorEmprestimo {
             long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
             if(dataPagamento < 0 /* && score <= ? */){
                 //Preencher mapa
-                mapaClientes.put(emprestimo.getData(), emprestimo.getCliente());
+                mapaEmprestimoClientes.put(emprestimo.getData(), emprestimo);
             }
         }
-        return mapaClientes;
+        return mapaEmprestimoClientes;
     }
 }

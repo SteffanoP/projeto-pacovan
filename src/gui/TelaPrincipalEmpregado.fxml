@@ -7,11 +7,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="48.0" layoutY="90.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="629.0">
         <items>
@@ -22,8 +25,15 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <ListView layoutX="1.0" layoutY="1.0" prefHeight="146.0" prefWidth="627.0" />
                   <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
+                  <TableView fx:id="tblvPropostas" layoutY="-1.0" prefHeight="146.0" prefWidth="619.0">
+                    <columns>
+                      <TableColumn fx:id="colDataProposta" prefWidth="109.0" text="Data" />
+                      <TableColumn fx:id="colValorDesejadoProposta" prefWidth="166.0" text="Valor desejado" />
+                        <TableColumn fx:id="colParcelasDesejadasProposta" prefWidth="133.0" text="Parcelas Desejadas" />
+                        <TableColumn fx:id="colNumProtocoloProposta" prefWidth="210.0" text="Número de Protocolo" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </items>
@@ -37,7 +47,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <ListView prefHeight="173.0" prefWidth="627.0" />
+                  <ListView fx:id="lstvComissoes" prefHeight="173.0" prefWidth="627.0" />
                   <ScrollBar layoutX="619.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="10.0" />
                </children>
             </AnchorPane>
@@ -55,8 +65,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView prefHeight="136.0" prefWidth="627.0" />
                         <ScrollBar layoutX="620.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="10.0" />
+                        <TableView fx:id="tblvDevedores" layoutY="-1.0" prefHeight="146.0" prefWidth="619.0">
+                          <columns>
+                            <TableColumn fx:id="colValorDevidoDevedores" prefWidth="100.0" text="Valor Devido" />
+                            <TableColumn fx:id="colDataPagamentoDevedores" prefWidth="141.0" text="Data Pagamento" />
+                              <TableColumn fx:id="colNomeClienteDevedores" prefWidth="133.0" text="Cliente" />
+                              <TableColumn fx:id="colParcelasDevedores" prefWidth="111.0" text="Parcelas" />
+                              <TableColumn fx:id="colConfiancaPagamentoDevedores" prefWidth="133.0" text="Confiança Pagamento" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
             </content>
@@ -65,8 +83,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView prefHeight="136.0" prefWidth="627.0" />
                         <ScrollBar layoutX="619.0" orientation="VERTICAL" prefHeight="137.0" prefWidth="10.0" />
+                        <TableView fx:id="tblvDProtegidos" prefHeight="146.0" prefWidth="619.0">
+                           <columns>
+                              <TableColumn fx:id="colValorDProtegidos" prefWidth="100.0" text="Valor Devido" />
+                              <TableColumn fx:id="colDataPagamentoDProtegidos" prefWidth="141.0" text="Data Pagamento" />
+                              <TableColumn fx:id="colNomeClienteDProtegidos" prefWidth="133.0" text="Cliente" />
+                              <TableColumn fx:id="colParcelasDProtegidos" prefWidth="111.0" text="Parcelas" />
+                              <TableColumn fx:id="colConfiancaPagamentoProtegidos" prefWidth="133.0" text="Confiança Pagamento" />
+                           </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
             </content>
@@ -75,8 +101,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView layoutY="-1.0" prefHeight="137.0" prefWidth="627.0" />
                         <ScrollBar layoutX="619.0" orientation="VERTICAL" prefHeight="135.0" prefWidth="4.0" />
+                        <TableView fx:id="tblvDAltoRisco" prefHeight="146.0" prefWidth="619.0">
+                           <columns>
+                              <TableColumn fx:id="colValorDevidoDAltoRisco" prefWidth="100.0" text="Valor Devido" />
+                              <TableColumn fx:id="colDataPagamentoDAltoRisco" prefWidth="141.0" text="Data Pagamento" />
+                              <TableColumn fx:id="colNomeClienteDAltoRisco" prefWidth="133.0" text="Cliente" />
+                              <TableColumn fx:id="colParcelasDAltoRisco" prefWidth="111.0" text="Parcelas" />
+                              <TableColumn fx:id="colConfiancaPagamentoAltoRisco" prefWidth="133.0" text="Confiança Pagamento" />
+                           </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
             </content>
@@ -84,5 +118,16 @@
         </panes>
       </Accordion>
       <Button layoutX="890.0" layoutY="703.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar ao login" />
+      <Label layoutX="48.0" layoutY="37.0" text="Olá, ">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNomeUsuario" layoutX="78.0" layoutY="37.0" prefHeight="21.0" prefWidth="147.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnMeusDados" layoutX="595.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnMeusDadosPressed" text="Meus Dados" />
    </children>
 </Pane>
