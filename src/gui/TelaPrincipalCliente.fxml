@@ -23,7 +23,7 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
                   <ListView layoutX="1.0" layoutY="1.0" prefHeight="146.0" prefWidth="627.0" />
-                  <TableView fx:id="tblvPropostas" layoutX="-1.0" layoutY="-1.0" prefHeight="146.0" prefWidth="629.0">
+                  <TableView fx:id="tblvPropostas" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#tblvPropostasOnMouseClicked" prefHeight="146.0" prefWidth="629.0">
                     <columns>
                         <TableColumn fx:id="colProtocoloPropostas" prefWidth="113.0" text="Protocolo" />
                       <TableColumn fx:id="colDataPropostas" prefWidth="135.0" text="Data" />
@@ -92,5 +92,6 @@
          </font>
       </Label>
       <Label fx:id="lblScoreUsuario" layoutX="532.0" layoutY="30.0" prefHeight="17.0" prefWidth="32.0" />
+      <Button fx:id="btnVerProposta" layoutX="587.0" layoutY="264.0" mnemonicParsing="false" onAction="#btnVerPropostaPressed" text="Ver Proposta" />
    </children>
 </Pane>

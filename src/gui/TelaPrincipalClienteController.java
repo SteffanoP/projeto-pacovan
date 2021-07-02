@@ -1,15 +1,14 @@
 package gui;
 
 import exceptions.PessoaInexistenteException;
+import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
 import gui.models.EmprestimoModelo;
 import gui.models.MovimentacaoModelo;
 import gui.models.PropostaModelo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.Fachada;
 import negocio.beans.Cliente;
@@ -41,6 +40,8 @@ public class TelaPrincipalClienteController {
     @FXML TableColumn<MovimentacaoModelo, String> colInstanteExtrato;
     @FXML TableColumn<MovimentacaoModelo, String> coltipoMovimentacaoExtrato;
     @FXML TableColumn<MovimentacaoModelo, Double> colvalorExtrato;
+
+    @FXML Button btnVerProposta;
 
     boolean initialized = false;
 
@@ -114,6 +115,14 @@ public class TelaPrincipalClienteController {
         }
     }
 
+    private void gerarAlertaErro(String titulo, String subtitulo, String justificativa) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro de " + titulo);
+        alerta.setHeaderText("Parece que tivemos um erro com " + subtitulo);
+        alerta.setContentText(justificativa);
+        alerta.showAndWait();
+    }
+
     public void onMouseEntered() {
         if (!initialized) {
             initialized = true;
@@ -161,5 +170,27 @@ public class TelaPrincipalClienteController {
             e.printStackTrace();
             System.out.println("Essa pessoa não existe!");
         }
+    }
+
+    @FXML
+    public void tblvPropostasOnMouseClicked() {
+        if (tblvPropostas.getSelectionModel().getSelectedItem() != null) {
+            long numProtocolo = tblvPropostas.getSelectionModel().getSelectedItem().getNumProtocolo();
+            try {
+                SessionManager.getInstance().setPropostaSessao(Fachada.getInstance().buscarProposta(numProtocolo));
+                System.out.println(SessionManager.getInstance().getPropostaSessao().toString());
+            } catch (PropostaInvalidaException e) {
+                this.gerarAlertaErro("Propostas", "busca de propostas",e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void btnVerPropostaPressed() {
+        if (SessionManager.getInstance().getPropostaSessao() != null) {
+            GerenciadorTelas.getInstance().changeScreen("telaFeedbackProposta");
+        } else
+            this.gerarAlertaErro("Propostas", "sua Proposta","Parece que você não" +
+                    "selecionou sua Proposta");
     }
 }
