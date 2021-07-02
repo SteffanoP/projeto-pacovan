@@ -196,7 +196,15 @@ public interface SistemaEmprestimosBens {
      */
     void criarProposta(Proposta p) throws PropostaInvalidaException;
 
-    String propostaEmDetalhe();
+    /**
+     * Método que faz a busca de uma {@code Proposta} no repositório de propostas por meio de um número de protocolo.
+     *
+     * @param numProtocolo se refere ao número único dado a cada proposta, quando cada proposta é criada.
+     * @return retorna uma {@code Proposta} referente ao número do Protocolo pedido do repositório
+     * @throws PropostaInvalidaException poderá acontecer caso o número de protocolo seja inválido ou se a proposta
+     * não existir no repositório de propostas.
+     */
+    Proposta buscarProposta(long numProtocolo) throws PropostaInvalidaException;
 
     /**
      * Método que lista as propostas do cliente ordenadas por sua data de criação por meio de um {@code Map} criado para armazenar

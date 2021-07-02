@@ -186,8 +186,8 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public String propostaEmDetalhe() {
-        return propostas.propostaEmDetalhe();
+    public Proposta buscarProposta(long numProtocolo) throws PropostaInvalidaException {
+        return propostas.buscarProposta(numProtocolo);
     }
 
     @Override

@@ -8,13 +8,11 @@ import exceptions.PropostaInvalidaException;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
-import java.util.Map;
-import java.util.NavigableMap;
-import java.util.TreeMap;
+import java.util.*;
 
 public class ControladorProposta {
     private Repositorio<Proposta> repoProposta;
-    private static long contadorProtocolo = 0;
+    private static long contadorProtocolo = 1;
 
     public ControladorProposta() {
         this.repoProposta = new RepositorioCRUD<>();
@@ -42,10 +40,30 @@ public class ControladorProposta {
         }
     }
 
-    public String propostaEmDetalhe() {
+    /**
+     * Método que faz a busca de uma {@code Proposta} no repositório de propostas por meio de um número de protocolo.
+     *
+     * @param numProtocolo se refere ao número único dado a cada proposta, quando cada proposta é criada.
+     * @return retorna uma {@code Proposta} referente ao número do Protocolo pedido do repositório
+     * @throws PropostaInvalidaException poderá acontecer caso o número de protocolo seja inválido ou se a proposta
+     * não existir no repositório de propostas.
+     */
+    public Proposta buscarProposta(long numProtocolo) throws PropostaInvalidaException {
+        if (numProtocolo < 1) throw new PropostaInvalidaException("O Número de protocolo é inválido");
         Proposta proposta = null;
 
-        return proposta.toString();
+        List<Proposta> propostaList = new ArrayList<>(this.repoProposta.listar());
+        boolean propostaEncontrada = false;
+        for (int i = 0; i < propostaList.size() && !propostaEncontrada; i++) {
+            proposta = propostaList.get(i);
+            if (numProtocolo == proposta.getNumProtocolo()) {
+                propostaEncontrada = true;
+            }
+        }
+
+        if (!propostaEncontrada) throw new PropostaInvalidaException("A protocolo para essa proposta não existe!");
+
+        return proposta;
     }
 
     /**
