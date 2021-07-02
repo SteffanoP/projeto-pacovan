@@ -89,7 +89,14 @@ public class GerenciadorTelas {
                 e.printStackTrace();
             }
             break;
-     }
+     	}
+     	case "telaFeedbackProposta": {
+     		try {
+     			telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaFeedbackProposta.fxml").openStream());
+			} catch (IOException e) {
+     			e.printStackTrace();
+			}
+     	}
     case "telaBensEmpresa": {
         	try {
         		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBensEmpresa.fxml").openStream());
