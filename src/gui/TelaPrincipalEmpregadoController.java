@@ -102,29 +102,32 @@ public class TelaPrincipalEmpregadoController {
                 colParcelasDAltoRisco, colConfiancaPagamentoAltoRisco);
     }
 
-    @FXML
-    public void btnMeusDadosPressed() {
-        GerenciadorTelas.getInstance().changeScreen("telaInformacoesPessoais");
-    }
-
-    public void btnAnalisePropostaPressed(ActionEvent event) {
-        GerenciadorTelas.getInstance().changeScreen("telaAnaliseProposta");
-    }
-
-    public void btnConfirmarDevedorPressed(ActionEvent event) {
-        GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
-    }
-
-    public void btnVoltarPressed(ActionEvent event) {
-        GerenciadorTelas.getInstance().changeScreen("telaLogin");
-    }
-
     private void setCellValuesProperties(TableColumn<DevedorModelo, Double> colValorDevido, TableColumn<DevedorModelo, String> colDataPagamento, TableColumn<DevedorModelo, String> colNomeCliente, TableColumn<DevedorModelo, Double> colParcelas, TableColumn<DevedorModelo, Float> colConfiancaPagamento) {
         colValorDevido.setCellValueFactory(new PropertyValueFactory<>("valorDevido"));
         colDataPagamento.setCellValueFactory(new PropertyValueFactory<>("dataPagamento"));
         colNomeCliente.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
         colParcelas.setCellValueFactory(new PropertyValueFactory<>("parcelas"));
         colConfiancaPagamento.setCellValueFactory(new PropertyValueFactory<>("confiancaPagamento"));
+    }
+
+    @FXML
+    public void btnMeusDadosPressed() {
+        GerenciadorTelas.getInstance().changeScreen("telaInformacoesPessoais");
+    }
+
+    @FXML
+    public void btnAnalisePropostaPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaAnaliseProposta");
+    }
+
+    @FXML
+    public void btnConfirmarDevedorPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
+    }
+
+    @FXML
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaLogin");
     }
 
     @FXML
