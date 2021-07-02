@@ -16,6 +16,7 @@ public class Emprestimo {
     private List<Bens> garantia;
     private Empregado empregado;
     private float confiancaPagamento;
+    private long numProtocolo;
 
     //Construtores
     public Emprestimo() {
@@ -135,5 +136,13 @@ public class Emprestimo {
 
     public void setConfiancaPagamento(float confiancaPagamento) {
         this.confiancaPagamento = confiancaPagamento;
+    }
+
+    public long getNumProtocolo() {
+        return numProtocolo;
+    }
+
+    public void setNumProtocolo(long numProtocolo) {
+        this.numProtocolo = numProtocolo;
     }
 }

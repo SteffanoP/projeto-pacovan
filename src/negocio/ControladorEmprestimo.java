@@ -22,6 +22,7 @@ public class ControladorEmprestimo {
     private static final long QTD_DIAS_PARA_1_PAGAMENTO = 30;
     private static final float CONFIANCA_PAGAMENTO_INICIAL = 50.0F;
     private Repositorio<Emprestimo> repoEmprestimo;
+    private static long contadorProtocolo = 1;
 
     public ControladorEmprestimo() {
         this.repoEmprestimo = new RepositorioCRUD<>();
@@ -55,8 +56,12 @@ public class ControladorEmprestimo {
         //Atribuindo a confiança de pagamento inicial
         emprestimo.setConfiancaPagamento(CONFIANCA_PAGAMENTO_INICIAL);
 
+        //Atribuindo o número de protocolo disponível para cadastro
+        emprestimo.setNumProtocolo(contadorProtocolo);
+
         try {
             repoEmprestimo.inserir(emprestimo);
+            contadorProtocolo++;
         } catch (ObjetoDuplicadoException e) {
             throw new EmprestimoDuplicadoException("Parece que esse empréstimo já existe!");
         }
