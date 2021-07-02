@@ -31,6 +31,7 @@ public class TelaPrincipalClienteController {
     @FXML TableColumn<PropostaModelo, Double> colParcelasPropostas;
 
     @FXML TableView<EmprestimoModelo> tblvEmprestimos;
+    @FXML TableColumn<EmprestimoModelo, Long> colnumProtocoloEmprestimo;
     @FXML TableColumn<EmprestimoModelo, String> coldataPagamentoEmprestimo;
     @FXML TableColumn<EmprestimoModelo, Double> colparcelasEmprestimo;
     @FXML TableColumn<EmprestimoModelo, Double> colvalorEmprestimo;
@@ -73,6 +74,7 @@ public class TelaPrincipalClienteController {
         colParcelasPropostas.setCellValueFactory(new PropertyValueFactory<>("parcelasDesejadas"));
 
         //Empréstimos
+        colnumProtocoloEmprestimo.setCellValueFactory(new PropertyValueFactory<>("numProtocolo"));
         coldataPagamentoEmprestimo.setCellValueFactory(new PropertyValueFactory<>("dataPagamento"));
         colparcelasEmprestimo.setCellValueFactory(new PropertyValueFactory<>("parcelas"));
         colvalorEmprestimo.setCellValueFactory(new PropertyValueFactory<>("valor"));
@@ -98,8 +100,9 @@ public class TelaPrincipalClienteController {
         //TODO: Pensar em mover essa conversão para local apropriado
         tblvEmprestimos.getItems().removeAll();
         for (Emprestimo emprestimo : emprestimoList) {
-            EmprestimoModelo emprestimoModelo = new EmprestimoModelo(emprestimo.getDataPagamento(),
-                    emprestimo.getParcelas(), emprestimo.getValor(),emprestimo.getEmpregado().getNome());
+            EmprestimoModelo emprestimoModelo = new EmprestimoModelo(emprestimo.getNumProtocolo(),
+                    emprestimo.getDataPagamento(), emprestimo.getParcelas(), emprestimo.getValor(),
+                    emprestimo.getEmpregado().getNome());
             tblvEmprestimos.getItems().add(emprestimoModelo);
         }
     }

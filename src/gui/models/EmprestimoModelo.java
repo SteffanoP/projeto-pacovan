@@ -1,18 +1,21 @@
 package gui.models;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EmprestimoModelo {
+    private SimpleLongProperty numProtocolo;
     private SimpleStringProperty dataPagamento;
     private SimpleDoubleProperty parcelas;
     private SimpleDoubleProperty valor;
     private SimpleStringProperty empregado;
 
-    public EmprestimoModelo(LocalDate dataPagamento, Double parcelas, Double valor, String empregado) {
+    public EmprestimoModelo(Long numProtocolo, LocalDate dataPagamento, Double parcelas, Double valor, String empregado) {
+        this.numProtocolo = new SimpleLongProperty(numProtocolo);
         this.dataPagamento = new SimpleStringProperty(this.formatadorData(dataPagamento));
         this.parcelas = new SimpleDoubleProperty(parcelas);
         this.valor = new SimpleDoubleProperty(valor);
@@ -22,6 +25,18 @@ public class EmprestimoModelo {
     private String formatadorData(LocalDate data) {
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return data.format(formatador);
+    }
+
+    public long getNumProtocolo() {
+        return numProtocolo.get();
+    }
+
+    public SimpleLongProperty numProtocoloProperty() {
+        return numProtocolo;
+    }
+
+    public void setNumProtocolo(long numProtocolo) {
+        this.numProtocolo.set(numProtocolo);
     }
 
     public String getDataPagamento() {
