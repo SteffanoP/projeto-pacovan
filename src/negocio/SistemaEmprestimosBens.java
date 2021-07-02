@@ -72,6 +72,16 @@ public interface SistemaEmprestimosBens {
     void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException;
 
     /**
+     * Método que faz a busca de um {@code Emprestimo} no repositório de Empréstimos por meio de um número de protocolo.
+     *
+     * @param numProtocolo se refere ao número único dado a cada empréstimo, quando cada empréstimo é criado.
+     * @return retorna um {@code Emprestimo} referente ao número de protocolo pedido do repositório.
+     * @throws EmprestimoInexistenteException poderá acontecer caso o número de protocolo seja inválido ou se a proposta
+     * não existir no repositório de empréstimos.
+     */
+    Emprestimo buscarEmprestimo(long numProtocolo) throws EmprestimoInexistenteException;
+
+    /**
      * Método que procura por detalhes de um empréstimo efetuado em uma determinada {@code dataEmprestimo} por um
      * {@code cliente}, visto que, há apenas 1 empréstimo do mesmo cliente por dia. O método lista os empréstimos de
      * um cliente e procura por empréstimos por data.

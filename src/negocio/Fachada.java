@@ -96,6 +96,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public Emprestimo buscarEmprestimo(long numProtocolo) throws EmprestimoInexistenteException {
+        return emprestimos.buscarEmprestimo(numProtocolo);
+    }
+
+    @Override
     public String emprestimoEmDetalhe(Cliente cliente, LocalDate dataEmprestimo) throws EmprestimoInexistenteException {
         return emprestimos.emprestimoEmDetalhe(cliente, dataEmprestimo);
     }
