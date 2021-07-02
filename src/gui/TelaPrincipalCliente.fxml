@@ -45,12 +45,13 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <TableView fx:id="tblvExtrato" layoutX="-1.0" prefHeight="146.0" prefWidth="629.0">
+                  <TableView fx:id="tblvExtrato" layoutX="-1.0" onMouseClicked="#tblvEmprestimosOnMouseClicked" prefHeight="146.0" prefWidth="629.0">
                      <columns>
+                        <TableColumn fx:id="colnumProtocoloEmprestimo" prefWidth="75.0" text="Protocolo" />
                         <TableColumn fx:id="coldataPagamentoEmprestimo" prefWidth="146.0" text="Data de Pagamento" />
-                        <TableColumn fx:id="colparcelasEmprestimo" prefWidth="122.0" text="Valor Parcela" />
-                        <TableColumn fx:id="colvalorEmprestimo" prefWidth="150.0" text="Valor Total" />
-                        <TableColumn fx:id="colempregadoEmprestimo" prefWidth="210.0" text="Empregado Responsável" />
+                        <TableColumn fx:id="colparcelasEmprestimo" prefWidth="105.0" text="Valor Parcela" />
+                        <TableColumn fx:id="colvalorEmprestimo" prefWidth="94.0" text="Valor Total" />
+                        <TableColumn fx:id="colempregadoEmprestimo" prefWidth="208.0" text="Empregado Responsável" />
                      </columns>
                   </TableView>
                </children>
@@ -93,5 +94,6 @@
       </Label>
       <Label fx:id="lblScoreUsuario" layoutX="532.0" layoutY="30.0" prefHeight="17.0" prefWidth="32.0" />
       <Button fx:id="btnVerProposta" layoutX="587.0" layoutY="264.0" mnemonicParsing="false" onAction="#btnVerPropostaPressed" text="Ver Proposta" />
+      <Button fx:id="btnVerEmprestimo" layoutX="570.0" layoutY="478.0" mnemonicParsing="false" onAction="#btnVerEmprestimosPressed" text="Ver Empréstimo" />
    </children>
 </Pane>

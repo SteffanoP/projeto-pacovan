@@ -1,5 +1,6 @@
 package gui;
 
+import exceptions.EmprestimoInexistenteException;
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
@@ -43,6 +44,7 @@ public class TelaPrincipalClienteController {
     @FXML TableColumn<MovimentacaoModelo, Double> colvalorExtrato;
 
     @FXML Button btnVerProposta;
+    @FXML Button btnVerEmprestimo;
 
     boolean initialized = false;
 
@@ -107,8 +109,7 @@ public class TelaPrincipalClienteController {
         }
     }
 
-    private void atualizarTableViewExtrato(List<Movimentacao> movimentacaoList)
-    {
+    private void atualizarTableViewExtrato(List<Movimentacao> movimentacaoList) {
         //TODO: Pensar em mover essa conversão para local apropriado
         tblvExtrato.getItems().removeAll();
         for (Movimentacao movimentacao : movimentacaoList) {
@@ -194,6 +195,27 @@ public class TelaPrincipalClienteController {
             GerenciadorTelas.getInstance().changeScreen("telaFeedbackProposta");
         } else
             this.gerarAlertaErro("Propostas", "sua Proposta","Parece que você não" +
-                    "selecionou sua Proposta");
+                    " selecionou sua Proposta");
+    }
+
+    @FXML
+    public void tblvEmprestimosOnMouseClicked() {
+        if (tblvEmprestimos.getSelectionModel().getSelectedItem() != null) {
+            long numProtocolo = tblvEmprestimos.getSelectionModel().getSelectedItem().getNumProtocolo();
+            try {
+                SessionManager.getInstance().setEmprestimoSessao(Fachada.getInstance().buscarEmprestimo(numProtocolo));
+            } catch (EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Empréstimos", "busca de empréstimos", e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void btnVerEmprestimosPressed() {
+        if (SessionManager.getInstance().getEmprestimoSessao() != null) {
+            //TODO: Transição para a tela de Empréstimo em Detalhe
+        } else
+            this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
+                    " selecionou seu Empréstimo");
     }
 }
