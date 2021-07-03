@@ -1,5 +1,7 @@
 package gui;
 
+import exceptions.PessoaInexistenteException;
+import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
 import gui.models.DevedorModelo;
 import gui.models.PropostaModelo;
@@ -10,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.Fachada;
 import negocio.beans.Empregado;
 import negocio.beans.Emprestimo;
+import negocio.beans.Proposta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,18 +60,29 @@ public class TelaPrincipalEmpregadoController {
 
         this.initializeTableViews();
 
+        try {
+            List<Proposta> propostas = new ArrayList<>(Fachada.getInstance().listarPropostasPendentes().values());
+            for (Proposta proposta : propostas) {
+                PropostaModelo propostaModelo = new PropostaModelo(proposta.getNumProtocolo(), proposta.getData(),
+                        proposta.getValorDesejado(), proposta.getValorDesejado());
+                tblvPropostas.getItems().addAll(propostaModelo);
+            }
+        } catch (PessoaInexistenteException e) { //TODO: REMOVER EXCEÇÃO SEM SENTIDO!!!
+            e.printStackTrace();
+        }
+
         List<Emprestimo> eDevedores = new ArrayList<>(Fachada.getInstance().listarDevedores().values());
-        this.atualizaTableViews(tblvDevedores, eDevedores);
+        this.atualizaTableViewsEmprestimo(tblvDevedores, eDevedores);
         List<Emprestimo> eDProtegidos = new ArrayList<>(Fachada.getInstance().listarDevedoresProtegidos().values());
-        this.atualizaTableViews(tblvDProtegidos, eDProtegidos);
+        this.atualizaTableViewsEmprestimo(tblvDProtegidos, eDProtegidos);
         List<Emprestimo> eDAltoRisco = new ArrayList<>(Fachada.getInstance().listarDevedoresAltoRisco().values());
-        this.atualizaTableViews(tblvDAltoRisco, eDAltoRisco);
+        this.atualizaTableViewsEmprestimo(tblvDAltoRisco, eDAltoRisco);
 
         Empregado empregado = (Empregado) SessionManager.getInstance().getPessoaSessao();
         this.atualizaListView(lstvComissoes, Fachada.getInstance().listarComissoesEmprestimo(empregado));
     }
 
-    private void atualizaTableViews(TableView<DevedorModelo> tableView, List<Emprestimo> emprestimoList) {
+    private void atualizaTableViewsEmprestimo(TableView<DevedorModelo> tableView, List<Emprestimo> emprestimoList) {
         for (Emprestimo emprestimo : emprestimoList) {
             DevedorModelo devedorModelo = new DevedorModelo(emprestimo.getValor(), emprestimo.getDataPagamento(),
                     emprestimo.getCliente(),emprestimo.getParcelas(),emprestimo.getConfiancaPagamento());
@@ -89,20 +103,26 @@ public class TelaPrincipalEmpregadoController {
     }
 
     private void initializeTableViews() {
+        //Seta as properties da Tableview Propostas
+        colDataProposta.setCellValueFactory(new PropertyValueFactory<>("data"));
+        colValorDesejadoProposta.setCellValueFactory(new PropertyValueFactory<>("valorDesejado"));
+        colParcelasDesejadasProposta.setCellValueFactory(new PropertyValueFactory<>("parcelasDesejadas"));
+        colNumProtocoloProposta.setCellValueFactory(new PropertyValueFactory<>("numProtocolo"));
+
         //Seta as properties da TableView Devedores
-        this.setCellValuesProperties(colValorDevidoDevedores, colDataPagamentoDevedores, colNomeClienteDevedores,
+        this.setCellValuesPropertiesDevedores(colValorDevidoDevedores, colDataPagamentoDevedores, colNomeClienteDevedores,
                 colParcelasDevedores,colConfiancaPagamentoDevedores);
 
         //Seta as properties da TableView Devedores Protegidos
-        this.setCellValuesProperties(colValorDProtegidos, colDataPagamentoDProtegidos, colNomeClienteDProtegidos,
+        this.setCellValuesPropertiesDevedores(colValorDProtegidos, colDataPagamentoDProtegidos, colNomeClienteDProtegidos,
                 colParcelasDProtegidos, colConfiancaPagamentoProtegidos);
 
         //Seta as properties da Tableview Devedores Alto Risco
-        this.setCellValuesProperties(colValorDevidoDAltoRisco, colDataPagamentoDAltoRisco, colNomeClienteDAltoRisco,
+        this.setCellValuesPropertiesDevedores(colValorDevidoDAltoRisco, colDataPagamentoDAltoRisco, colNomeClienteDAltoRisco,
                 colParcelasDAltoRisco, colConfiancaPagamentoAltoRisco);
     }
 
-    private void setCellValuesProperties(TableColumn<DevedorModelo, Double> colValorDevido, TableColumn<DevedorModelo, String> colDataPagamento, TableColumn<DevedorModelo, String> colNomeCliente, TableColumn<DevedorModelo, Double> colParcelas, TableColumn<DevedorModelo, Float> colConfiancaPagamento) {
+    private void setCellValuesPropertiesDevedores(TableColumn<DevedorModelo, Double> colValorDevido, TableColumn<DevedorModelo, String> colDataPagamento, TableColumn<DevedorModelo, String> colNomeCliente, TableColumn<DevedorModelo, Double> colParcelas, TableColumn<DevedorModelo, Float> colConfiancaPagamento) {
         colValorDevido.setCellValueFactory(new PropertyValueFactory<>("valorDevido"));
         colDataPagamento.setCellValueFactory(new PropertyValueFactory<>("dataPagamento"));
         colNomeCliente.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
