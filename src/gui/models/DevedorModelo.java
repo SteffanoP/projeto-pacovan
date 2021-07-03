@@ -2,6 +2,7 @@ package gui.models;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import negocio.beans.Cliente;
 
@@ -14,6 +15,7 @@ public class DevedorModelo {
     private SimpleStringProperty nomeCliente;
     private SimpleDoubleProperty parcelas;
     private SimpleFloatProperty confiancaPagamento;
+    private SimpleLongProperty numProtocolo;
 
     public DevedorModelo(Double valorDevido, LocalDate dataPagamento, Cliente cliente, Double parcelas,
                          Float confiancaPagamento) {
@@ -22,6 +24,16 @@ public class DevedorModelo {
         this.nomeCliente = new SimpleStringProperty(cliente.getNome());
         this.parcelas = new SimpleDoubleProperty(parcelas);
         this.confiancaPagamento = new SimpleFloatProperty(confiancaPagamento);
+    }
+
+    public DevedorModelo(Double valorDevido, LocalDate dataPagamento, Cliente cliente, Double parcelas,
+                         Float confiancaPagamento, Long numProtocolo) {
+        this.valorDevido = new SimpleDoubleProperty(valorDevido);
+        this.dataPagamento = new SimpleStringProperty(this.formatadorData(dataPagamento));
+        this.nomeCliente = new SimpleStringProperty(cliente.getNome());
+        this.parcelas = new SimpleDoubleProperty(parcelas);
+        this.confiancaPagamento = new SimpleFloatProperty(confiancaPagamento);
+        this.numProtocolo = new SimpleLongProperty(numProtocolo);
     }
 
     private String formatadorData(LocalDate data) {
@@ -87,5 +99,17 @@ public class DevedorModelo {
 
     public void setConfiancaPagamento(float confiancaPagamento) {
         this.confiancaPagamento.set(confiancaPagamento);
+    }
+
+    public long getNumProtocolo() {
+        return numProtocolo.get();
+    }
+
+    public SimpleLongProperty numProtocoloProperty() {
+        return numProtocolo;
+    }
+
+    public void setNumProtocolo(long numProtocolo) {
+        this.numProtocolo.set(numProtocolo);
     }
 }

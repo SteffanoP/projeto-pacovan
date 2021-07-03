@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaDevedorDetalheController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaDevedorDetalheController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="97.0" layoutY="50.0" prefHeight="325.0" prefWidth="879.0">
          <items>
@@ -52,20 +52,21 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tblvEmprestimos" layoutX="-1.0" layoutY="-1.0" prefHeight="208.0" prefWidth="881.0">
+                  <TableView fx:id="tblvEmprestimos" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#tblvEmprestimosOnMouseClicked" prefHeight="208.0" prefWidth="881.0">
                     <columns>
                       <TableColumn fx:id="colValorDevido" prefWidth="160.0" text="Valor Devido" />
-                      <TableColumn fx:id="colDataPagamento" prefWidth="202.0" text="Data Pagamento" />
-                        <TableColumn fx:id="colNomeCliente" prefWidth="179.0" text="Cliente" />
-                        <TableColumn fx:id="colParcelas" prefWidth="168.0" text="Parcelas" />
-                        <TableColumn fx:id="colConfiancaPagamento" prefWidth="171.0" text="Confiança Pagamento" />
+                      <TableColumn fx:id="colDataPagamento" prefWidth="135.0" text="Data Pagamento" />
+                        <TableColumn fx:id="colNomeCliente" prefWidth="158.0" text="Cliente" />
+                        <TableColumn fx:id="colParcelas" prefWidth="143.0" text="Parcelas" />
+                        <TableColumn fx:id="colConfiancaPagamento" prefWidth="169.0" text="Confiança Pagamento" />
+                        <TableColumn fx:id="colProtocolo" prefWidth="115.0" text="Protocolo" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
-      <Button fx:id="btnVerDetalhesEmprestimo" layoutX="810.0" layoutY="637.0" mnemonicParsing="false" text="Ver Detalhes do Empréstimo" />
+      <Button fx:id="btnVerDetalhesEmprestimo" layoutX="810.0" layoutY="637.0" mnemonicParsing="false" onAction="#btnVerDetalhesEmprestimoPressed" text="Ver Detalhes do Empréstimo" />
       <Button fx:id="btnVoltar" layoutX="848.0" layoutY="690.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar à tela principal" />
    </children>
 </Pane>
