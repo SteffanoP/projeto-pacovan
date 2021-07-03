@@ -65,7 +65,7 @@ public class TelaPrincipalEmpregadoController {
             for (Proposta proposta : propostas) {
                 PropostaModelo propostaModelo = new PropostaModelo(proposta.getNumProtocolo(), proposta.getData(),
                         proposta.getValorDesejado(), proposta.getValorDesejado());
-                tblvPropostas.getItems().addAll(propostaModelo);
+                tblvPropostas.getItems().add(propostaModelo);
             }
         } catch (PessoaInexistenteException e) { //TODO: REMOVER EXCEÇÃO SEM SENTIDO!!!
             e.printStackTrace();
