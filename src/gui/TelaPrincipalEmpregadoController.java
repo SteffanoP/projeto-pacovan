@@ -130,14 +130,39 @@ public class TelaPrincipalEmpregadoController {
         colConfiancaPagamento.setCellValueFactory(new PropertyValueFactory<>("confiancaPagamento"));
     }
 
+    private void gerarAlertaErro(String titulo, String subtitulo, String justificativa) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro de " + titulo);
+        alerta.setHeaderText("Parece que tivemos um erro com " + subtitulo);
+        alerta.setContentText(justificativa);
+        alerta.showAndWait();
+    }
+
+
     @FXML
     public void btnMeusDadosPressed() {
         GerenciadorTelas.getInstance().changeScreen("telaInformacoesPessoais");
     }
 
     @FXML
-    public void btnAnalisePropostaPressed(ActionEvent event) {
-        GerenciadorTelas.getInstance().changeScreen("telaAnaliseProposta");
+    public void tblvPropostasOnMouseClicked() {
+        if (tblvPropostas.getSelectionModel().getSelectedItem() != null) {
+            long numProtocolo = tblvPropostas.getSelectionModel().getSelectedItem().getNumProtocolo();
+            try {
+                SessionManager.getInstance().setPropostaSessao(Fachada.getInstance().buscarProposta(numProtocolo));
+            } catch (PropostaInvalidaException e) {
+                this.gerarAlertaErro("Propostas", "busca de propostas",e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void btnAnalisePropostaPressed() {
+        if (SessionManager.getInstance().getPropostaSessao() != null) {
+            GerenciadorTelas.getInstance().changeScreen("telaAnaliseProposta");
+        } else
+            this.gerarAlertaErro("Propostas", "sua Proposta", "Parece que você não" +
+                    " selecionou sua Proposta");
     }
 
     @FXML
