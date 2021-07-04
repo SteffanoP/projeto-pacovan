@@ -22,6 +22,7 @@ public class ControladorEmprestimo {
     private static final long QTD_DIAS_PARA_1_PAGAMENTO = 30;
     private static final float CONFIANCA_PAGAMENTO_INICIAL = 50.0F;
     private Repositorio<Emprestimo> repoEmprestimo;
+    private static long contadorProtocolo = 1;
 
     public ControladorEmprestimo() {
         this.repoEmprestimo = new RepositorioCRUD<>();
@@ -55,11 +56,42 @@ public class ControladorEmprestimo {
         //Atribuindo a confiança de pagamento inicial
         emprestimo.setConfiancaPagamento(CONFIANCA_PAGAMENTO_INICIAL);
 
+        //Atribuindo o número de protocolo disponível para cadastro
+        emprestimo.setNumProtocolo(contadorProtocolo);
+
         try {
             repoEmprestimo.inserir(emprestimo);
+            contadorProtocolo++;
         } catch (ObjetoDuplicadoException e) {
             throw new EmprestimoDuplicadoException("Parece que esse empréstimo já existe!");
         }
+    }
+
+    /**
+     * Método que faz a busca de um {@code Emprestimo} no repositório de Empréstimos por meio de um número de protocolo.
+     *
+     * @param numProtocolo se refere ao número único dado a cada empréstimo, quando cada empréstimo é criado.
+     * @return retorna um {@code Emprestimo} referente ao número de protocolo pedido do repositório.
+     * @throws EmprestimoInexistenteException poderá acontecer caso o número de protocolo seja inválido ou se a proposta
+     * não existir no repositório de empréstimos.
+     */
+    public Emprestimo buscarEmprestimo(long numProtocolo) throws EmprestimoInexistenteException {
+        if (numProtocolo < 1) throw new EmprestimoInexistenteException("O número de protocolo é inválido");
+        Emprestimo emprestimo = null;
+
+        List<Emprestimo> emprestimoList = new ArrayList<>(this.repoEmprestimo.listar());
+        boolean emprestimoEncontrado = false;
+        for (int i = 0; i < emprestimoList.size() && !emprestimoEncontrado; i++) {
+            emprestimo = emprestimoList.get(i);
+            if (numProtocolo == emprestimo.getNumProtocolo()) {
+                emprestimoEncontrado = true;
+            }
+        }
+
+        if (!emprestimoEncontrado) throw new EmprestimoInexistenteException("O Protocolo para esse empréstimo não " +
+                "existe!");
+
+        return emprestimo;
     }
 
     /**

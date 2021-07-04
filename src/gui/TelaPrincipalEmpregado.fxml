@@ -16,7 +16,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
    <children>
-      <SplitPane dividerPositions="0.12871287128712872" layoutX="48.0" layoutY="90.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="629.0">
+      <SplitPane dividerPositions="0.12871287128712872" layoutX="48.0" layoutY="90.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="788.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="158.0">
                <children>
@@ -25,13 +25,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
-                  <TableView fx:id="tblvPropostas" layoutY="-1.0" prefHeight="146.0" prefWidth="619.0">
+                  <TableView fx:id="tblvPropostas" layoutY="-1.0" onMouseClicked="#tblvPropostasOnMouseClicked" prefHeight="146.0" prefWidth="786.0">
                     <columns>
-                      <TableColumn fx:id="colDataProposta" prefWidth="109.0" text="Data" />
-                      <TableColumn fx:id="colValorDesejadoProposta" prefWidth="166.0" text="Valor desejado" />
-                        <TableColumn fx:id="colParcelasDesejadasProposta" prefWidth="133.0" text="Parcelas Desejadas" />
-                        <TableColumn fx:id="colNumProtocoloProposta" prefWidth="210.0" text="Número de Protocolo" />
+                      <TableColumn fx:id="colDataProposta" prefWidth="156.0" text="Data" />
+                      <TableColumn fx:id="colValorDesejadoProposta" prefWidth="283.0" text="Valor desejado" />
+                        <TableColumn fx:id="colParcelasDesejadasProposta" prefWidth="190.0" text="Parcelas Desejadas" />
+                        <TableColumn fx:id="colNumProtocoloProposta" prefWidth="156.0" text="Número de Protocolo" />
                     </columns>
                   </TableView>
                </children>
@@ -53,9 +52,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <ChoiceBox layoutX="715.0" layoutY="90.0" prefHeight="28.0" prefWidth="270.0" />
-      <Button layoutX="909.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnAnalisePropostaPressed" text="Confirmar" />
-      <Label layoutX="726.0" layoutY="95.0" text="Analizar Proposta" />
+      <Button layoutX="850.0" layoutY="238.0" mnemonicParsing="false" onAction="#btnAnalisePropostaPressed" text="Analisar Proposta" />
       <ChoiceBox layoutX="715.0" layoutY="283.0" prefHeight="28.0" prefWidth="270.0" />
       <Button layoutX="909.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnConfirmarDevedorPressed" text="Confirmar" />
       <Label layoutX="726.0" layoutY="288.0" text="Devedor em Detalhe" />
@@ -117,7 +114,7 @@
           </TitledPane>
         </panes>
       </Accordion>
-      <Button layoutX="890.0" layoutY="703.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar ao login" />
+      <Button layoutX="862.0" layoutY="703.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar ao login" />
       <Label layoutX="48.0" layoutY="37.0" text="Olá, ">
          <font>
             <Font size="15.0" />
@@ -128,6 +125,6 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="btnMeusDados" layoutX="595.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnMeusDadosPressed" text="Meus Dados" />
+      <Button fx:id="btnMeusDados" layoutX="740.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnMeusDadosPressed" text="Meus Dados" />
    </children>
 </Pane>

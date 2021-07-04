@@ -1,15 +1,15 @@
 package gui;
 
+import exceptions.EmprestimoInexistenteException;
 import exceptions.PessoaInexistenteException;
+import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
 import gui.models.EmprestimoModelo;
 import gui.models.MovimentacaoModelo;
 import gui.models.PropostaModelo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.Fachada;
 import negocio.beans.Cliente;
@@ -32,6 +32,7 @@ public class TelaPrincipalClienteController {
     @FXML TableColumn<PropostaModelo, Double> colParcelasPropostas;
 
     @FXML TableView<EmprestimoModelo> tblvEmprestimos;
+    @FXML TableColumn<EmprestimoModelo, Long> colnumProtocoloEmprestimo;
     @FXML TableColumn<EmprestimoModelo, String> coldataPagamentoEmprestimo;
     @FXML TableColumn<EmprestimoModelo, Double> colparcelasEmprestimo;
     @FXML TableColumn<EmprestimoModelo, Double> colvalorEmprestimo;
@@ -41,6 +42,9 @@ public class TelaPrincipalClienteController {
     @FXML TableColumn<MovimentacaoModelo, String> colInstanteExtrato;
     @FXML TableColumn<MovimentacaoModelo, String> coltipoMovimentacaoExtrato;
     @FXML TableColumn<MovimentacaoModelo, Double> colvalorExtrato;
+
+    @FXML Button btnVerProposta;
+    @FXML Button btnVerEmprestimo;
 
     boolean initialized = false;
 
@@ -72,6 +76,7 @@ public class TelaPrincipalClienteController {
         colParcelasPropostas.setCellValueFactory(new PropertyValueFactory<>("parcelasDesejadas"));
 
         //Empréstimos
+        colnumProtocoloEmprestimo.setCellValueFactory(new PropertyValueFactory<>("numProtocolo"));
         coldataPagamentoEmprestimo.setCellValueFactory(new PropertyValueFactory<>("dataPagamento"));
         colparcelasEmprestimo.setCellValueFactory(new PropertyValueFactory<>("parcelas"));
         colvalorEmprestimo.setCellValueFactory(new PropertyValueFactory<>("valor"));
@@ -97,14 +102,14 @@ public class TelaPrincipalClienteController {
         //TODO: Pensar em mover essa conversão para local apropriado
         tblvEmprestimos.getItems().removeAll();
         for (Emprestimo emprestimo : emprestimoList) {
-            EmprestimoModelo emprestimoModelo = new EmprestimoModelo(emprestimo.getDataPagamento(),
-                    emprestimo.getParcelas(), emprestimo.getValor(),emprestimo.getEmpregado().getNome());
+            EmprestimoModelo emprestimoModelo = new EmprestimoModelo(emprestimo.getNumProtocolo(),
+                    emprestimo.getDataPagamento(), emprestimo.getParcelas(), emprestimo.getValor(),
+                    emprestimo.getEmpregado().getNome());
             tblvEmprestimos.getItems().add(emprestimoModelo);
         }
     }
 
-    private void atualizarTableViewExtrato(List<Movimentacao> movimentacaoList)
-    {
+    private void atualizarTableViewExtrato(List<Movimentacao> movimentacaoList) {
         //TODO: Pensar em mover essa conversão para local apropriado
         tblvExtrato.getItems().removeAll();
         for (Movimentacao movimentacao : movimentacaoList) {
@@ -112,6 +117,14 @@ public class TelaPrincipalClienteController {
                     movimentacao.getTipoMovimentacao(), movimentacao.getValor());
             tblvExtrato.getItems().add(movimentacaoModelo);
         }
+    }
+
+    private void gerarAlertaErro(String titulo, String subtitulo, String justificativa) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro de " + titulo);
+        alerta.setHeaderText("Parece que tivemos um erro com " + subtitulo);
+        alerta.setContentText(justificativa);
+        alerta.showAndWait();
     }
 
     public void onMouseEntered() {
@@ -161,5 +174,48 @@ public class TelaPrincipalClienteController {
             e.printStackTrace();
             System.out.println("Essa pessoa não existe!");
         }
+    }
+
+    @FXML
+    public void tblvPropostasOnMouseClicked() {
+        if (tblvPropostas.getSelectionModel().getSelectedItem() != null) {
+            long numProtocolo = tblvPropostas.getSelectionModel().getSelectedItem().getNumProtocolo();
+            try {
+                SessionManager.getInstance().setPropostaSessao(Fachada.getInstance().buscarProposta(numProtocolo));
+                System.out.println(SessionManager.getInstance().getPropostaSessao().toString());
+            } catch (PropostaInvalidaException e) {
+                this.gerarAlertaErro("Propostas", "busca de propostas",e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void btnVerPropostaPressed() {
+        if (SessionManager.getInstance().getPropostaSessao() != null) {
+            GerenciadorTelas.getInstance().changeScreen("telaFeedbackProposta");
+        } else
+            this.gerarAlertaErro("Propostas", "sua Proposta","Parece que você não" +
+                    " selecionou sua Proposta");
+    }
+
+    @FXML
+    public void tblvEmprestimosOnMouseClicked() {
+        if (tblvEmprestimos.getSelectionModel().getSelectedItem() != null) {
+            long numProtocolo = tblvEmprestimos.getSelectionModel().getSelectedItem().getNumProtocolo();
+            try {
+                SessionManager.getInstance().setEmprestimoSessao(Fachada.getInstance().buscarEmprestimo(numProtocolo));
+            } catch (EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Empréstimos", "busca de empréstimos", e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void btnVerEmprestimosPressed() {
+        if (SessionManager.getInstance().getEmprestimoSessao() != null) {
+            //TODO: Transição para a tela de Empréstimo em Detalhe
+        } else
+            this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
+                    " selecionou seu Empréstimo");
     }
 }

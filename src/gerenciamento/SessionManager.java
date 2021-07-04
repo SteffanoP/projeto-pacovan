@@ -5,6 +5,7 @@ import negocio.beans.*;
 public class SessionManager {
     private static SessionManager instance;
     private Pessoa pessoaSessao;
+    private Cliente clienteSessao;
     private Bens bensSessao;
     private Proposta propostaSessao;
     private Emprestimo emprestimoSessao;
@@ -27,6 +28,14 @@ public class SessionManager {
 
     public void setPessoaSessao(Pessoa pessoaSessao) {
         this.pessoaSessao = pessoaSessao;
+    }
+
+    public Cliente getClienteSessao() {
+        return clienteSessao;
+    }
+
+    public void setClienteSessao(Cliente clienteSessao) {
+        this.clienteSessao = clienteSessao;
     }
 
     public Bens getBensSessao() {
