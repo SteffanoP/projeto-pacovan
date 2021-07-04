@@ -31,6 +31,7 @@ public class ControladorProposta {
         p.setData(LocalDate.now());
         p.setContraproposta(false);
         p.setNumProtocolo(contadorProtocolo);
+        p.setAprovado(false);
 
         try {
             this.repoProposta.inserir(p);

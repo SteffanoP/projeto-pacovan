@@ -15,6 +15,7 @@ public class Proposta {
     private List<Bens> garantia;
     private boolean contraproposta;
     private long numProtocolo;
+    private boolean aprovado;
 
     //Construtores
     public Proposta() {
@@ -119,5 +120,13 @@ public class Proposta {
 
     public void setNumProtocolo(long numProtocolo) {
         this.numProtocolo = numProtocolo;
+    }
+
+    public boolean isAprovado() {
+        return aprovado;
+    }
+
+    public void setAprovado(boolean aprovado) {
+        this.aprovado = aprovado;
     }
 }
