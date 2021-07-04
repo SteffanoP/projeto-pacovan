@@ -81,7 +81,7 @@ public class ControladorProposta {
         boolean clienteExiste = false;
         
         for (Proposta proposta : this.repoProposta.listar()) {
-            if(proposta.getCliente().getUid() == uidCliente && !proposta.isContraproposta()){
+            if(proposta.getCliente().getUid() == uidCliente){
                 clienteExiste = true;
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
