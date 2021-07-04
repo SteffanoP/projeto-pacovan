@@ -31,8 +31,7 @@ public class TelaInformacoesPessoaisController {
 
     @FXML Button btnSalvarSenha;
 
-    boolean initialized = false;
-
+    @FXML
     private void initialize() {
         Pessoa pessoa = SessionManager.getInstance().getPessoaSessao();
 
@@ -98,14 +97,6 @@ public class TelaInformacoesPessoaisController {
             GerenciadorTelas.getInstance().changeScreen("telaCliente");
         else if (SessionManager.getInstance().getPessoaSessao() instanceof Empregado)
             GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
-    }
-
-    @FXML
-    public void onMouseEntered() {
-        if (!initialized) {
-            this.initialize();
-            initialized = true;
-        }
     }
 
     private void ativarEdicaoDados(boolean edicao) {

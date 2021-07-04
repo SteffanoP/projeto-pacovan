@@ -24,8 +24,6 @@ public class TelaCriarPropostaController {
 
     @FXML ListView<String> lstvGarantias;
 
-    boolean initialized = false;
-
     public void onbtnCriarPropostaPressed() {
         if (!this.isTextFieldsBlank()) {
             Proposta proposta = new Proposta();
@@ -79,19 +77,13 @@ public class TelaCriarPropostaController {
         }
     }
 
+    @FXML
     private void initialize() {
         txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
         try {
             this.atualizarListaBens();
         } catch (PessoaInexistenteException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void onMouseEntered() {
-        if (!initialized) {
-            this.initialize();
-            initialized = true;
         }
     }
 }

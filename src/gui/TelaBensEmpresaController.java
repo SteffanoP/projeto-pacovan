@@ -35,8 +35,7 @@ public class TelaBensEmpresaController {
     @FXML TableColumn<BensModelo, String> colDescricaoImoveis;
     @FXML TableColumn<BensModelo, Integer> colTempoUsoImoveis;
 
-    boolean initialized = false;
-
+    @FXML
     private void initialize() {
         this.initializeTableViews();
         List<Bens> bensFungiveisList = new
@@ -81,10 +80,4 @@ public class TelaBensEmpresaController {
         colTempoUsoInfungiveis.setCellValueFactory(new PropertyValueFactory<>("tempoDeUso"));
     }
 
-    public void onMouseEntered() {
-        if (!initialized) {
-            initialized = true;
-            this.initialize();
-        }
-    }
 }
