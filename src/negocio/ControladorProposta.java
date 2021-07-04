@@ -89,6 +89,25 @@ public class ControladorProposta {
     }
 
     /**
+     * Método com foco no negócio, que realiza a aprovação de contrapropostas. A ideia aqui é apenas setar como
+     * {@code true} sempre que uma contraproposta for aprovada.
+     *
+     * @param numProtocolo se refere ao número único de uma proposta que se deseja aprovar.
+     * @throws PropostaInvalidaException poderá acontecer caso o número do protocolo não seja válido, se a proposta não
+     * existir e se esta for uma ação ilegal para esse método (caso a proposta não seja uma contraproposta).
+     */
+    public void aprovarContraProposta(long numProtocolo) throws PropostaInvalidaException {
+        if (numProtocolo < 1) throw new PropostaInvalidaException("O Número do protocolo é inválido!");
+
+        Proposta proposta = this.buscarProposta(numProtocolo);
+
+        if (proposta.isContraproposta()) {
+            proposta.setAprovado(true);
+            this.alterarProposta(proposta);
+        } else throw new PropostaInvalidaException("Esta é uma ação ilegal!");
+    }
+
+    /**
      * Método que lista as propostas do cliente ordenadas por sua data de criação por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo 
      * {@code data}.

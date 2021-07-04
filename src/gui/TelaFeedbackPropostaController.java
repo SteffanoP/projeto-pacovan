@@ -1,8 +1,10 @@
 package gui;
 
+import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import negocio.Fachada;
 import negocio.beans.Proposta;
 
 public class TelaFeedbackPropostaController {
@@ -26,7 +28,12 @@ public class TelaFeedbackPropostaController {
     @FXML
     public void btnAceitarContraproposta() {
         if (SessionManager.getInstance().getPropostaSessao().isContraproposta()) {
-            //TODO: Alterar Proposta para modo aprovado!
+            try {
+                Fachada.getInstance().aprovarContraProposta(
+                        SessionManager.getInstance().getPropostaSessao().getNumProtocolo());
+            } catch (PropostaInvalidaException e) {
+                this.gerarAlertaErroAprovacao(e.getMessage());
+            }
         }
     }
 
@@ -55,5 +62,13 @@ public class TelaFeedbackPropostaController {
 
         if (proposta.isContraproposta())
             btnAceitarContraproposta.disableProperty().set(false);
+    }
+
+    private void gerarAlertaErroAprovacao(String justificativa) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro de Contraproposta");
+        alerta.setHeaderText("Parece que tivemos um erro com a aprovação");
+        alerta.setContentText(justificativa);
+        alerta.showAndWait();
     }
 }
