@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaDevedorDetalheController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaDevedorDetalheController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="97.0" layoutY="50.0" prefHeight="325.0" prefWidth="879.0">
          <items>
@@ -41,7 +41,6 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
       <Label layoutX="97.0" layoutY="14.0" prefHeight="36.0" prefWidth="147.0" text="Dados Pessoais do Cliente" />
       <SplitPane dividerPositions="0.10606060606060606" layoutX="97.0" layoutY="398.0" orientation="VERTICAL" prefHeight="231.0" prefWidth="881.0">
         <items>
