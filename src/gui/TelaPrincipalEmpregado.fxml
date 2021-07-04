@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="48.0" layoutY="90.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="788.0">
         <items>
@@ -52,7 +52,6 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button layoutX="850.0" layoutY="238.0" mnemonicParsing="false" onAction="#btnAnalisePropostaPressed" text="Analisar Proposta" />
       <ChoiceBox layoutX="715.0" layoutY="283.0" prefHeight="28.0" prefWidth="270.0" />
       <Button layoutX="909.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnConfirmarDevedorPressed" text="Confirmar" />
       <Label layoutX="726.0" layoutY="288.0" text="Devedor em Detalhe" />

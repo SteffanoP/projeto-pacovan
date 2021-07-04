@@ -11,6 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import negocio.Fachada;
 import negocio.beans.Cliente;
 import negocio.beans.Emprestimo;
@@ -177,12 +179,18 @@ public class TelaPrincipalClienteController {
     }
 
     @FXML
-    public void tblvPropostasOnMouseClicked() {
+    public void tblvPropostasOnMouseClicked(MouseEvent event) {
         if (tblvPropostas.getSelectionModel().getSelectedItem() != null) {
             long numProtocolo = tblvPropostas.getSelectionModel().getSelectedItem().getNumProtocolo();
             try {
                 SessionManager.getInstance().setPropostaSessao(Fachada.getInstance().buscarProposta(numProtocolo));
                 System.out.println(SessionManager.getInstance().getPropostaSessao().toString());
+                if (SessionManager.getInstance().getPropostaSessao() != null) {
+	                if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2)
+	                    GerenciadorTelas.getInstance().changeScreen("telaFeedbackProposta");
+                } else
+                    this.gerarAlertaErro("Propostas", "sua Proposta","Parece que você não" +
+                            " selecionou sua Proposta");
             } catch (PropostaInvalidaException e) {
                 this.gerarAlertaErro("Propostas", "busca de propostas",e.getMessage());
             }
@@ -190,32 +198,21 @@ public class TelaPrincipalClienteController {
     }
 
     @FXML
-    public void btnVerPropostaPressed() {
-        if (SessionManager.getInstance().getPropostaSessao() != null) {
-            GerenciadorTelas.getInstance().changeScreen("telaFeedbackProposta");
-        } else
-            this.gerarAlertaErro("Propostas", "sua Proposta","Parece que você não" +
-                    " selecionou sua Proposta");
-    }
-
-    @FXML
-    public void tblvEmprestimosOnMouseClicked() {
+    public void tblvEmprestimosOnMouseClicked(MouseEvent event) {
         if (tblvEmprestimos.getSelectionModel().getSelectedItem() != null) {
             long numProtocolo = tblvEmprestimos.getSelectionModel().getSelectedItem().getNumProtocolo();
             try {
                 SessionManager.getInstance().setEmprestimoSessao(Fachada.getInstance().buscarEmprestimo(numProtocolo));
+                if (SessionManager.getInstance().getEmprestimoSessao() != null) {
+                	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2) {
+                		GerenciadorTelas.getInstance().changeScreen("telaEmprestimoDetalhe");
+                	}
+                } else
+                    this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
+                            " selecionou seu Empréstimo");
             } catch (EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Empréstimos", "busca de empréstimos", e.getMessage());
             }
         }
-    }
-
-    @FXML
-    public void btnVerEmprestimosPressed() {
-        if (SessionManager.getInstance().getEmprestimoSessao() != null) {
-            //TODO: Transição para a tela de Empréstimo em Detalhe
-        } else
-            this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
-                    " selecionou seu Empréstimo");
     }
 }
