@@ -8,6 +8,7 @@ import negocio.beans.Movimentacao;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class ControladorMovimentacao {
@@ -26,7 +27,7 @@ public class ControladorMovimentacao {
 
             if(move.getCliente().getUid() == uidCliente ){
                 moveClienteExiste = true;
-                    mapaMovimentacaoCliente.put(move.getInstante(), move);  //duvida
+                    mapaMovimentacaoCliente.put(move.getInstante(), move);
             }
         }if(!moveClienteExiste)  throw new PessoaInexistenteException ("Cliente Não existe!");
 
@@ -36,7 +37,16 @@ public class ControladorMovimentacao {
 
     public List<Movimentacao> listarPeriodoMovimentacaoCliente(long uidCliente, LocalDate dataInicial, LocalDate dataFinal) {
         List<Movimentacao> movimentacaoList = new ArrayList<>();
-
+        List<Movimentacao> mList = new ArrayList<>(this.repoMovimentacao.listar());
+        
+        LocalDate dataPagamento = null;
+        long prazo = ChronoUnit.DAYS.between(dataInicial, dataFinal);
+        
+        for(Movimentacao movimentacao : mList){
+        	dataPagamento = movimentacao.getInstante().toLocalDate();
+            long pagamento = ChronoUnit.DAYS.between(dataInicial, dataPagamento);
+            if(movimentacao.getCliente().getUid() == uidCliente && pagamento > prazo) movimentacaoList.add(movimentacao);
+            }
         return movimentacaoList;
     }
 

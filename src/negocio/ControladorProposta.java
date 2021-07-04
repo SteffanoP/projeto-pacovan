@@ -75,8 +75,9 @@ public class ControladorProposta {
      */
     public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar()); 
         
-        for (Proposta proposta : this.repoProposta.listar()) {
+        for (Proposta proposta : propostasList) {
             if(proposta.getCliente().getUid() == uidCliente && !proposta.isContraproposta()) {
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
@@ -97,9 +98,10 @@ public class ControladorProposta {
      */
     public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar());
         boolean clienteExiste = false;
         
-        for (Proposta proposta : this.repoProposta.listar()) {
+        for (Proposta proposta : propostasList) {
             if(proposta.getCliente().getUid() == uidCliente && proposta.isContraproposta()){
                 clienteExiste = true;
                 //Preencher mapa
@@ -121,8 +123,9 @@ public class ControladorProposta {
      */
     public Map<LocalDate, Proposta> listarPropostasPendentes() {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar());
         
-        for (Proposta proposta : this.repoProposta.listar()) {
+        for (Proposta proposta : propostasList) {
             if(!proposta.isContraproposta()){
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
