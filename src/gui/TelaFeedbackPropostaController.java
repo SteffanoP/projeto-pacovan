@@ -31,6 +31,7 @@ public class TelaFeedbackPropostaController {
             try {
                 Fachada.getInstance().aprovarContraProposta(
                         SessionManager.getInstance().getPropostaSessao().getNumProtocolo());
+                btnAceitarContraproposta.disableProperty().set(true);
             } catch (PropostaInvalidaException e) {
                 this.gerarAlertaErroAprovacao(e.getMessage());
             }
