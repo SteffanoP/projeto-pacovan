@@ -1,6 +1,7 @@
 package negocio.beans;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,6 +61,11 @@ public class Proposta {
 
     public LocalDate getData() {
         return data;
+    }
+
+    public String getDataToString() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.data.format(formatador);
     }
 
     public void setData(LocalDate data) {
