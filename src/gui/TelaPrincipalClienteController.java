@@ -215,4 +215,10 @@ public class TelaPrincipalClienteController {
             }
         }
     }
+    
+    @FXML
+    public void btnSairPressed() {
+    	SessionManager.getInstance().setPessoaSessao(null);
+        GerenciadorTelas.getInstance().changeScreen("telaLogin");
+    }
 }

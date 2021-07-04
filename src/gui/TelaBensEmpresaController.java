@@ -1,6 +1,7 @@
 package gui;
 
 import gui.models.BensModelo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -79,6 +80,11 @@ public class TelaBensEmpresaController {
         colNomeInfungiveis.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colDescricaoInfungiveis.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         colTempoUsoInfungiveis.setCellValueFactory(new PropertyValueFactory<>("tempoDeUso"));
+    }
+    
+    @FXML
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaAdmin");
     }
 
     public void onMouseEntered() {

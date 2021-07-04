@@ -77,6 +77,12 @@ public class TelaPrincipalAdminController {
 			}
     	}
     }
+    
+    @FXML
+    public void btnSairPressed() {
+    	SessionManager.getInstance().setPessoaSessao(null);
+        GerenciadorTelas.getInstance().changeScreen("telaLogin");
+    }
 
     public void onMouseEntered() {
         if (!initialized) {

@@ -190,14 +190,10 @@ public class TelaPrincipalEmpregadoController {
 			e.printStackTrace();
 		}
     }
-
+    
     @FXML
-    public void btnConfirmarDevedorPressed(ActionEvent event) {
-        GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
-    }
-
-    @FXML
-    public void btnVoltarPressed(ActionEvent event) {
+    public void btnSairPressed() {
+    	SessionManager.getInstance().setPessoaSessao(null);
         GerenciadorTelas.getInstance().changeScreen("telaLogin");
     }
 
