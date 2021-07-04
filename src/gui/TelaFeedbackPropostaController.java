@@ -19,6 +19,8 @@ public class TelaFeedbackPropostaController {
     @FXML ListView<String> lstvGarantia;
     @FXML Button btnAceitarContraproposta;
 
+    @FXML Button btnVoltar;
+
     @FXML
     private void initialize() {
         this.initializeHeader();
@@ -36,6 +38,11 @@ public class TelaFeedbackPropostaController {
                 this.gerarAlertaErroAprovacao(e.getMessage());
             }
         }
+    }
+
+    @FXML
+    public void btnVoltarPressed() {
+        GerenciadorTelas.getInstance().changeScreen("telaCliente");
     }
 
     private void initializeHeader() {

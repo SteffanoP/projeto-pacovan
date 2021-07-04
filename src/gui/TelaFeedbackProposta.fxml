@@ -59,5 +59,6 @@
             </AnchorPane>
          </items>
       </SplitPane>
+      <Button fx:id="btnVoltar" layoutX="107.0" layoutY="489.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar" />
    </children>
 </Pane>
