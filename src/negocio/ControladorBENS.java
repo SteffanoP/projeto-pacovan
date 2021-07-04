@@ -67,19 +67,16 @@ public class ControladorBENS {
         return  mapaBens;
     }
 
-    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
+    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) {
         NavigableMap<LocalDate, Bens> mapaBensCliente = new TreeMap<>();
-        boolean benClienteExiste = false;
         List<Bens> benClienteList = repoBENS.listar();
 
         for(Bens ben : benClienteList){
             if(ben.getCliente().getUid() == uidCliente) {
-
-                benClienteExiste = true;
                 mapaBensCliente.put(ben.getDataCadastro(), ben);
             }
 
-        }if(!benClienteExiste)  throw new PessoaInexistenteException("Cliente Não existe!");
+        }
             return mapaBensCliente;
     }
 
@@ -103,33 +100,24 @@ public class ControladorBENS {
         return mapaBensPendentes;
     }
 
-    public  Map<LocalDate,Bens> listarBensAprovados(long uidCliente) throws PessoaInexistenteException{
+    public  Map<LocalDate,Bens> listarBensAprovados() {
         NavigableMap<LocalDate, Bens> mapaBensaprovados = new TreeMap<>();
-        boolean aprovado = false;
         List<Bens> aproveList = repoBENS.listar();
 
         for(Bens ben : aproveList){
-            if(ben.getCliente().getUid() == uidCliente && (!ben.isPendente())) {
-              aprovado = true;
-
-              mapaBensaprovados.put(ben.getDataCadastro(), ben);
-            }
-        }if(!aprovado)  throw new PessoaInexistenteException("Cliente Não existe!");
-
+            if(!ben.isPendente()) mapaBensaprovados.put(ben.getDataCadastro(), ben);   
+        }
+        
         return mapaBensaprovados;
     }
 
-    public Map<LocalDate,Bens> listarBensGarantia (long uidCliente) throws PessoaInexistenteException{
+    public Map<LocalDate,Bens> listarBensGarantia () {
         NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
-        boolean garantia = false;
         List<Bens> garantiaList = repoBENS.listar();
 
             for(Bens ben: garantiaList){
-                if(ben.getCliente().getUid() == uidCliente && ben.isGarantia()){
-                    garantia = true;
-                    mapaBensGarantia.put(ben.getDataCadastro(), ben);
-                }
-            }if(!garantia)  throw new PessoaInexistenteException ("Cliente Não existe!");
+                if(ben.isGarantia()) mapaBensGarantia.put(ben.getDataCadastro(), ben);
+            }
 
         return mapaBensGarantia;
     }

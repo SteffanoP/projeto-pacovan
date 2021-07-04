@@ -94,6 +94,13 @@ public interface SistemaEmprestimosBens {
      */
     String emprestimoEmDetalhe(Cliente cliente, LocalDate dataEmprestimo) throws EmprestimoInexistenteException;
 
+    /**
+     * MÈtodo que retorna todos os emprÈstimos feitos pelo cliente identificado por seu {@code uid} atravÈs de um 
+     * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
+     * 
+     * @param uidCliente se refere ao identificador ˙nico e exclusivo do cliente que se vai alterar o cadastro.
+     * @return Map de emprÈstimos ordenados por data.
+     */
     Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
 
     /**
@@ -103,11 +110,30 @@ public interface SistemaEmprestimosBens {
      * @return uma lista de empr√©stimos do qual o empregado √© respons√°vel.
      */
     List<Emprestimo> listarComissoesEmprestimo(Empregado empregado);
-
+    
+    /**
+     * MÈtodo que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que n„o pagaram atÈ o {@code prazo}.
+     * 
+     * @return Map de emprÈstimos ordenados por data.
+     */
+    public
     Map<LocalDate, Emprestimo> listarDevedores();
 
+    /**
+     * MÈtodo que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que n„o pagaram atÈ o {@code prazo}.
+     * 
+     * @return Map de emprÈstimos ordenados por data.
+     */
     Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
+    /**
+     * MÈtodo que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que n„o foram pagos atÈ o {@code prazo} e alÈm disso possuem um {@code score} baixo.
+     * 
+     * @return Map de emprÈstimos ordenados por data.
+     */
     Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
     Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
@@ -222,10 +248,9 @@ public interface SistemaEmprestimosBens {
      * {@code data}.
      *
      * @param uidCliente se refere ao identificador √∫nico e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws PessoaInexistenteException poder√° acontecer caso o {@code uidCliente} n√£o esteja atribu√≠do a nenhum
-     *                                    cliente.
+     * @return Map de propostas ordenadas por data.
      */
-    Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException;
+    Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente);
 
     /**
      * M√©todo que lista as contra propostas realizadas ao cliente ordenadas por sua data de cria√ß√£o por meio de um {@code Map}
@@ -234,7 +259,8 @@ public interface SistemaEmprestimosBens {
      *
      * @param uidCliente se refere ao identificador √∫nico e exclusivo do cliente que se vai alterar o cadastro.
      * @throws PessoaInexistenteException poder√° acontecer caso o {@code uidCliente} n√£o esteja atribu√≠do a nenhum
-     *                                    cliente.
+     * cliente.
+     * @return Map de propostas ordenadas por data.
      */
     Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException;
 
@@ -242,9 +268,8 @@ public interface SistemaEmprestimosBens {
      * M√©todo que lista as contra propostas realizadas ao cliente ordenadas por sua data de cria√ß√£o por meio de um {@code Map}
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir
      * do seu atributo do tipo {@code Cliente} e orden√°-los a partir do seu atributo{@code data}.
-     *
-     * @throws PessoaInexistenteException poder√° acontecer caso o {@code uidCliente} n√£o esteja atribu√≠do a nenhum
-     *                                    cliente.
+     * 
+     * @return Map de propostas ordenadas por data.
      */
-    Map<LocalDate, Proposta> listarPropostasPendentes() throws PessoaInexistenteException;
+    Map<LocalDate, Proposta> listarPropostasPendentes();
 }
