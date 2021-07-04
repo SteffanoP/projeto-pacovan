@@ -3,6 +3,7 @@ package negocio;
 import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.ObjetoDuplicadoException;
+import exceptions.ObjetoInexistenteException;
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
 import negocio.beans.Proposta;
@@ -65,6 +66,26 @@ public class ControladorProposta {
         if (!propostaEncontrada) throw new PropostaInvalidaException("A protocolo para essa proposta não existe!");
 
         return proposta;
+    }
+
+    /**
+     * Método que faz a alteração de uma proposta dentro do repositório que usa como referência o {@code numProtocolo}
+     * para atualizar a proposta. O método utilizado substituí todas as informações (com exceção do
+     * {@code numProtocolo}) da proposta antiga e substituí por uma nova proposta.
+     *
+     * PS: É um método privado e deve se manter privado, pois este método deve ser apenas utilizado por classes
+     * internas, visto que este método confia em outros métodos para outras Exceções relacionadas.
+     *
+     * @param novaProposta se refere ao objeto com nova proposta que deverá substituir a proposta antiga.
+     * @throws PropostaInvalidaException poderá acontecer caso a proposta não exista no {@code repoProposta}.
+     */
+    private void alterarProposta(Proposta novaProposta) throws PropostaInvalidaException {
+        Proposta propostaAntiga = this.buscarProposta(novaProposta.getNumProtocolo());
+        try {
+            this.repoProposta.atualizar(propostaAntiga,novaProposta);
+        } catch (ObjetoInexistenteException e) {
+            throw new PropostaInvalidaException("Parece que essa proposta não existe!");
+        }
     }
 
     /**
