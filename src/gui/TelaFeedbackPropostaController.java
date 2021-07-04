@@ -34,6 +34,7 @@ public class TelaFeedbackPropostaController {
                 Fachada.getInstance().aprovarContraProposta(
                         SessionManager.getInstance().getPropostaSessao().getNumProtocolo());
                 btnAceitarContraproposta.disableProperty().set(true);
+                this.initializeHeader();
             } catch (PropostaInvalidaException e) {
                 this.gerarAlertaErroAprovacao(e.getMessage());
             }
@@ -49,8 +50,10 @@ public class TelaFeedbackPropostaController {
         lblNomeProposta.setText(SessionManager.getInstance().getPropostaSessao().getCliente().getNome());
         if (!SessionManager.getInstance().getPropostaSessao().isContraproposta()) {
             lblStatusProposta.setText("está em análise.");
-        } else {
+        } else if (!SessionManager.getInstance().getPropostaSessao().isAprovado()) {
             lblStatusProposta.setText("foi analisada e há uma contraproposta para você!");
+        } else {
+            lblStatusProposta.setText("está aguardando a abertura de Empréstimo.");
         }
     }
 
