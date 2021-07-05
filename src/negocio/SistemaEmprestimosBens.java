@@ -315,7 +315,7 @@ public interface SistemaEmprestimosBens {
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
      *
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException poderÃ¡ acontecer caso o {@code uidCliente} nÃ£o esteja atribuído a nenhum cliente.
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum cliente.
      * @return Map de propostas ordenadas por data.
      */
     Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException;
