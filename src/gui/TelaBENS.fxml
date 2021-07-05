@@ -26,10 +26,10 @@
                <children>
                   <TableView fx:id="tblvBens" prefHeight="146.0" prefWidth="619.0">
                     <columns>
-                      <TableColumn fx:id="colNomeBens" prefWidth="115.0" text="Nome" />
-                      <TableColumn fx:id="colDescricaoBens" prefWidth="277.0" text="Descrição" />
-                        <TableColumn fx:id="colValorBens" prefWidth="71.0" text="Valor" />
-                        <TableColumn fx:id="colDataCadastro" prefWidth="155.0" text="Data de Cadastro" />
+                      <TableColumn fx:id="colNomeBens" prefWidth="175.0" text="Nome" />
+                      <TableColumn fx:id="colDescricaoBens" prefWidth="341.0" text="Descrição" />
+                        <TableColumn fx:id="colValorBens" prefWidth="86.0" text="Valor" />
+                        <TableColumn fx:id="colDataCadastro" prefWidth="145.0" text="Data de Cadastro" />
                     </columns>
                   </TableView>
                   <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
@@ -51,10 +51,10 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="210.0">
                <children>
-                  <TextField fx:id="txtNomeBens" layoutX="14.0" layoutY="14.0" />
-                  <TextField fx:id="txtCliente" disable="true" editable="false" layoutX="14.0" layoutY="155.0" />
-                  <TextArea fx:id="txtDescricao" layoutX="14.0" layoutY="94.0" prefHeight="46.0" prefWidth="200.0" />
-                  <TextField fx:id="txtValor" layoutX="15.0" layoutY="194.0" />
+                  <TextField fx:id="txtNomeBens" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="310.0" />
+                  <TextField fx:id="txtCliente" disable="true" editable="false" layoutX="14.0" layoutY="177.0" />
+                  <TextArea fx:id="txtDescricao" layoutX="14.0" layoutY="94.0" prefHeight="66.0" prefWidth="310.0" />
+                  <TextField fx:id="txtValor" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="216.0" />
                   <TextField fx:id="txtTempoUso" layoutX="14.0" layoutY="54.0" />
                   <SplitMenuButton fx:id="splCategoriaBens" layoutX="14.0" layoutY="232.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Selecione a Categoria">
                     <items>
