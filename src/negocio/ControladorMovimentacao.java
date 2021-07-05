@@ -19,11 +19,11 @@ public class ControladorMovimentacao {
     }
 
     /**
-     * MÃ©todo que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
+     * MÃ©todo que lista as MovimentaÃ§Ãµes do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Movimentacao} e ordenÃ¡-los a partir do seu atributo {@code instante}.
      * 
      * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente não for encontrado.
+     * @throws PessoaInexistenteException se o cliente nÃ£o for encontrado.
      * @return Map de Movimentacao ordenados por data.
      */
     public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException  {
@@ -37,20 +37,20 @@ public class ControladorMovimentacao {
                 moveClienteExiste = true;
                     mapaMovimentacaoCliente.put(move.getInstante(), move);
             }
-        }if(!moveClienteExiste)  throw new PessoaInexistenteException ("Cliente NÃ£o existe!");
+        }if(!moveClienteExiste)  throw new PessoaInexistenteException ("Cliente NÃƒÂ£o existe!");
 
 
         return mapaMovimentacaoCliente;
     }
 
     /**
-     * MÃ©todo que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final. São
+     * MÃ©todo que lista as MovimentaÃ§Ãµes do cliente num perÃ­odo especÃ­fico indicado por parÃ¢metro de data inicial e final. SÃ£o
      * ordenados por sua data por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Movimentacao} e ordenÃ¡-los a partir do seu atributo {@code instante}.
      * 
      * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
-     * @param dataInicial é a data a partir da qual o cliente deseja ver suas movimentações.
-     * @param dataFinal é a data limite 
+     * @param dataInicial Ã© a data a partir da qual o cliente deseja ver suas movimentaÃ§Ãµes.
+     * @param dataFinal Ã© a data limite 
      * @return Map de Movimentacao ordenados por data.
      */
     public List<Movimentacao> listarPeriodoMovimentacaoCliente(long uidCliente, LocalDate dataInicial, LocalDate dataFinal) {
