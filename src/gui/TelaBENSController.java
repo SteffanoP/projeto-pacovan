@@ -129,7 +129,8 @@ public class TelaBENSController {
 
     private boolean isTextFieldsInserirBensBlank() {
         return txtNomeBens.getText().isBlank() || txtTempoUso.getText().isBlank() || txtDescricao.getText().isBlank() ||
-                txtCliente.getText().isBlank() || txtValor.getText().isBlank(); //TODO: Inserir CategoriaBens
+                txtCliente.getText().isBlank() || txtValor.getText().isBlank() ||
+                splCategoriaBens.getText().equals("Selecione a Categoria");
     }
 
     private void gerarAlertaErroCadastro(String justificativa) {
