@@ -106,7 +106,7 @@ public class ControladorBENS {
                 mapaBensPendentes.put(ben.getDataCadastro(), ben);
             }
         }
-        if(!pendente)  throw new PessoaInexistenteException("Cliente NÃ£o existe!");
+        if(!pendente)  throw new PessoaInexistenteException("Cliente Não existe!");
 
         return mapaBensPendentes;
     }
