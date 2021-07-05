@@ -132,7 +132,7 @@ public interface SistemaEmprestimosBens {
     Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
 
     /**
-     * Método que lista todas as comissÃµes de empréstimos de que um empregado Ã© responsável.
+     * Método que lista todas as comissões de empréstimos de que um empregado é responsável.
      *
      * @param empregado se refere ao empregado que se quer listar os empréstimos no qual ele é responsável.
      * @return uma lista de empréstimos do qual o empregado é responsável.
