@@ -173,10 +173,10 @@ public class TelaPrincipalEmpregadoController {
     	if (tblvDevedores.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDevedores.getSelectionModel().getSelectedItem().getEmail();
     	}
-    	else if (tblvDProtegidos.getSelectionModel().getSelectedItem() != null) {
+	if (tblvDProtegidos.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDProtegidos.getSelectionModel().getSelectedItem().getEmail();
     	}
-    	else if (tblvDAltoRisco.getSelectionModel().getSelectedItem() != null) {
+    	if (tblvDAltoRisco.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDAltoRisco.getSelectionModel().getSelectedItem().getEmail();
     	}
     	
