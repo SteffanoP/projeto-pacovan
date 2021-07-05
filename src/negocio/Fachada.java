@@ -46,6 +46,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
+        return bens.buscarBensCliente(uidCliente,nomeBens);
+    }
+
+    @Override
     public Map<LocalDate, Bens> listarBensEmpresa() {
         return bens.listarBensEmpresa();
     }
