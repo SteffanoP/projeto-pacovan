@@ -35,7 +35,7 @@ public class ControladorMovimentacao {
                 moveClienteExiste = true;
                     mapaMovimentacaoCliente.put(move.getInstante(), move);
             }
-        }if(!moveClienteExiste)  throw new PessoaInexistenteException ("Cliente NÃ£o existe!");
+        }if(!moveClienteExiste)  throw new PessoaInexistenteException ("Cliente Não existe!");
 
 
         return mapaMovimentacaoCliente;
