@@ -30,21 +30,12 @@ public class TelaDevedorDetalheController {
     @FXML Button btnVerDetalhesEmprestimo;
     @FXML Button btnVoltar;
 
-    private boolean initialized = false;
-
-    @FXML
-    public void onMouseEntered() {
-        if (!initialized) {
-            this.initialize();
-            initialized = true;
-        }
-    }
-
     @FXML
     public void btnVoltarPressed(ActionEvent event) {
         GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
     }
 
+    @FXML
     private void initialize() {
         this.initilializeTableViews();
         this.atualizarTableViews();

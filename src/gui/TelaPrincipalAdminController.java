@@ -26,8 +26,7 @@ public class TelaPrincipalAdminController {
     @FXML Button btnCadastrarEmpregado;
     @FXML Button btnCatalogoBens;
 
-    private boolean initialized = false;
-
+    @FXML
     private void initialize() {
         this.initializeTableView();
         this.atualizarTableView(tblvEmpregados, Fachada.getInstance().listarEmpregados());
@@ -78,12 +77,5 @@ public class TelaPrincipalAdminController {
     public void btnSairPressed() {
     	SessionManager.getInstance().setPessoaSessao(null);
         GerenciadorTelas.getInstance().changeScreen("telaLogin");
-    }
-
-    public void onMouseEntered() {
-        if (!initialized) {
-            this.initialize();
-            initialized = true;
-        }
     }
 }

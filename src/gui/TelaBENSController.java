@@ -34,8 +34,7 @@ public class TelaBENSController {
 
     @FXML ChoiceBox<BensModelo> chbRemoverBens;
 
-    private boolean initialized = false;
-
+    @FXML
     private void initialize() {
         this.initializeTableViews();
         try {
@@ -90,14 +89,6 @@ public class TelaBENSController {
     @FXML
     public void btnVoltarTelaClientePressed() {
         GerenciadorTelas.getInstance().changeScreen("telaCliente");
-    }
-
-    @FXML
-    public void onMouseEntered() {
-        if (!initialized) {
-            this.initialize();
-            initialized = true;
-        }
     }
 
     private void atualizarTableViewBens(List<Bens> bensList) {

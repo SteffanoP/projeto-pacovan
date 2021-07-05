@@ -56,8 +56,7 @@ public class TelaPrincipalEmpregadoController {
     @FXML Button btnAnaliseProposta;
     @FXML Button btnConfirmarDevedor;
 
-    private boolean initialized = false;
-
+    @FXML
     private void initialize() {
         lblNomeUsuario.setText(SessionManager.getInstance().getPessoaSessao().getNome());
 
@@ -195,13 +194,5 @@ public class TelaPrincipalEmpregadoController {
     public void btnSairPressed() {
     	SessionManager.getInstance().setPessoaSessao(null);
         GerenciadorTelas.getInstance().changeScreen("telaLogin");
-    }
-
-    @FXML
-    public void onMouseEntered() {
-        if (!initialized) {
-            this.initialize();
-            initialized = true;
-        }
     }
 }

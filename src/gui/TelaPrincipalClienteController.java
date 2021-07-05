@@ -48,8 +48,7 @@ public class TelaPrincipalClienteController {
     @FXML Button btnVerProposta;
     @FXML Button btnVerEmprestimo;
 
-    boolean initialized = false;
-
+    @FXML
     private void initialize() {
         Cliente usuario = (Cliente) SessionManager.getInstance().getPessoaSessao();
         this.lblNomeUsuario.setText(usuario.getNome());
@@ -127,13 +126,6 @@ public class TelaPrincipalClienteController {
         alerta.setHeaderText("Parece que tivemos um erro com " + subtitulo);
         alerta.setContentText(justificativa);
         alerta.showAndWait();
-    }
-
-    public void onMouseEntered() {
-        if (!initialized) {
-            initialized = true;
-            this.initialize();
-        }
     }
     
     @FXML
