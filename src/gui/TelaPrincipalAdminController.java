@@ -56,10 +56,6 @@ public class TelaPrincipalAdminController {
     public void btnCatalogoPressed(ActionEvent event) {
         GerenciadorTelas.getInstance().changeScreen("telaBensEmpresa");
     }
-
-    public void btnVoltarPressed(ActionEvent event) {
-        GerenciadorTelas.getInstance().changeScreen("telaLogin");
-    }
     
     @FXML
     public void tblvDevedoresOnMouseClicked(MouseEvent event) {
