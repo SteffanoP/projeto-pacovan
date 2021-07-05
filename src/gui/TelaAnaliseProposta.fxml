@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="97.0" layoutY="42.0" prefHeight="313.0" prefWidth="588.0">
          <items>
@@ -40,9 +39,7 @@
          </items>
       </SplitPane>
       <Label layoutX="100.0" layoutY="6.0" prefHeight="36.0" prefWidth="126.0" text="Detalhes da Proposta" />
-      <ChoiceBox layoutX="725.0" layoutY="42.0" prefHeight="28.0" prefWidth="270.0" />
-      <Button layoutX="926.0" layoutY="79.0" mnemonicParsing="false" text="Confirmar" />
-      <Label layoutX="734.0" layoutY="48.0" text="Cliente em Detalhe" />
+      <Button layoutX="725.0" layoutY="42.0" mnemonicParsing="false" text="Ver Detalhes do Cliente" />
       <Accordion layoutX="97.0" layoutY="347.0" />
       <Button layoutX="567.0" layoutY="317.0" mnemonicParsing="false" text="Criar Empréstimo" />
       <Label layoutX="24.0" layoutY="24.0" />

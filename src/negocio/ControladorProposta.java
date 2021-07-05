@@ -3,6 +3,7 @@ package negocio;
 import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.ObjetoDuplicadoException;
+import exceptions.ObjetoInexistenteException;
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
 import negocio.beans.Proposta;
@@ -31,6 +32,7 @@ public class ControladorProposta {
         p.setData(LocalDate.now());
         p.setContraproposta(false);
         p.setNumProtocolo(contadorProtocolo);
+        p.setAprovado(false);
 
         try {
             this.repoProposta.inserir(p);
@@ -67,6 +69,45 @@ public class ControladorProposta {
     }
 
     /**
+     * Método que faz a alteração de uma proposta dentro do repositório que usa como referência o {@code numProtocolo}
+     * para atualizar a proposta. O método utilizado substituí todas as informações (com exceção do
+     * {@code numProtocolo}) da proposta antiga e substituí por uma nova proposta.
+     *
+     * PS: É um método privado e deve se manter privado, pois este método deve ser apenas utilizado por classes
+     * internas, visto que este método confia em outros métodos para outras Exceções relacionadas.
+     *
+     * @param novaProposta se refere ao objeto com nova proposta que deverá substituir a proposta antiga.
+     * @throws PropostaInvalidaException poderá acontecer caso a proposta não exista no {@code repoProposta}.
+     */
+    private void alterarProposta(Proposta novaProposta) throws PropostaInvalidaException {
+        Proposta propostaAntiga = this.buscarProposta(novaProposta.getNumProtocolo());
+        try {
+            this.repoProposta.atualizar(propostaAntiga,novaProposta);
+        } catch (ObjetoInexistenteException e) {
+            throw new PropostaInvalidaException("Parece que essa proposta não existe!");
+        }
+    }
+
+    /**
+     * Método com foco no negócio, que realiza a aprovação de contrapropostas. A ideia aqui é apenas setar como
+     * {@code true} sempre que uma contraproposta for aprovada.
+     *
+     * @param numProtocolo se refere ao número único de uma proposta que se deseja aprovar.
+     * @throws PropostaInvalidaException poderá acontecer caso o número do protocolo não seja válido, se a proposta não
+     * existir e se esta for uma ação ilegal para esse método (caso a proposta não seja uma contraproposta).
+     */
+    public void aprovarContraProposta(long numProtocolo) throws PropostaInvalidaException {
+        if (numProtocolo < 1) throw new PropostaInvalidaException("O Número do protocolo é inválido!");
+
+        Proposta proposta = this.buscarProposta(numProtocolo);
+
+        if (proposta.isContraproposta()) {
+            proposta.setAprovado(true);
+            this.alterarProposta(proposta);
+        } else throw new PropostaInvalidaException("Esta é uma ação ilegal!");
+    }
+
+    /**
      * Método que lista as propostas do cliente ordenadas por sua data de criação por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo 
      * {@code data}.
@@ -78,8 +119,10 @@ public class ControladorProposta {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
         List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar()); 
         
-        for (Proposta proposta : propostasList) {
-            if(proposta.getCliente().getUid() == uidCliente && !proposta.isContraproposta()) {
+
+        for (Proposta proposta : this.repoProposta.listar()) {
+            if(proposta.getCliente().getUid() == uidCliente){
+                clienteExiste = true;
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
             }
