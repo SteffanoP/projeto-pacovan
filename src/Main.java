@@ -30,8 +30,9 @@ public class Main extends Application {
             e.printStackTrace();
         }
         */
+      
         primaryStage.setScene(GerenciadorTelas.getInstance().getMainScene());
-        primaryStage.setTitle("Sistema de Gerenciamento de Empréstimo Pessoal Alternativo");
+        primaryStage.setTitle("Sistema de Gerenciamento de EmprÃ©stimo Pessoal Alternativo");
 
         primaryStage.setWidth(1024);
         primaryStage.setHeight(768);
