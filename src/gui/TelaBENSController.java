@@ -86,6 +86,7 @@ public class TelaBENSController {
                 bens.setValor(Double.parseDouble(txtValor.getText()));
                 bens.setCategoria(categoriaSelecionadaCadastro);
                 Fachada.getInstance().inserirBens(bens);
+                this.limparCamposInserir();
                 try {
                     List<Bens> bensList = new
                             ArrayList<>(Fachada.getInstance().listarBensCliente(bens.getCliente().getUid()).values());
@@ -131,6 +132,16 @@ public class TelaBENSController {
         return txtNomeBens.getText().isBlank() || txtTempoUso.getText().isBlank() || txtDescricao.getText().isBlank() ||
                 txtCliente.getText().isBlank() || txtValor.getText().isBlank() ||
                 splCategoriaBens.getText().equals("Selecione a Categoria");
+    }
+
+    private void limparCamposInserir() {
+        txtNomeBens.setText("");
+        txtTempoUso.setText("");
+        txtDescricao.setText("");
+        txtValor.setText("");
+
+        categoriaSelecionadaCadastro = null;
+        splCategoriaBens.setText("Selecione a Categoria");
     }
 
     private void gerarAlertaErroCadastro(String justificativa) {
