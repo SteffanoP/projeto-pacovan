@@ -116,7 +116,7 @@ public interface SistemaEmprestimosBens {
      *
      * @param cliente        se refere ao {@code Cliente} que realizou o {@code Emprestimo}.
      * @param dataEmprestimo se refere a data em que o {@code Cliente} realizou o {@code Emprestimo}.
-     * @return uma {@code String} de dados, com base no mÃ©todo {@code toString()} do objeto {@code Emprestimo}.
+     * @return uma {@code String} de dados, com base no método {@code toString()} do objeto {@code Emprestimo}.
      * @throws EmprestimoInexistenteException poderá acontecer caso não exista um empréstimo para esse {@code cliente}
      *                                        ou não existe um empréstimo para esse {@code cliente} na determinada {@code dataEmprestimo}.
      */
