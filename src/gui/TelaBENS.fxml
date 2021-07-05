@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaBENSController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaBENSController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="117.0" layoutY="64.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="629.0">
          <items>
@@ -37,15 +37,15 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <SplitPane dividerPositions="0.21843003412969283" layoutX="120.0" layoutY="273.0" prefHeight="273.0" prefWidth="588.0">
+      <SplitPane dividerPositions="0.21843003412969283" layoutX="120.0" layoutY="273.0" prefHeight="293.0" prefWidth="588.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="10.0" layoutY="18.0" text="Nome de BENS:" />
                   <Label layoutX="10.0" layoutY="57.0" text="Tempo de uso:" />
-                  <Label layoutX="10.0" layoutY="199.0" text="Valor:" />
-                  <Label layoutX="10.0" layoutY="157.0" text="Cliente:" />
-                  <Label layoutX="12.0" layoutY="237.0" text="Categoria:" />
+                  <Label layoutX="16.0" layoutY="221.0" text="Valor:" />
+                  <Label layoutX="12.0" layoutY="182.0" text="Cliente:" />
+                  <Label layoutX="14.0" layoutY="260.0" text="Categoria:" />
                   <Label layoutX="11.0" layoutY="107.0" text="Descrição:" />
                </children>
             </AnchorPane>
@@ -56,7 +56,7 @@
                   <TextArea fx:id="txtDescricao" layoutX="14.0" layoutY="94.0" prefHeight="66.0" prefWidth="310.0" />
                   <TextField fx:id="txtValor" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="216.0" />
                   <TextField fx:id="txtTempoUso" layoutX="14.0" layoutY="54.0" />
-                  <SplitMenuButton fx:id="splCategoriaBens" layoutX="14.0" layoutY="232.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Selecione a Categoria">
+                  <SplitMenuButton fx:id="splCategoriaBens" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Selecione a Categoria">
                     <items>
                       <MenuItem fx:id="mnuiFungivel" mnemonicParsing="false" text="Fungível" />
                       <MenuItem fx:id="mnuiInfugivel" mnemonicParsing="false" text="Infungível" />
@@ -68,7 +68,7 @@
          </items>
       </SplitPane>
       <Label layoutX="124.0" layoutY="237.0" prefHeight="36.0" prefWidth="149.0" text="Cadastrar Novo BENS" />
-      <Button fx:id="btnInserirBens" layoutX="627.0" layoutY="560.0" mnemonicParsing="false" onAction="#btnInserirBens" text="Inserir BENS" />
+      <Button fx:id="btnInserirBens" layoutX="627.0" layoutY="576.0" mnemonicParsing="false" onAction="#btnInserirBens" text="Inserir BENS" />
       <Button fx:id="btnVoltarTelaCliente" layoutX="117.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnVoltarTelaClientePressed" text="&lt; Voltar" />
       <Button fx:id="btnRemoverBens" layoutX="774.0" layoutY="212.0" mnemonicParsing="false" onAction="#btnRemoverBens" text="Remover BENS" />
    </children>
