@@ -191,6 +191,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public void criarContraProposta(Proposta proposta) throws PropostaInvalidaException {
+        propostas.criarContraProposta(proposta);
+    }
+
+    @Override
     public Proposta buscarProposta(long numProtocolo) throws PropostaInvalidaException {
         return propostas.buscarProposta(numProtocolo);
     }
