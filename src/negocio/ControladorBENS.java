@@ -154,7 +154,7 @@ public class ControladorBENS {
                 existevalor = true;
                 valor = ben.getValor() ;
             }
-        }if(!existevalor)  throw new PessoaInexistenteException("Cliente NÃ£o existe!");
+        }if(!existevalor)  throw new PessoaInexistenteException("Cliente Não existe!");
 
         return valor;
     }
