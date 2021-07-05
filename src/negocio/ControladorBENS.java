@@ -5,9 +5,6 @@ import dados.RepositorioCRUD;
 import exceptions.*;
 import negocio.beans.Bens;
 import negocio.beans.CategoriaBens;
-import negocio.beans.Cliente;
-import negocio.beans.Movimentacao;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -137,7 +134,7 @@ public class ControladorBENS {
      * 
      * @return Map de Bens ordenados por data.
      */
-    public Map<LocalDate,Bens> listarBensGarantia () {
+    public Map<LocalDate,Bens> listarBensGarantia() {
         NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
         List<Bens> garantiaList = repoBENS.listar();
 

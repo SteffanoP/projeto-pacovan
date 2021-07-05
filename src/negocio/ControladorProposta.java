@@ -118,14 +118,18 @@ public class ControladorProposta {
     public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
         List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar()); 
-        
+        boolean clienteExiste = false;
 
-        for (Proposta proposta : this.repoProposta.listar()) {
+        for (Proposta proposta : propostasList) {
             if(proposta.getCliente().getUid() == uidCliente){
                 clienteExiste = true;
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
             }
+        }
+        
+        if (!clienteExiste) {
+            throw new PessoaInexistenteException("Cliente não existe!");
         }
 
         return mapaPropostas;

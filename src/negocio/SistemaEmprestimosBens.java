@@ -140,27 +140,27 @@ public interface SistemaEmprestimosBens {
     List<Emprestimo> listarComissoesEmprestimo(Empregado empregado);
     
     /**
-     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
      * {@code Emprestimo} que não pagaram até o {@code prazo}.
      * 
-     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
+     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
      */
     public
     Map<LocalDate, Emprestimo> listarDevedores();
 
     /**
-     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
      * {@code Emprestimo} que não pagaram até o {@code prazo}.
      * 
-     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
+     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
     /**
-     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
      * {@code Emprestimo} que não foram pagos até o {@code prazo} e além disso possuem um {@code score} baixo.
      * 
-     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
+     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
@@ -307,7 +307,7 @@ public interface SistemaEmprestimosBens {
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @return Map de propostas ordenadas por data.
      */
-    Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente);
+    Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException;
 
     /**
      * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map}

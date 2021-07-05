@@ -129,11 +129,11 @@ public class ControladorEmprestimo {
     }
 
     /**
-     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
+     * Mï¿½todo que retorna todos os emprï¿½stimos feitos pelo cliente identificado por seu {@code uid} atravï¿½s de um 
      * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de empréstimos ordenados por data.
+     * @param uidCliente se refere ao identificador ï¿½nico e exclusivo do cliente.
+     * @return Map de emprï¿½stimos ordenados por data.
      */
     public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
         NavigableMap<LocalDate, Emprestimo> mapaEmprestimos = new TreeMap<>();
@@ -166,13 +166,13 @@ public class ControladorEmprestimo {
     }
 
     /**
-     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que não pagaram até o {@code prazo}.
+     * Mï¿½todo que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que nï¿½o pagaram atï¿½ o {@code prazo}.
      * 
-     * @return Map de Cliente ordenados por data.
+     * @return Map de Emprestimo ordenados por data.
      */
-    public Map<LocalDate, Cliente> listarDevedores() {
-        NavigableMap<LocalDate, Cliente> mapaEmprestimoClientes = new TreeMap<>();
+    public Map<LocalDate, Emprestimo> listarDevedores() {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimoClientes = new TreeMap<>();
         List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
         for (Emprestimo emprestimo : repositorio) {
@@ -180,20 +180,20 @@ public class ControladorEmprestimo {
             long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
             if(dataPagamento < 0){
                 //Preencher mapa
-                mapaEmprestimoClientes.put(prazo, emprestimo.getCliente());
+                mapaEmprestimoClientes.put(prazo, emprestimo);
             }
         }
         return mapaEmprestimoClientes;
     }
 
     /**
-     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que não foram pagos até o {@code prazo}, porém possuem um {@code score} alto.
+     * Mï¿½todo que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que nï¿½o foram pagos atï¿½ o {@code prazo}, porï¿½m possuem um {@code score} alto.
      * 
-     * @return Map de Cliente ordenados por data.
+     * @return Map de Emprestimo ordenados por data.
      */
-    public Map<LocalDate, Cliente> listarDevedoresProtegidos() {
-        NavigableMap<LocalDate, Cliente> mapaEmprestimoClientes = new TreeMap<>();
+    public Map<LocalDate, Emprestimo> listarDevedoresProtegidos() {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimoClientes = new TreeMap<>();
         List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
         for (Emprestimo emprestimo : repositorio) {
@@ -201,20 +201,20 @@ public class ControladorEmprestimo {
             long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
             if(dataPagamento < 0 && emprestimo.getCliente().getScore() >= 75){
                 //Preencher mapa
-                mapaEmprestimoClientes.put(emprestimo.getData(), emprestimo.getCliente());
+                mapaEmprestimoClientes.put(emprestimo.getData(), emprestimo);
             }
         }
         return mapaEmprestimoClientes;
     }
 
     /**
-     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que não foram pagos até o {@code prazo} e além disso possuem um {@code score} baixo.
+     * Mï¿½todo que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que nï¿½o foram pagos atï¿½ o {@code prazo} e alï¿½m disso possuem um {@code score} baixo.
      * 
-     * @return Map de Cliente ordenados por data.
+     * @return Map de Emprestimo ordenados por data.
      */
-    public Map<LocalDate, Cliente> listarDevedoresAltoRisco() {
-        NavigableMap<LocalDate, Cliente> mapaEmprestimoClientes = new TreeMap<>();
+    public Map<LocalDate, Emprestimo> listarDevedoresAltoRisco() {
+        NavigableMap<LocalDate, Emprestimo> mapaEmprestimoClientes = new TreeMap<>();
         List<Emprestimo> repositorio = this.repoEmprestimo.listar();
 
         for (Emprestimo emprestimo : repositorio) {
@@ -222,7 +222,7 @@ public class ControladorEmprestimo {
             long dataPagamento = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), prazo);
             if(dataPagamento < 0 && emprestimo.getCliente().getScore() <= 35){
                 //Preencher mapa
-                mapaEmprestimoClientes.put(emprestimo.getData(), emprestimo.getCliente());
+                mapaEmprestimoClientes.put(emprestimo.getData(), emprestimo);
             }
         }
         return mapaEmprestimoClientes;

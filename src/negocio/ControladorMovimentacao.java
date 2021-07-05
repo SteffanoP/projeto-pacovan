@@ -3,9 +3,7 @@ package negocio;
 import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.PessoaInexistenteException;
-import negocio.beans.Bens;
 import negocio.beans.Movimentacao;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
