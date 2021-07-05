@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollBar?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onMouseEntered" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalEmpregadoController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="48.0" layoutY="90.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="788.0">
         <items>
@@ -52,10 +51,6 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button layoutX="850.0" layoutY="238.0" mnemonicParsing="false" onAction="#btnAnalisePropostaPressed" text="Analisar Proposta" />
-      <ChoiceBox layoutX="715.0" layoutY="283.0" prefHeight="28.0" prefWidth="270.0" />
-      <Button layoutX="909.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnConfirmarDevedorPressed" text="Confirmar" />
-      <Label layoutX="726.0" layoutY="288.0" text="Devedor em Detalhe" />
       <Accordion layoutX="48.0" layoutY="283.0" prefHeight="221.0" prefWidth="629.0">
         <panes>
           <TitledPane animated="false" text="Devedores">
@@ -114,7 +109,7 @@
           </TitledPane>
         </panes>
       </Accordion>
-      <Button layoutX="862.0" layoutY="703.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar ao login" />
+      <Button fx:id="btnSairPressed" layoutX="923.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSairPressed" text="Sair" />
       <Label layoutX="48.0" layoutY="37.0" text="Olá, ">
          <font>
             <Font size="15.0" />

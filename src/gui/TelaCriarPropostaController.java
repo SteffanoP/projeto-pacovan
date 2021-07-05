@@ -3,6 +3,7 @@ package gui;
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
@@ -23,8 +24,6 @@ public class TelaCriarPropostaController {
     @FXML SplitMenuButton splMenuGarantia;
 
     @FXML ListView<String> lstvGarantias;
-
-    boolean initialized = false;
 
     public void onbtnCriarPropostaPressed() {
         if (!this.isTextFieldsBlank()) {
@@ -78,20 +77,19 @@ public class TelaCriarPropostaController {
             splMenuGarantia.getItems().add(item);
         }
     }
+    
+    @FXML
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaCliente");
+    }
 
+    @FXML
     private void initialize() {
         txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
         try {
             this.atualizarListaBens();
         } catch (PessoaInexistenteException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void onMouseEntered() {
-        if (!initialized) {
-            this.initialize();
-            initialized = true;
         }
     }
 }

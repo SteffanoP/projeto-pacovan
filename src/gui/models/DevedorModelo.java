@@ -15,25 +15,28 @@ public class DevedorModelo {
     private SimpleStringProperty nomeCliente;
     private SimpleDoubleProperty parcelas;
     private SimpleFloatProperty confiancaPagamento;
+    private SimpleStringProperty email;
     private SimpleLongProperty numProtocolo;
 
     public DevedorModelo(Double valorDevido, LocalDate dataPagamento, Cliente cliente, Double parcelas,
-                         Float confiancaPagamento) {
+                         Float confiancaPagamento, String email) {
         this.valorDevido = new SimpleDoubleProperty(valorDevido);
         this.dataPagamento = new SimpleStringProperty(this.formatadorData(dataPagamento));
         this.nomeCliente = new SimpleStringProperty(cliente.getNome());
         this.parcelas = new SimpleDoubleProperty(parcelas);
         this.confiancaPagamento = new SimpleFloatProperty(confiancaPagamento);
+        this.email = new SimpleStringProperty(email);
     }
 
     public DevedorModelo(Double valorDevido, LocalDate dataPagamento, Cliente cliente, Double parcelas,
-                         Float confiancaPagamento, Long numProtocolo) {
+                         Float confiancaPagamento, String email, Long numProtocolo) {
         this.valorDevido = new SimpleDoubleProperty(valorDevido);
         this.dataPagamento = new SimpleStringProperty(this.formatadorData(dataPagamento));
         this.nomeCliente = new SimpleStringProperty(cliente.getNome());
         this.parcelas = new SimpleDoubleProperty(parcelas);
         this.confiancaPagamento = new SimpleFloatProperty(confiancaPagamento);
         this.numProtocolo = new SimpleLongProperty(numProtocolo);
+        this.email = new SimpleStringProperty(email);
     }
 
     private String formatadorData(LocalDate data) {
@@ -100,6 +103,14 @@ public class DevedorModelo {
     public void setConfiancaPagamento(float confiancaPagamento) {
         this.confiancaPagamento.set(confiancaPagamento);
     }
+
+	public String getEmail() {
+		return email.get();
+	}
+
+	public void setEmail(String email) {
+		this.email.set(email);;
+	}
 
     public long getNumProtocolo() {
         return numProtocolo.get();

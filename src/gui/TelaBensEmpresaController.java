@@ -1,6 +1,7 @@
 package gui;
 
 import gui.models.BensModelo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,8 +36,7 @@ public class TelaBensEmpresaController {
     @FXML TableColumn<BensModelo, String> colDescricaoImoveis;
     @FXML TableColumn<BensModelo, Integer> colTempoUsoImoveis;
 
-    boolean initialized = false;
-
+    @FXML
     private void initialize() {
         this.initializeTableViews();
         List<Bens> bensFungiveisList = new
@@ -80,11 +80,10 @@ public class TelaBensEmpresaController {
         colDescricaoInfungiveis.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         colTempoUsoInfungiveis.setCellValueFactory(new PropertyValueFactory<>("tempoDeUso"));
     }
-
-    public void onMouseEntered() {
-        if (!initialized) {
-            initialized = true;
-            this.initialize();
-        }
+    
+    @FXML
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaAdmin");
     }
+
 }
