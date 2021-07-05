@@ -132,7 +132,7 @@ public class ControladorEmprestimo {
      * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
      * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
      * 
-     * @param uidCliente se refere ao identificador �nico e exclusivo do cliente.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @return Map de empr�stimos ordenados por data.
      */
     public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
