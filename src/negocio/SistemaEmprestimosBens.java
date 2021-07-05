@@ -229,6 +229,18 @@ public interface SistemaEmprestimosBens {
     Proposta buscarProposta(long numProtocolo) throws PropostaInvalidaException;
 
     /**
+     * Método que atualiza apenas as Garantias de uma Proposta do Repositório de Propostas. Consiste em pegar a
+     * {@code garantia} de uma {@code Proposta} e passar para a {@code Proposta} do repositório (que tenha o mesmo
+     * {@code numProtocolo}) por meio do método {@code alterarProposta}.
+     *
+     * @param propostaComGarantia se refere a uma proposta com uma nova garantia que se pretende inserir numa proposta
+     *                            do repositório.
+     * @throws PropostaInvalidaException poderá acontecer caso o número do protocolo da {@code propostaComGarantia}
+     * seja inválido ou se não houver {@code Proposta} no repositório de propostas.
+     */
+    void atualizarGarantias(Proposta propostaComGarantia) throws PropostaInvalidaException;
+
+    /**
      * Método com foco no negócio, que realiza a aprovação de contrapropostas. A ideia aqui é apenas setar como
      * {@code true} sempre que uma contraproposta for aprovada.
      *
