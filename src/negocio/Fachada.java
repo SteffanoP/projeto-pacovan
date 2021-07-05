@@ -196,11 +196,6 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public void atualizarGarantias(Proposta propostaComGarantia) throws PropostaInvalidaException {
-        propostas.atualizarGarantias(propostaComGarantia);
-    }
-
-    @Override
     public void aprovarContraProposta(long numProtocolo) throws PropostaInvalidaException {
         propostas.aprovarContraProposta(numProtocolo);
     }
