@@ -45,7 +45,7 @@ public interface SistemaEmprestimosBens {
      * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente n�o for encontrado.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
      * @return Map de Bens ordenados por data.
      */
     
@@ -60,7 +60,7 @@ public interface SistemaEmprestimosBens {
     Map<LocalDate, Bens> listarBensAprovados();
 
     /**
-     * Método que lista todos os BENS que s�o garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
      * 
      * @return Map de Bens ordenados por data.
@@ -70,16 +70,16 @@ public interface SistemaEmprestimosBens {
     double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException;
 
     /**
-     * Método que altera um bem por outro no repositório
+     * Mátodo que altera um bem por outro no repositório
      *
      * @param bensAntigo bem inicialmente cadastrado.
      * @param bensNovo   novo bem a ser inserido para substituir
-     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
+     * @throws BensInexistenteException caso o bem a ser substituído nÃ£o exista no repositório.
      */
     void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException;
 
     /**
-     * Método que remove bens do repositório.
+     * MÃ©todo que remove bens do repositório.
      *
      * @param bens bem a ser removido do repositório.
      * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
@@ -116,23 +116,23 @@ public interface SistemaEmprestimosBens {
      *
      * @param cliente        se refere ao {@code Cliente} que realizou o {@code Emprestimo}.
      * @param dataEmprestimo se refere a data em que o {@code Cliente} realizou o {@code Emprestimo}.
-     * @return uma {@code String} de dados, com base no método {@code toString()} do objeto {@code Emprestimo}.
+     * @return uma {@code String} de dados, com base no mÃ©todo {@code toString()} do objeto {@code Emprestimo}.
      * @throws EmprestimoInexistenteException poderá acontecer caso não exista um empréstimo para esse {@code cliente}
      *                                        ou não existe um empréstimo para esse {@code cliente} na determinada {@code dataEmprestimo}.
      */
     String emprestimoEmDetalhe(Cliente cliente, LocalDate dataEmprestimo) throws EmprestimoInexistenteException;
 
     /**
-     * M�todo que retorna todos os empr�stimos feitos pelo cliente identificado por seu {@code uid} atrav�s de um 
+     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
      * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
      * 
-     * @param uidCliente se refere ao identificador �nico e exclusivo do cliente.
-     * @return Map de empr�stimos ordenados por data.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de empréstimos ordenados por data.
      */
     Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
 
     /**
-     * Método que lista todas as comissões de empréstimos de que um empregado é responsável.
+     * Método que lista todas as comissÃµes de empréstimos de que um empregado Ã© responsável.
      *
      * @param empregado se refere ao empregado que se quer listar os empréstimos no qual ele é responsável.
      * @return uma lista de empréstimos do qual o empregado é responsável.
@@ -140,48 +140,48 @@ public interface SistemaEmprestimosBens {
     List<Emprestimo> listarComissoesEmprestimo(Empregado empregado);
     
     /**
-     * M�todo que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que n�o pagaram at� o {@code prazo}.
+     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que não pagaram até o {@code prazo}.
      * 
-     * @return Map de clientes ordenados por data de vencimento da parcela do empr�stimo.
+     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
      */
     public
     Map<LocalDate, Emprestimo> listarDevedores();
 
     /**
-     * M�todo que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que n�o pagaram at� o {@code prazo}.
+     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que não pagaram até o {@code prazo}.
      * 
-     * @return Map de clientes ordenados por data de vencimento da parcela do empr�stimo.
+     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
     /**
-     * M�todo que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que n�o foram pagos at� o {@code prazo} e al�m disso possuem um {@code score} baixo.
+     * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que não foram pagos até o {@code prazo} e além disso possuem um {@code score} baixo.
      * 
-     * @return Map de clientes ordenados por data de vencimento da parcela do empr�stimo.
+     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
     /**
-     * Método que lista as Movimenta��es do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
+     * Método que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente n�o for encontrado.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
      * @return Map de Movimentacao ordenados por data.
      */
     Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
 
     /**
-     * Método que lista as Movimenta��es do cliente num per�odo espec�fico indicado por par�metro de data inicial e final. S�o
+     * Método que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final. São
      * ordenados por sua data por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @param dataInicial � a data a partir da qual o cliente deseja ver suas movimenta��es.
-     * @param dataFinal � a data limite 
+     * @param dataInicial é a data a partir da qual o cliente deseja ver suas movimentações.
+     * @param dataFinal é a data limite 
      * @return Map de Movimentacao ordenados por data.
      */
 
@@ -221,7 +221,7 @@ public interface SistemaEmprestimosBens {
      *
      * @param email se trata do parâmetro de busca do usuário
      * @return retorna um objeto abstrato do tipo {@code Pessoa}
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} nÃ£o esteja atribuído a nenhuma
      * {@code Pessoa}.
      */
     Pessoa buscarPessoa(String email) throws PessoaInexistenteException;
@@ -257,7 +257,7 @@ public interface SistemaEmprestimosBens {
     /**
      * Método que lista todos os empregados do repositório de empregados {@code repoEmpregado}.
      *
-     * @return uma lista não modificável do repositório de empregados.
+     * @return uma lista nÃ£o modificável do repositório de empregados.
      */
     List<Empregado> listarEmpregados();
 
@@ -272,7 +272,7 @@ public interface SistemaEmprestimosBens {
     String informacoesPessoais(Pessoa pessoa) throws PessoaInexistenteException;
 
     /**
-     * Método que cria e adiciona um objeto do tipo {@code Proposta}, no qual atribuí um número de procolo a proposta e
+     * Método que cria e adiciona um objeto do tipo {@code Proposta}, no qual atribui um número de procolo a proposta e
      * seta parâmetros de controle, como {@code data} e {@code contraproposta}.
      * @param p se refere a proposta inicial ao qual se deseja adicionar ao sistema.
      * @throws PropostaInvalidaException poderá acontecer caso a proposta seja inválida por alguma razão.
@@ -315,8 +315,7 @@ public interface SistemaEmprestimosBens {
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
      *
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
-     * cliente.
+     * @throws PessoaInexistenteException poderÃ¡ acontecer caso o {@code uidCliente} nÃ£o esteja atribuído a nenhum cliente.
      * @return Map de propostas ordenadas por data.
      */
     Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException;
