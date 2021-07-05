@@ -41,7 +41,6 @@
       <TextField layoutX="197.0" layoutY="171.0" />
       <Button layoutX="698.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnCadastrarEmpregadoPressed" text="Cadastrar empregado" />
       <Button layoutX="698.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnCatalogoPressed" prefHeight="26.0" prefWidth="131.0" text="Catálogo de bens" />
-      <Button layoutX="699.0" layoutY="646.0" mnemonicParsing="false" onAction="#btnVoltarPressed" prefHeight="26.0" prefWidth="131.0" text="Voltar ao login" />
       <SplitPane dividerPositions="0.12871287128712872" layoutX="697.0" layoutY="298.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="264.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="30.0" prefWidth="158.0">
