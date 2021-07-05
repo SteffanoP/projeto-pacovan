@@ -34,7 +34,7 @@ public class ControladorBENS {
         try {
             this.repoBENS.inserir(bens);
         } catch (ObjetoDuplicadoException e) {
-            throw new BensDuplicadoException("Bens já registrado no sistema!");
+            throw new BensDuplicadoException("Bens jÃ¡ registrado no sistema!");
         }
     }
 
@@ -69,9 +69,9 @@ public class ControladorBENS {
 
     /**
      * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * objetos do tipo {@code Bens} e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
      * @return Map de Bens ordenados por data.
      */
     public Map<LocalDate,Bens> listarBensCliente(long uidCliente) {
@@ -92,7 +92,7 @@ public class ControladorBENS {
      * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente n�o for encontrado.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
      * @return Map de Bens ordenados por data.
      */
     public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException{
@@ -109,14 +109,14 @@ public class ControladorBENS {
                 mapaBensPendentes.put(ben.getDataCadastro(), ben);
             }
         }
-        if(!pendente)  throw new PessoaInexistenteException("Cliente Não existe!");
+        if(!pendente)  throw new PessoaInexistenteException("Cliente NÃ£o existe!");
 
         return mapaBensPendentes;
     }
 
     /**
-     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * MÃ©todo que lista todos os BENS aprovados ordenados por sua data de criaÃ§Ã£o por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
      * 
      * @return Map de Bens ordenados por data.
      */
@@ -132,7 +132,7 @@ public class ControladorBENS {
     }
 
     /**
-     * Método que lista todos os BENS que s�o garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
      * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
      * 
      * @return Map de Bens ordenados por data.
@@ -157,7 +157,7 @@ public class ControladorBENS {
                 existevalor = true;
                 valor = ben.getValor() ;
             }
-        }if(!existevalor)  throw new PessoaInexistenteException("Cliente Não existe!");
+        }if(!existevalor)  throw new PessoaInexistenteException("Cliente NÃ£o existe!");
 
         return valor;
     }
@@ -179,7 +179,7 @@ public class ControladorBENS {
                 try {
                     this.repoBENS.atualizar(bensAntigo, bensNovo);
                 } catch (ObjetoInexistenteException e) {
-                    throw new BensInexistenteException("O bem não existe!");
+                    throw new BensInexistenteException("O bem nÃ£o existe!");
                 }
                 bensExiste = true;
             }
@@ -189,13 +189,13 @@ public class ControladorBENS {
     /**
      * Método que remove bens do repositório.
      * @param bens bem a ser removido do repositório.
-     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
+     * @throws BensInexistenteException caso o bem a ser substituído nÃ£o exista no repositório.
      */
     public void removerBens(Bens bens) throws BensInexistenteException{
         try {
             this.repoBENS.remover(bens);
         } catch (ObjetoInexistenteException e) {
-            throw new BensInexistenteException("O bem não existe!");
+            throw new BensInexistenteException("O bem nÃ£o existe!");
         }
     }
 }
