@@ -129,7 +129,7 @@ public class ControladorEmprestimo {
     }
 
     /**
-     * M�todo que retorna todos os empr�stimos feitos pelo cliente identificado por seu {@code uid} atrav�s de um 
+     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
      * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
      * 
      * @param uidCliente se refere ao identificador �nico e exclusivo do cliente.
