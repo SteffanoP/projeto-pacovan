@@ -133,7 +133,7 @@ public class ControladorEmprestimo {
      * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de empr�stimos ordenados por data.
+     * @return Map de empréstimos ordenados por data.
      */
     public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
         NavigableMap<LocalDate, Emprestimo> mapaEmprestimos = new TreeMap<>();
