@@ -66,7 +66,7 @@ public class ControladorBENS {
 
     /**
      * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
+     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
      * 
      * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
      * @return Map de Bens ordenados por data.
