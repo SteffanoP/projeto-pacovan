@@ -280,6 +280,16 @@ public interface SistemaEmprestimosBens {
     void criarProposta(Proposta p) throws PropostaInvalidaException;
 
     /**
+     * Método que altera uma proposta existente e a transformar em uma contraproposta que mantém o mesmo número de
+     * protocolo.
+     *
+     * @param contraproposta se refere a nova contraproposta que irá substituir pela proposta anterior.
+     * @throws PropostaInvalidaException poderá acontecer caso o número de protocolo seja inválido e se a proposta não
+     * existir no repositório de propostas.
+     */
+    void criarContraProposta(Proposta contraproposta) throws PropostaInvalidaException;
+
+    /**
      * Método que faz a busca de uma {@code Proposta} no repositório de propostas por meio de um número de protocolo.
      *
      * @param numProtocolo se refere ao número único dado a cada proposta, quando cada proposta é criada.

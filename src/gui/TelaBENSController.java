@@ -29,10 +29,13 @@ public class TelaBENSController {
     @FXML TextArea txtDescricao;
     @FXML TextField txtCliente;
     @FXML TextField txtValor;
-    @FXML ComboBox<CategoriaBens> chbCategoriaBens;
+    @FXML SplitMenuButton splCategoriaBens;
+    @FXML MenuItem mnuiFungivel;
+    @FXML MenuItem mnuiInfugivel;
+    @FXML MenuItem mnuiImovel;
     @FXML Button btnInserirBens;
 
-    @FXML ChoiceBox<BensModelo> chbRemoverBens;
+    CategoriaBens categoriaSelecionadaCadastro = null;
 
     @FXML
     private void initialize() {
@@ -43,12 +46,27 @@ public class TelaBENSController {
         } catch (PessoaInexistenteException e) {
             e.printStackTrace();
         }
+
+        //Inicializa Cadastro de Bens
         txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
+
+        mnuiFungivel.setOnAction((event -> {
+            categoriaSelecionadaCadastro = CategoriaBens.MOVEL_FUNGIVEL;
+            splCategoriaBens.setText(categoriaSelecionadaCadastro.getNome());
+        }));
+        mnuiInfugivel.setOnAction((event -> {
+            categoriaSelecionadaCadastro = CategoriaBens.MOVEL_INFUNGIVEL;
+            splCategoriaBens.setText(categoriaSelecionadaCadastro.getNome());
+        }));
+        mnuiImovel.setOnAction((event -> {
+            categoriaSelecionadaCadastro = CategoriaBens.IMOVEL;
+            splCategoriaBens.setText(categoriaSelecionadaCadastro.getNome());
+        }));
     }
     
     @FXML
     public void tblvBensOnMouseClicked() {
-    	// TODO: selecionar BENS da sess�o
+    	// TODO: selecionar BENS da sessão
     }
     
     @FXML
@@ -66,8 +84,9 @@ public class TelaBENSController {
                 bens.setDescricao(txtDescricao.getText());
                 bens.setCliente((Cliente) SessionManager.getInstance().getPessoaSessao());
                 bens.setValor(Double.parseDouble(txtValor.getText()));
-                //TODO: Seleção da categoria de Bens!
+                bens.setCategoria(categoriaSelecionadaCadastro);
                 Fachada.getInstance().inserirBens(bens);
+                this.limparCamposInserir();
                 try {
                     List<Bens> bensList = new
                             ArrayList<>(Fachada.getInstance().listarBensCliente(bens.getCliente().getUid()).values());
@@ -111,7 +130,18 @@ public class TelaBENSController {
 
     private boolean isTextFieldsInserirBensBlank() {
         return txtNomeBens.getText().isBlank() || txtTempoUso.getText().isBlank() || txtDescricao.getText().isBlank() ||
-                txtCliente.getText().isBlank() || txtValor.getText().isBlank(); //TODO: Inserir CategoriaBens
+                txtCliente.getText().isBlank() || txtValor.getText().isBlank() ||
+                splCategoriaBens.getText().equals("Selecione a Categoria");
+    }
+
+    private void limparCamposInserir() {
+        txtNomeBens.setText("");
+        txtTempoUso.setText("");
+        txtDescricao.setText("");
+        txtValor.setText("");
+
+        categoriaSelecionadaCadastro = null;
+        splCategoriaBens.setText("Selecione a Categoria");
     }
 
     private void gerarAlertaErroCadastro(String justificativa) {
