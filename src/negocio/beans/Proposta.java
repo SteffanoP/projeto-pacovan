@@ -1,6 +1,7 @@
 package negocio.beans;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +16,7 @@ public class Proposta {
     private List<Bens> garantia;
     private boolean contraproposta;
     private long numProtocolo;
+    private boolean aprovado;
 
     //Construtores
     public Proposta() {
@@ -61,6 +63,11 @@ public class Proposta {
         return data;
     }
 
+    public String getDataToString() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.data.format(formatador);
+    }
+
     public void setData(LocalDate data) {
         this.data = data;
     }
@@ -93,6 +100,11 @@ public class Proposta {
         return prazo;
     }
 
+    public String getPrazoData() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.data.plusDays(prazo).format(formatador);
+    }
+
     public void setPrazo(int prazo) {
         this.prazo = prazo;
     }
@@ -119,5 +131,13 @@ public class Proposta {
 
     public void setNumProtocolo(long numProtocolo) {
         this.numProtocolo = numProtocolo;
+    }
+
+    public boolean isAprovado() {
+        return aprovado;
+    }
+
+    public void setAprovado(boolean aprovado) {
+        this.aprovado = aprovado;
     }
 }

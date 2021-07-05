@@ -32,6 +32,7 @@ public class ControladorProposta {
         p.setData(LocalDate.now());
         p.setContraproposta(false);
         p.setNumProtocolo(contadorProtocolo);
+        p.setAprovado(false);
 
         try {
             this.repoProposta.inserir(p);
@@ -103,6 +104,25 @@ public class ControladorProposta {
         } catch (ObjetoInexistenteException e) {
             throw new PropostaInvalidaException("Parece que essa proposta não existe!");
         }
+    }
+
+    /**
+     * Método com foco no negócio, que realiza a aprovação de contrapropostas. A ideia aqui é apenas setar como
+     * {@code true} sempre que uma contraproposta for aprovada.
+     *
+     * @param numProtocolo se refere ao número único de uma proposta que se deseja aprovar.
+     * @throws PropostaInvalidaException poderá acontecer caso o número do protocolo não seja válido, se a proposta não
+     * existir e se esta for uma ação ilegal para esse método (caso a proposta não seja uma contraproposta).
+     */
+    public void aprovarContraProposta(long numProtocolo) throws PropostaInvalidaException {
+        if (numProtocolo < 1) throw new PropostaInvalidaException("O Número do protocolo é inválido!");
+
+        Proposta proposta = this.buscarProposta(numProtocolo);
+
+        if (proposta.isContraproposta()) {
+            proposta.setAprovado(true);
+            this.alterarProposta(proposta);
+        } else throw new PropostaInvalidaException("Esta é uma ação ilegal!");
     }
 
     /**

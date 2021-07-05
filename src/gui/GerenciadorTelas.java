@@ -1,10 +1,8 @@
 package gui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -140,6 +138,14 @@ public class GerenciadorTelas {
 		case "telaCriarProposta": {
             try {
                 telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCriarProposta.fxml").openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+		}
+		case "telaEmprestimoDetalhe": {
+            try {
+                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaEmpregadoDetalhe.fxml").openStream());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -1,20 +1,21 @@
 package gui;
 
-import exceptions.PessoaInexistenteException;
 import gui.models.EmpregadoModelo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import negocio.Fachada;
 import negocio.beans.Cliente;
 import negocio.beans.Empregado;
-import negocio.beans.Pessoa;
-
 import java.util.List;
+
+import exceptions.PessoaInexistenteException;
+import gerenciamento.SessionManager;
 
 public class TelaPrincipalAdminController {
     @FXML TableView<EmpregadoModelo> tblvEmpregados;
@@ -54,8 +55,27 @@ public class TelaPrincipalAdminController {
     public void btnCatalogoPressed(ActionEvent event) {
         GerenciadorTelas.getInstance().changeScreen("telaBensEmpresa");
     }
-
-    public void btnVoltarPressed(ActionEvent event) {
+    
+    @FXML
+    public void tblvDevedoresOnMouseClicked(MouseEvent event) {
+    	if (tblvEmpregados.getSelectionModel().getSelectedItem() != null) {
+    		String email = tblvEmpregados.getSelectionModel().getSelectedItem().getEmail();
+    	
+	    	try {
+					SessionManager.getInstance().setPessoaSessao(Fachada.getInstance().buscarPessoa(email)); 
+	            if (SessionManager.getInstance().getPessoaSessao() != null 
+	            		&& SessionManager.getInstance().getPessoaSessao() instanceof Empregado 
+	            		&& event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2)
+	            		GerenciadorTelas.getInstance().changeScreen("telaEmpregadoDetalhe");
+	        }catch (PessoaInexistenteException e) {
+				e.printStackTrace();
+			}
+    	}
+    }
+    
+    @FXML
+    public void btnSairPressed() {
+    	SessionManager.getInstance().setPessoaSessao(null);
         GerenciadorTelas.getInstance().changeScreen("telaLogin");
     }
 }

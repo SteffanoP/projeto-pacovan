@@ -201,6 +201,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public void aprovarContraProposta(long numProtocolo) throws PropostaInvalidaException {
+        propostas.aprovarContraProposta(numProtocolo);
+    }
+
+    @Override
     public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
         return propostas.listarPropostasCliente(uidCliente);
     }

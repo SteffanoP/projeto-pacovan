@@ -44,5 +44,6 @@
       <Accordion layoutX="107.0" layoutY="357.0" />
       <Button layoutX="107.0" layoutY="482.0" mnemonicParsing="false" onAction="#onbtnCriarPropostaPressed" text="Criar Proposta" />
       <Label layoutX="34.0" layoutY="34.0" />
+      <Button fx:id="btnVoltarPressed" layoutX="845.0" layoutY="51.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar" />
    </children>
 </Pane>

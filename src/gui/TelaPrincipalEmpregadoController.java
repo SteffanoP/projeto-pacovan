@@ -9,7 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import negocio.Fachada;
+import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 import negocio.beans.Emprestimo;
 import negocio.beans.Proposta;
@@ -84,7 +87,8 @@ public class TelaPrincipalEmpregadoController {
     private void atualizaTableViewsEmprestimo(TableView<DevedorModelo> tableView, List<Emprestimo> emprestimoList) {
         for (Emprestimo emprestimo : emprestimoList) {
             DevedorModelo devedorModelo = new DevedorModelo(emprestimo.getValor(), emprestimo.getDataPagamento(),
-                    emprestimo.getCliente(),emprestimo.getParcelas(),emprestimo.getConfiancaPagamento());
+                    emprestimo.getCliente(),emprestimo.getParcelas(),emprestimo.getConfiancaPagamento(),
+                    emprestimo.getCliente().getEmail());
             tableView.getItems().add(devedorModelo);
         }
     }
@@ -144,33 +148,51 @@ public class TelaPrincipalEmpregadoController {
     }
 
     @FXML
-    public void tblvPropostasOnMouseClicked() {
+    public void tblvPropostasOnMouseClicked(MouseEvent event) {
         if (tblvPropostas.getSelectionModel().getSelectedItem() != null) {
             long numProtocolo = tblvPropostas.getSelectionModel().getSelectedItem().getNumProtocolo();
             try {
                 SessionManager.getInstance().setPropostaSessao(Fachada.getInstance().buscarProposta(numProtocolo));
+                if (SessionManager.getInstance().getPropostaSessao() != null) {
+                	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2)
+                		GerenciadorTelas.getInstance().changeScreen("telaAnaliseProposta");
+                } else
+                    this.gerarAlertaErro("Propostas", "sua Proposta", "Parece que você não" +
+                            " selecionou sua Proposta");
             } catch (PropostaInvalidaException e) {
                 this.gerarAlertaErro("Propostas", "busca de propostas",e.getMessage());
             }
         }
     }
-
+    
     @FXML
-    public void btnAnalisePropostaPressed() {
-        if (SessionManager.getInstance().getPropostaSessao() != null) {
-            GerenciadorTelas.getInstance().changeScreen("telaAnaliseProposta");
-        } else
-            this.gerarAlertaErro("Propostas", "sua Proposta", "Parece que você não" +
-                    " selecionou sua Proposta");
+    public void tblvDevedoresOnMouseClicked(MouseEvent event) {
+    	String email = null;
+    	
+    	if (tblvDevedores.getSelectionModel().getSelectedItem() != null) {
+    		email = tblvDevedores.getSelectionModel().getSelectedItem().getEmail();
+    	}
+	if (tblvDProtegidos.getSelectionModel().getSelectedItem() != null) {
+    		email = tblvDProtegidos.getSelectionModel().getSelectedItem().getEmail();
+    	}
+    	if (tblvDAltoRisco.getSelectionModel().getSelectedItem() != null) {
+    		email = tblvDAltoRisco.getSelectionModel().getSelectedItem().getEmail();
+    	}
+    	
+    	try {
+				SessionManager.getInstance().setClienteSessao((Cliente) Fachada.getInstance().buscarPessoa(email)); 
+            if (SessionManager.getInstance().getClienteSessao() != null && event.getButton().equals(MouseButton.PRIMARY) 
+            		&& event.getClickCount() >= 2)
+            		GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
+        }catch (PessoaInexistenteException e) {
+        	this.gerarAlertaErro("Cliente", "busca de pessoas", e.getMessage());
+			e.printStackTrace();
+		}
     }
-
+    
     @FXML
-    public void btnConfirmarDevedorPressed(ActionEvent event) {
-        GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
-    }
-
-    @FXML
-    public void btnVoltarPressed(ActionEvent event) {
+    public void btnSairPressed() {
+    	SessionManager.getInstance().setPessoaSessao(null);
         GerenciadorTelas.getInstance().changeScreen("telaLogin");
     }
 }
