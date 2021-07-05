@@ -31,7 +31,7 @@ public class ControladorBENS {
         try {
             this.repoBENS.inserir(bens);
         } catch (ObjetoDuplicadoException e) {
-            throw new BensDuplicadoException("Bens jÃ¡ registrado no sistema!");
+            throw new BensDuplicadoException("Bens já registrado no sistema!");
         }
     }
 
