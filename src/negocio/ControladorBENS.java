@@ -186,7 +186,7 @@ public class ControladorBENS {
     /**
      * Método que remove bens do repositório.
      * @param bens bem a ser removido do repositório.
-     * @throws BensInexistenteException caso o bem a ser substituído nÃ£o exista no repositório.
+     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
      */
     public void removerBens(Bens bens) throws BensInexistenteException{
         try {
