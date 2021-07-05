@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaCadastroEmpregadosController">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaCadastroEmpregadosController">
    <children>
       <Label layoutX="232.0" layoutY="244.0" text="Nome*:">
          <font>
@@ -82,6 +82,6 @@
       </Button>
       <Button fx:id="btnCancelar" layoutX="749.0" layoutY="394.0" mnemonicParsing="false" onAction="#btnCancelarPressed" text="Cancelar" />
       <DatePicker fx:id="dtNascimento" layoutX="291.0" layoutY="323.0" prefHeight="26.0" prefWidth="150.0" />
-      <Button layoutX="666.0" layoutY="449.0" mnemonicParsing="false" onAction="#btnVoltarPressed" prefHeight="26.0" prefWidth="150.0" text="Voltar à tela principal" />
+      <Button fx:id="btnVoltarPressed" layoutX="666.0" layoutY="449.0" mnemonicParsing="false" onAction="#btnVoltarPressed" prefHeight="26.0" prefWidth="150.0" text="Voltar à tela principal" />
    </children>
 </AnchorPane>

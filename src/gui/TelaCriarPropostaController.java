@@ -3,6 +3,7 @@ package gui;
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import negocio.Fachada;
@@ -75,6 +76,11 @@ public class TelaCriarPropostaController {
             MenuItem item = new MenuItem(bens.getNome());
             splMenuGarantia.getItems().add(item);
         }
+    }
+    
+    @FXML
+    public void btnVoltarPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaCliente");
     }
 
     @FXML

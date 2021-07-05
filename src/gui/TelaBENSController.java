@@ -45,6 +45,16 @@ public class TelaBENSController {
         }
         txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
     }
+    
+    @FXML
+    public void tblvBensOnMouseClicked() {
+    	// TODO: selecionar BENS da sessão
+    }
+    
+    @FXML
+    public void btnRemoverBens() {
+    	// TODO: remover BENS selecionado
+    }
 
     @FXML
     public void btnInserirBens() {

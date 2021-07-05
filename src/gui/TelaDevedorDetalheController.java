@@ -3,7 +3,6 @@ package gui;
 import exceptions.EmprestimoInexistenteException;
 import gerenciamento.SessionManager;
 import gui.models.DevedorModelo;
-import gui.models.EmprestimoModelo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import negocio.Fachada;
 import negocio.beans.Emprestimo;
 
@@ -28,27 +29,6 @@ public class TelaDevedorDetalheController {
 
     @FXML Button btnVerDetalhesEmprestimo;
     @FXML Button btnVoltar;
-
-    @FXML
-    public void tblvEmprestimosOnMouseClicked() {
-        if (tblvEmprestimos.getSelectionModel().getSelectedItem() != null) {
-            long numProtocolo = tblvEmprestimos.getSelectionModel().getSelectedItem().getNumProtocolo();
-            try {
-                SessionManager.getInstance().setEmprestimoSessao(Fachada.getInstance().buscarEmprestimo(numProtocolo));
-            } catch (EmprestimoInexistenteException e) {
-                this.gerarAlertaErro("Empréstimos", "busca dos empréstimos", e.getMessage());
-            }
-        }
-    }
-
-    @FXML
-    public void btnVerDetalhesEmprestimoPressed() {
-        if (SessionManager.getInstance().getEmprestimoSessao() != null) {
-            //TODO: Tela de Empréstimo em detalhe
-        } else
-            this.gerarAlertaErro("Empréstimos", "o empréstimo", "Parece que você não" +
-                    " selecionou um Empréstimo");
-    }
 
     @FXML
     public void btnVoltarPressed(ActionEvent event) {
@@ -78,7 +58,7 @@ public class TelaDevedorDetalheController {
         for (Emprestimo emprestimo : emprestimoList) {
             DevedorModelo devedorModelo = new DevedorModelo(emprestimo.getValor(),emprestimo.getDataPagamento(),
                     emprestimo.getCliente(), emprestimo.getParcelas(), emprestimo.getConfiancaPagamento(),
-                    emprestimo.getNumProtocolo());
+                    emprestimo.getCliente().getEmail(),emprestimo.getNumProtocolo());
             tblvEmprestimos.getItems().add(devedorModelo);
         }
     }
@@ -89,5 +69,24 @@ public class TelaDevedorDetalheController {
         alerta.setHeaderText("Parece que tivemos um erro com " + subtitulo);
         alerta.setContentText(justificativa);
         alerta.showAndWait();
+    }
+    
+    @FXML
+    public void tblvEmprestimosOnMouseClicked(MouseEvent event) {
+        if (tblvEmprestimos.getSelectionModel().getSelectedItem() != null) {
+            long numProtocolo = tblvEmprestimos.getSelectionModel().getSelectedItem().getNumProtocolo();
+            try {
+                SessionManager.getInstance().setEmprestimoSessao(Fachada.getInstance().buscarEmprestimo(numProtocolo));
+                if (SessionManager.getInstance().getEmprestimoSessao() != null) {
+                	if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2) {
+                		GerenciadorTelas.getInstance().changeScreen("telaEmprestimoDetalhe");
+                	}
+                } else
+                    this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
+                            " selecionou seu Empréstimo");
+            } catch (EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Empréstimos", "busca de empréstimos", e.getMessage());
+            }
+        }
     }
 }

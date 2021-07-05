@@ -65,7 +65,6 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Button fx:id="btnVerDetalhesEmprestimo" layoutX="810.0" layoutY="637.0" mnemonicParsing="false" onAction="#btnVerDetalhesEmprestimoPressed" text="Ver Detalhes do Empréstimo" />
       <Button fx:id="btnVoltar" layoutX="848.0" layoutY="690.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar à tela principal" />
    </children>
 </Pane>
