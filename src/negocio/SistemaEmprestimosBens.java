@@ -70,7 +70,7 @@ public interface SistemaEmprestimosBens {
     double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException;
 
     /**
-     * Mátodo que altera um bem por outro no repositório
+     * Método que altera um bem por outro no repositório
      *
      * @param bensAntigo bem inicialmente cadastrado.
      * @param bensNovo   novo bem a ser inserido para substituir
