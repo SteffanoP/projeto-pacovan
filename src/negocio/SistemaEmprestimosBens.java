@@ -19,6 +19,18 @@ public interface SistemaEmprestimosBens {
      */
     void inserirBens(Bens bens) throws BensDuplicadoException;
 
+    /**
+     * Método que faz a busca de um BENS do cliente por meio do nome de seu BENS. Utiliza a técnica lambda/stream de
+     * java 8 que filtra de acordo com o nome do BENS e seleciona o elemento (caso haja uma lista de elementos
+     * seleciona apenas o último elemento de uma lista; caso para duplicados) de mesmo nome.
+     *
+     * @param uidCliente se refere ao {@code uidCliente} do qual se trata o BENS.
+     * @param nomeBens se refere ao {@code nome} do Bens do qual se trata o BENS.
+     * @return irá retornar o BENS pesquisado sobre os parâmetros anteriores
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não exista.
+     */
+    Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException;
+
     Map<LocalDate, Bens> listarBensEmpresa();
 
     /**
