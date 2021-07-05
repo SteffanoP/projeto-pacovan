@@ -221,7 +221,7 @@ public interface SistemaEmprestimosBens {
      *
      * @param email se trata do parâmetro de busca do usuário
      * @return retorna um objeto abstrato do tipo {@code Pessoa}
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} nÃ£o esteja atribuído a nenhuma
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
      * {@code Pessoa}.
      */
     Pessoa buscarPessoa(String email) throws PessoaInexistenteException;
