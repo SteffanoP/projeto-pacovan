@@ -187,8 +187,8 @@ public class ControladorEmprestimo {
     }
 
     /**
-     * M�todo que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que n�o foram pagos at� o {@code prazo}, por�m possuem um {@code score} alto.
+     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que não foram pagos até o {@code prazo}, porém possuem um {@code score} alto.
      * 
      * @return Map de Emprestimo ordenados por data.
      */
