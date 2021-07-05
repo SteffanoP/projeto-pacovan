@@ -192,7 +192,7 @@ public class ControladorBENS {
         try {
             this.repoBENS.remover(bens);
         } catch (ObjetoInexistenteException e) {
-            throw new BensInexistenteException("O bem nÃ£o existe!");
+            throw new BensInexistenteException("O bem não existe!");
         }
     }
 }
