@@ -74,7 +74,7 @@ public class ControladorProposta {
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @return Map de propostas ordenadas por data.
      */
-    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) {
+    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
         List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar()); 
         
