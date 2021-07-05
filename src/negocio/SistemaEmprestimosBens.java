@@ -31,13 +31,41 @@ public interface SistemaEmprestimosBens {
      */
     Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
 
+    /**
+     * MÃ©todo que lista os BENS do cliente ordenados por sua data de criaÃ§Ã£o por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
+     * @return Map de Bens ordenados por data.
+     */
     Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException;
 
+    /**
+     * MÃ©todo que lista os BENS pendentes do cliente ordenados por sua data de criaÃ§Ã£o por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
+     * @return Map de Bens ordenados por data.
+     */
+    
     Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException;
 
-    Map<LocalDate, Bens> listarBensAprovados(long uidCliente) throws PessoaInexistenteException;
+    /**
+     * MÃ©todo que lista todos os BENS aprovados ordenados por sua data de criaÃ§Ã£o por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
+    Map<LocalDate, Bens> listarBensAprovados();
 
-    Map<LocalDate, Bens> listarBensGarantia(long uidCliente) throws PessoaInexistenteException;
+    /**
+     * MÃ©todo que lista todos os BENS que são garantia ordenados por sua data de criaÃ§Ã£o por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
+    Map<LocalDate, Bens> listarBensGarantia();
 
     double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException;
 
@@ -98,7 +126,7 @@ public interface SistemaEmprestimosBens {
      * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
      * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @return Map de empréstimos ordenados por data.
      */
     Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
@@ -115,7 +143,7 @@ public interface SistemaEmprestimosBens {
      * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
      * {@code Emprestimo} que não pagaram até o {@code prazo}.
      * 
-     * @return Map de empréstimos ordenados por data.
+     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
      */
     public
     Map<LocalDate, Emprestimo> listarDevedores();
@@ -124,7 +152,7 @@ public interface SistemaEmprestimosBens {
      * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
      * {@code Emprestimo} que não pagaram até o {@code prazo}.
      * 
-     * @return Map de empréstimos ordenados por data.
+     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
@@ -132,11 +160,30 @@ public interface SistemaEmprestimosBens {
      * Método que retorna um {@code Map} de {@code Cliente} ordenado por data referente ao {@code prazo} de todos os 
      * {@code Emprestimo} que não foram pagos até o {@code prazo} e além disso possuem um {@code score} baixo.
      * 
-     * @return Map de empréstimos ordenados por data.
+     * @return Map de clientes ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
+    /**
+     * MÃ©todo que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Movimentacao} e ordenÃ¡-los a partir do seu atributo {@code instante}.
+     * 
+     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
+     * @return Map de Movimentacao ordenados por data.
+     */
     Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
+
+    /**
+     * MÃ©todo que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final. São
+     * ordenados por sua data por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Movimentacao} e ordenÃ¡-los a partir do seu atributo {@code instante}.
+     * 
+     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
+     * @param dataInicial é a data a partir da qual o cliente deseja ver suas movimentações.
+     * @param dataFinal é a data limite 
+     * @return Map de Movimentacao ordenados por data.
+     */
 
     List<Movimentacao> listarPeriodoMovimentacaoCliente(long uidCliente, LocalDate dataInicial, LocalDate dataFinal);
 
@@ -247,7 +294,7 @@ public interface SistemaEmprestimosBens {
      * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordenÃ¡-los a partir do seu atributo
      * {@code data}.
      *
-     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente que se vai alterar o cadastro.
+     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
      * @return Map de propostas ordenadas por data.
      */
     Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente);
@@ -257,7 +304,7 @@ public interface SistemaEmprestimosBens {
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir
      * do seu atributo do tipo {@code Cliente} e ordenÃ¡-los a partir do seu atributo {@code data}.
      *
-     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente que se vai alterar o cadastro.
+     * @param uidCliente se refere ao identificador Ãºnico e exclusivo do cliente.
      * @throws PessoaInexistenteException poderÃ¡ acontecer caso o {@code uidCliente} nÃ£o esteja atribuÃ­do a nenhum
      * cliente.
      * @return Map de propostas ordenadas por data.

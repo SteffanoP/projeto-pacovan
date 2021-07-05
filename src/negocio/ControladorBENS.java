@@ -67,6 +67,13 @@ public class ControladorBENS {
         return  mapaBens;
     }
 
+    /**
+     * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de Bens ordenados por data.
+     */
     public Map<LocalDate,Bens> listarBensCliente(long uidCliente) {
         NavigableMap<LocalDate, Bens> mapaBensCliente = new TreeMap<>();
         List<Bens> benClienteList = repoBENS.listar();
@@ -80,7 +87,14 @@ public class ControladorBENS {
             return mapaBensCliente;
     }
 
-
+    /**
+     * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @throws PessoaInexistenteException se o cliente n�o for encontrado.
+     * @return Map de Bens ordenados por data.
+     */
     public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException{
 
         NavigableMap<LocalDate, Bens> mapaBensPendentes = new TreeMap<>();
@@ -100,6 +114,12 @@ public class ControladorBENS {
         return mapaBensPendentes;
     }
 
+    /**
+     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
     public  Map<LocalDate,Bens> listarBensAprovados() {
         NavigableMap<LocalDate, Bens> mapaBensaprovados = new TreeMap<>();
         List<Bens> aproveList = repoBENS.listar();
@@ -111,6 +131,12 @@ public class ControladorBENS {
         return mapaBensaprovados;
     }
 
+    /**
+     * Método que lista todos os BENS que s�o garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
     public Map<LocalDate,Bens> listarBensGarantia () {
         NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
         List<Bens> garantiaList = repoBENS.listar();

@@ -71,7 +71,8 @@ public class ControladorProposta {
      * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo 
      * {@code data}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de propostas ordenadas por data.
      */
     public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
@@ -92,9 +93,10 @@ public class ControladorProposta {
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir 
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
      * cliente.
+     * @return Map de propostas ordenadas por data.
      */
     public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
@@ -120,6 +122,8 @@ public class ControladorProposta {
      * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
+     * 
+     * @return Map de propostas ordenadas por data.
      */
     public Map<LocalDate, Proposta> listarPropostasPendentes() {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();

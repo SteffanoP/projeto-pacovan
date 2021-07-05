@@ -27,7 +27,7 @@ public abstract class Pessoa {
     public boolean pessoaDeMaior(){
         long anos = ChronoUnit.YEARS.between(this.dataNascimento, LocalDate.now());
         boolean deMaior = false;
-        if(anos > 18) deMaior = true;
+        if(anos >= 18) deMaior = true;
         return deMaior;
     }
 
