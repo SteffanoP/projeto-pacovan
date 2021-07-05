@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaAnalisePropostaController">
    <children>
-      <SplitPane dividerPositions="0.1348314606741573" layoutX="97.0" layoutY="42.0" prefHeight="300.0" prefWidth="892.0">
+      <SplitPane dividerPositions="0.1348314606741573" layoutX="67.0" layoutY="50.0" prefHeight="300.0" prefWidth="892.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -28,33 +28,33 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="311.0" prefWidth="731.0">
                <children>
-                  <TextField disable="true" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="436.0" />
-                  <TextArea layoutX="14.0" layoutY="97.0" prefHeight="67.0" prefWidth="436.0" />
-                  <TextField alignment="CENTER_RIGHT" layoutX="14.0" layoutY="179.0" />
-                  <TextField alignment="CENTER_RIGHT" layoutX="14.0" layoutY="217.0" />
-                  <DatePicker disable="true" editable="false" layoutX="14.0" layoutY="54.0" />
-                  <TextField layoutX="14.0" layoutY="256.0" />
-                <Button layoutX="612.0" layoutY="256.0" mnemonicParsing="false" text="Criar Contraproposta" />
-                  <Button layoutX="592.0" layoutY="217.0" mnemonicParsing="false" text="Editar p/ Contraproposta" />
+                  <TextField fx:id="txtNomeCliente" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="436.0" />
+                  <TextArea fx:id="txtMotivo" layoutX="14.0" layoutY="97.0" prefHeight="67.0" prefWidth="436.0" />
+                  <TextField fx:id="txtValor" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="179.0" />
+                  <TextField fx:id="txtParcelas" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="217.0" />
+                  <DatePicker fx:id="dtData" disable="true" editable="false" layoutX="14.0" layoutY="54.0" />
+                  <TextField fx:id="txtPrazo" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="256.0" />
+                <Button fx:id="btnCriarContraproposta" disable="true" layoutX="612.0" layoutY="256.0" mnemonicParsing="false" onAction="#btnCriarContrapropostaPressed" text="Criar Contraproposta" />
+                  <Button fx:id="btnEditarContraproposta" layoutX="592.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnEditarContrapropostaPressed" text="Editar p/ Contraproposta" />
                </children>
             </AnchorPane>
          </items>
       </SplitPane>
-      <Label layoutX="100.0" layoutY="6.0" prefHeight="36.0" prefWidth="126.0" text="Detalhes da Proposta" />
-      <Label layoutX="100.0" layoutY="342.0" prefHeight="36.0" prefWidth="73.0" text="Garantia(s):" />
-      <TableView layoutX="100.0" layoutY="378.0" prefHeight="300.0" prefWidth="892.0">
+      <Label layoutX="70.0" layoutY="14.0" prefHeight="36.0" prefWidth="126.0" text="Detalhes da Proposta" />
+      <Label layoutX="70.0" layoutY="350.0" prefHeight="36.0" prefWidth="73.0" text="Garantia(s):" />
+      <TableView fx:id="tblvGarantia" layoutX="70.0" layoutY="386.0" prefHeight="300.0" prefWidth="892.0">
         <columns>
-          <TableColumn text="Valor" />
-            <TableColumn prefWidth="167.0" text="Nome" />
-          <TableColumn prefWidth="385.0" text="Descrição" />
-            <TableColumn prefWidth="115.0" text="Tempo de Uso" />
-            <TableColumn prefWidth="144.0" text="Data Cadastro" />
+          <TableColumn fx:id="colValor" text="Valor" />
+            <TableColumn fx:id="colNome" prefWidth="167.0" text="Nome" />
+          <TableColumn fx:id="colDescricao" prefWidth="385.0" text="Descrição" />
+            <TableColumn fx:id="colTempoUso" prefWidth="115.0" text="Tempo de Uso" />
+            <TableColumn fx:id="colDataCadastro" prefWidth="144.0" text="Data Cadastro" />
         </columns>
       </TableView>
-      <ButtonBar layoutX="100.0" layoutY="696.0" prefHeight="40.0" prefWidth="892.0">
+      <ButtonBar layoutX="67.0" layoutY="686.0" prefHeight="40.0" prefWidth="892.0">
         <buttons>
-            <Button mnemonicParsing="false" text="Voltar à tela principal" />
-            <Button mnemonicParsing="false" text="Criar Empréstimo" />
+            <Button fx:id="btnVoltarTela" mnemonicParsing="false" onAction="#btnVoltarTelaPressed" text="Voltar à tela principal" />
+            <Button fx:id="btnCriarEmprestimo" mnemonicParsing="false" onAction="#btnCriarEmprestimoPressed" text="Criar Empréstimo" />
         </buttons>
       </ButtonBar>
    </children>
