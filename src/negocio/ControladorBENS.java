@@ -115,8 +115,8 @@ public class ControladorBENS {
     }
 
     /**
-     * MÃ©todo que lista todos os BENS aprovados ordenados por sua data de criaÃ§Ã£o por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordenÃ¡-los a partir do seu atributo {@code dataCadastro}.
+     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
      * 
      * @return Map de Bens ordenados por data.
      */
