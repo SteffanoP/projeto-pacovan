@@ -79,7 +79,7 @@ public interface SistemaEmprestimosBens {
     void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException;
 
     /**
-     * MÃ©todo que remove bens do repositório.
+     * Método que remove bens do repositório.
      *
      * @param bens bem a ser removido do repositório.
      * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
