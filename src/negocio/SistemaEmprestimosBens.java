@@ -74,7 +74,7 @@ public interface SistemaEmprestimosBens {
      *
      * @param bensAntigo bem inicialmente cadastrado.
      * @param bensNovo   novo bem a ser inserido para substituir
-     * @throws BensInexistenteException caso o bem a ser substituído nÃ£o exista no repositório.
+     * @throws BensInexistenteException caso o bem a ser substituído não exista no repositório.
      */
     void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException;
 
