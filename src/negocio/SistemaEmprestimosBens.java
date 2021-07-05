@@ -257,7 +257,7 @@ public interface SistemaEmprestimosBens {
     /**
      * Método que lista todos os empregados do repositório de empregados {@code repoEmpregado}.
      *
-     * @return uma lista nÃ£o modificável do repositório de empregados.
+     * @return uma lista não modificável do repositório de empregados.
      */
     List<Empregado> listarEmpregados();
 
