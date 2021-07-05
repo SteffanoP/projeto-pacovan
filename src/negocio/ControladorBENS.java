@@ -176,7 +176,7 @@ public class ControladorBENS {
                 try {
                     this.repoBENS.atualizar(bensAntigo, bensNovo);
                 } catch (ObjetoInexistenteException e) {
-                    throw new BensInexistenteException("O bem nÃ£o existe!");
+                    throw new BensInexistenteException("O bem não existe!");
                 }
                 bensExiste = true;
             }
