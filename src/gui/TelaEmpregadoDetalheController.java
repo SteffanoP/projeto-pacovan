@@ -9,11 +9,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.Fachada;
-import negocio.beans.Bens;
 import negocio.beans.Empregado;
 import negocio.beans.Emprestimo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TelaEmpregadoDetalheController {
