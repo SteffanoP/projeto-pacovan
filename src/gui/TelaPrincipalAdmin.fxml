@@ -51,7 +51,7 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
                   <ScrollBar layoutX="619.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="151.0" prefWidth="10.0" />
-                  <TableView fx:id="tblvEmpregados" prefHeight="146.0" prefWidth="262.0">
+                  <TableView fx:id="tblvEmpregados" onMouseClicked="#tblvEmpregadosOnMouseClicked" prefHeight="146.0" prefWidth="262.0">
                     <columns>
                       <TableColumn fx:id="colNomeEmpregados" prefWidth="159.0" text="Empregado" />
                       <TableColumn fx:id="colReputacaoEmpregados" prefWidth="102.0" text="Reputação (%)" />
