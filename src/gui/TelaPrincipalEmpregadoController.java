@@ -170,16 +170,18 @@ public class TelaPrincipalEmpregadoController {
     	if (tblvDAltoRisco.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDAltoRisco.getSelectionModel().getSelectedItem().getEmail();
     	}
-    	
-    	try {
-				SessionManager.getInstance().setClienteSessao((Cliente) Fachada.getInstance().buscarPessoa(email)); 
-            if (SessionManager.getInstance().getClienteSessao() != null && event.getButton().equals(MouseButton.PRIMARY) 
-            		&& event.getClickCount() >= 2)
-            		GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
-        }catch (PessoaInexistenteException e) {
-        	this.gerarAlertaErro("Cliente", "busca de pessoas", e.getMessage());
-			e.printStackTrace();
-		}
+
+    	if (email != null) {
+            try {
+                SessionManager.getInstance().setClienteSessao((Cliente) Fachada.getInstance().buscarPessoa(email));
+                if (SessionManager.getInstance().getClienteSessao() != null && event.getButton().equals(MouseButton.PRIMARY)
+                        && event.getClickCount() >= 2)
+                    GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
+            } catch (PessoaInexistenteException e) {
+                this.gerarAlertaErro("Cliente", "busca de pessoas", e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
     
     @FXML
