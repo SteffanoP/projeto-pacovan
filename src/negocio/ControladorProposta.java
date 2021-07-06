@@ -6,6 +6,7 @@ import exceptions.ObjetoDuplicadoException;
 import exceptions.ObjetoInexistenteException;
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
+import negocio.beans.Bens;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
@@ -104,6 +105,25 @@ public class ControladorProposta {
         } catch (ObjetoInexistenteException e) {
             throw new PropostaInvalidaException("Parece que essa proposta não existe!");
         }
+    }
+
+    /**
+     * Método que atualiza apenas as Garantias de uma Proposta do Repositório de Propostas. Consiste em pegar a
+     * {@code garantia} de uma {@code Proposta} e passar para a {@code Proposta} do repositório (que tenha o mesmo
+     * {@code numProtocolo}) por meio do método {@code alterarProposta}.
+     *
+     * @param propostaComGarantia se refere a uma proposta com uma nova garantia que se pretende inserir numa proposta
+     *                            do repositório.
+     * @throws PropostaInvalidaException poderá acontecer caso o número do protocolo da {@code propostaComGarantia}
+     * seja inválido ou se não houver {@code Proposta} no repositório de propostas.
+     */
+    public void atualizarGarantias(Proposta propostaComGarantia) throws PropostaInvalidaException {
+        if (propostaComGarantia.getNumProtocolo() < 1)
+            throw new PropostaInvalidaException("O Número do protocolo é inválido!");
+
+        Proposta proposta = this.buscarProposta(propostaComGarantia.getNumProtocolo());
+        proposta.setGarantia(propostaComGarantia.getGarantia());
+        this.alterarProposta(proposta);
     }
 
     /**
