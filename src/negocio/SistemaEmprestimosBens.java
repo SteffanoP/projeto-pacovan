@@ -172,7 +172,7 @@ public interface SistemaEmprestimosBens {
      * @throws PessoaInexistenteException se o cliente não for encontrado.
      * @return Map de Movimentacao ordenados por data.
      */
-    Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
+    Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente);
 
     /**
      * Método que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final. São

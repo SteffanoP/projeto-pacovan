@@ -21,21 +21,17 @@ public class ControladorMovimentacao {
      * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente não for encontrado.
      * @return Map de Movimentacao ordenados por data.
      */
-    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException  {
+    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) {
         NavigableMap<LocalDateTime, Movimentacao> mapaMovimentacaoCliente = new TreeMap<>();
-        boolean moveClienteExiste = false;
         List<Movimentacao> moveList = repoMovimentacao.listar();
 
-        for( Movimentacao move : moveList){
-
-            if(move.getCliente().getUid() == uidCliente ){
-                moveClienteExiste = true;
+        for(Movimentacao move : moveList){
+            if(move.getCliente().getUid() == uidCliente) {
                     mapaMovimentacaoCliente.put(move.getInstante(), move);
             }
-        }if(!moveClienteExiste)  throw new PessoaInexistenteException ("Cliente Não existe!");
+        }
 
 
         return mapaMovimentacaoCliente;

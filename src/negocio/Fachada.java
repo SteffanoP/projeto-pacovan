@@ -131,7 +131,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException {
+    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) {
         return movimentacoes.listarMoveCliente(uidCliente);
     }
 
