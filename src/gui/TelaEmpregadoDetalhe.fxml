@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEmpregadoDetalheController">
    <children>
       <Label layoutX="387.0" layoutY="57.0" text="Empregado em Detalhe">
          <font>
@@ -60,18 +60,18 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="105.0" layoutY="53.0" />
-            <TextField layoutX="433.0" layoutY="216.0" />
-            <TextField disable="true" editable="false" layoutX="433.0" layoutY="66.0" />
-            <TextField layoutX="433.0" layoutY="136.0" />
-            <TextField layoutX="105.0" layoutY="101.0" />
-            <TextField layoutX="105.0" layoutY="146.0" />
-            <TextField layoutX="105.0" layoutY="188.0" />
-            <TextField layoutX="105.0" layoutY="229.0" />
+            <TextField fx:id="txtUID" disable="true" editable="false" layoutX="105.0" layoutY="53.0" />
+            <TextField fx:id="txtSalarioBase" layoutX="433.0" layoutY="216.0" />
+            <TextField fx:id="txtCPF" disable="true" editable="false" layoutX="433.0" layoutY="66.0" />
+            <TextField fx:id="txtReputacao" layoutX="433.0" layoutY="136.0" />
+            <TextField fx:id="txtNome" layoutX="105.0" layoutY="101.0" />
+            <TextField fx:id="txtEmail" layoutX="105.0" layoutY="146.0" />
+            <TextField fx:id="txtEndereco" layoutX="105.0" layoutY="188.0" />
+            <TextField fx:id="txtTelefone" layoutX="105.0" layoutY="229.0" />
             <Separator layoutX="316.0" layoutY="58.0" orientation="VERTICAL" prefHeight="201.0" prefWidth="2.0" />
          </children>
       </Pane>
-      <Button layoutX="790.0" layoutY="639.0" mnemonicParsing="false" text="Voltar" />
+      <Button fx:id="btnVoltar" layoutX="790.0" layoutY="639.0" mnemonicParsing="false" onAction="#btnVoltarPressed" text="Voltar" />
       <SplitPane dividerPositions="0.1111111111111111" layoutX="174.0" layoutY="404.0" orientation="VERTICAL" prefHeight="223.0" prefWidth="677.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -81,13 +81,13 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView prefHeight="193.0" prefWidth="677.0">
+                  <TableView fx:id="tblvDevedores" prefHeight="193.0" prefWidth="677.0">
                     <columns>
-                      <TableColumn prefWidth="106.0" text="Valor Devido" />
-                      <TableColumn prefWidth="111.0" text="Data Pagamento" />
-                        <TableColumn prefWidth="194.0" text="Cliente" />
-                        <TableColumn prefWidth="127.0" text="Parcelas" />
-                        <TableColumn prefWidth="138.0" text="Confiança Pagamento" />
+                      <TableColumn fx:id="colValorDevido" prefWidth="106.0" text="Valor Devido" />
+                      <TableColumn fx:id="colDataPagamento" prefWidth="111.0" text="Data Pagamento" />
+                        <TableColumn fx:id="colNomeCliente" prefWidth="194.0" text="Cliente" />
+                        <TableColumn fx:id="colParcelas" prefWidth="127.0" text="Parcelas" />
+                        <TableColumn fx:id="colConfiancaPagamento" prefWidth="138.0" text="Confiança Pagamento" />
                     </columns>
                   </TableView>
                </children>

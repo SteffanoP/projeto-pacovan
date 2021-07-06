@@ -6,6 +6,7 @@ public class SessionManager {
     private static SessionManager instance;
     private Pessoa pessoaSessao;
     private Cliente clienteSessao;
+    private Empregado empregadoSessao;
     private Bens bensSessao;
     private Proposta propostaSessao;
     private Emprestimo emprestimoSessao;
@@ -36,6 +37,14 @@ public class SessionManager {
 
     public void setClienteSessao(Cliente clienteSessao) {
         this.clienteSessao = clienteSessao;
+    }
+
+    public Empregado getEmpregadoSessao() {
+        return empregadoSessao;
+    }
+
+    public void setEmpregadoSessao(Empregado empregadoSessao) {
+        this.empregadoSessao = empregadoSessao;
     }
 
     public Bens getBensSessao() {
