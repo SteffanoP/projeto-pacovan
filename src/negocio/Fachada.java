@@ -66,13 +66,13 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensAprovados(long uidCliente) throws PessoaInexistenteException {
-        return bens.listarBensAprovados(uidCliente);
+    public Map<LocalDate, Bens> listarBensAprovados() {
+        return bens.listarBensAprovados();
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensGarantia(long uidCliente) throws PessoaInexistenteException {
-        return bens.listarBensGarantia(uidCliente);
+    public Map<LocalDate, Bens> listarBensGarantia() {
+        return bens.listarBensGarantia();
     }
 
     @Override
@@ -131,7 +131,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException {
+    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) {
         return movimentacoes.listarMoveCliente(uidCliente);
     }
 
@@ -216,7 +216,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarPropostasPendentes() throws PessoaInexistenteException {
+    public Map<LocalDate, Proposta> listarPropostasPendentes() {
         return propostas.listarPropostasPendentes();
     }
 }
