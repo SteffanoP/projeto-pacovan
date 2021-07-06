@@ -58,7 +58,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollBar layoutX="620.0" orientation="VERTICAL" prefHeight="136.0" prefWidth="10.0" />
-                        <TableView fx:id="tblvDevedores" layoutY="-1.0" prefHeight="146.0" prefWidth="619.0">
+                        <TableView fx:id="tblvDevedores" layoutY="-1.0" onMouseClicked="#tblvDevedoresOnMouseClicked" prefHeight="146.0" prefWidth="619.0">
                           <columns>
                             <TableColumn fx:id="colValorDevidoDevedores" prefWidth="100.0" text="Valor Devido" />
                             <TableColumn fx:id="colDataPagamentoDevedores" prefWidth="141.0" text="Data Pagamento" />
@@ -76,7 +76,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ScrollBar layoutX="619.0" orientation="VERTICAL" prefHeight="137.0" prefWidth="10.0" />
-                        <TableView fx:id="tblvDProtegidos" prefHeight="146.0" prefWidth="619.0">
+                        <TableView fx:id="tblvDProtegidos" onMouseClicked="#tblvDevedoresOnMouseClicked" prefHeight="146.0" prefWidth="619.0">
                            <columns>
                               <TableColumn fx:id="colValorDProtegidos" prefWidth="100.0" text="Valor Devido" />
                               <TableColumn fx:id="colDataPagamentoDProtegidos" prefWidth="141.0" text="Data Pagamento" />
@@ -89,7 +89,7 @@
                   </AnchorPane>
             </content>
           </TitledPane>
-          <TitledPane animated="false" text="Devedores de Alto Risco">
+          <TitledPane animated="false" onMouseClicked="#tblvDevedoresOnMouseClicked" text="Devedores de Alto Risco">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

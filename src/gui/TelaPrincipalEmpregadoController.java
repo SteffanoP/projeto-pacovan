@@ -52,9 +52,6 @@ public class TelaPrincipalEmpregadoController {
 
     @FXML ListView<String> lstvComissoes;
 
-    @FXML Button btnAnaliseProposta;
-    @FXML Button btnConfirmarDevedor;
-
     @FXML
     private void initialize() {
         lblNomeUsuario.setText(SessionManager.getInstance().getPessoaSessao().getNome());
@@ -167,7 +164,7 @@ public class TelaPrincipalEmpregadoController {
     	if (tblvDevedores.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDevedores.getSelectionModel().getSelectedItem().getEmail();
     	}
-	if (tblvDProtegidos.getSelectionModel().getSelectedItem() != null) {
+	    if (tblvDProtegidos.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDProtegidos.getSelectionModel().getSelectedItem().getEmail();
     	}
     	if (tblvDAltoRisco.getSelectionModel().getSelectedItem() != null) {
