@@ -81,7 +81,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tblvDevedores" prefHeight="193.0" prefWidth="677.0">
+                  <TableView fx:id="tblvDevedores" onMouseClicked="#tblvDevedoresOnMouseClicked" prefHeight="193.0" prefWidth="677.0">
                     <columns>
                       <TableColumn fx:id="colValorDevido" prefWidth="106.0" text="Valor Devido" />
                       <TableColumn fx:id="colDataPagamento" prefWidth="111.0" text="Data Pagamento" />

@@ -1,5 +1,6 @@
 package gui;
 
+import exceptions.PessoaInexistenteException;
 import gerenciamento.SessionManager;
 import gui.models.DevedorModelo;
 import javafx.fxml.FXML;
@@ -8,9 +9,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import negocio.Fachada;
+import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 import negocio.beans.Emprestimo;
+import negocio.beans.Pessoa;
 
 import java.util.List;
 
@@ -75,6 +80,25 @@ public class TelaEmpregadoDetalheController {
                     emprestimo.getCliente().getEmail());
             tableView.getItems().add(devedorModelo);
         });
+    }
+
+    @FXML
+    private void tblvDevedoresOnMouseClicked(MouseEvent event) {
+        if (tblvDevedores.getSelectionModel().getSelectedItem() != null) {
+            String emailDevedor = tblvDevedores.getSelectionModel().getSelectedItem().getEmail();
+            try {
+                Pessoa devedor = Fachada.getInstance().buscarPessoa(emailDevedor);
+                if (devedor instanceof Cliente) {
+                    SessionManager.getInstance().setClienteSessao((Cliente) devedor);
+                }
+            } catch (PessoaInexistenteException e) {
+                e.printStackTrace();
+            }
+
+            if (SessionManager.getInstance().getClienteSessao() != null &&
+                    event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2)
+                    GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
+        }
     }
 
     @FXML
