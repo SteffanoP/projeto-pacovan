@@ -38,6 +38,8 @@ public class TelaCriarPropostaController {
             try {
                 listGarantiasTemp.add(Fachada.getInstance().buscarBensCliente(uidCliente,nomeBens));
                 this.atualizarListViewGarantias();
+                splMenuGarantia.setText("Selecione o BENS");
+                splMenuGarantia.getItems().removeIf(bens -> bens.getText().equals(nomeBens));
             } catch (PessoaInexistenteException e) {
                 this.gerarAlertaErroCadastro(e.getMessage());
             }
