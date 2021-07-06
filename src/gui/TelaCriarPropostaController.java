@@ -54,7 +54,7 @@ public class TelaCriarPropostaController {
                 proposta.setMotivo(txtMotivo.getText());
                 proposta.setValorDesejado(Double.parseDouble(txtValor.getText()));
                 proposta.setParcelasDesejadas(Double.parseDouble(txtParcelas.getText()));
-                proposta.setPrazo((int) dtPrazo.getValue().until(LocalDate.now(), ChronoUnit.DAYS));
+                proposta.setPrazo((int) LocalDate.now().until(dtPrazo.getValue(), ChronoUnit.DAYS));
                 proposta.setGarantia(listGarantiasTemp);
                 Fachada.getInstance().criarProposta(proposta);
                 SessionManager.getInstance().setPropostaSessao(

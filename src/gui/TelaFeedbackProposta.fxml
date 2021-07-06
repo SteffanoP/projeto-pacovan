@@ -52,7 +52,7 @@
                   <TextField fx:id="txtValor" alignment="CENTER_RIGHT" editable="false" layoutX="14.0" layoutY="116.0" />
                   <TextField fx:id="txtParcelas" alignment="CENTER_RIGHT" editable="false" layoutX="14.0" layoutY="154.0" />
                   <DatePicker fx:id="dtDataProposta" disable="true" editable="false" layoutX="14.0" layoutY="14.0" />
-                  <DatePicker fx:id="txtPrazo" disable="true" editable="false" layoutX="14.0" layoutY="193.0" />
+                  <DatePicker fx:id="dtPrazo" disable="true" editable="false" layoutX="14.0" layoutY="193.0" />
                   <ListView fx:id="lstvGarantia" layoutX="13.0" layoutY="235.0" prefHeight="65.0" prefWidth="269.0" />
                   <Button fx:id="btnAceitarContraproposta" disable="true" layoutX="254.0" layoutY="322.0" mnemonicParsing="false" onAction="#btnAceitarContraproposta" text="Aceitar Contraproposta" />
                </children>
