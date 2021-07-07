@@ -11,7 +11,7 @@ public class ControladorGeradorRelatorios implements GeradorRelatorios {
     }
 
     @Override
-    public void gerarRelatiorioEmpregado(RelatorioEmpregado relatorioEmpregado) {
+    public void gerarRelatorioEmpregado(RelatorioEmpregado relatorioEmpregado) {
 
     }
 }

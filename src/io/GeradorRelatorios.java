@@ -7,5 +7,5 @@ public interface GeradorRelatorios {
 
     void gerarRelatorioCliente(RelatorioCliente relatorioCliente);
 
-    void gerarRelatiorioEmpregado(RelatorioEmpregado relatorioEmpregado);
+    void gerarRelatorioEmpregado(RelatorioEmpregado relatorioEmpregado);
 }
