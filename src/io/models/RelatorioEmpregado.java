@@ -15,4 +15,20 @@ public class RelatorioEmpregado {
             this.devedores = devedores;
         }
     }
+
+    public Empregado getEmpregado() {
+        return empregado;
+    }
+
+    public void setEmpregado(Empregado empregado) {
+        this.empregado = empregado;
+    }
+
+    public List<Emprestimo> getDevedores() {
+        return devedores;
+    }
+
+    public void setDevedores(List<Emprestimo> devedores) {
+        this.devedores = devedores;
+    }
 }
