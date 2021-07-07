@@ -1,15 +1,13 @@
 package gui;
 
+import exceptions.PessoaInexistenteException;
 import gerenciamento.SessionManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import negocio.Fachada;
+import negocio.beans.Cliente;
 import negocio.beans.Pessoa;
 import negocio.beans.Empregado;
-
-import java.awt.event.ActionEvent;
 
 public class TelaGeracaoRelatorioController {
     @FXML Label lblNomeEmpregado;
@@ -35,7 +33,58 @@ public class TelaGeracaoRelatorioController {
     @FXML Button btnVoltar;
 
     @FXML
-    public void btnVoltarPressed(javafx.event.ActionEvent event) {
+    public void btnLimparEmpregadoPressed() {
+        this.txtUidEmpregado.setText("");
+        this.cbxInfoPessoaisCliente.selectedProperty().set(false);
+        this.cbxDevedores.selectedProperty().set(false);
+        this.cbxReputacao.selectedProperty().set(false);
+        this.cbxComissoes.selectedProperty().set(false);
+        this.cbxLista.selectedProperty().set(false);
+    }
+
+    @FXML
+    public void btnGerarEmpregadoPressed() {
+        try {
+            Pessoa empregado = Fachada.getInstance().buscarPessoa(Long.parseLong(txtUidEmpregado.getText()));
+            if (empregado instanceof Empregado) {
+                //TODO: pegar instâncias das checkbox
+                //TODO: Gerar o arquivo
+            } else {
+                this.gerarAlertaErroPessoa("Essa pessoa não é um empregado!");
+            }
+        } catch (PessoaInexistenteException | NumberFormatException e) {
+            this.gerarAlertaErroPessoa("Parece que essa pessoa não existe");
+        }
+
+    }
+
+    @FXML
+    public void btnLimparClientePressed() {
+        this.txtUidCliente.setText("");
+        this.cbxInfoPessoaisEmpregado.selectedProperty().set(false);
+        this.cbxPropostas.selectedProperty().set(false);
+        this.cbxExtrato.selectedProperty().set(false);
+        this.cbxScore.selectedProperty().set(false);
+        this.cbxBENS.selectedProperty().set(false);
+    }
+
+    @FXML
+    public void btnGerarClientePressed() {
+        try {
+            Pessoa empregado = Fachada.getInstance().buscarPessoa(Long.parseLong(txtUidEmpregado.getText()));
+            if (empregado instanceof Cliente) {
+                //TODO: pegar instâncias das checkbox
+                //TODO: Gerar o arquivo
+            } else {
+                this.gerarAlertaErroPessoa("Essa pessoa não é um Cliente!");
+            }
+        } catch (PessoaInexistenteException | NumberFormatException e) {
+            this.gerarAlertaErroPessoa("Parece que essa pessoa não existe");
+        }
+    }
+
+    @FXML
+    public void btnVoltarPressed() {
         Empregado empregado = null;
         if(SessionManager.getInstance().getPessoaSessao() instanceof Empregado)
             empregado = (Empregado)SessionManager.getInstance().getPessoaSessao();
@@ -43,5 +92,13 @@ public class TelaGeracaoRelatorioController {
             GerenciadorTelas.getInstance().changeScreen("telaAdmin");
         else if (empregado != null && (empregado.getPrivilegio() >= 1 || empregado.getPrivilegio() <= 4))
             GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
+    }
+
+    private void gerarAlertaErroPessoa(String justificativa) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle("Erro");
+        alerta.setHeaderText("Não conseguimos encontrar essa pessoa");
+        alerta.setContentText(justificativa);
+        alerta.showAndWait();
     }
 }
