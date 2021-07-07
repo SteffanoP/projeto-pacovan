@@ -82,7 +82,7 @@ public class TelaBensEmpresaController {
     }
     
     @FXML
-    public void btnVoltarPressed(ActionEvent event) {
+    public void btnVoltarPressed() {
         GerenciadorTelas.getInstance().changeScreen("telaAdmin");
     }
 
