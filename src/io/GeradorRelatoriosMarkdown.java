@@ -99,7 +99,20 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
                         .append("\n\n");
             });
         }
-        //TODO: Campo de Extrato
+
+        if (this.escolhaCamposCliente[2]) {
+            corpoArquivo.append("## Extrato\n\n");
+            this.relatorioCliente.getMovimentacoes().forEach(movimentacao -> {
+                corpoArquivo.append("- ")
+                            .append(movimentacao.getInstanteToString())
+                            .append(": ")
+                            .append(movimentacao.getTipoMovimentacao().toString())
+                            .append(" - ")
+                            .append(movimentacao.getDescricao())
+                            .append("\n");
+            });
+            corpoArquivo.append("\n");
+        }
         //TODO: Campo de Score
         //TODO: Campo de BENS
     }
