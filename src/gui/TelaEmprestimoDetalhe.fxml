@@ -32,7 +32,7 @@
                   <TextField fx:id="txtNomeCliente" editable="false" layoutX="14.0" layoutY="54.0" />
                   <TextField fx:id="txtValor" layoutX="14.0" layoutY="93.0" />
                   <TextField fx:id="txtParcelas" layoutX="14.0" layoutY="131.0" />
-                  <DatePicker layoutX="14.0" layoutY="170.0" />
+                  <DatePicker fx:id="dtPrazo" layoutX="14.0" layoutY="170.0" />
                   <ListView fx:id="lstvGarantias" layoutX="14.0" layoutY="209.0" prefHeight="120.0" prefWidth="306.0" />
                </children>
             </AnchorPane>

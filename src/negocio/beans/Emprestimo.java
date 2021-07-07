@@ -1,6 +1,7 @@
 package negocio.beans;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -108,6 +109,11 @@ public class Emprestimo {
 
     public int getPrazo() {
         return prazo;
+    }
+    
+    public String getPrazoData() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.data.plusDays(prazo).format(formatador);
     }
 
     public void setPrazo(int prazo) {

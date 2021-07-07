@@ -23,7 +23,7 @@ public class TelaEmprestimoDetalheController {
     @FXML DatePicker dtData;
     @FXML TextField txtValor;
     @FXML TextField txtParcelas;
-    //@FXML DatePicker dtPrazo;
+    @FXML DatePicker dtPrazo;
 
     @FXML TableView<MovimentacaoModelo> tblvExtrato;
     @FXML TableColumn<MovimentacaoModelo, Double> colParcelas;
@@ -61,7 +61,7 @@ public class TelaEmprestimoDetalheController {
         this.dtData.getEditor().setText(emprestimoSessao.getData().toString());
         this.txtValor.setText(String.valueOf(emprestimoSessao.getValor()));
         this.txtParcelas.setText(String.valueOf(emprestimoSessao.getParcelas()));
-        //this.dtPrazo.getEditor().setText(emprestimoSessao.getPrazo().toString());
+        this.dtPrazo.getEditor().setText(emprestimoSessao.getPrazoData());
     }
     
     private void atualizarTableViewExtrato(List<Movimentacao> extratoList) {
