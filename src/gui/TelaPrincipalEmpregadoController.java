@@ -52,9 +52,6 @@ public class TelaPrincipalEmpregadoController {
 
     @FXML ListView<String> lstvComissoes;
 
-    @FXML Button btnAnaliseProposta;
-    @FXML Button btnConfirmarDevedor;
-
     @FXML
     private void initialize() {
         lblNomeUsuario.setText(SessionManager.getInstance().getPessoaSessao().getNome());
@@ -167,22 +164,24 @@ public class TelaPrincipalEmpregadoController {
     	if (tblvDevedores.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDevedores.getSelectionModel().getSelectedItem().getEmail();
     	}
-	if (tblvDProtegidos.getSelectionModel().getSelectedItem() != null) {
+	    if (tblvDProtegidos.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDProtegidos.getSelectionModel().getSelectedItem().getEmail();
     	}
     	if (tblvDAltoRisco.getSelectionModel().getSelectedItem() != null) {
     		email = tblvDAltoRisco.getSelectionModel().getSelectedItem().getEmail();
     	}
-    	
-    	try {
-				SessionManager.getInstance().setClienteSessao((Cliente) Fachada.getInstance().buscarPessoa(email)); 
-            if (SessionManager.getInstance().getClienteSessao() != null && event.getButton().equals(MouseButton.PRIMARY) 
-            		&& event.getClickCount() >= 2)
-            		GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
-        }catch (PessoaInexistenteException e) {
-        	this.gerarAlertaErro("Cliente", "busca de pessoas", e.getMessage());
-			e.printStackTrace();
-		}
+
+    	if (email != null) {
+            try {
+                SessionManager.getInstance().setClienteSessao((Cliente) Fachada.getInstance().buscarPessoa(email));
+                if (SessionManager.getInstance().getClienteSessao() != null && event.getButton().equals(MouseButton.PRIMARY)
+                        && event.getClickCount() >= 2)
+                    GerenciadorTelas.getInstance().changeScreen("telaDevedorDetalhe");
+            } catch (PessoaInexistenteException e) {
+                this.gerarAlertaErro("Cliente", "busca de pessoas", e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
     
     @FXML
