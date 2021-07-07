@@ -109,6 +109,11 @@ public class Emprestimo {
     public int getPrazo() {
         return prazo;
     }
+    
+    public String getPrazoData() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.data.plusDays(prazo).format(formatador);
+    }
 
     public void setPrazo(int prazo) {
         this.prazo = prazo;
