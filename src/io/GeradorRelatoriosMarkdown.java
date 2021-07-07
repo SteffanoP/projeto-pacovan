@@ -113,7 +113,26 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
             });
             corpoArquivo.append("\n");
         }
-        //TODO: Campo de Score
+
+        if (this.escolhaCamposCliente[3]) {
+            corpoArquivo.append("## Score\n\n");
+            corpoArquivo.append("O score do cliente é de ")
+                        .append(this.relatorioCliente.getCliente().getScore())
+                        .append("%. ");
+            if (this.relatorioCliente.getCliente().getScore() < 15) {
+                corpoArquivo.append("Este Score é considerado **péssimo**.");
+            } else if (this.relatorioCliente.getCliente().getScore() < 30) {
+                corpoArquivo.append("Este Score é considerado **ruim**.");
+            } else if (this.relatorioCliente.getCliente().getScore() < 50) {
+                corpoArquivo.append("Este Score é considerado **regular**.");
+            } else if (this.relatorioCliente.getCliente().getScore() < 75) {
+                corpoArquivo.append("Este Score é considerado **bom**.");
+            } else if (this.relatorioCliente.getCliente().getScore() < 100) {
+                corpoArquivo.append("Este Score é considerado **ótimo**.");
+            } else {
+                corpoArquivo.append("Este Score é considerado **inválido**.");
+            }
+        }
         //TODO: Campo de BENS
     }
 
