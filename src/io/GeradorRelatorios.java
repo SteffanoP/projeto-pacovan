@@ -5,7 +5,7 @@ import io.models.RelatorioEmpregado;
 
 public interface GeradorRelatorios {
 
-    void gerarRelatorioCliente(RelatorioCliente relatorioCliente);
+    void gerarRelatorioCliente(String path);
 
-    void gerarRelatorioEmpregado(RelatorioEmpregado relatorioEmpregado);
+    void gerarRelatorioEmpregado(String path);
 }
