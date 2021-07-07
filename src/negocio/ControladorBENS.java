@@ -5,9 +5,6 @@ import dados.RepositorioCRUD;
 import exceptions.*;
 import negocio.beans.Bens;
 import negocio.beans.CategoriaBens;
-import negocio.beans.Cliente;
-import negocio.beans.Movimentacao;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -36,6 +33,24 @@ public class ControladorBENS {
         } catch (ObjetoDuplicadoException e) {
             throw new BensDuplicadoException("Bens já registrado no sistema!");
         }
+    }
+
+    /**
+     * Método que faz a busca de um BENS do cliente por meio do nome de seu BENS. Utiliza a técnica lambda/stream de
+     * java 8 que filtra de acordo com o nome do BENS e seleciona o elemento (caso haja uma lista de elementos
+     * seleciona apenas o último elemento de uma lista; caso para duplicados) de mesmo nome.
+     *
+     * @param uidCliente se refere ao {@code uidCliente} do qual se trata o BENS.
+     * @param nomeBens se refere ao {@code nome} do Bens do qual se trata o BENS.
+     * @return irá retornar o BENS pesquisado sobre os parâmetros anteriores
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não exista.
+     */
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
+        List<Bens> listBensCliente = new ArrayList<>(this.listarBensCliente(uidCliente).values());
+        return listBensCliente.stream()
+                .filter(bens -> bens.getNome().equals(nomeBens))
+                .reduce((a,b) -> b) //TODO: Tratar se houver duplicados
+                .orElse(null);
     }
 
     public Map<LocalDate,Bens> listarBensEmpresa() {
@@ -67,23 +82,34 @@ public class ControladorBENS {
         return  mapaBens;
     }
 
-    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
+    /**
+     * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de Bens ordenados por data.
+     */
+    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) {
         NavigableMap<LocalDate, Bens> mapaBensCliente = new TreeMap<>();
-        boolean benClienteExiste = false;
         List<Bens> benClienteList = repoBENS.listar();
 
         for(Bens ben : benClienteList){
             if(ben.getCliente().getUid() == uidCliente) {
-
-                benClienteExiste = true;
                 mapaBensCliente.put(ben.getDataCadastro(), ben);
             }
 
-        }if(!benClienteExiste)  throw new PessoaInexistenteException("Cliente Não existe!");
+        }
             return mapaBensCliente;
     }
 
-
+    /**
+     * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
+     * @return Map de Bens ordenados por data.
+     */
     public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException{
 
         NavigableMap<LocalDate, Bens> mapaBensPendentes = new TreeMap<>();
@@ -103,33 +129,36 @@ public class ControladorBENS {
         return mapaBensPendentes;
     }
 
-    public  Map<LocalDate,Bens> listarBensAprovados(long uidCliente) throws PessoaInexistenteException{
+    /**
+     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
+    public  Map<LocalDate,Bens> listarBensAprovados() {
         NavigableMap<LocalDate, Bens> mapaBensaprovados = new TreeMap<>();
-        boolean aprovado = false;
         List<Bens> aproveList = repoBENS.listar();
 
         for(Bens ben : aproveList){
-            if(ben.getCliente().getUid() == uidCliente && (!ben.isPendente())) {
-              aprovado = true;
-
-              mapaBensaprovados.put(ben.getDataCadastro(), ben);
-            }
-        }if(!aprovado)  throw new PessoaInexistenteException("Cliente Não existe!");
-
+            if(!ben.isPendente()) mapaBensaprovados.put(ben.getDataCadastro(), ben);   
+        }
+        
         return mapaBensaprovados;
     }
 
-    public Map<LocalDate,Bens> listarBensGarantia (long uidCliente) throws PessoaInexistenteException{
+    /**
+     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
+    public Map<LocalDate,Bens> listarBensGarantia() {
         NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
-        boolean garantia = false;
         List<Bens> garantiaList = repoBENS.listar();
 
             for(Bens ben: garantiaList){
-                if(ben.getCliente().getUid() == uidCliente && ben.isGarantia()){
-                    garantia = true;
-                    mapaBensGarantia.put(ben.getDataCadastro(), ben);
-                }
-            }if(!garantia)  throw new PessoaInexistenteException ("Cliente Não existe!");
+                if(ben.isGarantia()) mapaBensGarantia.put(ben.getDataCadastro(), ben);
+            }
 
         return mapaBensGarantia;
     }

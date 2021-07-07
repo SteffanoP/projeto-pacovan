@@ -19,6 +19,18 @@ public interface SistemaEmprestimosBens {
      */
     void inserirBens(Bens bens) throws BensDuplicadoException;
 
+    /**
+     * Método que faz a busca de um BENS do cliente por meio do nome de seu BENS. Utiliza a técnica lambda/stream de
+     * java 8 que filtra de acordo com o nome do BENS e seleciona o elemento (caso haja uma lista de elementos
+     * seleciona apenas o último elemento de uma lista; caso para duplicados) de mesmo nome.
+     *
+     * @param uidCliente se refere ao {@code uidCliente} do qual se trata o BENS.
+     * @param nomeBens se refere ao {@code nome} do Bens do qual se trata o BENS.
+     * @return irá retornar o BENS pesquisado sobre os parâmetros anteriores
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não exista.
+     */
+    Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException;
+
     Map<LocalDate, Bens> listarBensEmpresa();
 
     /**
@@ -31,13 +43,41 @@ public interface SistemaEmprestimosBens {
      */
     Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
 
+    /**
+     * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de Bens ordenados por data.
+     */
     Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException;
 
+    /**
+     * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
+     * @return Map de Bens ordenados por data.
+     */
+    
     Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException;
 
-    Map<LocalDate, Bens> listarBensAprovados(long uidCliente) throws PessoaInexistenteException;
+    /**
+     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
+    Map<LocalDate, Bens> listarBensAprovados();
 
-    Map<LocalDate, Bens> listarBensGarantia(long uidCliente) throws PessoaInexistenteException;
+    /**
+     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * 
+     * @return Map de Bens ordenados por data.
+     */
+    Map<LocalDate, Bens> listarBensGarantia();
 
     double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException;
 
@@ -94,6 +134,13 @@ public interface SistemaEmprestimosBens {
      */
     String emprestimoEmDetalhe(Cliente cliente, LocalDate dataEmprestimo) throws EmprestimoInexistenteException;
 
+    /**
+     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
+     * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de empréstimos ordenados por data.
+     */
     Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
 
     /**
@@ -103,14 +150,52 @@ public interface SistemaEmprestimosBens {
      * @return uma lista de empréstimos do qual o empregado é responsável.
      */
     List<Emprestimo> listarComissoesEmprestimo(Empregado empregado);
-
+    
+    /**
+     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que não pagaram até o {@code prazo}.
+     * 
+     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
+     */
+    public
     Map<LocalDate, Emprestimo> listarDevedores();
 
+    /**
+     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que não pagaram até o {@code prazo}.
+     * 
+     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
+     */
     Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
 
+    /**
+     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * {@code Emprestimo} que não foram pagos até o {@code prazo} e além disso possuem um {@code score} baixo.
+     * 
+     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
+     */
     Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
 
-    Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException;
+    /**
+     * Método que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @throws PessoaInexistenteException se o cliente não for encontrado.
+     * @return Map de Movimentacao ordenados por data.
+     */
+    Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente);
+
+    /**
+     * Método que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final. São
+     * ordenados por sua data por meio de um {@code Map} criado para armazenar 
+     * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @param dataInicial é a data a partir da qual o cliente deseja ver suas movimentações.
+     * @param dataFinal é a data limite 
+     * @return Map de Movimentacao ordenados por data.
+     */
 
     List<Movimentacao> listarPeriodoMovimentacaoCliente(long uidCliente, LocalDate dataInicial, LocalDate dataFinal);
 
@@ -209,7 +294,7 @@ public interface SistemaEmprestimosBens {
     String informacoesPessoais(Pessoa pessoa) throws PessoaInexistenteException;
 
     /**
-     * Método que cria e adiciona um objeto do tipo {@code Proposta}, no qual atribuí um número de procolo a proposta e
+     * Método que cria e adiciona um objeto do tipo {@code Proposta}, no qual atribui um número de procolo a proposta e
      * seta parâmetros de controle, como {@code data} e {@code contraproposta}.
      * @param p se refere a proposta inicial ao qual se deseja adicionar ao sistema.
      * @throws PropostaInvalidaException poderá acontecer caso a proposta seja inválida por alguma razão.
@@ -237,6 +322,18 @@ public interface SistemaEmprestimosBens {
     Proposta buscarProposta(long numProtocolo) throws PropostaInvalidaException;
 
     /**
+     * Método que atualiza apenas as Garantias de uma Proposta do Repositório de Propostas. Consiste em pegar a
+     * {@code garantia} de uma {@code Proposta} e passar para a {@code Proposta} do repositório (que tenha o mesmo
+     * {@code numProtocolo}) por meio do método {@code alterarProposta}.
+     *
+     * @param propostaComGarantia se refere a uma proposta com uma nova garantia que se pretende inserir numa proposta
+     *                            do repositório.
+     * @throws PropostaInvalidaException poderá acontecer caso o número do protocolo da {@code propostaComGarantia}
+     * seja inválido ou se não houver {@code Proposta} no repositório de propostas.
+     */
+    void atualizarGarantias(Proposta propostaComGarantia) throws PropostaInvalidaException;
+
+    /**
      * Método com foco no negócio, que realiza a aprovação de contrapropostas. A ideia aqui é apenas setar como
      * {@code true} sempre que uma contraproposta for aprovada.
      *
@@ -251,9 +348,8 @@ public interface SistemaEmprestimosBens {
      * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo
      * {@code data}.
      *
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
-     *                                    cliente.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de propostas ordenadas por data.
      */
     Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException;
 
@@ -262,9 +358,9 @@ public interface SistemaEmprestimosBens {
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
      *
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
-     *                                    cliente.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum cliente.
+     * @return Map de propostas ordenadas por data.
      */
     Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException;
 
@@ -272,9 +368,8 @@ public interface SistemaEmprestimosBens {
      * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map}
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
-     *
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
-     *                                    cliente.
+     * 
+     * @return Map de propostas ordenadas por data.
      */
-    Map<LocalDate, Proposta> listarPropostasPendentes() throws PessoaInexistenteException;
+    Map<LocalDate, Proposta> listarPropostasPendentes();
 }

@@ -6,6 +6,7 @@ import exceptions.ObjetoDuplicadoException;
 import exceptions.ObjetoInexistenteException;
 import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
+import negocio.beans.Bens;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
@@ -107,6 +108,25 @@ public class ControladorProposta {
     }
 
     /**
+     * Método que atualiza apenas as Garantias de uma Proposta do Repositório de Propostas. Consiste em pegar a
+     * {@code garantia} de uma {@code Proposta} e passar para a {@code Proposta} do repositório (que tenha o mesmo
+     * {@code numProtocolo}) por meio do método {@code alterarProposta}.
+     *
+     * @param propostaComGarantia se refere a uma proposta com uma nova garantia que se pretende inserir numa proposta
+     *                            do repositório.
+     * @throws PropostaInvalidaException poderá acontecer caso o número do protocolo da {@code propostaComGarantia}
+     * seja inválido ou se não houver {@code Proposta} no repositório de propostas.
+     */
+    public void atualizarGarantias(Proposta propostaComGarantia) throws PropostaInvalidaException {
+        if (propostaComGarantia.getNumProtocolo() < 1)
+            throw new PropostaInvalidaException("O Número do protocolo é inválido!");
+
+        Proposta proposta = this.buscarProposta(propostaComGarantia.getNumProtocolo());
+        proposta.setGarantia(propostaComGarantia.getGarantia());
+        this.alterarProposta(proposta);
+    }
+
+    /**
      * Método com foco no negócio, que realiza a aprovação de contrapropostas. A ideia aqui é apenas setar como
      * {@code true} sempre que uma contraproposta for aprovada.
      *
@@ -130,19 +150,18 @@ public class ControladorProposta {
      * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo 
      * {@code data}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
-     * cliente.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return Map de propostas ordenadas por data.
      */
     public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar()); 
         boolean clienteExiste = false;
         
         for (Proposta proposta : this.repoProposta.listar()) {
-            if(proposta.getCliente().getUid() == uidCliente && !proposta.isContraproposta()){
+            if(proposta.getCliente().getUid() == uidCliente){
                 clienteExiste = true;
-                //Preencher mapa
-                mapaPropostas.put(proposta.getData(), proposta);
+                if(!proposta.isContraproposta()) mapaPropostas.put(proposta.getData(), proposta);
             }
         }
         
@@ -158,19 +177,20 @@ public class ControladorProposta {
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir 
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
      * cliente.
+     * @return Map de propostas ordenadas por data.
      */
     public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
+        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar());
         boolean clienteExiste = false;
         
-        for (Proposta proposta : this.repoProposta.listar()) {
-            if(proposta.getCliente().getUid() == uidCliente && proposta.isContraproposta()){
+        for (Proposta proposta : propostasList) {
+            if(proposta.getCliente().getUid() == uidCliente){
                 clienteExiste = true;
-                //Preencher mapa
-                mapaPropostas.put(proposta.getData(), proposta);
+                if(proposta.isContraproposta()) mapaPropostas.put(proposta.getData(), proposta);
             }
         }
         
@@ -186,24 +206,17 @@ public class ControladorProposta {
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente que se vai alterar o cadastro.
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
-     * cliente.
+     * @return Map de propostas ordenadas por data.
      */
-    public Map<LocalDate, Proposta> listarPropostasPendentes() throws PessoaInexistenteException {
+    public Map<LocalDate, Proposta> listarPropostasPendentes() {
         NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
-        boolean clienteExiste = false;
+        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar());
         
-        for (Proposta proposta : this.repoProposta.listar()) {
+        for (Proposta proposta : propostasList) {
             if(!proposta.isContraproposta()){
-                clienteExiste = true;
                 //Preencher mapa
                 mapaPropostas.put(proposta.getData(), proposta);
             }
-        }
-        
-        if (!clienteExiste) {
-            throw new PessoaInexistenteException("Cliente não existe!");
         }
 
         return mapaPropostas;

@@ -46,6 +46,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
+        return bens.buscarBensCliente(uidCliente,nomeBens);
+    }
+
+    @Override
     public Map<LocalDate, Bens> listarBensEmpresa() {
         return bens.listarBensEmpresa();
     }
@@ -66,13 +71,13 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensAprovados(long uidCliente) throws PessoaInexistenteException {
-        return bens.listarBensAprovados(uidCliente);
+    public Map<LocalDate, Bens> listarBensAprovados() {
+        return bens.listarBensAprovados();
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensGarantia(long uidCliente) throws PessoaInexistenteException {
-        return bens.listarBensGarantia(uidCliente);
+    public Map<LocalDate, Bens> listarBensGarantia() {
+        return bens.listarBensGarantia();
     }
 
     @Override
@@ -131,7 +136,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) throws PessoaInexistenteException {
+    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) {
         return movimentacoes.listarMoveCliente(uidCliente);
     }
 
@@ -206,6 +211,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public void atualizarGarantias(Proposta propostaComGarantia) throws PropostaInvalidaException {
+        propostas.atualizarGarantias(propostaComGarantia);
+    }
+
+    @Override
     public void aprovarContraProposta(long numProtocolo) throws PropostaInvalidaException {
         propostas.aprovarContraProposta(numProtocolo);
     }
@@ -221,7 +231,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarPropostasPendentes() throws PessoaInexistenteException {
+    public Map<LocalDate, Proposta> listarPropostasPendentes() {
         return propostas.listarPropostasPendentes();
     }
 }
