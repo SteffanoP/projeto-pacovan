@@ -27,7 +27,7 @@
                   <CheckBox fx:id="cbxComissoes" layoutX="14.0" layoutY="210.0" mnemonicParsing="false" text="Comissões" />
                   <CheckBox fx:id="cbxDevedores" layoutX="14.0" layoutY="142.0" mnemonicParsing="false" text="Devedores" />
                   <CheckBox fx:id="cbxReputacao" layoutX="14.0" layoutY="175.0" mnemonicParsing="false" text="Reputação de Negócio" />
-                  <CheckBox fx:id="cbxInfoPessoaisCliente" layoutX="14.0" layoutY="107.0" mnemonicParsing="false" text="Informações Pessoais" />
+                  <CheckBox fx:id="cbxInfoPessoaisEmpregado" layoutX="14.0" layoutY="107.0" mnemonicParsing="false" text="Informações Pessoais" />
                   <CheckBox fx:id="cbxLista" layoutX="14.0" layoutY="244.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="Lista Protegidos/Alto-Risco" />
                   <Button fx:id="btnLimparEmpregado" layoutX="175.0" layoutY="281.0" mnemonicParsing="false" onAction="#btnLimparEmpregadoPressed" text="Limpar" />
                   <Button fx:id="btnGerarEmpregado" layoutX="244.0" layoutY="281.0" mnemonicParsing="false" onAction="#btnGerarEmpregadoPressed" text="Gerar" />
@@ -47,7 +47,7 @@
                   <CheckBox fx:id="cbxScore" layoutX="14.0" layoutY="209.0" mnemonicParsing="false" text="Score" />
                   <CheckBox fx:id="cbxPropostas" layoutX="14.0" layoutY="141.0" mnemonicParsing="false" text="Propostas" />
                   <CheckBox fx:id="cbxExtrato" layoutX="14.0" layoutY="176.0" mnemonicParsing="false" text="Extrato" />
-                  <CheckBox fx:id="cbxInfoPessoaisEmpregado" layoutX="14.0" layoutY="106.0" mnemonicParsing="false" text="Informações Pessoais" />
+                  <CheckBox fx:id="cbxInfoPessoaisCliente" layoutX="14.0" layoutY="106.0" mnemonicParsing="false" text="Informações Pessoais" />
                   <CheckBox fx:id="cbxBENS" layoutX="14.0" layoutY="243.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="230.0" text="Bens Especiais Não Solicitados (BENS)" />
                   <Button fx:id="btnLimparCliente" layoutX="176.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnLimparClientePressed" text="Limpar" />
                   <Button fx:id="btnGerarCliente" layoutX="244.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnGerarClientePressed" text="Gerar" />
