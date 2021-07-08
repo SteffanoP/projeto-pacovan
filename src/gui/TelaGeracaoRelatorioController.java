@@ -136,7 +136,7 @@ public class TelaGeracaoRelatorioController {
             empregado = (Empregado)SessionManager.getInstance().getPessoaSessao();
         if(empregado != null && empregado.getPrivilegio() == 5)
             GerenciadorTelas.getInstance().changeScreen("telaAdmin");
-        else if (empregado != null && (empregado.getPrivilegio() >= 1 || empregado.getPrivilegio() <= 4))
+        else if (empregado != null && (empregado.getPrivilegio() >= 1 && empregado.getPrivilegio() <= 4))
             GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
     }
 
