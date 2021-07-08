@@ -1,5 +1,6 @@
 package gui;
 
+import exceptions.BensInexistenteException;
 import exceptions.EmprestimoDuplicadoException;
 import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
@@ -84,6 +85,8 @@ public class TelaAnalisePropostaController {
                     (Empregado) SessionManager.getInstance().getPessoaSessao());
         } catch (EmprestimoDuplicadoException e) {
             this.gerarAlertaErro("Erro de Empréstimo","Empréstimo Duplicado", e.getMessage());
+        } catch (BensInexistenteException e) {
+            this.gerarAlertaErro("Erro de Empréstimo", "Bens de Garantia Inexistente", e.getMessage());
         }
         this.btnCriarEmprestimo.disableProperty().set(true);
     }

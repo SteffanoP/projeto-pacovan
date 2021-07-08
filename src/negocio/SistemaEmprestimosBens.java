@@ -118,7 +118,8 @@ public interface SistemaEmprestimosBens {
      * @throws EmprestimoDuplicadoException poderá acontecer caso o {@code Emprestimo} já esteja cadastro no sistema de
      *                                      {@code repoEmprestimo}.
      */
-    void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException;
+    void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException,
+            BensInexistenteException;
 
     /**
      * Método que faz a busca de um {@code Emprestimo} no repositório de Empréstimos por meio de um número de protocolo.

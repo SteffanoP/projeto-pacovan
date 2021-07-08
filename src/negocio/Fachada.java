@@ -101,7 +101,8 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException {
+    public void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException,
+            BensInexistenteException {
         emprestimos.criarEmprestimo(proposta, empregado);
     }
 

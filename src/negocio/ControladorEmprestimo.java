@@ -2,6 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
+import exceptions.BensInexistenteException;
 import exceptions.EmprestimoDuplicadoException;
 import exceptions.EmprestimoInexistenteException;
 import exceptions.ObjetoDuplicadoException;
@@ -39,7 +40,8 @@ public class ControladorEmprestimo {
      * @throws EmprestimoDuplicadoException poderá acontecer caso o {@code Emprestimo} já esteja cadastro no sistema de
      * {@code repoEmprestimo}.
      */
-    public void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException {
+    public void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException,
+            BensInexistenteException {
         //Evitar criação de empréstimo fantasma
         if (proposta == null || empregado == null) return;
 
@@ -61,6 +63,7 @@ public class ControladorEmprestimo {
 
         try {
             repoEmprestimo.inserir(emprestimo);
+            Fachada.getInstance().aplicarBensComoGarantia(proposta.getGarantia());
             contadorProtocolo++;
         } catch (ObjetoDuplicadoException e) {
             throw new EmprestimoDuplicadoException("Parece que esse empréstimo já existe!");
