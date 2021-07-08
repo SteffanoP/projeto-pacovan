@@ -175,7 +175,16 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
                         .append(this.relatorioEmpregado.getEmpregado().getSalarioBase())
                         .append("\n\n");
         }
-        //TODO: Campo de Devedores de negócio
+
+        if (this.escolhaCamposEmpregado[1]) {
+            corpoArquivo.append("## Lista de Devedores\n\n");
+            this.relatorioEmpregado.getDevedores().forEach(devedores -> {
+                corpoArquivo.append("- Nome: ").append(devedores.getCliente().getNome()).append("\n");
+                corpoArquivo.append("- CPF: ").append(devedores.getCliente().getCpf()).append("\n");
+                corpoArquivo.append("- Saldo Devido: R$ ").append(devedores.getValor()).append("\n");
+            });
+            corpoArquivo.append("\n");
+        }
         //TODO: Campo de Reputação de Negócio
         //TODO: Campo de comissões
         //TODO: Campo de Listas Protegidos/Alto-Risco
