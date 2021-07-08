@@ -40,12 +40,8 @@ public class TelaBENSController {
     @FXML
     private void initialize() {
         this.initializeTableViews();
-        try {
-            List<Bens> bensList = new ArrayList<>(Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid()).values());
-            this.atualizarTableViewBens(bensList);
-        } catch (PessoaInexistenteException e) {
-            e.printStackTrace();
-        }
+        this.atualizarTableViewBens(
+                Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid()));
 
         //Inicializa Cadastro de Bens
         txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
@@ -87,13 +83,7 @@ public class TelaBENSController {
                 bens.setCategoria(categoriaSelecionadaCadastro);
                 Fachada.getInstance().inserirBens(bens);
                 this.limparCamposInserir();
-                try {
-                    List<Bens> bensList = new
-                            ArrayList<>(Fachada.getInstance().listarBensCliente(bens.getCliente().getUid()).values());
-                    this.atualizarTableViewBens(bensList);
-                } catch (PessoaInexistenteException e) {
-                    e.printStackTrace();
-                }
+                this.atualizarTableViewBens(Fachada.getInstance().listarBensCliente(bens.getCliente().getUid()));
             } catch (NumberFormatException e) {
                 this.gerarAlertaErroCadastro("Há campos com valores inválidos!");
             } catch (BensDuplicadoException e) {

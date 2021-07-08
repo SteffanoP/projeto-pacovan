@@ -27,57 +27,56 @@ public interface SistemaEmprestimosBens {
      * @param uidCliente se refere ao {@code uidCliente} do qual se trata o BENS.
      * @param nomeBens se refere ao {@code nome} do Bens do qual se trata o BENS.
      * @return irá retornar o BENS pesquisado sobre os parâmetros anteriores
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não exista.
      */
-    Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException;
-
-    Map<LocalDate, Bens> listarBensEmpresa();
+    Bens buscarBensCliente(long uidCliente, String nomeBens);
 
     /**
-     * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma
-     * {@code CategoriaBens} parametrizada.
+     * Método que retorna todos os BENS cadastrados no repositório de BENS.
+     * @return lista de BENS do repositório de Bens
+     */
+    List<Bens> listarBens();
+
+    /**
+     * Método que lista um {@code List<Bens>} de todos os Bens da empresa, filtrado por um {@code CategoriaBens}
+     * parametrizada.
      *
      * @param categoria se refere a categoria de bens que se pretende listar.
-     * @return um {@code Map<LocalDate, Bens>} com os bens filtrados por meio de uma {@code CategoriaBens} como
-     * parâmetro.
+     * @return uma lista com os bens filtrados por meio de uma {@code CategoriaBens} com parâmetro.
      */
-    Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
+    List<Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
 
     /**
-     * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
+     * Método que lista dos Bens do Repositório de Bens, filtrado por Cliente, neste caso pelo {@code uidCliente}.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que filtra os Bens.
+     * @return lista de bens filtrado para o cliente especificado.
+     */
+    List<Bens> listarBensCliente(long uidCliente);
+
+    /**
+     * Método que lista os BENS pendentes do cliente do quais são objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente true}.
+     *
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por cliente e por pendência.
      */
-    Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException;
+    List<Bens> listarBensPendentes(long uidCliente);
 
     /**
-     * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente não for encontrado.
-     * @return Map de Bens ordenados por data.
+     * Método que lista todos os BENS aprovados criado para armazenar objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente false}.
+     *
+     * @return Lista de Bens filtrados por aprovação.
      */
-    
-    Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException;
+    List<Bens> listarBensAprovados();
 
     /**
-     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @return Map de Bens ordenados por data.
+     * Método que lista todos os BENS que são garantia criado para armazenar objetos do tipo {@code Bens} que tem seu
+     * atributo {@code garantia true}.
+     *
+     * @return Lista de Bens filtrados por garantia.
      */
-    Map<LocalDate, Bens> listarBensAprovados();
-
-    /**
-     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @return Map de Bens ordenados por data.
-     */
-    Map<LocalDate, Bens> listarBensGarantia();
+    List<Bens> listarBensGarantia();
 
     double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException;
 

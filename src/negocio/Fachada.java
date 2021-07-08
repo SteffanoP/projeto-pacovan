@@ -46,37 +46,37 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) {
         return bens.buscarBensCliente(uidCliente,nomeBens);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensEmpresa() {
-        return bens.listarBensEmpresa();
+    public List<Bens> listarBens() {
+        return bens.listarBens();
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
+    public List<Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
         return bens.listarBensEmpresaCategoria(categoria);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
+    public List<Bens> listarBensCliente(long uidCliente) {
         return bens.listarBensCliente(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException {
+    public List<Bens> listarBensPendentes(long uidCliente) {
         return bens.listarBensPendentes(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensAprovados() {
+    public List<Bens> listarBensAprovados() {
         return bens.listarBensAprovados();
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensGarantia() {
+    public List<Bens> listarBensGarantia() {
         return bens.listarBensGarantia();
     }
 

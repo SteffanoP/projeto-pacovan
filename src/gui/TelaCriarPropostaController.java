@@ -35,14 +35,10 @@ public class TelaCriarPropostaController {
         String nomeBens = splMenuGarantia.getText();
         if (!nomeBens.equals("Selecione o BENS")) {
             long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
-            try {
-                listGarantiasTemp.add(Fachada.getInstance().buscarBensCliente(uidCliente,nomeBens));
-                this.atualizarListViewGarantias();
-                splMenuGarantia.setText("Selecione o BENS");
-                splMenuGarantia.getItems().removeIf(bens -> bens.getText().equals(nomeBens));
-            } catch (PessoaInexistenteException e) {
-                this.gerarAlertaErroCadastro(e.getMessage());
-            }
+            listGarantiasTemp.add(Fachada.getInstance().buscarBensCliente(uidCliente, nomeBens));
+            this.atualizarListViewGarantias();
+            splMenuGarantia.setText("Selecione o BENS");
+            splMenuGarantia.getItems().removeIf(bens -> bens.getText().equals(nomeBens));
         }
     }
 
@@ -92,7 +88,7 @@ public class TelaCriarPropostaController {
     private void atualizarListaBens() throws PessoaInexistenteException {
         splMenuGarantia.getItems().removeAll();
         for (Bens bens :
-                Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid()).values()) {
+                Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid())) {
             //TODO: Rever quais bens podem ser usados como garantia
             MenuItem item = new MenuItem(bens.getNome());
             item.setOnAction(event -> splMenuGarantia.setText(item.getText()));

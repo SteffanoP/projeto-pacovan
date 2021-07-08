@@ -39,15 +39,14 @@ public class TelaBensEmpresaController {
     @FXML
     private void initialize() {
         this.initializeTableViews();
-        List<Bens> bensFungiveisList = new
-                ArrayList<>(Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_FUNGIVEL).values());
-        this.atualizaTableViewBens(tblvMoveisFungiveis, bensFungiveisList);
-        List<Bens> bensInfungiveisList = new
-                ArrayList<>(Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_INFUNGIVEL).values());
-        this.atualizaTableViewBens(tblvMoveisInfungiveis, bensInfungiveisList);
-        List<Bens> bensImoveisList = new
-                ArrayList<>(Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.IMOVEL).values());
-        this.atualizaTableViewBens(tblvImoveis, bensImoveisList);
+        //Atualiza a Table View de Móveis Fungíveis
+        this.atualizaTableViewBens(tblvMoveisFungiveis,
+                Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_FUNGIVEL));
+        //Atualiza a Table View de Móveis Infungíveis
+        this.atualizaTableViewBens(tblvMoveisInfungiveis,
+                Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.MOVEL_INFUNGIVEL));
+        //Atualiza a Table View de Móveis Infungíveis
+        this.atualizaTableViewBens(tblvImoveis, Fachada.getInstance().listarBensEmpresaCategoria(CategoriaBens.IMOVEL));
     }
 
     private void atualizaTableViewBens(TableView<BensModelo> tableView, List<Bens> bensList) {
