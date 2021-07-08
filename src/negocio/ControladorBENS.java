@@ -53,13 +53,12 @@ public class ControladorBENS {
                 .orElse(null);
     }
 
-    public Map<LocalDate,Bens> listarBensEmpresa() {
-        NavigableMap<LocalDate, Bens> mapaBens = new TreeMap<>();
-        List<Bens> benEmpresaList = repoBENS.listar();
-            for( Bens ben : benEmpresaList){
-               mapaBens.put(ben.getDataCadastro(), ben);
-            }
-        return mapaBens;
+    /**
+     * Método que retorna todos os BENS cadastrados no repositório de BENS.
+     * @return lista de BENS do repositório de Bens
+     */
+    public List<Bens> listarBens() {
+        return this.repoBENS.listar();
     }
 
     /**

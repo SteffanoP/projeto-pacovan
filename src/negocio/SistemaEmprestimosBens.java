@@ -31,7 +31,11 @@ public interface SistemaEmprestimosBens {
      */
     Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException;
 
-    Map<LocalDate, Bens> listarBensEmpresa();
+    /**
+     * Método que retorna todos os BENS cadastrados no repositório de BENS.
+     * @return lista de BENS do repositório de Bens
+     */
+    List<Bens> listarBens();
 
     /**
      * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma

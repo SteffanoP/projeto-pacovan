@@ -51,8 +51,8 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensEmpresa() {
-        return bens.listarBensEmpresa();
+    public List<Bens> listarBens() {
+        return bens.listarBens();
     }
 
     @Override
