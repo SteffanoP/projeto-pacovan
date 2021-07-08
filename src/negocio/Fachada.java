@@ -86,6 +86,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public void aplicarBensComoGarantia(List<Bens> bensAntigos) throws BensInexistenteException {
+        this.bens.aplicarBensComoGarantia(bensAntigos);
+    }
+
+    @Override
     public void alterarBens(Bens bensAntigo, Bens bensNovo) throws BensInexistenteException {
         bens.alterarBens(bensAntigo, bensNovo);
     }
