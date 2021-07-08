@@ -132,8 +132,22 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
             } else {
                 corpoArquivo.append("Este Score é considerado **inválido**.");
             }
+            corpoArquivo.append("\n\n");
         }
-        //TODO: Campo de BENS
+
+        if (this.escolhaCamposCliente[4]) {
+            corpoArquivo.append("## Bens Especiais Não Solicitados (BENS)\n\n");
+            corpoArquivo.append("Os Bens do usuário seguem em lista a seguir (não necessariamente são garantias): ")
+                        .append("\n\n");
+            this.relatorioCliente.getBens().forEach(bens -> {
+                corpoArquivo.append("### ").append(bens.getNome()).append("\n\n");
+                corpoArquivo.append("Categoria: ").append(bens.getCategoria().getNome()).append(";\n\n");
+                corpoArquivo.append("Descrição: ").append(bens.getDescricao()).append(";\n\n");
+                corpoArquivo.append("Valor: R$").append(bens.getValor()).append(";\n\n");
+                corpoArquivo.append("Data de cadastro: ").append(bens.getDataCadastroToString()).append(";\n\n");
+                corpoArquivo.append("Tempo de uso: ").append(bens.getTempoDeUso()).append(" anos.\n\n");
+            });
+        }
     }
 
     private void preencherCamposEmpregado(StringBuilder corpoArquivo) {
