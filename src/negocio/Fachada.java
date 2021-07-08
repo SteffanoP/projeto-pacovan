@@ -4,7 +4,6 @@ import exceptions.*;
 import negocio.beans.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -151,7 +150,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) {
+    public List<Movimentacao> listarMoveCliente(long uidCliente) {
         return movimentacoes.listarMoveCliente(uidCliente);
     }
 

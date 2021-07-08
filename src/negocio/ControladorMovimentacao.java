@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ControladorMovimentacao {
     private Repositorio<Movimentacao> repoMovimentacao;
@@ -38,35 +39,24 @@ public class ControladorMovimentacao {
     }
 
     /**
-     * Método que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
+     * Método que lista as Movimentações do cliente.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de Movimentacao ordenados por data.
+     * @return List de Movimentacao ordenados por data.
      */
-    public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) {
-        NavigableMap<LocalDateTime, Movimentacao> mapaMovimentacaoCliente = new TreeMap<>();
-        List<Movimentacao> moveList = repoMovimentacao.listar();
-
-        for(Movimentacao move : moveList){
-            if(move.getCliente().getUid() == uidCliente) {
-                    mapaMovimentacaoCliente.put(move.getInstante(), move);
-            }
-        }
-
-
-        return mapaMovimentacaoCliente;
+    public List<Movimentacao> listarMoveCliente(long uidCliente) {
+    	return this.repoMovimentacao.listar().stream()
+							                 .filter(movimentacao -> movimentacao.getCliente().getUid() == uidCliente)
+							                 .collect(Collectors.toList());
     }
 
     /**
-     * Método que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final. São
-     * ordenados por sua data por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
+     * Método que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @param dataInicial é a data a partir da qual o cliente deseja ver suas movimentações.
-     * @param dataFinal é a data limite 
-     * @return Map de Movimentacao ordenados por data.
+     * @param dataFinal é a data limite em qual o cliente deve pagar a parcela sem aumento.
+     * @return List de Movimentacao.
      */
     public List<Movimentacao> listarPeriodoMovimentacaoCliente(long uidCliente, LocalDate dataInicial, LocalDate dataFinal) {
         List<Movimentacao> movimentacaoList = new ArrayList<>();
