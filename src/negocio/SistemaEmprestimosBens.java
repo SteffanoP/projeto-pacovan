@@ -63,12 +63,12 @@ public interface SistemaEmprestimosBens {
     List<Bens> listarBensPendentes(long uidCliente);
 
     /**
-     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @return Map de Bens ordenados por data.
+     * Método que lista todos os BENS aprovados criado para armazenar objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente false}.
+     *
+     * @return Lista de Bens filtrados por aprovação.
      */
-    Map<LocalDate, Bens> listarBensAprovados();
+    List<Bens> listarBensAprovados();
 
     /**
      * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 

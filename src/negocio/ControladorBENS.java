@@ -101,20 +101,15 @@ public class ControladorBENS {
     }
 
     /**
-     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * Método que lista todos os BENS aprovados criado para armazenar objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente false}.
      * 
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por aprovação.
      */
-    public  Map<LocalDate,Bens> listarBensAprovados() {
-        NavigableMap<LocalDate, Bens> mapaBensaprovados = new TreeMap<>();
-        List<Bens> aproveList = repoBENS.listar();
-
-        for(Bens ben : aproveList){
-            if(!ben.isPendente()) mapaBensaprovados.put(ben.getDataCadastro(), ben);   
-        }
-        
-        return mapaBensaprovados;
+    public List<Bens> listarBensAprovados() {
+        return this.repoBENS.listar().stream()
+                                     .filter(bens -> !bens.isPendente())
+                                     .collect(Collectors.toList());
     }
 
     /**
