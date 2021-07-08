@@ -40,7 +40,7 @@ public class TelaGeracaoRelatorioController {
     @FXML
     public void btnLimparEmpregadoPressed() {
         this.txtUidEmpregado.setText("");
-        this.cbxInfoPessoaisCliente.selectedProperty().set(false);
+        this.cbxInfoPessoaisEmpregado.selectedProperty().set(false);
         this.cbxDevedores.selectedProperty().set(false);
         this.cbxReputacao.selectedProperty().set(false);
         this.cbxComissoes.selectedProperty().set(false);
@@ -77,7 +77,7 @@ public class TelaGeracaoRelatorioController {
     @FXML
     public void btnLimparClientePressed() {
         this.txtUidCliente.setText("");
-        this.cbxInfoPessoaisEmpregado.selectedProperty().set(false);
+        this.cbxInfoPessoaisCliente.selectedProperty().set(false);
         this.cbxPropostas.selectedProperty().set(false);
         this.cbxExtrato.selectedProperty().set(false);
         this.cbxScore.selectedProperty().set(false);
