@@ -60,9 +60,7 @@ public class TelaPrincipalClienteController {
         long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
             List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente));
             this.atualizarTableViewPropostas(pList);
-            List<Emprestimo> eList = new
-                    ArrayList<>(Fachada.getInstance().listarEmprestimosCliente(uidCliente).values());
-            this.atualizarTableViewEmprestimos(eList);
+            this.atualizarTableViewEmprestimos(Fachada.getInstance().listarEmprestimosCliente(uidCliente));
             List<Movimentacao> mList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(uidCliente).values());
             this.atualizarTableViewExtrato(mList);
     }

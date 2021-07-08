@@ -134,13 +134,13 @@ public interface SistemaEmprestimosBens {
     String emprestimoEmDetalhe(Cliente cliente, LocalDate dataEmprestimo) throws EmprestimoInexistenteException;
 
     /**
-     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
-     * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
-     * 
+     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de uma
+     * {@code List} do qual armazena todos os objetos do tipo {@code Emprestimo}.
+     *
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de empréstimos ordenados por data.
+     * @return List de empréstimos filtrados por cliente.
      */
-    Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
+    List<Emprestimo> listarEmprestimosCliente(long uidCliente);
 
     /**
      * Método que lista todas as comissões de empréstimos de que um empregado é responsável.
@@ -149,31 +149,30 @@ public interface SistemaEmprestimosBens {
      * @return uma lista de empréstimos do qual o empregado é responsável.
      */
     List<Emprestimo> listarComissoesEmprestimo(Empregado empregado);
-    
-    /**
-     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que não pagaram até o {@code prazo}.
-     * 
-     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
-     */
-    public
-    Map<LocalDate, Emprestimo> listarDevedores();
 
     /**
-     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
-     * {@code Emprestimo} que não pagaram até o {@code prazo}.
-     * 
-     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
+     * Método que retorna uma {@code List} de {@code Emprestimo} referente ao {@code prazo} de todos os
+     * {@code Emprestimo} que não pagaram até a data de pagamento.
+     *
+     * @return Lista de Empréstimos filtrados por data de pagamento.
      */
-    Map<LocalDate, Emprestimo> listarDevedoresProtegidos();
+    List<Emprestimo> listarDevedores();
 
     /**
-     * Método que retorna um {@code Map} de {@code Emprestimo} ordenado por data referente ao {@code prazo} de todos os 
+     * Método que retorna uma {@code List} de {@code Emprestimo} referente ao {@code prazo} de todos os
+     * {@code Emprestimo} que não foram pagos até a data de pagamento, porém possuem um {@code score} alto.
+     *
+     * @return Lista de Empréstimos filtrados por data de pagamento e score alto.
+     */
+    List<Emprestimo> listarDevedoresProtegidos();
+
+    /**
+     * Método que retorna uma {@code List} de {@code Emprestimo} referente ao {@code prazo} de todos os
      * {@code Emprestimo} que não foram pagos até o {@code prazo} e além disso possuem um {@code score} baixo.
-     * 
-     * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
+     *
+     * @return Lista de Empréstimo filtrados por data de pagamento e score baixo.
      */
-    Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
+    List<Emprestimo> listarDevedoresAltoRisco();
     
     double calcularValorParcelas(Emprestimo emprestimo);
     
