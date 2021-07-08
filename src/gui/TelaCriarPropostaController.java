@@ -90,7 +90,7 @@ public class TelaCriarPropostaController {
     }
 
     private void atualizarListaBens() throws PessoaInexistenteException {
-        splMenuGarantia.getItems().removeAll();
+        splMenuGarantia.getItems().clear();
         for (Bens bens :
                 Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid()).values()) {
             //TODO: Rever quais bens podem ser usados como garantia
@@ -101,7 +101,7 @@ public class TelaCriarPropostaController {
     }
 
     private void atualizarListViewGarantias() {
-        lstvGarantias.getItems().removeAll();
+        lstvGarantias.getItems().clear();
         listGarantiasTemp.forEach(bens -> lstvGarantias.getItems().add(bens.getNome()));
     }
     

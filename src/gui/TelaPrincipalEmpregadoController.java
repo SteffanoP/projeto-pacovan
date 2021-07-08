@@ -86,7 +86,7 @@ public class TelaPrincipalEmpregadoController {
     }
 
     private void atualizaListView(ListView<String> listView, List<Emprestimo> emprestimoList) {
-        listView.getItems().removeAll();
+        listView.getItems().clear();
         for (Emprestimo emprestimo : emprestimoList) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(emprestimo.getEmpregado()).append("; ");

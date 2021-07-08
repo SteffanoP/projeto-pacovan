@@ -112,7 +112,7 @@ public class TelaBENSController {
 
     private void atualizarTableViewBens(List<Bens> bensList) {
         //Bens
-        tblvBens.getItems().removeAll();
+        tblvBens.getItems().clear();
         for (Bens bens : bensList) {
             BensModelo bensModelo = new BensModelo(bens.getDataCadastro(), bens.getValor(), bens.getNome(),
                     bens.getDescricao(), bens.getTempoDeUso());

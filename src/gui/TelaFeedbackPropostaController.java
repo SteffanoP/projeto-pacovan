@@ -68,7 +68,7 @@ public class TelaFeedbackPropostaController {
         try {
             proposta.getGarantia().forEach(bens -> lstvGarantia.getItems().add(bens.getNome()));
         } catch (NullPointerException e) {
-            lstvGarantia.getItems().removeAll();
+            lstvGarantia.getItems().clear();
         }
 
         if (proposta.isContraproposta())

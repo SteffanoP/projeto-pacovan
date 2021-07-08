@@ -73,7 +73,7 @@ public class TelaEmpregadoDetalheController {
     }
 
     private void atualizaTableViewDevedores(TableView<DevedorModelo> tableView, List<Emprestimo> emprestimos) {
-        tableView.getItems().removeAll();
+        tableView.getItems().clear();
         emprestimos.forEach(emprestimo -> {
             DevedorModelo devedorModelo = new DevedorModelo(emprestimo.getValor(), emprestimo.getDataPagamento(),
                     emprestimo.getCliente(), emprestimo.getParcelas(), emprestimo.getConfiancaPagamento(),
