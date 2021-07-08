@@ -356,32 +356,28 @@ public interface SistemaEmprestimosBens {
     void aprovarContraProposta(long numProtocolo) throws PropostaInvalidaException;
 
     /**
-     * Método que lista as propostas do cliente ordenadas por sua data de criação por meio de um {@code Map} criado para armazenar
-     * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo
-     * {@code data}.
-     *
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de propostas ordenadas por data.
-     */
-    Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException;
-
-    /**
-     * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map}
-     * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir
-     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
-     *
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum cliente.
-     * @return Map de propostas ordenadas por data.
-     */
-    Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException;
-
-    /**
-     * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map}
-     * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir
-     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
+     * Método que lista as propostas do cliente criado para armazenar objetos do tipo {@code Proposta} a partir do seu 
+     * atributo do tipo {@code Cliente}.
      * 
-     * @return Map de propostas ordenadas por data.
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return List de propostas.
      */
-    Map<LocalDate, Proposta> listarPropostasPendentes();
+    List<Proposta> listarPropostasCliente(long uidCliente); 
+    
+    /**
+     * Método que lista as contra propostas realizadas ao cliente e que tenham o atributo {@code contraProposta} true a partir 
+     * do seu atributo do tipo {@code Cliente}.
+     * 
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
+     * @return List de propostas.
+     */
+    List<Proposta> listarContraPropostas(long uidCliente);
+
+    /**
+     * Método que lista as contra propostas realizadas ao cliente e que tenham o atributo {@code contraProposta} false a partir 
+     * do seu atributo do tipo {@code Cliente}.
+     * 
+     * @return List de propostas.
+     */
+    List<Proposta> listarPropostasPendentes();
 }

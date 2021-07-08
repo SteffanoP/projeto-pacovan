@@ -54,18 +54,15 @@ public class TelaCriarPropostaController {
                 proposta.setGarantia(listGarantiasTemp);
                 Fachada.getInstance().criarProposta(proposta);
                 SessionManager.getInstance().setPropostaSessao(
-                        Fachada.getInstance().listarPropostasCliente(
-                                proposta.getCliente().getUid()).values().stream()
-                                                                        .reduce((primeiro, segundo) -> segundo)
-                                                                        .orElse(null)
+                        Fachada.getInstance().listarPropostasCliente(proposta.getCliente().getUid()).stream()
+                        																			.reduce((primeiro, segundo) -> segundo)
+                        																			.orElse(null)
                 );
                 GerenciadorTelas.getInstance().changeScreen("telaFeedbackProposta");
             } catch (NumberFormatException e) {
                 this.gerarAlertaErroCadastro("Há campos com dados inválidos!");
             } catch (PropostaInvalidaException e) {
                 this.gerarAlertaErroCadastro(e.getMessage());
-            } catch (PessoaInexistenteException e) {
-                e.printStackTrace();
             }
         } else {
             this.gerarAlertaErroCadastro("Verifique se você preencheu todos os campos.");

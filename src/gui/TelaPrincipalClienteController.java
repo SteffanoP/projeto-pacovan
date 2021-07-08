@@ -58,17 +58,13 @@ public class TelaPrincipalClienteController {
         this.initializeTableViews();
 
         long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
-        try {
-            List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente).values());
+            List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente));
             this.atualizarTableViewPropostas(pList);
             List<Emprestimo> eList = new
                     ArrayList<>(Fachada.getInstance().listarEmprestimosCliente(uidCliente).values());
             this.atualizarTableViewEmprestimos(eList);
             List<Movimentacao> mList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(uidCliente).values());
             this.atualizarTableViewExtrato(mList);
-        } catch (PessoaInexistenteException e) {
-            e.printStackTrace();
-        }
     }
 
     private void initializeTableViews() {

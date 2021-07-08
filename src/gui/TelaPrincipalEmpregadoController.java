@@ -58,7 +58,7 @@ public class TelaPrincipalEmpregadoController {
 
         this.initializeTableViews();
 
-        List<Proposta> propostas = new ArrayList<>(Fachada.getInstance().listarPropostasPendentes().values());
+        List<Proposta> propostas = new ArrayList<>(Fachada.getInstance().listarPropostasPendentes());
 		for (Proposta proposta : propostas) {
 		    PropostaModelo propostaModelo = new PropostaModelo(proposta.getNumProtocolo(), proposta.getData(),
 		            proposta.getValorDesejado(), proposta.getValorDesejado());
