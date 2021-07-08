@@ -375,8 +375,8 @@ public interface SistemaEmprestimosBens {
     List<Proposta> listarContraPropostas(long uidCliente);
 
     /**
-     * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
-     * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
+     * Método que lista as contra propostas realizadas ao cliente e que tenham o atributo {@code contraProposta} false a partir 
+     * do seu atributo do tipo {@code Cliente}.```
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
      * 
      * @return List de propostas.
