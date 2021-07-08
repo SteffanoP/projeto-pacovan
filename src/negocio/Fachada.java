@@ -45,37 +45,37 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) {
         return bens.buscarBensCliente(uidCliente,nomeBens);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensEmpresa() {
-        return bens.listarBensEmpresa();
+    public List<Bens> listarBens() {
+        return bens.listarBens();
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
+    public List<Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
         return bens.listarBensEmpresaCategoria(categoria);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
+    public List<Bens> listarBensCliente(long uidCliente) {
         return bens.listarBensCliente(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException {
+    public List<Bens> listarBensPendentes(long uidCliente) {
         return bens.listarBensPendentes(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensAprovados() {
+    public List<Bens> listarBensAprovados() {
         return bens.listarBensAprovados();
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensGarantia() {
+    public List<Bens> listarBensGarantia() {
         return bens.listarBensGarantia();
     }
 
@@ -110,7 +110,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
+    public List<Emprestimo> listarEmprestimosCliente(long uidCliente) {
         return emprestimos.listarEmprestimosCliente(uidCliente);
     }
 
@@ -120,17 +120,17 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarDevedores() {
+    public List<Emprestimo> listarDevedores() {
         return emprestimos.listarDevedores();
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarDevedoresProtegidos() {
+    public List<Emprestimo> listarDevedoresProtegidos() {
         return emprestimos.listarDevedoresProtegidos();
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarDevedoresAltoRisco() {
+    public List<Emprestimo> listarDevedoresAltoRisco() {
         return emprestimos.listarDevedoresAltoRisco();
     }
     
@@ -235,17 +235,17 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
+    public List<Proposta> listarPropostasCliente(long uidCliente){
         return propostas.listarPropostasCliente(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException {
+    public List<Proposta> listarContraPropostas(long uidCliente){
         return propostas.listarContraPropostas(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarPropostasPendentes() {
+    public List<Proposta> listarPropostasPendentes() {
         return propostas.listarPropostasPendentes();
     }
 }

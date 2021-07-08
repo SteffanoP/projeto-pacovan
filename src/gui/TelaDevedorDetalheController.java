@@ -54,7 +54,7 @@ public class TelaDevedorDetalheController {
     private void atualizarTableViews() {
         //Atualiza TableView de Empréstimos do Cliente
         List<Emprestimo> emprestimoList = new ArrayList<>(Fachada.getInstance().listarEmprestimosCliente(
-                SessionManager.getInstance().getClienteSessao().getUid()).values());
+                SessionManager.getInstance().getClienteSessao().getUid()));
         for (Emprestimo emprestimo : emprestimoList) {
             DevedorModelo devedorModelo = new DevedorModelo(emprestimo.getValor(),emprestimo.getDataPagamento(),
                     emprestimo.getCliente(), emprestimo.getParcelas(), emprestimo.getConfiancaPagamento(),
