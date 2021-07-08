@@ -166,9 +166,9 @@ public class ControladorProposta {
      */
     public List<Proposta> listarContraPropostas(long uidCliente){
     	return this.repoProposta.listar().stream()
-                						 .filter(proposta -> proposta.getCliente().getUid() == uidCliente)
-                						 .filter(proposta -> proposta.isContraproposta())
-                						 .collect(Collectors.toList());
+					 .filter(proposta -> proposta.getCliente().getUid() == uidCliente)
+					 .filter(proposta -> proposta.isContraproposta())
+					 .collect(Collectors.toList());
     }
 
     /**
@@ -179,7 +179,7 @@ public class ControladorProposta {
      */
     public List<Proposta> listarPropostasPendentes() {
     	return this.repoProposta.listar().stream()
-						                 .filter(proposta -> !proposta.isContraproposta())
-						                 .collect(Collectors.toList());
+					 .filter(proposta -> !proposta.isContraproposta())
+					 .collect(Collectors.toList());
     }
 }
