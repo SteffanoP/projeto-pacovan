@@ -4,13 +4,12 @@ import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.ObjetoDuplicadoException;
 import exceptions.ObjetoInexistenteException;
-import exceptions.PessoaInexistenteException;
 import exceptions.PropostaInvalidaException;
-import negocio.beans.Bens;
 import negocio.beans.Proposta;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ControladorProposta {
     private Repositorio<Proposta> repoProposta;
@@ -146,59 +145,29 @@ public class ControladorProposta {
     }
 
     /**
-     * Método que lista as propostas do cliente ordenadas por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Proposta} a partir do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo 
-     * {@code data}.
+     * Método que lista as propostas do cliente criado para armazenar objetos do tipo {@code Proposta} a partir do seu 
+     * atributo do tipo {@code Cliente}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de propostas ordenadas por data.
+     * @return List de propostas.
      */
-    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
-        NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
-        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar()); 
-        boolean clienteExiste = false;
-        
-        for (Proposta proposta : this.repoProposta.listar()) {
-            if(proposta.getCliente().getUid() == uidCliente){
-                clienteExiste = true;
-                if(!proposta.isContraproposta()) mapaPropostas.put(proposta.getData(), proposta);
-            }
-        }
-        
-        if (!clienteExiste) {
-            throw new PessoaInexistenteException("Cliente não existe!");
-        }
-
-        return mapaPropostas;
-    }
+    public List<Proposta> listarPropostasCliente(long uidCliente) {
+        return this.repoProposta.listar().stream()
+                                         .filter(proposta -> proposta.getCliente().getUid() == uidCliente)
+                                         .collect(Collectors.toList());
+    } 
     
     /**
-     * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
-     * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} true a partir 
-     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo {@code data}.
+     * Método que lista as contra propostas realizadas ao cliente e que tenham o atributo {@code contraProposta} true a partir 
+     * do seu atributo do tipo {@code Cliente}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não esteja atribuído a nenhum
-     * cliente.
-     * @return Map de propostas ordenadas por data.
+     * @return List de propostas.
      */
-    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException {
-        NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
-        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar());
-        boolean clienteExiste = false;
-        
-        for (Proposta proposta : propostasList) {
-            if(proposta.getCliente().getUid() == uidCliente){
-                clienteExiste = true;
-                if(proposta.isContraproposta()) mapaPropostas.put(proposta.getData(), proposta);
-            }
-        }
-        
-        if (!clienteExiste) {
-            throw new PessoaInexistenteException("Cliente não existe!");
-        }
-
-        return mapaPropostas;
+    public List<Proposta> listarContraPropostas(long uidCliente){
+    	return this.repoProposta.listar().stream()
+                .filter(proposta -> proposta.getCliente().getUid() == uidCliente).filter(proposta -> proposta.isContraproposta())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -206,19 +175,11 @@ public class ControladorProposta {
      * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
      * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
      * 
-     * @return Map de propostas ordenadas por data.
+     * @return List de propostas.
      */
-    public Map<LocalDate, Proposta> listarPropostasPendentes() {
-        NavigableMap<LocalDate, Proposta> mapaPropostas = new TreeMap<>();
-        List<Proposta> propostasList = new ArrayList<>(this.repoProposta.listar());
-        
-        for (Proposta proposta : propostasList) {
-            if(!proposta.isContraproposta()){
-                //Preencher mapa
-                mapaPropostas.put(proposta.getData(), proposta);
-            }
-        }
-
-        return mapaPropostas;
+    public List<Proposta> listarPropostasPendentes() {
+    	return this.repoProposta.listar().stream()
+                .filter(proposta -> !proposta.isContraproposta())
+                .collect(Collectors.toList());
     }
 }

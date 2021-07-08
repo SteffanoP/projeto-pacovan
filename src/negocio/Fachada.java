@@ -236,17 +236,17 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarPropostasCliente(long uidCliente) throws PessoaInexistenteException {
+    public List<Proposta> listarPropostasCliente(long uidCliente){
         return propostas.listarPropostasCliente(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarContraPropostas(long uidCliente) throws PessoaInexistenteException {
+    public List<Proposta> listarContraPropostas(long uidCliente){
         return propostas.listarContraPropostas(uidCliente);
     }
 
     @Override
-    public Map<LocalDate, Proposta> listarPropostasPendentes() {
+    public List<Proposta> listarPropostasPendentes() {
         return propostas.listarPropostasPendentes();
     }
 }
