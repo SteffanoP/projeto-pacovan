@@ -1,6 +1,7 @@
 package negocio.beans;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 //TODO: Implementação da classe Bens
@@ -73,6 +74,10 @@ public class Bens {
 
     public LocalDate getDataCadastro() {
         return dataCadastro;
+    }
+
+    public String getDataCadastroToString() {
+        return this.dataCadastro.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public void setDataCadastro(LocalDate dataCadastro) {
