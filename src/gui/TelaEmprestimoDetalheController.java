@@ -65,7 +65,7 @@ public class TelaEmprestimoDetalheController {
     }
     
     private void atualizarTableViewExtrato(List<Movimentacao> extratoList) {
-    	tblvExtrato.getItems().removeAll();
+    	tblvExtrato.getItems().clear();
     	for (Movimentacao movimentacao: extratoList) {
     		if (movimentacao.getCliente().equals(SessionManager.getInstance().getClienteSessao())) {
     			MovimentacaoModelo movimentacaoModelo = new MovimentacaoModelo(movimentacao.getInstante(), 
@@ -76,7 +76,7 @@ public class TelaEmprestimoDetalheController {
     }
     
     private void atualizarListViewGarantias() {
-        lstvGarantias.getItems().removeAll();
+        lstvGarantias.getItems().clear();
         listGarantiasTemp.forEach(bens -> lstvGarantias.getItems().add(bens.getNome()));
     }
     

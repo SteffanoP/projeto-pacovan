@@ -86,7 +86,7 @@ public class TelaPrincipalClienteController {
 
     private void atualizarTableViewPropostas(List<Proposta> propostaList) {
         //TODO: Pensar em mover essa conversão para local apropriado
-        tblvPropostas.getItems().removeAll();
+        tblvPropostas.getItems().clear();
         for (Proposta proposta : propostaList) {
             PropostaModelo propostaModelo = new PropostaModelo(proposta.getNumProtocolo(),proposta.getData(),
                     proposta.getValorDesejado(),proposta.getParcelasDesejadas());
@@ -96,7 +96,7 @@ public class TelaPrincipalClienteController {
 
     private void atualizarTableViewEmprestimos(List<Emprestimo> emprestimoList) {
         //TODO: Pensar em mover essa conversão para local apropriado
-        tblvEmprestimos.getItems().removeAll();
+        tblvEmprestimos.getItems().clear();
         for (Emprestimo emprestimo : emprestimoList) {
             EmprestimoModelo emprestimoModelo = new EmprestimoModelo(emprestimo.getNumProtocolo(),
                     emprestimo.getDataPagamento(), emprestimo.getParcelas(), emprestimo.getValor(),
@@ -107,7 +107,7 @@ public class TelaPrincipalClienteController {
 
     private void atualizarTableViewExtrato(List<Movimentacao> movimentacaoList) {
         //TODO: Pensar em mover essa conversão para local apropriado
-        tblvExtrato.getItems().removeAll();
+        tblvExtrato.getItems().clear();
         for (Movimentacao movimentacao : movimentacaoList) {
             MovimentacaoModelo movimentacaoModelo = new MovimentacaoModelo(movimentacao.getInstante(),
                     movimentacao.getTipoMovimentacao(), movimentacao.getValor());

@@ -113,7 +113,7 @@ public class TelaAnalisePropostaController {
     }
 
     private void atualizaTableViewBens(TableView<BensModelo> tableView, List<Bens> bensList) {
-        tableView.getItems().removeAll();
+        tableView.getItems().clear();
         if (bensList != null) {
             for (Bens bens : bensList) {
                 BensModelo bensModelo = new BensModelo(bens.getDataCadastro(), bens.getValor(), bens.getNome(),
