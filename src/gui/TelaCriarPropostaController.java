@@ -58,9 +58,9 @@ public class TelaCriarPropostaController {
                 proposta.setGarantia(listGarantiasTemp);
                 Fachada.getInstance().criarProposta(proposta);
                 SessionManager.getInstance().setPropostaSessao(
-                        Fachada.getInstance().listarPropostasCliente(
-                                proposta.getCliente().getUid()).stream()
-                        		.reduce((primeiro, segundo) -> segundo).orElse(null)
+                        Fachada.getInstance().listarPropostasCliente(proposta.getCliente().getUid()).stream()
+                        																			.reduce((primeiro, segundo) -> segundo)
+                        																			.orElse(null)
                 );
                 GerenciadorTelas.getInstance().changeScreen("telaFeedbackProposta");
             } catch (NumberFormatException e) {
