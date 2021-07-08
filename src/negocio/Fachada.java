@@ -121,17 +121,17 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarDevedores() {
+    public List<Emprestimo> listarDevedores() {
         return emprestimos.listarDevedores();
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarDevedoresProtegidos() {
+    public List<Emprestimo> listarDevedoresProtegidos() {
         return emprestimos.listarDevedoresProtegidos();
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarDevedoresAltoRisco() {
+    public List<Emprestimo> listarDevedoresAltoRisco() {
         return emprestimos.listarDevedoresAltoRisco();
     }
     

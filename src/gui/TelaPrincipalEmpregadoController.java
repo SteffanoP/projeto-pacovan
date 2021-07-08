@@ -65,12 +65,9 @@ public class TelaPrincipalEmpregadoController {
 		    tblvPropostas.getItems().add(propostaModelo);
 		}
 
-        List<Emprestimo> eDevedores = new ArrayList<>(Fachada.getInstance().listarDevedores().values());
-        this.atualizaTableViewsEmprestimo(tblvDevedores, eDevedores);
-        List<Emprestimo> eDProtegidos = new ArrayList<>(Fachada.getInstance().listarDevedoresProtegidos().values());
-        this.atualizaTableViewsEmprestimo(tblvDProtegidos, eDProtegidos);
-        List<Emprestimo> eDAltoRisco = new ArrayList<>(Fachada.getInstance().listarDevedoresAltoRisco().values());
-        this.atualizaTableViewsEmprestimo(tblvDAltoRisco, eDAltoRisco);
+        this.atualizaTableViewsEmprestimo(tblvDevedores, Fachada.getInstance().listarDevedores());
+        this.atualizaTableViewsEmprestimo(tblvDProtegidos, Fachada.getInstance().listarDevedoresProtegidos());
+        this.atualizaTableViewsEmprestimo(tblvDAltoRisco, Fachada.getInstance().listarDevedoresAltoRisco());
 
         Empregado empregado = (Empregado) SessionManager.getInstance().getPessoaSessao();
         this.atualizaListView(lstvComissoes, Fachada.getInstance().listarComissoesEmprestimo(empregado));
