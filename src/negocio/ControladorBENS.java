@@ -87,30 +87,17 @@ public class ControladorBENS {
     }
 
     /**
-     * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * Método que lista os BENS pendentes do cliente do quais são objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente true}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente não for encontrado.
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por cliente e por pendência.
      */
-    public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException{
-
-        NavigableMap<LocalDate, Bens> mapaBensPendentes = new TreeMap<>();
-        boolean pendente = false;
-        List<Bens> pendenteList = repoBENS.listar();
-
-        for(Bens ben : pendenteList){
-            if(ben.getCliente().getUid() == uidCliente && ben.isPendente()) {
-
-                pendente = true;
-
-                mapaBensPendentes.put(ben.getDataCadastro(), ben);
-            }
-        }
-        if(!pendente)  throw new PessoaInexistenteException("Cliente Não existe!");
-
-        return mapaBensPendentes;
+    public List<Bens> listarBensPendentes(long uidCliente) {
+        return this.repoBENS.listar().stream()
+                                     .filter(bens -> bens.getCliente().getUid() == uidCliente)
+                                     .filter(Bens::isPendente)
+                                     .collect(Collectors.toList());
     }
 
     /**

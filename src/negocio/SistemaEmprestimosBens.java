@@ -54,15 +54,13 @@ public interface SistemaEmprestimosBens {
     List<Bens> listarBensCliente(long uidCliente);
 
     /**
-     * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
+     * Método que lista os BENS pendentes do cliente do quais são objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente true}.
+     *
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente não for encontrado.
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por cliente e por pendência.
      */
-    
-    Map<LocalDate, Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException;
+    List<Bens> listarBensPendentes(long uidCliente);
 
     /**
      * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
