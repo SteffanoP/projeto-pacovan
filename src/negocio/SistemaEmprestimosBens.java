@@ -376,8 +376,7 @@ public interface SistemaEmprestimosBens {
 
     /**
      * Método que lista as contra propostas realizadas ao cliente e que tenham o atributo {@code contraProposta} false a partir 
-     * do seu atributo do tipo {@code Cliente}.```
-     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
+     * do seu atributo do tipo {@code Cliente}.
      * 
      * @return List de propostas.
      */
