@@ -147,6 +147,34 @@ public class ControladorPessoa {
     }
 
     /**
+     * Método que faz a busca de uma {@code Pessoa} dentro do repositório de todos os usuários.
+     *
+     * @param uidPessoa se trata do parâmetro de busca do usuário
+     * @return retorna um objeto abstrato do tipo {@code Pessoa}
+     * @throws PessoaInexistenteException poderá acontecer caso o {@code email} não esteja atribuído a nenhuma
+     * {@code Pessoa}.
+     */
+    public Pessoa buscarPessoa(long uidPessoa) throws PessoaInexistenteException {
+        Pessoa pessoa = null;
+        List<Pessoa> listPessoas = new ArrayList<>(repoCliente.listar());
+        listPessoas.addAll(repoEmpregado.listar());
+
+        boolean pessoaEncontrada = false;
+        for (int i = 0; (i < listPessoas.size()) && !pessoaEncontrada; i++) {
+            Pessoa p = listPessoas.get(i);
+            if (uidPessoa == p.getUid()) {
+                pessoa = p;
+                pessoaEncontrada = true;
+            }
+        }
+
+        if (!pessoaEncontrada)
+            throw new PessoaInexistenteException("Essa pessoa não foi encontrada!");
+
+        return pessoa;
+    }
+
+    /**
      * Método que altera os dados cadastrados de uma pessoa por meio da substituição do objeto {@code Pessoa} antigo
      * por um novo objeto do tipo {@code Pessoa}.
      *

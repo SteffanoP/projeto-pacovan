@@ -56,7 +56,7 @@ public class GerenciadorTelas {
 		        }
 		        break;
 			}
-			case "telaAdmin": {	        
+			case "telaAdmin": {
 		        try {
 		        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalAdmin.fxml").openStream());
 		        } catch (IOException e) {
@@ -159,12 +159,20 @@ public class GerenciadorTelas {
 	            }
 	            break;
 			}
+			case "telaRelatorio": {
+				try {
+					telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaGeracaoRelatorio.fxml").openStream());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + tela);
 			}
 
     	this.mainScene = new Scene(telaAtual);
-    	primaryStage.setScene(mainScene);
+      primaryStage.setScene(mainScene);
 
     }
 
