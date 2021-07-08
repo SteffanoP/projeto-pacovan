@@ -109,7 +109,7 @@ public class ControladorEmprestimo {
         if (cliente == null || dataEmprestimo == null) throw new EmprestimoInexistenteException("Essa requisição " +
                 "parece inválida!");
 
-        List<Emprestimo> listaEmprestimosCliente = new ArrayList<>(this.listarEmprestimosCliente(cliente.getUid()).values());
+        List<Emprestimo> listaEmprestimosCliente = new ArrayList<>(this.listarEmprestimosCliente(cliente.getUid()));
         String emprestimoEmDetalhe = "";
 
         boolean emprestimoEncontrado = false;
@@ -129,23 +129,16 @@ public class ControladorEmprestimo {
     }
 
     /**
-     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
-     * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
-     * 
+     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de uma
+     * {@code List} do qual armazena todos os objetos do tipo {@code Emprestimo}.
+     *
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de empréstimos ordenados por data.
+     * @return List de empréstimos filtrados por cliente.
      */
-    public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
-        NavigableMap<LocalDate, Emprestimo> mapaEmprestimos = new TreeMap<>();
-        List<Emprestimo> repositorio = this.repoEmprestimo.listar();
-
-        for (Emprestimo emprestimo : repositorio) {
-            if(emprestimo.getCliente().getUid() == uidCliente){
-                //Preencher mapa
-                mapaEmprestimos.put(emprestimo.getData(), emprestimo);
-            }
-        }
-        return mapaEmprestimos;
+    public List<Emprestimo> listarEmprestimosCliente(long uidCliente) {
+        return this.repoEmprestimo.listar().stream()
+                                           .filter(emprestimo -> emprestimo.getCliente().getUid() == uidCliente)
+                                           .collect(Collectors.toList());
     }
 
     /**

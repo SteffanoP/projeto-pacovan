@@ -134,13 +134,13 @@ public interface SistemaEmprestimosBens {
     String emprestimoEmDetalhe(Cliente cliente, LocalDate dataEmprestimo) throws EmprestimoInexistenteException;
 
     /**
-     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de um 
-     * {@code Map} dos  que ordena todos os objetos do tipo {@code Emprestimo} por sua {@code dataEmprestimo}.
-     * 
+     * Método que retorna todos os empréstimos feitos pelo cliente identificado por seu {@code uid} através de uma
+     * {@code List} do qual armazena todos os objetos do tipo {@code Emprestimo}.
+     *
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de empréstimos ordenados por data.
+     * @return List de empréstimos filtrados por cliente.
      */
-    Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente);
+    List<Emprestimo> listarEmprestimosCliente(long uidCliente);
 
     /**
      * Método que lista todas as comissões de empréstimos de que um empregado é responsável.

@@ -111,7 +111,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Emprestimo> listarEmprestimosCliente(long uidCliente) {
+    public List<Emprestimo> listarEmprestimosCliente(long uidCliente) {
         return emprestimos.listarEmprestimosCliente(uidCliente);
     }
 
