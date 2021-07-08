@@ -38,14 +38,13 @@ public interface SistemaEmprestimosBens {
     List<Bens> listarBens();
 
     /**
-     * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma
-     * {@code CategoriaBens} parametrizada.
+     * Método que lista um {@code List<Bens>} de todos os Bens da empresa, filtrado por um {@code CategoriaBens}
+     * parametrizada.
      *
      * @param categoria se refere a categoria de bens que se pretende listar.
-     * @return um {@code Map<LocalDate, Bens>} com os bens filtrados por meio de uma {@code CategoriaBens} como
-     * parâmetro.
+     * @return uma lista com os bens filtrados por meio de uma {@code CategoriaBens} com parâmetro.
      */
-    Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
+    List<Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
 
     /**
      * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 

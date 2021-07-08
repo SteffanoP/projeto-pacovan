@@ -7,6 +7,7 @@ import negocio.beans.Bens;
 import negocio.beans.CategoriaBens;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ControladorBENS {
     private Repositorio<Bens> repoBENS;
@@ -62,23 +63,16 @@ public class ControladorBENS {
     }
 
     /**
-     * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma
-     * {@code CategoriaBens} parametrizada.
+     * Método que lista um {@code List<Bens>} de todos os Bens da empresa, filtrado por um {@code CategoriaBens}
+     * parametrizada.
      *
      * @param categoria se refere a categoria de bens que se pretende listar.
-     * @return um {@code Map<LocalDate, Bens>} com os bens filtrados por meio de uma {@code CategoriaBens} como
-     * parâmetro.
+     * @return uma lista com os bens filtrados por meio de uma {@code CategoriaBens} com parâmetro.
      */
-    public Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
-        NavigableMap<LocalDate, Bens> mapaBens = new TreeMap<>();
-        List<Bens> bensList = this.repoBENS.listar();
-
-        for (Bens bens : bensList) {
-            if (bens.getCategoria().equals(categoria)) {
-                mapaBens.put(bens.getDataCadastro(), bens);
-            }
-        }
-        return  mapaBens;
+    public List<Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
+        return this.repoBENS.listar().stream()
+                                     .filter(bens -> bens.getCategoria().equals(categoria))
+                                     .collect(Collectors.toList());
     }
 
     /**
