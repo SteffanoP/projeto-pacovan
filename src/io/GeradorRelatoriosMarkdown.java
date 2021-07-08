@@ -187,7 +187,26 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
         }
         //TODO: Campo de Reputação de Negócio
         //TODO: Campo de comissões
-        //TODO: Campo de Listas Protegidos/Alto-Risco
+        if (this.escolhaCamposEmpregado[4]) {
+            corpoArquivo.append("## Lista de Devedores Protegidos\n\n");
+            this.relatorioEmpregado.getDevedoresProtegidos().forEach(devedores -> {
+                corpoArquivo.append("- Nome: ").append(devedores.getCliente().getNome()).append("\n");
+                corpoArquivo.append("- CPF: ").append(devedores.getCliente().getCpf()).append("\n");
+                corpoArquivo.append("- Saldo Devido: R$ ").append(devedores.getValor()).append("\n");
+                corpoArquivo.append("- Score: ").append(devedores.getCliente().getScore()).append("\n");
+                corpoArquivo.append("- Empregado: ").append(devedores.getEmpregado().getNome()).append("\n");
+            });
+            corpoArquivo.append("\n");
+
+            corpoArquivo.append("## Lista de Devedores de Alto Risco\n\n");
+            this.relatorioEmpregado.getDevedoresAltoRisco().forEach(devedores -> {
+                corpoArquivo.append("- Nome: ").append(devedores.getCliente().getNome()).append("\n");
+                corpoArquivo.append("- CPF: ").append(devedores.getCliente().getCpf()).append("\n");
+                corpoArquivo.append("- Saldo Devido: R$ ").append(devedores.getValor()).append("\n");
+                corpoArquivo.append("- Score: ").append(devedores.getCliente().getScore()).append("\n");
+                corpoArquivo.append("- Empregado: ").append(devedores.getEmpregado().getNome()).append("\n");
+            });
+        }
     }
     //Setters, caso necessário
     private void setRelatorioCliente(RelatorioCliente relatorioCliente) {

@@ -55,8 +55,13 @@ public class TelaGeracaoRelatorioController {
                 //TODO: Substituir Maps pelas Lists
                 List<Emprestimo> emprestimos = new
                         ArrayList<>(Fachada.getInstance().listarComissoesEmprestimo((Empregado) empregado));
+                List<Emprestimo> emprestimosProtegidos = new
+                        ArrayList<>(Fachada.getInstance().listarDevedoresProtegidos().values());
+                List<Emprestimo> emprestimosAltoRisco = new
+                        ArrayList<>(Fachada.getInstance().listarDevedoresAltoRisco().values());
 
-                RelatorioEmpregado relatorio = new RelatorioEmpregado((Empregado) empregado, emprestimos);
+                RelatorioEmpregado relatorio = new RelatorioEmpregado((Empregado) empregado, emprestimos,
+                        emprestimosProtegidos, emprestimosAltoRisco);
                 GeradorRelatorios geradorRelatorios = new
                         GeradorRelatoriosMarkdown(relatorio, this.verificarCheckBoxEmpregado());
                 geradorRelatorios.gerarRelatorioEmpregado(null);
