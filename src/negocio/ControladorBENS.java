@@ -113,20 +113,13 @@ public class ControladorBENS {
     }
 
     /**
-     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * Método que lista todos os BENS que são garantia criado para armazenar objetos do tipo {@code Bens} que tem seu
+     * atributo {@code garantia true}.
      * 
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por garantia.
      */
-    public Map<LocalDate,Bens> listarBensGarantia() {
-        NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
-        List<Bens> garantiaList = repoBENS.listar();
-
-            for(Bens ben: garantiaList){
-                if(ben.isGarantia()) mapaBensGarantia.put(ben.getDataCadastro(), ben);
-            }
-
-        return mapaBensGarantia;
+    public List<Bens> listarBensGarantia() {
+        return this.repoBENS.listar().stream().filter(Bens::isGarantia).collect(Collectors.toList());
     }
 
     public double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException{

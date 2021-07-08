@@ -71,12 +71,12 @@ public interface SistemaEmprestimosBens {
     List<Bens> listarBensAprovados();
 
     /**
-     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @return Map de Bens ordenados por data.
+     * Método que lista todos os BENS que são garantia criado para armazenar objetos do tipo {@code Bens} que tem seu
+     * atributo {@code garantia true}.
+     *
+     * @return Lista de Bens filtrados por garantia.
      */
-    Map<LocalDate, Bens> listarBensGarantia();
+    List<Bens> listarBensGarantia();
 
     double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException;
 
