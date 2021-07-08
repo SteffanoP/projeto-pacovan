@@ -151,6 +151,14 @@ public class GerenciadorTelas {
             }
             break;
 		}
+		case "telaRelatorio": {
+			try {
+				telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaGeracaoRelatorio.fxml").openStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + tela);
 		}

@@ -166,6 +166,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public Pessoa buscarPessoa(long uidPessoa) throws PessoaInexistenteException {
+        return pessoas.buscarPessoa(uidPessoa);
+    }
+
+    @Override
     public void alterarDadosPessoais(Pessoa pessoaDadosNovo) throws PessoaInexistenteException {
         pessoas.alterarDadosPessoais(pessoaDadosNovo);
     }

@@ -46,6 +46,7 @@ public class TelaPrincipalAdminController {
     }
 
     public void btnGerarRelatorioPressed(ActionEvent event) {
+        GerenciadorTelas.getInstance().changeScreen("telaRelatorio");
     }
 
     public void btnCadastrarEmpregadoPressed(ActionEvent event) {

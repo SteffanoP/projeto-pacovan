@@ -24,6 +24,16 @@ public class Proposta {
 
     //Métodos
 
+    /**
+     * Método que calcula o valor total dos BENS como garantia em uma proposta.
+     *
+     * @return um valor que se refere ao valor total de garantias.
+     */
+    public double valorTotalBENS() {
+        if (garantia != null) return garantia.stream().mapToDouble(Bens::getValor).sum();
+        else return 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

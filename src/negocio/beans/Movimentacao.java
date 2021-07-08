@@ -1,6 +1,7 @@
 package negocio.beans;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Movimentacao {
@@ -51,6 +52,10 @@ public class Movimentacao {
 
     public LocalDateTime getInstante() {
         return instante;
+    }
+
+    public String getInstanteToString() {
+        return this.instante.format(DateTimeFormatter.ofPattern("HH/mm dd/MM/yyyy"));
     }
 
     public void setInstante(LocalDateTime instante) {
