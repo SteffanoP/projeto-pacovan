@@ -175,6 +175,19 @@ public interface SistemaEmprestimosBens {
      * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
+    
+    double calcularValorParcelas(Emprestimo emprestimo);
+    
+    LocalDate calcularProximoPrazo(Emprestimo emprestimo, int parcela);
+
+    /**
+     * Método que gera a movimentação e armazena um objeto {@code Movimentacao} dentro do repositório de movimentações
+     *
+     * @param movimentacao se refere ao objeto {@code Movimentacao} que se deseja inserir dentro do repositório.
+     * @throws MovimentacaoDuplicadaException poderá acontecer caso já exista uma movimentação igual no repositório do
+     * sistema.
+     */
+    void gerarMovimentacao(Movimentacao movimentacao) throws MovimentacaoDuplicadaException;
 
     /**
      * Método que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 

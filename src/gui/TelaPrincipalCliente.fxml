@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalClienteController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalClienteController">
    <children>
       <SplitPane dividerPositions="0.12871287128712872" layoutX="51.0" layoutY="79.0" orientation="VERTICAL" prefHeight="173.0" prefWidth="629.0">
          <items>
@@ -94,5 +94,6 @@
       </Label>
       <Label fx:id="lblScoreUsuario" layoutX="532.0" layoutY="30.0" prefHeight="17.0" prefWidth="32.0" />
       <Button fx:id="btnSairPressed" layoutX="853.0" layoutY="26.0" mnemonicParsing="false" onAction="#btnSairPressed" text="Sair" />
+      <Button layoutX="712.0" layoutY="298.0" mnemonicParsing="false" onAction="#btnPagamentoEfetuadoPressed" text="Pamento Efetuado" />
    </children>
 </Pane>

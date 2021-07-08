@@ -40,136 +40,136 @@ public class GerenciadorTelas {
     	Parent telaAtual = null;
     	
     	switch (tela) {
-		case "telaCliente": {
-	        try {
-	        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalCliente.fxml").openStream());
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        break;
-		}
-		case "telaEmpregado": {
-	        try {
-	        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalEmpregado.fxml").openStream());
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        break;
-		}
-		case "telaAdmin": {	        
-	        try {
-	        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalAdmin.fxml").openStream());
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        break;
-		}
-		case "telaCadastrar":{
-		    try {
-		        telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCadastrarCliente.fxml").openStream());
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		    break;
-		}
-		case "telaCadastrarEmpregado": {
-			try {
-				telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCadastroEmpregados.fxml").openStream());
-			} catch (IOException e) {
-				e.printStackTrace();
+			case "telaCliente": {
+		        try {
+		        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalCliente.fxml").openStream());
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        break;
 			}
-			break;
-		}
-		case "telaLogin": {
-            try {
-                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            break;
-     	}
-     	case "telaFeedbackProposta": {
-     		try {
-     			telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaFeedbackProposta.fxml").openStream());
-			} catch (IOException e) {
-     			e.printStackTrace();
+			case "telaEmpregado": {
+		        try {
+		        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalEmpregado.fxml").openStream());
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        break;
 			}
-     	}
-    case "telaBensEmpresa": {
-        	try {
-        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBensEmpresa.fxml").openStream());
-        	} catch (IOException e) {
-        		e.printStackTrace();
-        	}
-        	break;
-		 }
-    case "telaAnaliseProposta": {
-        	try {
-        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaAnaliseProposta.fxml").openStream());
-        	} catch (IOException e) {
-        		e.printStackTrace();
-        	}
-        	break;
-     }
-    case "telaDevedorDetalhe": {
-        	try {
-        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaDevedorDetalhe.fxml").openStream());
-        	} catch (IOException e) {
-        		e.printStackTrace();
-        	}
-        	break;
-     }
-		case "telaInformacoesPessoais": {
-            try {
-                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaInformacoesPessoais.fxml").openStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            break;
-		 }
-		case "telaBENS": {
-            try {
-                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBENS.fxml").openStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            break;
-		 }
-		case "telaCriarProposta": {
-            try {
-                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCriarProposta.fxml").openStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            break;
-		}
-		case "telaEmprestimoDetalhe": {
-            try {
-                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaEmpregadoDetalhe.fxml").openStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            break;
-		}
-		case "telaEmpregadoDetalhe": {
+			case "telaAdmin": {
+		        try {
+		        	telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaPrincipalAdmin.fxml").openStream());
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		        break;
+			}
+			case "telaCadastrar":{
+			    try {
+			        telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCadastrarCliente.fxml").openStream());
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			    }
+			    break;
+			}
+			case "telaCadastrarEmpregado": {
 				try {
-					telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaEmpregadoDetalhe.fxml").openStream());
+					telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCadastroEmpregados.fxml").openStream());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				break;
 			}
-			break;
-		case "telaRelatorio": {
-			try {
-				telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaGeracaoRelatorio.fxml").openStream());
-			} catch (IOException e) {
-				e.printStackTrace();
+			case "telaLogin": {
+	            try {
+	                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaLogin.fxml").openStream());
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            break;
+	     	}
+	     	case "telaFeedbackProposta": {
+	     		try {
+	     			telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaFeedbackProposta.fxml").openStream());
+				} catch (IOException e) {
+	     			e.printStackTrace();
+				}
+	     	}
+		    case "telaBensEmpresa": {
+		        	try {
+		        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBensEmpresa.fxml").openStream());
+		        	} catch (IOException e) {
+		        		e.printStackTrace();
+		        	}
+		        	break;
+				 }
+		    case "telaAnaliseProposta": {
+		        	try {
+		        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaAnaliseProposta.fxml").openStream());
+		        	} catch (IOException e) {
+		        		e.printStackTrace();
+		        	}
+		        	break;
+		     }
+		    case "telaDevedorDetalhe": {
+		        	try {
+		        		telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaDevedorDetalhe.fxml").openStream());
+		        	} catch (IOException e) {
+		        		e.printStackTrace();
+		        	}
+		        	break;
+		     }
+			case "telaInformacoesPessoais": {
+	            try {
+	                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaInformacoesPessoais.fxml").openStream());
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            break;
+			 }
+			case "telaBENS": {
+	            try {
+	                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaBENS.fxml").openStream());
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            break;
+			 }
+			case "telaCriarProposta": {
+	            try {
+	                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaCriarProposta.fxml").openStream());
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            break;
 			}
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + tela);
-		}
+			case "telaEmprestimoDetalhe": {
+	            try {
+	                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaEmprestimoDetalhe.fxml").openStream());
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            break;
+			}
+			case "telaEmpregadoDetalhe": {
+	            try {
+	                telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaEmpregadoDetalhe.fxml").openStream());
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	            break;
+			}
+			case "telaRelatorio": {
+				try {
+					telaAtual = fxmlLoader.load(getClass().getResource("/gui/TelaGeracaoRelatorio.fxml").openStream());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + tela);
+			}
 
     	this.mainScene = new Scene(telaAtual);
       primaryStage.setScene(mainScene);
