@@ -11,9 +11,10 @@ public class EmpregadoModelo {
     private final SimpleFloatProperty reputacao;
     private SimpleFloatProperty salarioBase;
 
-    public EmpregadoModelo(String nome, Float reputacao) {
+    public EmpregadoModelo(String nome, Float reputacao, String email) {
         this.nome = new SimpleStringProperty(nome);
         this.reputacao = new SimpleFloatProperty(reputacao);
+        this.email = new SimpleStringProperty(email);
     }
 
     public EmpregadoModelo(Long uid, String nome, String email, Float reputacao, Float salarioBase) {

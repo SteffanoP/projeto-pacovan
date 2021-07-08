@@ -16,6 +16,7 @@ import java.util.List;
 
 import exceptions.PessoaInexistenteException;
 import gerenciamento.SessionManager;
+import negocio.beans.Pessoa;
 
 public class TelaPrincipalAdminController {
     @FXML TableView<EmpregadoModelo> tblvEmpregados;
@@ -34,7 +35,8 @@ public class TelaPrincipalAdminController {
 
     private void atualizarTableView(TableView<EmpregadoModelo> tableView, List<Empregado> empregadoList) {
         for (Empregado empregado : empregadoList) {
-            EmpregadoModelo empregadoModelo = new EmpregadoModelo(empregado.getNome(), empregado.getReputacao());
+            EmpregadoModelo empregadoModelo = new EmpregadoModelo(empregado.getNome(), empregado.getReputacao(),
+                    empregado.getEmail());
             tableView.getItems().add(empregadoModelo);
         }
     }
@@ -58,17 +60,21 @@ public class TelaPrincipalAdminController {
     }
     
     @FXML
-    public void tblvDevedoresOnMouseClicked(MouseEvent event) {
+    public void tblvEmpregadosOnMouseClicked(MouseEvent event) {
     	if (tblvEmpregados.getSelectionModel().getSelectedItem() != null) {
     		String email = tblvEmpregados.getSelectionModel().getSelectedItem().getEmail();
-    	
+
 	    	try {
-					SessionManager.getInstance().setPessoaSessao(Fachada.getInstance().buscarPessoa(email)); 
-	            if (SessionManager.getInstance().getPessoaSessao() != null 
-	            		&& SessionManager.getInstance().getPessoaSessao() instanceof Empregado 
+                Pessoa empregado = Fachada.getInstance().buscarPessoa(email);
+                if (empregado instanceof Empregado) {
+                    SessionManager.getInstance().setEmpregadoSessao(
+                            (Empregado) Fachada.getInstance().buscarPessoa(email)
+                    );
+                }
+	            if (SessionManager.getInstance().getEmpregadoSessao() != null
 	            		&& event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() >= 2)
-	            		GerenciadorTelas.getInstance().changeScreen("telaEmpregadoDetalhe");
-	        }catch (PessoaInexistenteException e) {
+                    GerenciadorTelas.getInstance().changeScreen("telaEmpregadoDetalhe");
+	        } catch (PessoaInexistenteException e) {
 				e.printStackTrace();
 			}
     	}
