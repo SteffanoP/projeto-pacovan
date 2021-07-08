@@ -107,9 +107,7 @@ public class ControladorBENS {
      * @return Lista de Bens filtrados por aprovação.
      */
     public List<Bens> listarBensAprovados() {
-        return this.repoBENS.listar().stream()
-                                     .filter(bens -> !bens.isPendente())
-                                     .collect(Collectors.toList());
+        return this.repoBENS.listar().stream().filter(bens -> !bens.isPendente()).collect(Collectors.toList());
     }
 
     /**
