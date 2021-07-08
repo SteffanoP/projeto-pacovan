@@ -27,9 +27,8 @@ public interface SistemaEmprestimosBens {
      * @param uidCliente se refere ao {@code uidCliente} do qual se trata o BENS.
      * @param nomeBens se refere ao {@code nome} do Bens do qual se trata o BENS.
      * @return irá retornar o BENS pesquisado sobre os parâmetros anteriores
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não exista.
      */
-    Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException;
+    Bens buscarBensCliente(long uidCliente, String nomeBens);
 
     /**
      * Método que retorna todos os BENS cadastrados no repositório de BENS.
@@ -47,13 +46,12 @@ public interface SistemaEmprestimosBens {
     List<Bens> listarBensEmpresaCategoria(CategoriaBens categoria);
 
     /**
-     * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de Bens ordenados por data.
+     * Método que lista dos Bens do Repositório de Bens, filtrado por Cliente, neste caso pelo {@code uidCliente}.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que filtra os Bens.
+     * @return lista de bens filtrado para o cliente especificado.
      */
-    Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException;
+    List<Bens> listarBensCliente(long uidCliente);
 
     /**
      * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 

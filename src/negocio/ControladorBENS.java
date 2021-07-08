@@ -44,10 +44,9 @@ public class ControladorBENS {
      * @param uidCliente se refere ao {@code uidCliente} do qual se trata o BENS.
      * @param nomeBens se refere ao {@code nome} do Bens do qual se trata o BENS.
      * @return irá retornar o BENS pesquisado sobre os parâmetros anteriores
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não exista.
      */
-    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
-        List<Bens> listBensCliente = new ArrayList<>(this.listarBensCliente(uidCliente).values());
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) {
+        List<Bens> listBensCliente = new ArrayList<>(this.listarBensCliente(uidCliente));
         return listBensCliente.stream()
                 .filter(bens -> bens.getNome().equals(nomeBens))
                 .reduce((a,b) -> b) //TODO: Tratar se houver duplicados
@@ -76,23 +75,15 @@ public class ControladorBENS {
     }
 
     /**
-     * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de Bens ordenados por data.
+     * Método que lista dos Bens do Repositório de Bens, filtrado por Cliente, neste caso pelo {@code uidCliente}.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que filtra os Bens.
+     * @return lista de bens filtrado para o cliente especificado.
      */
-    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) {
-        NavigableMap<LocalDate, Bens> mapaBensCliente = new TreeMap<>();
-        List<Bens> benClienteList = repoBENS.listar();
-
-        for(Bens ben : benClienteList){
-            if(ben.getCliente().getUid() == uidCliente) {
-                mapaBensCliente.put(ben.getDataCadastro(), ben);
-            }
-
-        }
-            return mapaBensCliente;
+    public List<Bens> listarBensCliente(long uidCliente) {
+        return this.repoBENS.listar().stream()
+                                     .filter(bens -> bens.getCliente().getUid() == uidCliente)
+                                     .collect(Collectors.toList());
     }
 
     /**

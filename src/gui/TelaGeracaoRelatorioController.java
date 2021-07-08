@@ -95,7 +95,7 @@ public class TelaGeracaoRelatorioController {
                 List<Movimentacao> movimentacoes = new
                         ArrayList<>(Fachada.getInstance().listarMoveCliente(cliente.getUid()).values());
                 List<Bens> bens = new
-                        ArrayList<>(Fachada.getInstance().listarBensCliente(cliente.getUid()).values());
+                        ArrayList<>(Fachada.getInstance().listarBensCliente(cliente.getUid()));
 
                 RelatorioCliente relatorio = new RelatorioCliente((Cliente) cliente, propostas,movimentacoes,bens);
                 GeradorRelatorios geradorRelatorios = new

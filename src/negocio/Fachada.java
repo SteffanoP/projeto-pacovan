@@ -46,7 +46,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) {
         return bens.buscarBensCliente(uidCliente,nomeBens);
     }
 
@@ -61,7 +61,7 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public Map<LocalDate, Bens> listarBensCliente(long uidCliente) throws PessoaInexistenteException {
+    public List<Bens> listarBensCliente(long uidCliente) {
         return bens.listarBensCliente(uidCliente);
     }
 
