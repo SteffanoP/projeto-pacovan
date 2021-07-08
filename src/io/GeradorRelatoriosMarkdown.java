@@ -89,7 +89,8 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
                             "um empregado")
                             .append("\n\n");
                 }
-                corpoArquivo.append("O Valor da proposta é R$ ").append(proposta.getValorDesejado()).append("\n\n");
+                corpoArquivo.append("O Valor da proposta é R$ ")
+                            .append(String.format("%.2f",proposta.getValorDesejado())).append("\n\n");
                 corpoArquivo.append("Foram apresentados os seguintes BENS como garantia:").append("\n\n");
                 if (proposta.getGarantia() != null) {
                     proposta.getGarantia().forEach(bens -> {
@@ -145,7 +146,7 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
                 corpoArquivo.append("### ").append(bens.getNome()).append("\n\n");
                 corpoArquivo.append("Categoria: ").append(bens.getCategoria().getNome()).append(";\n\n");
                 corpoArquivo.append("Descrição: ").append(bens.getDescricao()).append(";\n\n");
-                corpoArquivo.append("Valor: R$").append(bens.getValor()).append(";\n\n");
+                corpoArquivo.append("Valor: R$").append(String.format("%.2f",bens.getValor())).append(";\n\n");
                 corpoArquivo.append("Data de cadastro: ").append(bens.getDataCadastroToString()).append(";\n\n");
                 corpoArquivo.append("Tempo de uso: ").append(bens.getTempoDeUso()).append(" anos.\n\n");
             });
@@ -159,8 +160,8 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
                         .append(this.relatorioEmpregado.getEmpregado().getNome())
                         .append("\n\n");
             corpoArquivo.append("Data de Nascimento: ")
-                    .append(this.relatorioEmpregado.getEmpregado().getDataNascimentoToString())
-                    .append("\n\n");
+                        .append(this.relatorioEmpregado.getEmpregado().getDataNascimentoToString())
+                        .append("\n\n");
             corpoArquivo.append("CPF: ")
                         .append(this.relatorioEmpregado.getEmpregado().getCpf())
                         .append("\n\n");
@@ -174,7 +175,7 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
                         .append(this.relatorioEmpregado.getEmpregado().getPrivilegio())
                         .append("\n\n");
             corpoArquivo.append("Salário Base: R$ ")
-                        .append(this.relatorioEmpregado.getEmpregado().getSalarioBase())
+                        .append(String.format("%.2f", this.relatorioEmpregado.getEmpregado().getSalarioBase()))
                         .append("\n\n");
         }
 
