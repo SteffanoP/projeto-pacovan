@@ -13,6 +13,8 @@ import negocio.beans.Proposta;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelaCriarPropostaController {
     @FXML TextField txtCliente;
@@ -22,8 +24,27 @@ public class TelaCriarPropostaController {
     @FXML DatePicker dtPrazo;
 
     @FXML SplitMenuButton splMenuGarantia;
+    @FXML Button btnAplicarGarantia;
 
     @FXML ListView<String> lstvGarantias;
+
+    private List<Bens> listGarantiasTemp = new ArrayList<>();
+
+    @FXML
+    public void btnAplicarGarantiaPressed() {
+        String nomeBens = splMenuGarantia.getText();
+        if (!nomeBens.equals("Selecione o BENS")) {
+            long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
+            try {
+                listGarantiasTemp.add(Fachada.getInstance().buscarBensCliente(uidCliente,nomeBens));
+                this.atualizarListViewGarantias();
+                splMenuGarantia.setText("Selecione o BENS");
+                splMenuGarantia.getItems().removeIf(bens -> bens.getText().equals(nomeBens));
+            } catch (PessoaInexistenteException e) {
+                this.gerarAlertaErroCadastro(e.getMessage());
+            }
+        }
+    }
 
     public void onbtnCriarPropostaPressed() {
         if (!this.isTextFieldsBlank()) {
@@ -34,7 +55,7 @@ public class TelaCriarPropostaController {
                 proposta.setValorDesejado(Double.parseDouble(txtValor.getText()));
                 proposta.setParcelasDesejadas(Double.parseDouble(txtParcelas.getText()));
                 proposta.setPrazo(Period.between(LocalDate.now(),dtPrazo.getValue()).getDays()); //TODO: Verificar!!!
-                //TODO: Setar as garantias de empréstimo
+                proposta.setGarantia(listGarantiasTemp);
                 Fachada.getInstance().criarProposta(proposta);
                 SessionManager.getInstance().setPropostaSessao(
                         Fachada.getInstance().listarPropostasCliente(
@@ -74,8 +95,14 @@ public class TelaCriarPropostaController {
                 Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid()).values()) {
             //TODO: Rever quais bens podem ser usados como garantia
             MenuItem item = new MenuItem(bens.getNome());
+            item.setOnAction(event -> splMenuGarantia.setText(item.getText()));
             splMenuGarantia.getItems().add(item);
         }
+    }
+
+    private void atualizarListViewGarantias() {
+        lstvGarantias.getItems().removeAll();
+        listGarantiasTemp.forEach(bens -> lstvGarantias.getItems().add(bens.getNome()));
     }
     
     @FXML

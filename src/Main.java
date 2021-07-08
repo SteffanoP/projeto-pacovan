@@ -5,7 +5,6 @@ import gui.GerenciadorTelas;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import negocio.Fachada;
-import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 import java.time.LocalDate;
 

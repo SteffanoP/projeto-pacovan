@@ -5,7 +5,6 @@ import exceptions.PropostaInvalidaException;
 import gerenciamento.SessionManager;
 import gui.models.DevedorModelo;
 import gui.models.PropostaModelo;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -62,16 +61,12 @@ public class TelaPrincipalEmpregadoController {
 
         this.initializeTableViews();
 
-        try {
-            List<Proposta> propostas = new ArrayList<>(Fachada.getInstance().listarPropostasPendentes().values());
-            for (Proposta proposta : propostas) {
-                PropostaModelo propostaModelo = new PropostaModelo(proposta.getNumProtocolo(), proposta.getData(),
-                        proposta.getValorDesejado(), proposta.getValorDesejado());
-                tblvPropostas.getItems().add(propostaModelo);
-            }
-        } catch (PessoaInexistenteException e) { //TODO: REMOVER EXCEÇÃO SEM SENTIDO!!!
-            e.printStackTrace();
-        }
+        List<Proposta> propostas = new ArrayList<>(Fachada.getInstance().listarPropostasPendentes().values());
+		for (Proposta proposta : propostas) {
+		    PropostaModelo propostaModelo = new PropostaModelo(proposta.getNumProtocolo(), proposta.getData(),
+		            proposta.getValorDesejado(), proposta.getValorDesejado());
+		    tblvPropostas.getItems().add(propostaModelo);
+		}
 
         List<Emprestimo> eDevedores = new ArrayList<>(Fachada.getInstance().listarDevedores().values());
         this.atualizaTableViewsEmprestimo(tblvDevedores, eDevedores);
