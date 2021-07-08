@@ -30,7 +30,8 @@ public class Proposta {
      * @return um valor que se refere ao valor total de garantias.
      */
     public double valorTotalBENS() {
-        return garantia.stream().mapToDouble(Bens::getValor).sum();
+        if (garantia != null) return garantia.stream().mapToDouble(Bens::getValor).sum();
+        else return 0;
     }
 
     @Override

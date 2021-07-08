@@ -91,9 +91,11 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
                 }
                 corpoArquivo.append("O Valor da proposta é R$ ").append(proposta.getValorDesejado()).append("\n\n");
                 corpoArquivo.append("Foram apresentados os seguintes BENS como garantia:").append("\n\n");
-                proposta.getGarantia().forEach(bens -> {
-                    corpoArquivo.append("- ").append(bens.getNome()).append("\n");
-                });
+                if (proposta.getGarantia() != null) {
+                    proposta.getGarantia().forEach(bens -> {
+                        corpoArquivo.append("- ").append(bens.getNome()).append("\n");
+                    });
+                }
                 corpoArquivo.append("\n").append("Totalizando um valor de R$ ")
                         .append(String.format("%.2f",proposta.valorTotalBENS()))
                         .append("\n\n");
