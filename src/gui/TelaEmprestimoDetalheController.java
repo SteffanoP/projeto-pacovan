@@ -58,7 +58,7 @@ public class TelaEmprestimoDetalheController {
 
     private void initializeDetalhesDoEmprestimo(Emprestimo emprestimoSessao) {
     	this.txtNomeCliente.setText(emprestimoSessao.getCliente().getNome());
-        this.dtData.getEditor().setText(emprestimoSessao.getData().toString());
+        this.dtData.getEditor().setText(emprestimoSessao.getDataToString());
         this.txtValor.setText(String.valueOf(emprestimoSessao.getValor()));
         this.txtParcelas.setText(String.valueOf(emprestimoSessao.getParcelas()));
         this.dtPrazo.getEditor().setText(emprestimoSessao.getPrazoData());

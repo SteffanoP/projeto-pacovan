@@ -78,6 +78,11 @@ public class Emprestimo {
     public LocalDate getData() {
         return data;
     }
+    
+    public String getDataToString() {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.data.format(formatador);
+    }
 
     public void setData(LocalDate data) {
         this.data = data;
