@@ -61,8 +61,7 @@ public class TelaPrincipalClienteController {
             List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente));
             this.atualizarTableViewPropostas(pList);
             this.atualizarTableViewEmprestimos(Fachada.getInstance().listarEmprestimosCliente(uidCliente));
-            List<Movimentacao> mList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(uidCliente).values());
-            this.atualizarTableViewExtrato(mList);
+            this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(uidCliente));
     }
 
     private void initializeTableViews() {
@@ -214,8 +213,7 @@ public class TelaPrincipalClienteController {
     		movimentacao.setTipoMovimentacao(TipoMovimentacao.DEBITO);
             try {
                 Fachada.getInstance().gerarMovimentacao(movimentacao);
-                List<Movimentacao> movimentacaoList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()).values());
-                this.atualizarTableViewExtrato(movimentacaoList);
+                this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
             } catch (MovimentacaoDuplicadaException e) {
                 this.gerarAlertaErro("Erro de Movimentação",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());

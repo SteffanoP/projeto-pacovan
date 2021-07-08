@@ -4,7 +4,6 @@ import exceptions.*;
 import negocio.beans.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -188,26 +187,21 @@ public interface SistemaEmprestimosBens {
     void gerarMovimentacao(Movimentacao movimentacao) throws MovimentacaoDuplicadaException;
 
     /**
-     * Método que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
+     * Método que lista as Movimentações do cliente.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente não for encontrado.
-     * @return Map de Movimentacao ordenados por data.
+     * @return List de Movimentacao ordenados por data.
      */
-    Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente);
+    List<Movimentacao> listarMoveCliente(long uidCliente);
 
     /**
-     * Método que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final. São
-     * ordenados por sua data por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Movimentacao} e ordená-los a partir do seu atributo {@code instante}.
+     * Método que lista as Movimentações do cliente num período específico indicado por parâmetro de data inicial e final.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
      * @param dataInicial é a data a partir da qual o cliente deseja ver suas movimentações.
-     * @param dataFinal é a data limite 
-     * @return Map de Movimentacao ordenados por data.
+     * @param dataFinal é a data limite em qual o cliente deve pagar a parcela sem aumento.
+     * @return List de Movimentacao.
      */
-
     List<Movimentacao> listarPeriodoMovimentacaoCliente(long uidCliente, LocalDate dataInicial, LocalDate dataFinal);
 
     List<Movimentacao> listarDiasMovimentacaoCliente(long uidCliente, int dias);

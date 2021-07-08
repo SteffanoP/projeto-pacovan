@@ -93,7 +93,7 @@ public class TelaGeracaoRelatorioController {
                 List<Proposta> propostas = new
                         ArrayList<>(Fachada.getInstance().listarPropostasCliente(cliente.getUid()));
                 List<Movimentacao> movimentacoes = new
-                        ArrayList<>(Fachada.getInstance().listarMoveCliente(cliente.getUid()).values());
+                        ArrayList<>(Fachada.getInstance().listarMoveCliente(cliente.getUid()));
                 List<Bens> bens = new
                         ArrayList<>(Fachada.getInstance().listarBensCliente(cliente.getUid()));
 
