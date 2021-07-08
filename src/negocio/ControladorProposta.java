@@ -172,9 +172,8 @@ public class ControladorProposta {
     }
 
     /**
-     * Método que lista as contra propostas realizadas ao cliente ordenadas por sua data de criação por meio de um {@code Map} 
-     * criado para armazenar objetos do tipo {@code Proposta} que tenham o atributo {@code contraProposta} false a partir 
-     * do seu atributo do tipo {@code Cliente} e ordená-los a partir do seu atributo{@code data}.
+     * Método que lista as contra propostas realizadas ao cliente e que tenham o atributo {@code contraProposta} false a partir 
+     * do seu atributo do tipo {@code Cliente}.
      * 
      * @return List de propostas.
      */
