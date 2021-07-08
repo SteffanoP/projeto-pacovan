@@ -19,6 +19,7 @@ import negocio.beans.Emprestimo;
 import negocio.beans.Movimentacao;
 import negocio.beans.Pessoa;
 import negocio.beans.Proposta;
+import negocio.beans.TipoMovimentacao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -206,6 +207,21 @@ public class TelaPrincipalClienteController {
                 this.gerarAlertaErro("Empréstimos", "busca de empréstimos", e.getMessage());
             }
         }
+    }
+    
+    @FXML
+    public void btnPagamentoEfetuadoPressed() {
+    	if (SessionManager.getInstance().getEmprestimoSessao() != null) {
+    		Movimentacao movimentacao = new Movimentacao();
+    		movimentacao.setCliente(SessionManager.getInstance().getEmprestimoSessao().getCliente());
+    		movimentacao.setDescricao(SessionManager.getInstance().getEmprestimoSessao().toString());
+    		movimentacao.setValor(Fachada.getInstance().calcularValorParcelas(SessionManager.getInstance().getEmprestimoSessao()));
+    		movimentacao.setTipoMovimentacao(TipoMovimentacao.DEBITO);
+        	List<Movimentacao> movimentacaoList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()).values());
+        	this.atualizarTableViewExtrato(movimentacaoList);
+        } else
+            this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
+                    " selecionou seu Empréstimo");
     }
     
     @FXML

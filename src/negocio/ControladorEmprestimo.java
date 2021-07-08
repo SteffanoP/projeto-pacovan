@@ -227,4 +227,16 @@ public class ControladorEmprestimo {
         }
         return mapaEmprestimoClientes;
     }
+    
+    public double calcularValorParcelas(Emprestimo emprestimo) {
+    	double valorParcela = emprestimo.getValor() / emprestimo.getParcelas();
+    	return valorParcela;
+    }
+    
+    public LocalDate calcularProximoPrazo(Emprestimo emprestimo, int parcela) {
+    	long dias = ChronoUnit.DAYS.between(emprestimo.getData(), emprestimo.getData().plusDays(emprestimo.getPrazo()));
+    	long proximaData = (long) (dias / emprestimo.getParcelas());
+    	LocalDate proximoPrazo = emprestimo.getData().plusDays(proximaData*parcela);
+    	return proximoPrazo;
+    }
 }

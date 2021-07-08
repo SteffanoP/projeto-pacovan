@@ -175,6 +175,10 @@ public interface SistemaEmprestimosBens {
      * @return Map de Emprestimo ordenados por data de vencimento da parcela do empréstimo.
      */
     Map<LocalDate, Emprestimo> listarDevedoresAltoRisco();
+    
+    double calcularValorParcelas(Emprestimo emprestimo);
+    
+    LocalDate calcularProximoPrazo(Emprestimo emprestimo, int parcela);
 
     /**
      * Método que lista as Movimentações do cliente ordenados por sua data por meio de um {@code Map} criado para armazenar 
