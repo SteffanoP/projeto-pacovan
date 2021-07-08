@@ -58,7 +58,8 @@ public class TelaEmprestimoDetalheController {
         this.txtParcelas.setText(String.valueOf(emprestimoSessao.getParcelas()));
         this.dtPrazo.getEditor().setText(emprestimoSessao.getPrazoData());
         
-        List<Movimentacao> movimentacaoList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(SessionManager.getInstance().getPessoaSessao().getUid()).values());
+        List<Movimentacao> movimentacaoList = new
+                ArrayList<>(Fachada.getInstance().listarMoveCliente(emprestimoSessao.getCliente().getUid()).values());
         this.atualizarTableViewExtrato(movimentacaoList);
         this.atualizarListViewGarantias();
     }
