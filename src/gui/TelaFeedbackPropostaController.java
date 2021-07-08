@@ -15,7 +15,7 @@ public class TelaFeedbackPropostaController {
     @FXML TextArea txtMotivo;
     @FXML TextField txtValor;
     @FXML TextField txtParcelas;
-    @FXML DatePicker txtPrazo;
+    @FXML DatePicker dtPrazo;
     @FXML ListView<String> lstvGarantia;
     @FXML Button btnAceitarContraproposta;
 
@@ -64,7 +64,7 @@ public class TelaFeedbackPropostaController {
         txtValor.editableProperty().set(false);
         txtParcelas.setText(String.valueOf(proposta.getParcelasDesejadas()));
         txtParcelas.editableProperty().set(false);
-        dtDataProposta.getEditor().setText(proposta.getDataToString());
+        dtPrazo.getEditor().setText(proposta.getPrazoData());
         try {
             proposta.getGarantia().forEach(bens -> lstvGarantia.getItems().add(bens.getNome()));
         } catch (NullPointerException e) {
