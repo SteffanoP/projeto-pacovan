@@ -151,7 +151,30 @@ public class GeradorRelatoriosMarkdown implements GeradorRelatorios {
     }
 
     private void preencherCamposEmpregado(StringBuilder corpoArquivo) {
-        //TODO: Campo de Informações pessoais
+        if (this.escolhaCamposEmpregado[0]) {
+            corpoArquivo.append("## Informações Pessoais\n\n");
+            corpoArquivo.append("Nome do cliente: ")
+                        .append(this.relatorioEmpregado.getEmpregado().getNome())
+                        .append("\n\n");
+            corpoArquivo.append("Data de Nascimento: ")
+                    .append(this.relatorioEmpregado.getEmpregado().getDataNascimentoToString())
+                    .append("\n\n");
+            corpoArquivo.append("CPF: ")
+                        .append(this.relatorioEmpregado.getEmpregado().getCpf())
+                        .append("\n\n");
+            corpoArquivo.append("Endereço: ")
+                        .append(this.relatorioEmpregado.getEmpregado().getEndereco())
+                        .append("\n\n");
+            corpoArquivo.append("Telefone: ")
+                        .append(this.relatorioEmpregado.getEmpregado().getTelefone())
+                        .append("\n\n");
+            corpoArquivo.append("Privilégio: ")
+                        .append(this.relatorioEmpregado.getEmpregado().getPrivilegio())
+                        .append("\n\n");
+            corpoArquivo.append("Salário Base: R$ ")
+                        .append(this.relatorioEmpregado.getEmpregado().getSalarioBase())
+                        .append("\n\n");
+        }
         //TODO: Campo de Devedores de negócio
         //TODO: Campo de Reputação de Negócio
         //TODO: Campo de comissões
