@@ -7,6 +7,7 @@ import negocio.beans.Bens;
 import negocio.beans.CategoriaBens;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ControladorBENS {
     private Repositorio<Bens> repoBENS;
@@ -43,124 +44,80 @@ public class ControladorBENS {
      * @param uidCliente se refere ao {@code uidCliente} do qual se trata o BENS.
      * @param nomeBens se refere ao {@code nome} do Bens do qual se trata o BENS.
      * @return irá retornar o BENS pesquisado sobre os parâmetros anteriores
-     * @throws PessoaInexistenteException poderá acontecer caso o {@code uidCliente} não exista.
      */
-    public Bens buscarBensCliente(long uidCliente, String nomeBens) throws PessoaInexistenteException {
-        List<Bens> listBensCliente = new ArrayList<>(this.listarBensCliente(uidCliente).values());
+    public Bens buscarBensCliente(long uidCliente, String nomeBens) {
+        List<Bens> listBensCliente = new ArrayList<>(this.listarBensCliente(uidCliente));
         return listBensCliente.stream()
                 .filter(bens -> bens.getNome().equals(nomeBens))
                 .reduce((a,b) -> b) //TODO: Tratar se houver duplicados
                 .orElse(null);
     }
 
-    public Map<LocalDate,Bens> listarBensEmpresa() {
-        NavigableMap<LocalDate, Bens> mapaBens = new TreeMap<>();
-        List<Bens> benEmpresaList = repoBENS.listar();
-            for( Bens ben : benEmpresaList){
-               mapaBens.put(ben.getDataCadastro(), ben);
-            }
-        return mapaBens;
+    /**
+     * Método que retorna todos os BENS cadastrados no repositório de BENS.
+     * @return lista de BENS do repositório de Bens
+     */
+    public List<Bens> listarBens() {
+        return this.repoBENS.listar();
     }
 
     /**
-     * Método que lista um {@code Map<LocalDate, Bens>} de todos os Bens da empresa, filtrado por uma
-     * {@code CategoriaBens} parametrizada.
+     * Método que lista um {@code List<Bens>} de todos os Bens da empresa, filtrado por um {@code CategoriaBens}
+     * parametrizada.
      *
      * @param categoria se refere a categoria de bens que se pretende listar.
-     * @return um {@code Map<LocalDate, Bens>} com os bens filtrados por meio de uma {@code CategoriaBens} como
-     * parâmetro.
+     * @return uma lista com os bens filtrados por meio de uma {@code CategoriaBens} com parâmetro.
      */
-    public Map<LocalDate, Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
-        NavigableMap<LocalDate, Bens> mapaBens = new TreeMap<>();
-        List<Bens> bensList = this.repoBENS.listar();
-
-        for (Bens bens : bensList) {
-            if (bens.getCategoria().equals(categoria)) {
-                mapaBens.put(bens.getDataCadastro(), bens);
-            }
-        }
-        return  mapaBens;
+    public List<Bens> listarBensEmpresaCategoria(CategoriaBens categoria) {
+        return this.repoBENS.listar().stream()
+                                     .filter(bens -> bens.getCategoria().equals(categoria))
+                                     .collect(Collectors.toList());
     }
 
     /**
-     * Método que lista os BENS do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * Método que lista dos Bens do Repositório de Bens, filtrado por Cliente, neste caso pelo {@code uidCliente}.
+     *
+     * @param uidCliente se refere ao identificador único e exclusivo do cliente que filtra os Bens.
+     * @return lista de bens filtrado para o cliente especificado.
+     */
+    public List<Bens> listarBensCliente(long uidCliente) {
+        return this.repoBENS.listar().stream()
+                                     .filter(bens -> bens.getCliente().getUid() == uidCliente)
+                                     .collect(Collectors.toList());
+    }
+
+    /**
+     * Método que lista os BENS pendentes do cliente do quais são objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente true}.
      * 
      * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por cliente e por pendência.
      */
-    public Map<LocalDate,Bens> listarBensCliente(long uidCliente) {
-        NavigableMap<LocalDate, Bens> mapaBensCliente = new TreeMap<>();
-        List<Bens> benClienteList = repoBENS.listar();
-
-        for(Bens ben : benClienteList){
-            if(ben.getCliente().getUid() == uidCliente) {
-                mapaBensCliente.put(ben.getDataCadastro(), ben);
-            }
-
-        }
-            return mapaBensCliente;
+    public List<Bens> listarBensPendentes(long uidCliente) {
+        return this.repoBENS.listar().stream()
+                                     .filter(bens -> bens.getCliente().getUid() == uidCliente)
+                                     .filter(Bens::isPendente)
+                                     .collect(Collectors.toList());
     }
 
     /**
-     * Método que lista os BENS pendentes do cliente ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} true e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * Método que lista todos os BENS aprovados criado para armazenar objetos do tipo {@code Bens} que tem seu atributo
+     * {@code pendente false}.
      * 
-     * @param uidCliente se refere ao identificador único e exclusivo do cliente.
-     * @throws PessoaInexistenteException se o cliente não for encontrado.
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por aprovação.
      */
-    public  Map<LocalDate,Bens> listarBensPendentes(long uidCliente) throws PessoaInexistenteException{
-
-        NavigableMap<LocalDate, Bens> mapaBensPendentes = new TreeMap<>();
-        boolean pendente = false;
-        List<Bens> pendenteList = repoBENS.listar();
-
-        for(Bens ben : pendenteList){
-            if(ben.getCliente().getUid() == uidCliente && ben.isPendente()) {
-
-                pendente = true;
-
-                mapaBensPendentes.put(ben.getDataCadastro(), ben);
-            }
-        }
-        if(!pendente)  throw new PessoaInexistenteException("Cliente Não existe!");
-
-        return mapaBensPendentes;
+    public List<Bens> listarBensAprovados() {
+        return this.repoBENS.listar().stream().filter(bens -> !bens.isPendente()).collect(Collectors.toList());
     }
 
     /**
-     * Método que lista todos os BENS aprovados ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code pendente} false e ordená-los a partir do seu atributo {@code dataCadastro}.
+     * Método que lista todos os BENS que são garantia criado para armazenar objetos do tipo {@code Bens} que tem seu
+     * atributo {@code garantia true}.
      * 
-     * @return Map de Bens ordenados por data.
+     * @return Lista de Bens filtrados por garantia.
      */
-    public  Map<LocalDate,Bens> listarBensAprovados() {
-        NavigableMap<LocalDate, Bens> mapaBensaprovados = new TreeMap<>();
-        List<Bens> aproveList = repoBENS.listar();
-
-        for(Bens ben : aproveList){
-            if(!ben.isPendente()) mapaBensaprovados.put(ben.getDataCadastro(), ben);   
-        }
-        
-        return mapaBensaprovados;
-    }
-
-    /**
-     * Método que lista todos os BENS que são garantia ordenados por sua data de criação por meio de um {@code Map} criado para armazenar 
-     * objetos do tipo {@code Bens} que tem seu atributo {@code garantia} true e ordená-los a partir do seu atributo {@code dataCadastro}.
-     * 
-     * @return Map de Bens ordenados por data.
-     */
-    public Map<LocalDate,Bens> listarBensGarantia() {
-        NavigableMap<LocalDate, Bens> mapaBensGarantia = new TreeMap<>();
-        List<Bens> garantiaList = repoBENS.listar();
-
-            for(Bens ben: garantiaList){
-                if(ben.isGarantia()) mapaBensGarantia.put(ben.getDataCadastro(), ben);
-            }
-
-        return mapaBensGarantia;
+    public List<Bens> listarBensGarantia() {
+        return this.repoBENS.listar().stream().filter(Bens::isGarantia).collect(Collectors.toList());
     }
 
     public double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException{

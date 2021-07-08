@@ -56,9 +56,9 @@ public class TelaGeracaoRelatorioController {
                 List<Emprestimo> emprestimos = new
                         ArrayList<>(Fachada.getInstance().listarComissoesEmprestimo((Empregado) empregado));
                 List<Emprestimo> emprestimosProtegidos = new
-                        ArrayList<>(Fachada.getInstance().listarDevedoresProtegidos().values());
+                        ArrayList<>(Fachada.getInstance().listarDevedoresProtegidos());
                 List<Emprestimo> emprestimosAltoRisco = new
-                        ArrayList<>(Fachada.getInstance().listarDevedoresAltoRisco().values());
+                        ArrayList<>(Fachada.getInstance().listarDevedoresAltoRisco());
 
                 RelatorioEmpregado relatorio = new RelatorioEmpregado((Empregado) empregado, emprestimos,
                         emprestimosProtegidos, emprestimosAltoRisco);
@@ -91,11 +91,11 @@ public class TelaGeracaoRelatorioController {
             if (cliente instanceof Cliente) {
                 //TODO: Substituir Maps pelas Lists
                 List<Proposta> propostas = new
-                        ArrayList<>(Fachada.getInstance().listarPropostasCliente(cliente.getUid()).values());
+                        ArrayList<>(Fachada.getInstance().listarPropostasCliente(cliente.getUid()));
                 List<Movimentacao> movimentacoes = new
-                        ArrayList<>(Fachada.getInstance().listarMoveCliente(cliente.getUid()).values());
+                        ArrayList<>(Fachada.getInstance().listarMoveCliente(cliente.getUid()));
                 List<Bens> bens = new
-                        ArrayList<>(Fachada.getInstance().listarBensCliente(cliente.getUid()).values());
+                        ArrayList<>(Fachada.getInstance().listarBensCliente(cliente.getUid()));
 
                 RelatorioCliente relatorio = new RelatorioCliente((Cliente) cliente, propostas,movimentacoes,bens);
                 GeradorRelatorios geradorRelatorios = new
