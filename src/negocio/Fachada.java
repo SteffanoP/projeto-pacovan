@@ -146,6 +146,11 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
+    public void gerarMovimentacao(Movimentacao movimentacao) throws MovimentacaoDuplicadaException {
+        movimentacoes.gerarMovimentacao(movimentacao);
+    }
+
+    @Override
     public Map<LocalDateTime, Movimentacao> listarMoveCliente(long uidCliente) {
         return movimentacoes.listarMoveCliente(uidCliente);
     }

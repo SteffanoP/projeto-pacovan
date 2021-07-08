@@ -2,7 +2,8 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.PessoaInexistenteException;
+import exceptions.MovimentacaoDuplicadaException;
+import exceptions.ObjetoDuplicadoException;
 import negocio.beans.Movimentacao;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +15,26 @@ public class ControladorMovimentacao {
 
     public ControladorMovimentacao() {
         this.repoMovimentacao = new RepositorioCRUD<>();
+    }
+
+    /**
+     * Método que gera a movimentação e armazena um objeto {@code Movimentacao} dentro do repositório de movimentações
+     *
+     * @param movimentacao se refere ao objeto {@code Movimentacao} que se deseja inserir dentro do repositório.
+     * @throws MovimentacaoDuplicadaException poderá acontecer caso já exista uma movimentação igual no repositório do
+     * sistema.
+     */
+    public void gerarMovimentacao(Movimentacao movimentacao) throws MovimentacaoDuplicadaException {
+        if (movimentacao == null) return;
+
+        //Set do instante atual
+        movimentacao.setInstante(LocalDateTime.now());
+
+        try {
+            this.repoMovimentacao.inserir(movimentacao);
+        } catch (ObjetoDuplicadoException e) {
+            throw new MovimentacaoDuplicadaException("Essa movimentação já existe no sistema");
+        }
     }
 
     /**

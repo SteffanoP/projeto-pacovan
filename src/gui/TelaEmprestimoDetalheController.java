@@ -39,11 +39,6 @@ public class TelaEmprestimoDetalheController {
     @FXML
     private void initialize() {
         this.initializeTableViews();
-        List<Movimentacao> movimentacaoList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(SessionManager.getInstance().getPessoaSessao().getUid()).values());
-        this.atualizarTableViewExtrato(movimentacaoList);
-        
-        this.atualizarListViewGarantias();
-        
         Emprestimo emprestimoSessao = SessionManager.getInstance().getEmprestimoSessao();
         this.initializeDetalhesDoEmprestimo(emprestimoSessao);
     }
@@ -62,6 +57,10 @@ public class TelaEmprestimoDetalheController {
         this.txtValor.setText(String.valueOf(emprestimoSessao.getValor()));
         this.txtParcelas.setText(String.valueOf(emprestimoSessao.getParcelas()));
         this.dtPrazo.getEditor().setText(emprestimoSessao.getPrazoData());
+        
+        List<Movimentacao> movimentacaoList = new ArrayList<>(Fachada.getInstance().listarMoveCliente(SessionManager.getInstance().getPessoaSessao().getUid()).values());
+        this.atualizarTableViewExtrato(movimentacaoList);
+        this.atualizarListViewGarantias();
     }
     
     private void atualizarTableViewExtrato(List<Movimentacao> extratoList) {
