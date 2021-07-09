@@ -238,6 +238,22 @@ public class ControladorEmprestimo {
             throw new EmprestimoInexistenteException("Empréstimo não encontrado!");
         }
     }
+
+    /**
+     * Método privado que quita um empréstimo e o remove do repositório de empréstimos, portanto que o número do
+     * protocolo seja único a aquele empréstimo.
+     *
+     * @param numProtocolo se refere ao número de protocolo que se deseja quitar/remover o empréstimo.
+     * @throws EmprestimoInexistenteException poderá acontecer caso o empréstimo não exista com o número de protocolo.
+     */
+    private void quitarEmprestimo(long numProtocolo) throws EmprestimoInexistenteException {
+        Emprestimo emprestimoQuitado = this.buscarEmprestimo(numProtocolo);
+        try {
+            this.repoEmprestimo.remover(emprestimoQuitado);
+        } catch (ObjetoInexistenteException e) {
+            throw new EmprestimoInexistenteException("Empréstimo não encontrado!");
+        }
+    }
     
     public double calcularValorParcelas(Emprestimo emprestimo) {
     	double valorParcela = emprestimo.getValor() / emprestimo.getParcelas();
