@@ -61,9 +61,11 @@ public class TelaCriarPropostaController {
             try {
                 proposta.setCliente((Cliente) SessionManager.getInstance().getPessoaSessao());
                 proposta.setMotivo(txtMotivo.getText());
-                proposta.setValorDesejado(Double.parseDouble(txtValor.getText()));
-                proposta.setParcelasDesejadas(Double.parseDouble(txtParcelas.getText().replace(',','.')));
+                if (Double.parseDouble(txtValor.getText()) > 0) {
+                    proposta.setValorDesejado(Double.parseDouble(txtValor.getText()));
+                } else throw new NumberFormatException();
                 proposta.setPrazo((int) LocalDate.now().until(dtPrazo.getValue(), ChronoUnit.DAYS));
+                proposta.setParcelasDesejadas(Double.parseDouble(txtParcelas.getText().replace(',','.')));
                 proposta.setGarantia(listGarantiasTemp);
                 Fachada.getInstance().criarProposta(proposta);
                 SessionManager.getInstance().setPropostaSessao(
