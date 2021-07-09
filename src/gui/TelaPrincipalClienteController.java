@@ -54,8 +54,8 @@ public class TelaPrincipalClienteController {
     private void initialize() {
         Cliente usuario = (Cliente) SessionManager.getInstance().getPessoaSessao();
         this.lblNomeUsuario.setText(usuario.getNome());
-        Fachada.getInstance().calcularScore(usuario);
-        this.lblScoreUsuario.setText(usuario.getScore() + "%");
+        this.atualizarScore(usuario.getScore());
+        
         this.initializeTableViews();
 
         long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
@@ -114,6 +114,10 @@ public class TelaPrincipalClienteController {
                     movimentacao.getTipoMovimentacao(), movimentacao.getValor());
             tblvExtrato.getItems().add(movimentacaoModelo);
         }
+    }
+    
+    private void atualizarScore(int score) {
+    	this.lblScoreUsuario.setText(score + "%");
     }
 
     private void gerarAlertaErro(String titulo, String subtitulo, String justificativa) {
@@ -215,6 +219,8 @@ public class TelaPrincipalClienteController {
             try {
                 Fachada.getInstance().gerarMovimentacao(movimentacao);
                 this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+                Fachada.getInstance().calcularScore(movimentacao.getCliente());
+                this.atualizarScore(movimentacao.getCliente().getScore());
             } catch (MovimentacaoDuplicadaException e) {
                 this.gerarAlertaErro("Erro de Movimentação",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
