@@ -209,13 +209,15 @@ public class TelaPrincipalClienteController {
     		Movimentacao movimentacao = new Movimentacao();
     		movimentacao.setCliente(SessionManager.getInstance().getEmprestimoSessao().getCliente());
     		movimentacao.setDescricao(SessionManager.getInstance().getEmprestimoSessao().toString());
-    		movimentacao.setValor(Fachada.getInstance().calcularValorParcelas(SessionManager.getInstance().getEmprestimoSessao()));
+    		movimentacao.setValor(SessionManager.getInstance().getEmprestimoSessao().getParcelas());
     		movimentacao.setTipoMovimentacao(TipoMovimentacao.DEBITO);
             try {
-                Fachada.getInstance().gerarMovimentacao(movimentacao);
-                this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
-            } catch (MovimentacaoDuplicadaException e) {
-                this.gerarAlertaErro("Erro de Movimentação",
+                Fachada.getInstance().pagarEmprestimo(
+                        SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
+                this.atualizarTableViewExtrato(
+                        Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+            } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
             }
         } else

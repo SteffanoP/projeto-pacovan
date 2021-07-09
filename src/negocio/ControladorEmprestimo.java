@@ -3,10 +3,7 @@ package negocio;
 import dados.Repositorio;
 import dados.RepositorioCRUD;
 import exceptions.*;
-import negocio.beans.Cliente;
-import negocio.beans.Empregado;
-import negocio.beans.Emprestimo;
-import negocio.beans.Proposta;
+import negocio.beans.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -260,15 +257,18 @@ public class ControladorEmprestimo {
      * Método que realiza o pagamento de um empréstimo e atualiza o empréstimo no repositório de Empréstimos
      *
      * @param numProtocolo se refere ao número de protocolo do empréstimo que se deseja realizar um pagamento.
-     * @param valorPago se refere ao valor que será debitado do valor da parcela mensal do pagamento.
+     * @param movimentacao se refere a movimentação que irá debitar do valor da parcela mensal do pagamento.
      * @throws EmprestimoInexistenteException poderá acontecer se não existir um empréstimo com o número de protocolo
      * veículado em {@code numProtocolo}.
+     * @throws MovimentacaoDuplicadaException poderá acontecer se já existir uma operação semelhante durante a operação
+     * de pagamento do empréstimo.
      */
-    public void pagarEmprestimo(long numProtocolo, double valorPago) throws EmprestimoInexistenteException {
+    public void pagarEmprestimo(long numProtocolo, Movimentacao movimentacao) throws EmprestimoInexistenteException,
+            MovimentacaoDuplicadaException {
         Emprestimo emprestimo = this.buscarEmprestimo(numProtocolo);
 
         //Set da nova data de pagamento após pagar o empréstimo
-        if (valorPago == emprestimo.getParcelas()) {
+        if (movimentacao.getValor() == emprestimo.getParcelas()) {
             /* É tratado dessa forma, pois não há um sistema com pagamentos diferenciados, logo todos pagamentos são
              * realizados de acordo com o valor de parcelas.
              */
@@ -278,7 +278,7 @@ public class ControladorEmprestimo {
         }
 
         //Set do novo valor devido
-        emprestimo.setValor(emprestimo.getValor() - valorPago);
+        emprestimo.setValor(emprestimo.getValor() - movimentacao.getValor());
 
         //Caso seja quitado o valor, o empréstimo é quitado
         if (emprestimo.getValor() <= 0) {
@@ -286,6 +286,7 @@ public class ControladorEmprestimo {
         } else {
             this.atualizarEmprestimo(emprestimo);
         }
+        Fachada.getInstance().gerarMovimentacao(movimentacao);
     }
     
     public double calcularValorParcelas(Emprestimo emprestimo) {

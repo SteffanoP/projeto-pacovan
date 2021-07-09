@@ -187,11 +187,14 @@ public interface SistemaEmprestimosBens {
      * Método que realiza o pagamento de um empréstimo e atualiza o empréstimo no repositório de Empréstimos
      *
      * @param numProtocolo se refere ao número de protocolo do empréstimo que se deseja realizar um pagamento.
-     * @param valorPago se refere ao valor que será debitado do valor da parcela mensal do pagamento.
+     * @param movimentacao se refere a movimentação que irá debitar do valor da parcela mensal do pagamento.
      * @throws EmprestimoInexistenteException poderá acontecer se não existir um empréstimo com o número de protocolo
      * veículado em {@code numProtocolo}.
+     * @throws MovimentacaoDuplicadaException poderá acontecer se já existir uma operação semelhante durante a operação
+     * de pagamento do empréstimo.
      */
-    void pagarEmprestimo(long numProtocolo, double valorPago) throws EmprestimoInexistenteException;
+    void pagarEmprestimo(long numProtocolo, Movimentacao movimentacao) throws EmprestimoInexistenteException,
+            MovimentacaoDuplicadaException;
     
     double calcularValorParcelas(Emprestimo emprestimo);
     

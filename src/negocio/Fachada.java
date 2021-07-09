@@ -141,8 +141,9 @@ public class Fachada implements SistemaEmprestimosBens {
     }
 
     @Override
-    public void pagarEmprestimo(long numProtocolo, double valorPago) throws EmprestimoInexistenteException {
-        this.emprestimos.pagarEmprestimo(numProtocolo,valorPago);
+    public void pagarEmprestimo(long numProtocolo, Movimentacao movimentacao) throws EmprestimoInexistenteException,
+            MovimentacaoDuplicadaException {
+        this.emprestimos.pagarEmprestimo(numProtocolo,movimentacao);
     }
     
     @Override
