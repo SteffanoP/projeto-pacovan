@@ -19,6 +19,7 @@ public class TelaCadastroEmpregadosController {
     @FXML TextField txtSenha;
     @FXML TextField txtTelefone;
     @FXML TextField txtSalarioBase;
+    @FXML TextField txtPrivilegio;
 
     @FXML TableView<EmpregadoModelo> tblvEmpregadosCadastro;
     @FXML TableColumn<EmpregadoModelo, Long> colEmpregadoUID;
@@ -45,6 +46,7 @@ public class TelaCadastroEmpregadosController {
             empregadoCadastro.setEmail(txtEmail.getText());
             empregadoCadastro.setSenha(txtSenha.getText());
             empregadoCadastro.setTelefone(txtTelefone.getText());
+            empregadoCadastro.setPrivilegio(Integer.parseInt(txtPrivilegio.getText()));
             try {
                 empregadoCadastro.setSalarioBase(Float.parseFloat(txtSalarioBase.getText()));
                 Fachada.getInstance().cadastrarPessoa(empregadoCadastro,txtSenha.getText());
