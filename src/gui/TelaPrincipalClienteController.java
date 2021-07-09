@@ -54,6 +54,7 @@ public class TelaPrincipalClienteController {
     private void initialize() {
         Cliente usuario = (Cliente) SessionManager.getInstance().getPessoaSessao();
         this.lblNomeUsuario.setText(usuario.getNome());
+        Fachada.getInstance().calcularScore(usuario);
         this.lblScoreUsuario.setText(usuario.getScore() + "%");
         this.initializeTableViews();
 

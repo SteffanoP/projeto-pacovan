@@ -4,6 +4,7 @@ import exceptions.*;
 import negocio.beans.*;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 
@@ -148,6 +149,11 @@ public class Fachada implements SistemaEmprestimosBens {
     @Override
     public LocalDate calcularProximoPrazo(Emprestimo emprestimo, int parcela) {
     	return emprestimos.calcularProximoPrazo(emprestimo, parcela);
+    }
+    
+    @Override
+    public void calcularScore(Cliente cliente) {
+    	emprestimos.calcularScore(cliente);
     }
 
     @Override
