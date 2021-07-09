@@ -55,7 +55,7 @@ public class TelaPrincipalAdminController {
     private void initialize() {
     	lblNomeUsuario.setText(SessionManager.getInstance().getPessoaSessao().getNome());
     	
-        this.initializeTableView();
+        this.initializeTableViews();
         this.atualizarTableView(tblvEmpregados, Fachada.getInstance().listarEmpregados());
     }
 
@@ -65,12 +65,6 @@ public class TelaPrincipalAdminController {
                     empregado.getEmail());
             tableView.getItems().add(empregadoModelo);
         }
-    }
-
-    private void initializeTableView() {
-        //Initialize tableview
-        colNomeEmpregados.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colReputacaoEmpregados.setCellValueFactory(new PropertyValueFactory<>("reputacao"));
     }
 
     public void btnGerarRelatorioPressed(ActionEvent event) {
@@ -107,6 +101,9 @@ public class TelaPrincipalAdminController {
     }
     
     private void initializeTableViews() {
+    	//Initialize tableview Empregados
+    	colNomeEmpregados.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colReputacaoEmpregados.setCellValueFactory(new PropertyValueFactory<>("reputacao"));
         //Seta as properties da TableView Devedores
         this.setCellValuesPropertiesDevedores(colValorDevidoDevedores, colDataPagamentoDevedores, colNomeClienteDevedores,
                 colParcelasDevedores,colConfiancaPagamentoDevedores);
