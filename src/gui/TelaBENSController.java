@@ -1,6 +1,7 @@
 package gui;
 
 import exceptions.BensDuplicadoException;
+import exceptions.BensInexistenteException;
 import exceptions.PessoaInexistenteException;
 import gerenciamento.SessionManager;
 import gui.models.BensModelo;
@@ -11,9 +12,11 @@ import negocio.Fachada;
 import negocio.beans.Bens;
 import negocio.beans.CategoriaBens;
 import negocio.beans.Cliente;
+import negocio.beans.Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TelaBENSController {
     @FXML Button btnVoltarTelaCliente;
@@ -40,8 +43,11 @@ public class TelaBENSController {
     @FXML
     private void initialize() {
         this.initializeTableViews();
+        long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
         this.atualizarTableViewBens(
-                Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid()));
+                Fachada.getInstance().listarBensCliente(uidCliente).stream()
+                                                                   .filter(bens -> !bens.isGarantia())
+                                                                   .collect(Collectors.toList()));
 
         //Inicializa Cadastro de Bens
         txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
@@ -62,12 +68,24 @@ public class TelaBENSController {
     
     @FXML
     public void tblvBensOnMouseClicked() {
-    	// TODO: selecionar BENS da sessão
+    	if (tblvBens.getSelectionModel().getSelectedItem() != null) {
+            Cliente cliente = (Cliente) SessionManager.getInstance().getPessoaSessao();
+    	    String nomeBens = tblvBens.getSelectionModel().getSelectedItem().getNome();
+    	    SessionManager.getInstance().setBensSessao(
+    	            Fachada.getInstance().buscarBensCliente(cliente.getUid(),nomeBens));
+        }
     }
     
     @FXML
-    public void btnRemoverBens() {
-    	// TODO: remover BENS selecionado
+    public void btnRemoverBensPressed() {
+        if (SessionManager.getInstance().getBensSessao() != null) {
+            try {
+                Fachada.getInstance().removerBens(SessionManager.getInstance().getBensSessao());
+                this.initialize();
+            } catch (BensInexistenteException e) {
+                this.gerarAlertaErroCadastro("Parece que o BENS não existe mais no repositório de BENS");
+            }
+        }
     }
 
     @FXML
@@ -97,6 +115,7 @@ public class TelaBENSController {
 
     @FXML
     public void btnVoltarTelaClientePressed() {
+        SessionManager.getInstance().setBensSessao(null);
         GerenciadorTelas.getInstance().changeScreen("telaCliente");
     }
 

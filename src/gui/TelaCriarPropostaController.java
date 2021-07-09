@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TelaCriarPropostaController {
     @FXML TextField txtCliente;
@@ -99,9 +100,10 @@ public class TelaCriarPropostaController {
 
     private void atualizarListaBens() throws PessoaInexistenteException {
         splMenuGarantia.getItems().clear();
+        long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
         for (Bens bens :
-                Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid())) {
-            //TODO: Rever quais bens podem ser usados como garantia
+                Fachada.getInstance().listarBensCliente(uidCliente).stream().filter(bens -> !bens.isGarantia())
+                        .collect(Collectors.toList())) {
             MenuItem item = new MenuItem(bens.getNome());
             item.setOnAction(event -> splMenuGarantia.setText(item.getText()));
             splMenuGarantia.getItems().add(item);
