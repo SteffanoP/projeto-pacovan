@@ -59,9 +59,9 @@ public class TelaPrincipalClienteController {
 
         long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
             List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente));
-            this.atualizarTableViewPropostas(pList);
-            this.atualizarTableViewEmprestimos(Fachada.getInstance().listarEmprestimosCliente(uidCliente));
-            this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(uidCliente));
+        this.atualizarTableViewPropostas(Fachada.getInstance().listarPropostasCliente(uidCliente));
+        this.atualizarTableViewEmprestimos(Fachada.getInstance().listarEmprestimosCliente(uidCliente));
+        this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(uidCliente));
     }
 
     private void initializeTableViews() {
@@ -204,18 +204,70 @@ public class TelaPrincipalClienteController {
     }
     
     @FXML
-    public void btnPagamentoEfetuadoPressed() {
+    public void btnPagamentoDebitoPressed() {
     	if (SessionManager.getInstance().getEmprestimoSessao() != null) {
     		Movimentacao movimentacao = new Movimentacao();
     		movimentacao.setCliente(SessionManager.getInstance().getEmprestimoSessao().getCliente());
     		movimentacao.setDescricao(SessionManager.getInstance().getEmprestimoSessao().toString());
-    		movimentacao.setValor(Fachada.getInstance().calcularValorParcelas(SessionManager.getInstance().getEmprestimoSessao()));
+    		movimentacao.setValor(SessionManager.getInstance().getEmprestimoSessao().getParcelas());
     		movimentacao.setTipoMovimentacao(TipoMovimentacao.DEBITO);
             try {
-                Fachada.getInstance().gerarMovimentacao(movimentacao);
-                this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
-            } catch (MovimentacaoDuplicadaException e) {
-                this.gerarAlertaErro("Erro de Movimentação",
+                Fachada.getInstance().pagarEmprestimo(
+                        SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
+                this.atualizarTableViewExtrato(
+                        Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+                this.atualizarTableViewEmprestimos(
+                        Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+            } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Erro de Pagamento",
+                        "Parece que tivemos um erro no seu pagamento", e.getMessage());
+            }
+        } else
+            this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
+                    " selecionou seu Empréstimo");
+    }
+
+    @FXML
+    public void btnPagamentoCreditoPressed() {
+        if (SessionManager.getInstance().getEmprestimoSessao() != null) {
+            Movimentacao movimentacao = new Movimentacao();
+            movimentacao.setCliente(SessionManager.getInstance().getEmprestimoSessao().getCliente());
+            movimentacao.setDescricao(SessionManager.getInstance().getEmprestimoSessao().toString());
+            movimentacao.setValor(SessionManager.getInstance().getEmprestimoSessao().getParcelas());
+            movimentacao.setTipoMovimentacao(TipoMovimentacao.CREDITO);
+            try {
+                Fachada.getInstance().pagarEmprestimo(
+                        SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
+                this.atualizarTableViewExtrato(
+                        Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+                this.atualizarTableViewEmprestimos(
+                        Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+            } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Erro de Pagamento",
+                        "Parece que tivemos um erro no seu pagamento", e.getMessage());
+            }
+        } else
+            this.gerarAlertaErro("Empréstimos", "seu Empréstimo", "Parece que você não" +
+                    " selecionou seu Empréstimo");
+    }
+
+    @FXML
+    public void btnPagamentoBensPressed() {
+        if (SessionManager.getInstance().getEmprestimoSessao() != null) {
+            Movimentacao movimentacao = new Movimentacao();
+            movimentacao.setCliente(SessionManager.getInstance().getEmprestimoSessao().getCliente());
+            movimentacao.setDescricao(SessionManager.getInstance().getEmprestimoSessao().toString());
+            movimentacao.setValor(SessionManager.getInstance().getEmprestimoSessao().getParcelas());
+            movimentacao.setTipoMovimentacao(TipoMovimentacao.BENS);
+            try {
+                Fachada.getInstance().pagarEmprestimo(
+                        SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
+                this.atualizarTableViewExtrato(
+                        Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+                this.atualizarTableViewEmprestimos(
+                        Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+            } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
             }
         } else

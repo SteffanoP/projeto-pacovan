@@ -24,7 +24,8 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
                   <TableView fx:id="tblvPropostas" layoutY="-1.0" onMouseClicked="#tblvPropostasOnMouseClicked" prefHeight="146.0" prefWidth="786.0">
-                    <columns>
+                      <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                      <columns>
                       <TableColumn fx:id="colDataProposta" prefWidth="156.0" text="Data" />
                       <TableColumn fx:id="colValorDesejadoProposta" prefWidth="283.0" text="Valor desejado" />
                         <TableColumn fx:id="colParcelasDesejadasProposta" prefWidth="190.0" text="Parcelas Desejadas" />
