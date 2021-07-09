@@ -300,4 +300,20 @@ public class ControladorEmprestimo {
     	LocalDate proximoPrazo = emprestimo.getData().plusDays(proximaData*parcela);
     	return proximoPrazo;
     }
+    
+    public void calcularScore(Cliente cliente) {
+    	List<Emprestimo> emprestimos = listarEmprestimosCliente(cliente.getUid());
+    	int score = 0;
+    	for (Emprestimo emprestimo : emprestimos) {
+			long diferencaEmDias = ChronoUnit.DAYS.between(emprestimo.getDataPagamento(), emprestimo.getData().plusDays(emprestimo.getPrazo()));
+			if (diferencaEmDias >= 5) score = cliente.getScore() + 2;
+			else if (diferencaEmDias >= 0) score = cliente.getScore() + 1;
+			else if (diferencaEmDias > -7) score = cliente.getScore() - 1;
+			else {
+				int semana = (int) diferencaEmDias/7;
+				score = cliente.getScore() - (2 * semana);
+			}
+		}
+    	cliente.setScore(score);
+    }
 }

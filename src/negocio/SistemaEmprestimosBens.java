@@ -199,6 +199,8 @@ public interface SistemaEmprestimosBens {
     double calcularValorParcelas(Emprestimo emprestimo);
     
     LocalDate calcularProximoPrazo(Emprestimo emprestimo, int parcela);
+    
+    void calcularScore(Cliente cliente);
 
     /**
      * Método que gera a movimentação e armazena um objeto {@code Movimentacao} dentro do repositório de movimentações

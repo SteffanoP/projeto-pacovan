@@ -114,6 +114,10 @@ public class TelaPrincipalClienteController {
             tblvExtrato.getItems().add(movimentacaoModelo);
         }
     }
+    
+    private void atualizarScore(int score) {
+    	this.lblScoreUsuario.setText(score + "%");
+    }
 
     private void gerarAlertaErro(String titulo, String subtitulo, String justificativa) {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
@@ -218,6 +222,8 @@ public class TelaPrincipalClienteController {
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
                 this.atualizarTableViewEmprestimos(
                         Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+                Fachada.getInstance().calcularScore(movimentacao.getCliente());
+                this.atualizarScore(movimentacao.getCliente().getScore());
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
@@ -242,6 +248,8 @@ public class TelaPrincipalClienteController {
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
                 this.atualizarTableViewEmprestimos(
                         Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+                Fachada.getInstance().calcularScore(movimentacao.getCliente());
+                this.atualizarScore(movimentacao.getCliente().getScore());
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
@@ -266,6 +274,8 @@ public class TelaPrincipalClienteController {
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
                 this.atualizarTableViewEmprestimos(
                         Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+                Fachada.getInstance().calcularScore(movimentacao.getCliente());
+                this.atualizarScore(movimentacao.getCliente().getScore());
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
