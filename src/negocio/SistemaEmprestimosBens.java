@@ -182,6 +182,16 @@ public interface SistemaEmprestimosBens {
      * @return Lista de Empréstimo filtrados por data de pagamento e score baixo.
      */
     List<Emprestimo> listarDevedoresAltoRisco();
+
+    /**
+     * Método que realiza o pagamento de um empréstimo e atualiza o empréstimo no repositório de Empréstimos
+     *
+     * @param numProtocolo se refere ao número de protocolo do empréstimo que se deseja realizar um pagamento.
+     * @param valorPago se refere ao valor que será debitado do valor da parcela mensal do pagamento.
+     * @throws EmprestimoInexistenteException poderá acontecer se não existir um empréstimo com o número de protocolo
+     * veículado em {@code numProtocolo}.
+     */
+    void pagarEmprestimo(long numProtocolo, double valorPago) throws EmprestimoInexistenteException;
     
     double calcularValorParcelas(Emprestimo emprestimo);
     

@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 public class ControladorEmprestimo {
     private static final long QTD_DIAS_PARA_1_PAGAMENTO = 30;
+    private static final long QTD_DIAS_PARA_PROX_PAGAMENTO = 30;
     private static final float CONFIANCA_PAGAMENTO_INICIAL = 50.0F;
     private Repositorio<Emprestimo> repoEmprestimo;
     private static long contadorProtocolo = 1;
@@ -252,6 +253,38 @@ public class ControladorEmprestimo {
             this.repoEmprestimo.remover(emprestimoQuitado);
         } catch (ObjetoInexistenteException e) {
             throw new EmprestimoInexistenteException("Empréstimo não encontrado!");
+        }
+    }
+
+    /**
+     * Método que realiza o pagamento de um empréstimo e atualiza o empréstimo no repositório de Empréstimos
+     *
+     * @param numProtocolo se refere ao número de protocolo do empréstimo que se deseja realizar um pagamento.
+     * @param valorPago se refere ao valor que será debitado do valor da parcela mensal do pagamento.
+     * @throws EmprestimoInexistenteException poderá acontecer se não existir um empréstimo com o número de protocolo
+     * veículado em {@code numProtocolo}.
+     */
+    public void pagarEmprestimo(long numProtocolo, double valorPago) throws EmprestimoInexistenteException {
+        Emprestimo emprestimo = this.buscarEmprestimo(numProtocolo);
+
+        //Set da nova data de pagamento após pagar o empréstimo
+        if (valorPago == emprestimo.getParcelas()) {
+            /* É tratado dessa forma, pois não há um sistema com pagamentos diferenciados, logo todos pagamentos são
+             * realizados de acordo com o valor de parcelas.
+             */
+            emprestimo.setDataPagamento(emprestimo.getDataPagamento().plusDays(QTD_DIAS_PARA_PROX_PAGAMENTO));
+        } else {
+            return; //Temporário, enquanto não é tratado outros tipos de pagamentos.
+        }
+
+        //Set do novo valor devido
+        emprestimo.setValor(emprestimo.getValor() - valorPago);
+
+        //Caso seja quitado o valor, o empréstimo é quitado
+        if (emprestimo.getValor() <= 0) {
+            this.quitarEmprestimo(emprestimo.getNumProtocolo());
+        } else {
+            this.atualizarEmprestimo(emprestimo);
         }
     }
     
