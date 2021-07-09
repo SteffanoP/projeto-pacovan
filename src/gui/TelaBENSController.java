@@ -62,12 +62,24 @@ public class TelaBENSController {
     
     @FXML
     public void tblvBensOnMouseClicked() {
-    	// TODO: selecionar BENS da sessão
+    	if (tblvBens.getSelectionModel().getSelectedItem() != null) {
+            Cliente cliente = (Cliente) SessionManager.getInstance().getPessoaSessao();
+    	    String nomeBens = tblvBens.getSelectionModel().getSelectedItem().getNome();
+    	    SessionManager.getInstance().setBensSessao(
+    	            Fachada.getInstance().buscarBensCliente(cliente.getUid(),nomeBens));
+        }
     }
     
     @FXML
-    public void btnRemoverBens() {
-    	// TODO: remover BENS selecionado
+    public void btnRemoverBensPressed() {
+        if (SessionManager.getInstance().getBensSessao() != null) {
+            try {
+                Fachada.getInstance().removerBens(SessionManager.getInstance().getBensSessao());
+                this.initialize();
+            } catch (BensInexistenteException e) {
+                this.gerarAlertaErroCadastro("Parece que o BENS não existe mais no repositório de BENS");
+            }
+        }
     }
 
     @FXML
@@ -97,6 +109,7 @@ public class TelaBENSController {
 
     @FXML
     public void btnVoltarTelaClientePressed() {
+        SessionManager.getInstance().setBensSessao(null);
         GerenciadorTelas.getInstance().changeScreen("telaCliente");
     }
 
