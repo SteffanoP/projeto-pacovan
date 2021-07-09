@@ -2,10 +2,7 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.BensInexistenteException;
-import exceptions.EmprestimoDuplicadoException;
-import exceptions.EmprestimoInexistenteException;
-import exceptions.ObjetoDuplicadoException;
+import exceptions.*;
 import negocio.beans.Cliente;
 import negocio.beans.Empregado;
 import negocio.beans.Emprestimo;
@@ -222,6 +219,24 @@ public class ControladorEmprestimo {
         }
 
         return devedoresAltoRisco;
+    }
+
+    /**
+     * Método privado que atualiza o repositório de empréstimos ao inserir um novo empréstimo, portanto que o número
+     * de protocolo seja único.
+     *
+     * @param novoObjEmprestimo se refere ao objeto atualiza que contém o número de protocolo do empréstimo a ser
+     *                          atualizado
+     * @throws EmprestimoInexistenteException poderá acontecer caso o {@code numProtocolo} do empréstimo não existir
+     * no repositórios de empréstimos.
+     */
+    private void atualizarEmprestimo(Emprestimo novoObjEmprestimo) throws EmprestimoInexistenteException {
+        Emprestimo antigoObjEmprestimo = this.buscarEmprestimo(novoObjEmprestimo.getNumProtocolo());
+        try {
+            this.repoEmprestimo.atualizar(antigoObjEmprestimo,novoObjEmprestimo);
+        } catch (ObjetoInexistenteException e) {
+            throw new EmprestimoInexistenteException("Empréstimo não encontrado!");
+        }
     }
     
     public double calcularValorParcelas(Emprestimo emprestimo) {
