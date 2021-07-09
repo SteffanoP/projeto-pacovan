@@ -2,14 +2,8 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-import exceptions.BensInexistenteException;
-import exceptions.EmprestimoDuplicadoException;
-import exceptions.EmprestimoInexistenteException;
-import exceptions.ObjetoDuplicadoException;
-import negocio.beans.Cliente;
-import negocio.beans.Empregado;
-import negocio.beans.Emprestimo;
-import negocio.beans.Proposta;
+import exceptions.*;
+import negocio.beans.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -22,6 +16,7 @@ import java.util.stream.Collectors;
 
 public class ControladorEmprestimo {
     private static final long QTD_DIAS_PARA_1_PAGAMENTO = 30;
+    private static final long QTD_DIAS_PARA_PROX_PAGAMENTO = 30;
     private static final float CONFIANCA_PAGAMENTO_INICIAL = 50.0F;
     private Repositorio<Emprestimo> repoEmprestimo;
     private static long contadorProtocolo = 1;
@@ -222,6 +217,76 @@ public class ControladorEmprestimo {
         }
 
         return devedoresAltoRisco;
+    }
+
+    /**
+     * Método privado que atualiza o repositório de empréstimos ao inserir um novo empréstimo, portanto que o número
+     * de protocolo seja único.
+     *
+     * @param novoObjEmprestimo se refere ao objeto atualiza que contém o número de protocolo do empréstimo a ser
+     *                          atualizado
+     * @throws EmprestimoInexistenteException poderá acontecer caso o {@code numProtocolo} do empréstimo não existir
+     * no repositórios de empréstimos.
+     */
+    private void atualizarEmprestimo(Emprestimo novoObjEmprestimo) throws EmprestimoInexistenteException {
+        Emprestimo antigoObjEmprestimo = this.buscarEmprestimo(novoObjEmprestimo.getNumProtocolo());
+        try {
+            this.repoEmprestimo.atualizar(antigoObjEmprestimo,novoObjEmprestimo);
+        } catch (ObjetoInexistenteException e) {
+            throw new EmprestimoInexistenteException("Empréstimo não encontrado!");
+        }
+    }
+
+    /**
+     * Método privado que quita um empréstimo e o remove do repositório de empréstimos, portanto que o número do
+     * protocolo seja único a aquele empréstimo.
+     *
+     * @param numProtocolo se refere ao número de protocolo que se deseja quitar/remover o empréstimo.
+     * @throws EmprestimoInexistenteException poderá acontecer caso o empréstimo não exista com o número de protocolo.
+     */
+    private void quitarEmprestimo(long numProtocolo) throws EmprestimoInexistenteException {
+        Emprestimo emprestimoQuitado = this.buscarEmprestimo(numProtocolo);
+        try {
+            this.repoEmprestimo.remover(emprestimoQuitado);
+        } catch (ObjetoInexistenteException e) {
+            throw new EmprestimoInexistenteException("Empréstimo não encontrado!");
+        }
+    }
+
+    /**
+     * Método que realiza o pagamento de um empréstimo e atualiza o empréstimo no repositório de Empréstimos
+     *
+     * @param numProtocolo se refere ao número de protocolo do empréstimo que se deseja realizar um pagamento.
+     * @param movimentacao se refere a movimentação que irá debitar do valor da parcela mensal do pagamento.
+     * @throws EmprestimoInexistenteException poderá acontecer se não existir um empréstimo com o número de protocolo
+     * veículado em {@code numProtocolo}.
+     * @throws MovimentacaoDuplicadaException poderá acontecer se já existir uma operação semelhante durante a operação
+     * de pagamento do empréstimo.
+     */
+    public void pagarEmprestimo(long numProtocolo, Movimentacao movimentacao) throws EmprestimoInexistenteException,
+            MovimentacaoDuplicadaException {
+        Emprestimo emprestimo = this.buscarEmprestimo(numProtocolo);
+
+        //Set da nova data de pagamento após pagar o empréstimo
+        if (movimentacao.getValor() == emprestimo.getParcelas()) {
+            /* É tratado dessa forma, pois não há um sistema com pagamentos diferenciados, logo todos pagamentos são
+             * realizados de acordo com o valor de parcelas.
+             */
+            emprestimo.setDataPagamento(emprestimo.getDataPagamento().plusDays(QTD_DIAS_PARA_PROX_PAGAMENTO));
+        } else {
+            return; //Temporário, enquanto não é tratado outros tipos de pagamentos.
+        }
+
+        //Set do novo valor devido
+        emprestimo.setValor(emprestimo.getValor() - movimentacao.getValor());
+
+        //Caso seja quitado o valor, o empréstimo é quitado
+        if (emprestimo.getValor() <= 0) {
+            this.quitarEmprestimo(emprestimo.getNumProtocolo());
+        } else {
+            this.atualizarEmprestimo(emprestimo);
+        }
+        Fachada.getInstance().gerarMovimentacao(movimentacao);
     }
     
     public double calcularValorParcelas(Emprestimo emprestimo) {

@@ -139,6 +139,12 @@ public class Fachada implements SistemaEmprestimosBens {
     public List<Emprestimo> listarDevedoresAltoRisco() {
         return emprestimos.listarDevedoresAltoRisco();
     }
+
+    @Override
+    public void pagarEmprestimo(long numProtocolo, Movimentacao movimentacao) throws EmprestimoInexistenteException,
+            MovimentacaoDuplicadaException {
+        this.emprestimos.pagarEmprestimo(numProtocolo,movimentacao);
+    }
     
     @Override
     public double calcularValorParcelas(Emprestimo emprestimo) {
