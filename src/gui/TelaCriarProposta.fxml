@@ -21,8 +21,8 @@
                   <Label layoutX="14.0" layoutY="14.0" text="Cliente:" />
                   <Label layoutX="14.0" layoutY="83.0" text="Motivo:" />
                   <Label layoutX="13.0" layoutY="163.0" text="Valor:" />
-                  <Label layoutX="11.0" layoutY="199.0" text="Parcelas:" />
-                  <Label layoutX="12.0" layoutY="240.0" text="Prazo:" />
+                  <Label layoutX="13.0" layoutY="235.0" text="Valor Parcela:" />
+                  <Label layoutX="13.0" layoutY="200.0" text="Prazo:" />
                   <Label layoutX="13.0" layoutY="280.0" text="Garantia(s):" />
                </children>
             </AnchorPane>
@@ -30,12 +30,12 @@
                <children>
                   <TextField fx:id="txtCliente" editable="false" layoutX="14.0" layoutY="14.0" />
                   <TextArea fx:id="txtMotivo" layoutX="14.0" layoutY="56.0" prefHeight="87.0" prefWidth="306.0" />
-                  <TextField fx:id="txtValor" layoutX="14.0" layoutY="156.0" />
-                  <TextField fx:id="txtParcelas" layoutX="14.0" layoutY="194.0" />
-                  <DatePicker fx:id="dtPrazo" layoutX="14.0" layoutY="233.0" />
+                  <TextField fx:id="txtValor" layoutX="14.0" layoutY="156.0" onKeyReleased="#calculoParcela" />
+                  <DatePicker fx:id="dtPrazo" layoutX="14.0" layoutY="194.0" onAction="#calculoParcela" />
                   <Button fx:id="btnAplicarGarantia" layoutX="172.0" layoutY="272.0" mnemonicParsing="false" onAction="#btnAplicarGarantiaPressed" text="Aplicar como Garantia" />
                   <ListView fx:id="lstvGarantias" layoutX="12.0" layoutY="309.0" prefHeight="87.0" prefWidth="306.0" />
                   <SplitMenuButton fx:id="splMenuGarantia" layoutX="14.0" layoutY="272.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Selecione o BENS" />
+                  <TextField fx:id="txtParcelas" disable="true" editable="false" layoutX="14.0" layoutY="233.0" />
                </children>
             </AnchorPane>
          </items>
