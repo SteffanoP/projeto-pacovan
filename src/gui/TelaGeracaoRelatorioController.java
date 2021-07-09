@@ -139,7 +139,29 @@ public class TelaGeracaoRelatorioController {
         else if (empregado != null && (empregado.getPrivilegio() >= 1 && empregado.getPrivilegio() <= 4))
             GerenciadorTelas.getInstance().changeScreen("telaEmpregado");
     }
+    
+    @FXML
+    public void UidClienteDigitado() {
+    	try {
+    		Pessoa usuario = Fachada.getInstance().buscarPessoa(Long.parseLong(this.txtUidCliente.getText()));
+    		if (usuario instanceof Cliente) this.lblNomeCliente.setText(usuario.getNome());
+    		else this.lblNomeCliente.setText("");
+		} catch (PessoaInexistenteException | NumberFormatException e) {
+    	    //Faz nada C:
+		}
+    }
 
+    @FXML
+    public void UidEmpregadoDigitado() {
+		try {
+			Pessoa usuario = Fachada.getInstance().buscarPessoa(Long.parseLong(this.txtUidEmpregado.getText()));
+			if (usuario instanceof Empregado) this.lblNomeEmpregado.setText(usuario.getNome());
+			else this.lblNomeEmpregado.setText("");
+		} catch (PessoaInexistenteException | NumberFormatException e) {
+            //Faz nada C:
+		}
+    }
+    
     private void gerarAlertaErroPessoa(String justificativa) {
         Alert alerta = new Alert(Alert.AlertType.ERROR);
         alerta.setTitle("Erro");
