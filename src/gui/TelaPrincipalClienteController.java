@@ -54,8 +54,7 @@ public class TelaPrincipalClienteController {
     private void initialize() {
         Cliente usuario = (Cliente) SessionManager.getInstance().getPessoaSessao();
         this.lblNomeUsuario.setText(usuario.getNome());
-        this.atualizarScore(usuario.getScore());
-        
+        this.lblScoreUsuario.setText(usuario.getScore() + "%");
         this.initializeTableViews();
 
         long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
@@ -217,13 +216,14 @@ public class TelaPrincipalClienteController {
     		movimentacao.setValor(SessionManager.getInstance().getEmprestimoSessao().getParcelas());
     		movimentacao.setTipoMovimentacao(TipoMovimentacao.DEBITO);
             try {
-<<<<<<< Upstream, based on origin/main
                 Fachada.getInstance().pagarEmprestimo(
                         SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
                 this.atualizarTableViewExtrato(
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
                 this.atualizarTableViewEmprestimos(
                         Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+                Fachada.getInstance().calcularScore(movimentacao.getCliente());
+                this.atualizarScore(movimentacao.getCliente().getScore());
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
@@ -248,6 +248,8 @@ public class TelaPrincipalClienteController {
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
                 this.atualizarTableViewEmprestimos(
                         Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
+                Fachada.getInstance().calcularScore(movimentacao.getCliente());
+                this.atualizarScore(movimentacao.getCliente().getScore());
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
@@ -272,16 +274,10 @@ public class TelaPrincipalClienteController {
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
                 this.atualizarTableViewEmprestimos(
                         Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
-            } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
-                this.gerarAlertaErro("Erro de Pagamento",
-=======
-                Fachada.getInstance().gerarMovimentacao(movimentacao);
-                this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
                 Fachada.getInstance().calcularScore(movimentacao.getCliente());
                 this.atualizarScore(movimentacao.getCliente().getScore());
-            } catch (MovimentacaoDuplicadaException e) {
-                this.gerarAlertaErro("Erro de Movimentação",
->>>>>>> 1879234 Método atualizarScore()
+            } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
+                this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
             }
         } else

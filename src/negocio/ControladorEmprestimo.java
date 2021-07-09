@@ -2,20 +2,8 @@ package negocio;
 
 import dados.Repositorio;
 import dados.RepositorioCRUD;
-<<<<<<< Upstream, based on origin/main
 import exceptions.*;
 import negocio.beans.*;
-=======
-import exceptions.BensInexistenteException;
-import exceptions.EmprestimoDuplicadoException;
-import exceptions.EmprestimoInexistenteException;
-import exceptions.ObjetoDuplicadoException;
-import gerenciamento.SessionManager;
-import negocio.beans.Cliente;
-import negocio.beans.Empregado;
-import negocio.beans.Emprestimo;
-import negocio.beans.Proposta;
->>>>>>> caa940e Implementação do método calcularScore()
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
