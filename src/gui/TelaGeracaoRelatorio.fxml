@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaGeracaoRelatorioController">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaGeracaoRelatorioController">
    <children>
       <Label layoutX="424.0" layoutY="111.0" text="Relatórios">
          <font>
@@ -32,9 +32,9 @@
                   <Button fx:id="btnLimparEmpregado" layoutX="175.0" layoutY="281.0" mnemonicParsing="false" onAction="#btnLimparEmpregadoPressed" text="Limpar" />
                   <Button fx:id="btnGerarEmpregado" layoutX="244.0" layoutY="281.0" mnemonicParsing="false" onAction="#btnGerarEmpregadoPressed" text="Gerar" />
                   <Label layoutX="14.0" layoutY="67.0" text="UID:" />
-                  <TextField fx:id="txtUidEmpregado" layoutX="45.0" layoutY="61.0" prefHeight="26.0" prefWidth="52.0" />
+                  <TextField fx:id="txtUidEmpregado" layoutX="45.0" layoutY="61.0" onAction="#UidEmpregadoDigitado" prefHeight="26.0" prefWidth="52.0" />
                   <Label layoutX="107.0" layoutY="66.0" text="Nome:" />
-                  <Label fx:id="lblNomeCliente" layoutX="153.0" layoutY="67.0" prefHeight="18.0" prefWidth="164.0" />
+                  <Label fx:id="lblNomeEmpregado" layoutX="153.0" layoutY="67.0" prefHeight="18.0" prefWidth="164.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="349.0" prefWidth="299.0">
@@ -52,9 +52,9 @@
                   <Button fx:id="btnLimparCliente" layoutX="176.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnLimparClientePressed" text="Limpar" />
                   <Button fx:id="btnGerarCliente" layoutX="244.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnGerarClientePressed" text="Gerar" />
                   <Label layoutX="14.0" layoutY="67.0" text="UID:" />
-                  <TextField fx:id="txtUidCliente" layoutX="46.0" layoutY="62.0" prefHeight="26.0" prefWidth="52.0" />
+                  <TextField fx:id="txtUidCliente" layoutX="46.0" layoutY="62.0" onAction="#UidClienteDigitado" prefHeight="26.0" prefWidth="52.0" />
                   <Label layoutX="108.0" layoutY="66.0" text="Nome:" />
-                  <Label fx:id="lblNomeEmpregado" layoutX="153.0" layoutY="67.0" prefHeight="18.0" prefWidth="164.0" />
+                  <Label fx:id="lblNomeCliente" layoutX="153.0" layoutY="67.0" prefHeight="18.0" prefWidth="164.0" />
                </children>
             </AnchorPane>
         </items>
