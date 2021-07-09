@@ -66,7 +66,8 @@
       <TextField fx:id="txtSenha" layoutX="663.0" layoutY="280.0" />
       <TextField fx:id="txtSalarioBase" layoutX="664.0" layoutY="358.0" />
       <TableView fx:id="tblvEmpregadosCadastro" layoutX="152.0" layoutY="510.0" prefHeight="200.0" prefWidth="662.0">
-        <columns>
+         <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+         <columns>
           <TableColumn fx:id="colEmpregadoUID" prefWidth="119.99996566772461" text="UID Empregado" />
             <TableColumn fx:id="colEmpregadoNome" prefWidth="128.7999725341797" text="Nome" />
             <TableColumn fx:id="colEmpregadoEmail" prefWidth="158.4000244140625" text="E-mail" />
