@@ -17,6 +17,7 @@ import java.util.List;
 
 import exceptions.PessoaInexistenteException;
 import gerenciamento.SessionManager;
+import negocio.beans.Emprestimo;
 import negocio.beans.Pessoa;
 
 public class TelaPrincipalAdminController {
@@ -56,14 +57,26 @@ public class TelaPrincipalAdminController {
     	lblNomeUsuario.setText(SessionManager.getInstance().getPessoaSessao().getNome());
     	
         this.initializeTableViews();
-        this.atualizarTableView(tblvEmpregados, Fachada.getInstance().listarEmpregados());
+        this.atualizarTableViewEmpregado(tblvEmpregados, Fachada.getInstance().listarEmpregados());
+        this.atualizarTableViewDevedor(tblvDevedores, Fachada.getInstance().listarDevedores());
+        this.atualizarTableViewDevedor(tblvDProtegidos, Fachada.getInstance().listarDevedoresProtegidos());
+        this.atualizarTableViewDevedor(tblvDAltoRisco, Fachada.getInstance().listarDevedoresAltoRisco());
     }
 
-    private void atualizarTableView(TableView<EmpregadoModelo> tableView, List<Empregado> empregadoList) {
+    private void atualizarTableViewEmpregado(TableView<EmpregadoModelo> tableView, List<Empregado> empregadoList) {
         for (Empregado empregado : empregadoList) {
             EmpregadoModelo empregadoModelo = new EmpregadoModelo(empregado.getNome(), empregado.getReputacao(),
                     empregado.getEmail());
             tableView.getItems().add(empregadoModelo);
+        }
+    }
+
+    private void atualizarTableViewDevedor(TableView<DevedorModelo> tableView, List<Emprestimo> emprestimoList) {
+        for (Emprestimo emprestimo : emprestimoList) {
+            DevedorModelo devedorModelo = new DevedorModelo(emprestimo.getValor(), emprestimo.getDataPagamento(),
+                    emprestimo.getCliente(),emprestimo.getParcelas(),emprestimo.getConfiancaPagamento(),
+                    emprestimo.getCliente().getEmail());
+            tableView.getItems().add(devedorModelo);
         }
     }
 
