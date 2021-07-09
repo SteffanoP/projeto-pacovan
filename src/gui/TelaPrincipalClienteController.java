@@ -59,9 +59,9 @@ public class TelaPrincipalClienteController {
 
         long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
             List<Proposta> pList = new ArrayList<>(Fachada.getInstance().listarPropostasCliente(uidCliente));
-            this.atualizarTableViewPropostas(pList);
-            this.atualizarTableViewEmprestimos(Fachada.getInstance().listarEmprestimosCliente(uidCliente));
-            this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(uidCliente));
+        this.atualizarTableViewPropostas(Fachada.getInstance().listarPropostasCliente(uidCliente));
+        this.atualizarTableViewEmprestimos(Fachada.getInstance().listarEmprestimosCliente(uidCliente));
+        this.atualizarTableViewExtrato(Fachada.getInstance().listarMoveCliente(uidCliente));
     }
 
     private void initializeTableViews() {
@@ -216,6 +216,8 @@ public class TelaPrincipalClienteController {
                         SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
                 this.atualizarTableViewExtrato(
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+                this.atualizarTableViewEmprestimos(
+                        Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
@@ -238,6 +240,8 @@ public class TelaPrincipalClienteController {
                         SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
                 this.atualizarTableViewExtrato(
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+                this.atualizarTableViewEmprestimos(
+                        Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
@@ -260,6 +264,8 @@ public class TelaPrincipalClienteController {
                         SessionManager.getInstance().getEmprestimoSessao().getNumProtocolo(),movimentacao);
                 this.atualizarTableViewExtrato(
                         Fachada.getInstance().listarMoveCliente(movimentacao.getCliente().getUid()));
+                this.atualizarTableViewEmprestimos(
+                        Fachada.getInstance().listarEmprestimosCliente(movimentacao.getCliente().getUid()));
             } catch (MovimentacaoDuplicadaException | EmprestimoInexistenteException e) {
                 this.gerarAlertaErro("Erro de Pagamento",
                         "Parece que tivemos um erro no seu pagamento", e.getMessage());
