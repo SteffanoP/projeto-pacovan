@@ -80,6 +80,15 @@ public interface SistemaEmprestimosBens {
     double calcularValorBensCliente(long uidCliente) throws PessoaInexistenteException;
 
     /**
+     * Método que, por meio de lista de Bens, filtra os bens e os aplica como garantia; ou seja realiza o set do
+     * atributo de {@code garantia} como {@code true}.
+     *
+     * @param bensAntigos se refere a lista de Bens ao qual será aplicado como garantia.
+     * @throws BensInexistenteException poderá acontecer caso haja um BENS que não pertença ao repositório de BENS
+     */
+    void aplicarBensComoGarantia(List<Bens> bensAntigos) throws BensInexistenteException;
+
+    /**
      * Método que altera um bem por outro no repositório
      *
      * @param bensAntigo bem inicialmente cadastrado.
@@ -107,7 +116,8 @@ public interface SistemaEmprestimosBens {
      * @throws EmprestimoDuplicadoException poderá acontecer caso o {@code Emprestimo} já esteja cadastro no sistema de
      *                                      {@code repoEmprestimo}.
      */
-    void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException;
+    void criarEmprestimo(Proposta proposta, Empregado empregado) throws EmprestimoDuplicadoException,
+            BensInexistenteException;
 
     /**
      * Método que faz a busca de um {@code Emprestimo} no repositório de Empréstimos por meio de um número de protocolo.

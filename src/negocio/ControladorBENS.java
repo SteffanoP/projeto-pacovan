@@ -135,6 +135,30 @@ public class ControladorBENS {
     }
 
     /**
+     * Método que, por meio de lista de Bens, filtra os bens e os aplica como garantia; ou seja realiza o set do
+     * atributo de {@code garantia} como {@code true}.
+     *
+     * @param bensAntigos se refere a lista de Bens ao qual será aplicado como garantia.
+     * @throws BensInexistenteException poderá acontecer caso haja um BENS que não pertença ao repositório de BENS
+     */
+    public void aplicarBensComoGarantia(List<Bens> bensAntigos) throws BensInexistenteException {
+        if (bensAntigos == null) return;
+
+        List<Bens> bensComoGarantia = bensAntigos.stream()
+                                                 .peek(bens -> {bens.setGarantia(true);})
+                                                 .collect(Collectors.toList());
+        for (Bens bensAntigo : bensAntigos) {
+            for (Bens bensNovos : bensComoGarantia) {
+                try {
+                    this.alterarBens(bensAntigo, bensNovos);
+                } catch (BensInexistenteException e) {
+                    throw new BensInexistenteException("Há Bens de garantia que não existem!");
+                }
+            }
+        }
+    }
+
+    /**
      * Método que altera um bem por outro no repositório
      * @param bensAntigo bem inicialmente cadastrado.
      * @param bensNovo novo bem a ser inserido para substituir
