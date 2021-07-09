@@ -22,7 +22,8 @@
             <Label layoutX="156.0" layoutY="323.0" text="Móveis infungíveis" />
             <Label layoutX="156.0" layoutY="496.0" text="Imóveis" />
             <TableView fx:id="tblvMoveisInfungiveis" layoutX="156.0" layoutY="340.0" prefHeight="135.0" prefWidth="660.0">
-               <columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                <columns>
                   <TableColumn fx:id="colDtCadastroInfungiveis" prefWidth="110.0" text="Data de Cadastro" />
                   <TableColumn fx:id="colValorInfungiveis" text="Valor" />
                   <TableColumn fx:id="colNomeInfungiveis" prefWidth="120.0" text="Nome" />
@@ -31,7 +32,8 @@
                </columns>
             </TableView>
             <TableView fx:id="tblvMoveisFungiveis" layoutX="156.0" layoutY="156.0" prefHeight="135.0" prefWidth="660.0">
-              <columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                <columns>
                 <TableColumn fx:id="colDtCadastroFungiveis" prefWidth="110.0" text="Data de Cadastro" />
                 <TableColumn fx:id="colValorFungiveis" text="Valor" />
                   <TableColumn fx:id="colNomeFungiveis" prefWidth="120.0" text="Nome" />
@@ -40,7 +42,8 @@
               </columns>
             </TableView>
             <TableView fx:id="tblvImoveis" layoutX="156.0" layoutY="513.0" prefHeight="135.0" prefWidth="660.0">
-               <columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+                <columns>
                   <TableColumn fx:id="colDtCadastroImoveis" prefWidth="110.0" text="Data de Cadastro" />
                   <TableColumn fx:id="colValorImoveis" text="Valor" />
                   <TableColumn fx:id="colNomeImoveis" prefWidth="120.0" text="Nome" />
