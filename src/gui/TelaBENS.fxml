@@ -23,7 +23,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <TableView fx:id="tblvBens" onMouseClicked="#tblvBensOnMouseClicked" prefHeight="146.0" prefWidth="619.0">
+                  <TableView fx:id="tblvBens" onMouseClicked="#tblvBensOnMouseClicked" prefHeight="146.0" prefWidth="629.0">
                     <columns>
                       <TableColumn fx:id="colNomeBens" prefWidth="175.0" text="Nome" />
                       <TableColumn fx:id="colDescricaoBens" prefWidth="341.0" text="Descrição" />
