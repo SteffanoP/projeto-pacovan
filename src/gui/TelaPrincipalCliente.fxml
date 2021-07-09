@@ -93,6 +93,8 @@
       </Label>
       <Label fx:id="lblScoreUsuario" layoutX="532.0" layoutY="30.0" prefHeight="17.0" prefWidth="32.0" />
       <Button fx:id="btnSairPressed" layoutX="853.0" layoutY="26.0" mnemonicParsing="false" onAction="#btnSairPressed" text="Sair" />
-      <Button layoutX="712.0" layoutY="298.0" mnemonicParsing="false" onAction="#btnPagamentoEfetuadoPressed" text="Pamento Efetuado" />
+      <Button layoutX="712.0" layoutY="298.0" mnemonicParsing="false" onAction="#btnPagamentoDebitoPressed" prefHeight="25.0" prefWidth="123.0" text="Pagamento Débito" />
+      <Button layoutX="712.0" layoutY="335.0" mnemonicParsing="false" onAction="#btnPagamentoCreditoPressed" prefHeight="25.0" prefWidth="123.0" text="Pagamento Crédito" />
+      <Button layoutX="712.0" layoutY="372.0" mnemonicParsing="false" onAction="#btnPagamentoBensPressed" prefHeight="25.0" prefWidth="123.0" text="Pagamento BENS" />
    </children>
 </Pane>
