@@ -63,11 +63,9 @@ public class TelaEmprestimoDetalheController {
     private void atualizarTableViewExtrato(List<Movimentacao> extratoList) {
     	tblvExtrato.getItems().clear();
     	for (Movimentacao movimentacao: extratoList) {
-    		if (movimentacao.getCliente().equals(SessionManager.getInstance().getClienteSessao())) {
-    			MovimentacaoModelo movimentacaoModelo = new MovimentacaoModelo(movimentacao.getInstante(), 
+            MovimentacaoModelo movimentacaoModelo = new MovimentacaoModelo(movimentacao.getInstante(),
     					movimentacao.getTipoMovimentacao(), movimentacao.getValor());
-    			tblvExtrato.getItems().add(movimentacaoModelo);
-    		}
+            tblvExtrato.getItems().add(movimentacaoModelo);
     	}
     }
     
