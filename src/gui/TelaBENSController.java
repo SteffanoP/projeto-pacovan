@@ -1,6 +1,7 @@
 package gui;
 
 import exceptions.BensDuplicadoException;
+import exceptions.BensInexistenteException;
 import exceptions.PessoaInexistenteException;
 import gerenciamento.SessionManager;
 import gui.models.BensModelo;
@@ -11,9 +12,11 @@ import negocio.Fachada;
 import negocio.beans.Bens;
 import negocio.beans.CategoriaBens;
 import negocio.beans.Cliente;
+import negocio.beans.Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TelaBENSController {
     @FXML Button btnVoltarTelaCliente;
@@ -40,8 +43,11 @@ public class TelaBENSController {
     @FXML
     private void initialize() {
         this.initializeTableViews();
+        long uidCliente = SessionManager.getInstance().getPessoaSessao().getUid();
         this.atualizarTableViewBens(
-                Fachada.getInstance().listarBensCliente(SessionManager.getInstance().getPessoaSessao().getUid()));
+                Fachada.getInstance().listarBensCliente(uidCliente).stream()
+                                                                   .filter(bens -> !bens.isGarantia())
+                                                                   .collect(Collectors.toList()));
 
         //Inicializa Cadastro de Bens
         txtCliente.setText(SessionManager.getInstance().getPessoaSessao().getNome());
