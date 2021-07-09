@@ -86,9 +86,11 @@ public class TelaPrincipalEmpregadoController {
         listView.getItems().clear();
         for (Emprestimo emprestimo : emprestimoList) {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(emprestimo.getEmpregado()).append("; ");
-            stringBuilder.append("R$ ").append(emprestimo.getValor()).append("; ");
-            stringBuilder.append("Confiança: ").append(emprestimo.getConfiancaPagamento()).append("%;");
+            stringBuilder.append("Cliente: ").append(emprestimo.getCliente().getNome()).append("; ");
+            stringBuilder.append("Comissão R$ ")
+                         .append(emprestimo.getValor() / (emprestimo.getCliente().getScore() * 0.1))
+                         .append("; ");
+            stringBuilder.append("Score: ").append(emprestimo.getCliente().getScore()).append("%;");
 
             listView.getItems().add(stringBuilder.toString());
         }
