@@ -141,14 +141,13 @@ public class TelaGeracaoRelatorioController {
     }
     
     @FXML
-    public void UidClienteDigitado() throws PessoaInexistenteException {
+    public void UidClienteDigitado() {
     	try {
     		Pessoa usuario = Fachada.getInstance().buscarPessoa(Long.parseLong(this.txtUidCliente.getText()));
-			if (usuario instanceof Cliente) {
-				if (usuario != null && usuario instanceof Cliente) this.lblNomeCliente.setText(usuario.getNome());
-			} else this.gerarAlertaErroPessoa("Essa pessoa não é um Cliente!");
+    		if (usuario instanceof Cliente) this.lblNomeCliente.setText(usuario.getNome());
+    		else this.lblNomeCliente.setText("");
 		} catch (PessoaInexistenteException | NumberFormatException e) {
-            this.gerarAlertaErroPessoa("Parece que essa pessoa não existe");
+    	    //Faz nada C:
 		}
     }
 
@@ -156,11 +155,10 @@ public class TelaGeracaoRelatorioController {
     public void UidEmpregadoDigitado() {
 		try {
 			Pessoa usuario = Fachada.getInstance().buscarPessoa(Long.parseLong(this.txtUidEmpregado.getText()));
-			if (usuario instanceof Empregado) {
-				if (usuario != null) this.lblNomeEmpregado.setText(usuario.getNome());
-			} else this.gerarAlertaErroPessoa("Essa pessoa não é um Empregado!");
+			if (usuario instanceof Empregado) this.lblNomeEmpregado.setText(usuario.getNome());
+			else this.lblNomeEmpregado.setText("");
 		} catch (PessoaInexistenteException | NumberFormatException e) {
-            this.gerarAlertaErroPessoa("Parece que essa pessoa não existe");
+            //Faz nada C:
 		}
     }
     
