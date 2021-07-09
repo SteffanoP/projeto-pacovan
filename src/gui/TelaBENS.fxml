@@ -23,7 +23,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="169.0" prefWidth="201.0">
                <children>
-                  <TableView fx:id="tblvBens" prefHeight="146.0" prefWidth="619.0">
+                  <TableView fx:id="tblvBens" onMouseClicked="#tblvBensOnMouseClicked" prefHeight="146.0" prefWidth="619.0">
                     <columns>
                       <TableColumn fx:id="colNomeBens" prefWidth="175.0" text="Nome" />
                       <TableColumn fx:id="colDescricaoBens" prefWidth="341.0" text="Descrição" />
@@ -50,10 +50,10 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="210.0">
                <children>
                   <TextField fx:id="txtNomeBens" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="310.0" />
-                  <TextField fx:id="txtCliente" disable="true" editable="false" layoutX="14.0" layoutY="177.0" />
-                  <TextArea fx:id="txtDescricao" layoutX="14.0" layoutY="94.0" prefHeight="66.0" prefWidth="310.0" />
-                  <TextField fx:id="txtValor" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="216.0" />
                   <TextField fx:id="txtTempoUso" layoutX="14.0" layoutY="54.0" />
+                  <TextArea fx:id="txtDescricao" layoutX="14.0" layoutY="94.0" prefHeight="66.0" prefWidth="310.0" />
+                  <TextField fx:id="txtCliente" disable="true" editable="false" layoutX="14.0" layoutY="177.0" />
+                  <TextField fx:id="txtValor" alignment="CENTER_RIGHT" layoutX="15.0" layoutY="216.0" />
                   <SplitMenuButton fx:id="splCategoriaBens" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="Selecione a Categoria">
                     <items>
                       <MenuItem fx:id="mnuiFungivel" mnemonicParsing="false" text="Fungível" />
@@ -68,6 +68,6 @@
       <Label layoutX="124.0" layoutY="237.0" prefHeight="36.0" prefWidth="149.0" text="Cadastrar Novo BENS" />
       <Button fx:id="btnInserirBens" layoutX="627.0" layoutY="576.0" mnemonicParsing="false" onAction="#btnInserirBens" text="Inserir BENS" />
       <Button fx:id="btnVoltarTelaCliente" layoutX="117.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnVoltarTelaClientePressed" text="&lt; Voltar" />
-      <Button fx:id="btnRemoverBens" layoutX="774.0" layoutY="212.0" mnemonicParsing="false" onAction="#btnRemoverBens" text="Remover BENS" />
+      <Button fx:id="btnRemoverBens" layoutX="774.0" layoutY="212.0" mnemonicParsing="false" onAction="#btnRemoverBensPressed" text="Remover BENS" />
    </children>
 </Pane>
