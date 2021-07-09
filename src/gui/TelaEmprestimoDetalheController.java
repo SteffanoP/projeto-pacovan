@@ -26,10 +26,8 @@ public class TelaEmprestimoDetalheController {
     @FXML DatePicker dtPrazo;
 
     @FXML TableView<MovimentacaoModelo> tblvExtrato;
-    @FXML TableColumn<MovimentacaoModelo, Double> colParcelas;
-    @FXML TableColumn<MovimentacaoModelo, String> colValorParcela;
-    @FXML TableColumn<MovimentacaoModelo, String> colDataVencimento;
     @FXML TableColumn<MovimentacaoModelo, String> colDataPagamento;
+    @FXML TableColumn<MovimentacaoModelo, String> colValorParcela;
     @FXML TableColumn<MovimentacaoModelo, String> colTipoPagamento;
     
     @FXML ListView<String> lstvGarantias;
@@ -44,11 +42,9 @@ public class TelaEmprestimoDetalheController {
     }
 
     private void initializeTableViews() {
-        colParcelas.setCellValueFactory(new PropertyValueFactory<>("parcelas"));
-        colValorParcela.setCellValueFactory(new PropertyValueFactory<>("valorParcela"));
-        colDataPagamento.setCellValueFactory(new PropertyValueFactory<>("dataPagamento"));
-        colDataVencimento.setCellValueFactory(new PropertyValueFactory<>("dataVencimento"));
-        colTipoPagamento.setCellValueFactory(new PropertyValueFactory<>("tipoPagamento"));
+        colDataPagamento.setCellValueFactory(new PropertyValueFactory<>("instante"));
+        colValorParcela.setCellValueFactory(new PropertyValueFactory<>("valor"));
+        colTipoPagamento.setCellValueFactory(new PropertyValueFactory<>("tipoMovimentacao"));
     }
 
     private void initializeDetalhesDoEmprestimo(Emprestimo emprestimoSessao) {
